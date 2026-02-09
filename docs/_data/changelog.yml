@@ -20,7 +20,7 @@
   list:
   - <a href="https://github.com/bugcrowd/disclosure-policy">Bugcrowd and Cipherlaw collaborate to release the Open Source Vulnerability Disclosure Framework</a>
 
-- title: Free ISO 24197 
+- title: Free ISO 24197
   date: Apr 18, 2016
   list:
   - <a href="https://www.itnews.com.au/news/iso-vulnerability-disclosure-standard-now-free-418253">ISO 24197 made free to download</a>
@@ -38,3 +38,76 @@
   - <a href="https://arstechnica.com/information-technology/2018/08/new-open-source-effort-legal-code-to-make-reporting-security-bugs-safer">#legalbugbounty and OSVDF combine and create The disclose.io Project</a>
   - <a href="https://www.crunchbase.com/organization/disclose-io">Crunchbase listing</a>
   - <a href="https://wikitia.com/wiki/Disclose.io">Wiktia entry</a>
+
+- title: ISO/IEC 30111:2019
+  date: Oct, 2019
+  list:
+  - <a href="https://www.iso.org/standard/69725.html">Updated vulnerability handling processes standard published</a>
+
+- title: CISA BOD 20-01
+  date: Sep 2, 2020
+  list:
+  - <a href="https://www.cisa.gov/news-events/directives/bod-20-01-develop-and-publish-vulnerability-disclosure-policy">Binding Operational Directive requires all US federal civilian agencies to publish VDPs</a>
+
+- title: UK Vulnerability Disclosure Toolkit
+  date: Sep, 2020
+  list:
+  - <a href="https://www.ncsc.gov.uk/information/vulnerability-disclosure-toolkit">UK NCSC releases comprehensive VDP guidance and templates</a>
+
+- title: Van Buren v. United States
+  date: Jun 3, 2021
+  list:
+  - <a href="https://www.supremecourt.gov/opinions/20pdf/19-783_k53l.pdf">Supreme Court narrows CFAA "exceeds authorized access" in landmark 6-3 ruling</a>
+  - <a href="https://www.eff.org/deeplinks/2021/06/supreme-court-rejects-narrow-interpretation-cfaa-van-buren">EFF analysis of the decision</a>
+
+- title: CISA VDP Platform
+  date: Jul 30, 2021
+  list:
+  - <a href="https://www.cisa.gov/news-events/alerts/2021/07/30/cisa-announces-vulnerability-disclosure-policy-vdp-platform">CISA launches centralized VDP platform for federal agencies</a>
+
+- title: RFC 9116 (security.txt)
+  date: Apr, 2022
+  list:
+  - <a href="https://datatracker.ietf.org/doc/rfc9116/">IETF standardizes machine-readable format for vulnerability disclosure policies</a>
+
+- title: DOJ Good-Faith Security Research Policy
+  date: May 19, 2022
+  list:
+  - <a href="https://www.justice.gov/archives/opa/pr/department-justice-announces-new-policy-charging-cases-under-computer-fraud-and-abuse-act">DOJ announces it will not prosecute good-faith security research under CFAA</a>
+
+- title: HackerOne Gold Standard Safe Harbor
+  date: Nov 16, 2022
+  list:
+  - <a href="https://www.hackerone.com/press-release/hackerone-announces-gold-standard-safe-harbor-improve-protections-good-faith-security">HackerOne launches standardized safe harbor statement for customers</a>
+
+- title: NIS2 Directive
+  date: Dec 14, 2022
+  list:
+  - <a href="https://digital-strategy.ec.europa.eu/en/policies/nis2-directive">EU adopts directive mandating coordinated vulnerability disclosure across Member States</a>
+  - <a href="https://www.nis-2-directive.com/NIS_2_Directive_Article_12.html">Article 12 establishes CVD framework</a>
+
+- title: NIST SP 800-216
+  date: May, 2023
+  list:
+  - <a href="https://csrc.nist.gov/pubs/sp/800/216/final">NIST publishes federal vulnerability disclosure guidelines framework</a>
+
+- title: Bugcrowd Default Safe Harbor
+  date: 2023
+  list:
+  - <a href="https://www.bugcrowd.com/blog/safe-harbor/">Bugcrowd makes disclose.io safe harbor language the default for all programs</a>
+
+- title: UK PSTI Act Enforced
+  date: Apr 29, 2024
+  list:
+  - <a href="https://www.gov.uk/government/collections/the-product-security-and-telecommunications-infrastructure-psti-bill-factsheets">First law requiring VDPs for consumer IoT devices takes effect</a>
+  - <a href="https://www.hackerone.com/blog/vulnerability-disclosure-policy-requirements-uk-smart-products">HackerOne analysis of requirements</a>
+
+- title: EU Cyber Resilience Act
+  date: Dec 10, 2024
+  list:
+  - <a href="https://digital-strategy.ec.europa.eu/en/policies/cyber-resilience-act">EU regulation mandating VDPs for all products with digital elements enters force</a>
+
+- title: ENISA European Vulnerability Database
+  date: May 13, 2025
+  list:
+  - <a href="https://www.enisa.europa.eu/topics/vulnerability-disclosure">EU launches centralized vulnerability database per NIS2 mandate</a>
