@@ -1,7 +1,7 @@
 # Homepage feature boxes
 
 - title: "Deploy a VDP using Policymaker"
-  description: "Generate a customized and disclose.io compliant VDP with our free template-based VDP policy, safe harbor clause, securitytxt, and DNS Security TXT generator."
+  description: "Join the organizations researchers want to help. Generate a disclose.io-compliant VDP with safe harbor, security.txt, and everything needed to welcome good-faith research."
   icon: "pencil"
   url: "https://policymaker.disclose.io"
 
@@ -11,6 +11,6 @@
   url: "/programs/"
 
 - title: "Get disclosure assistance"
-  description: "Get help finding security contacts from the disclose.io Community, and collaborate with like-minded folks working on making the Internet a safer place!"
+  description: "Want to do the right thing but don't know where to start? Our community helps you find contacts, navigate disclosures, and connect with others who get it."
   icon: "heart"
   url: "https://community.disclose.io/c/hacker-connect/5"
