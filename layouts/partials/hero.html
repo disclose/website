@@ -1,62 +1,25 @@
-{{/* Hero section for homepage */}}
+{{/* Hero section for homepage - white background like production */}}
 {{ with .Params.hero }}
-<section class="hero-gradient text-white">
-  <div class="container-wide section">
-    <div class="max-w-3xl mx-auto text-center">
+<section class="bg-white py-16">
+  <div class="container-wide">
+    <div class="max-w-4xl mx-auto text-center">
       {{/* Logo/Image */}}
       {{ with .image }}
       <div class="mb-8">
-        <img src="{{ . | relURL }}" alt="disclose.io" class="h-24 w-auto mx-auto">
+        <img src="{{ . | relURL }}" alt="disclose.io" class="max-w-5xl w-full mx-auto">
       </div>
       {{ end }}
 
       {{/* Title */}}
-      <h1 class="text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-6 text-balance">
+      <h1 class="text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-6 text-purple">
         {{ .title }}
       </h1>
 
       {{/* Subtitle */}}
       {{ with .subtitle }}
-      <p class="text-xl md:text-2xl text-white/80 mb-8 max-w-2xl mx-auto text-balance">
+      <p class="text-xl md:text-2xl text-gray-600 mb-8 max-w-3xl mx-auto">
         {{ . }}
       </p>
-      {{ end }}
-
-      {{/* Search */}}
-      {{ if .search }}
-      <div class="max-w-xl mx-auto mt-8" x-data="{ query: '' }">
-        <div class="relative">
-          <div class="search-icon">
-            <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
-            </svg>
-          </div>
-          <div id="hero-search" class="bg-white rounded-lg shadow-lg"></div>
-          <script>
-            window.addEventListener('DOMContentLoaded', function() {
-              new PagefindUI({
-                element: "#hero-search",
-                showSubResults: true,
-                showImages: false,
-                autofocus: false
-              });
-            });
-          </script>
-        </div>
-      </div>
-      {{ end }}
-
-      {{/* CTA buttons */}}
-      {{ with .buttons }}
-      <div class="flex flex-col sm:flex-row gap-4 justify-center mt-8">
-        {{ range . }}
-        <a href="{{ .url }}"
-           class="{{ if eq .style "primary" }}bg-white text-purple hover:bg-gray-100{{ else }}border-2 border-white text-white hover:bg-white/10{{ end }} px-8 py-3 rounded-lg font-medium transition-colors"
-           {{ if strings.HasPrefix .url "http" }}target="_blank" rel="noopener noreferrer"{{ end }}>
-          {{ .text }}
-        </a>
-        {{ end }}
-      </div>
       {{ end }}
     </div>
   </div>

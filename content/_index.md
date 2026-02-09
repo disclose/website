@@ -4,7 +4,7 @@ description: "We're here to make vulnerability disclosure safe, simple, and stan
 hero:
   title: "disclose.io"
   subtitle: "We're here to make vulnerability disclosure safe, simple, and standardized for everyone."
-  image: "uploads/tug-of-war.jpg"
+  image: "uploads/tug-of-war.png"
   search: true
   buttons:
     - text: "Get Started"
@@ -17,7 +17,7 @@ faq:
   title: "Frequently asked questions"
   subtitle: "Got a quick question? Let's get you a quick answer"
 videos:
-  title: "Why does The disclose.io Project exist?"
+  title: "Why does disclose.io exist?"
   subtitle: "A couple of talks to get you started..."
 cta:
   title: "Didn't find what you were looking for?"
