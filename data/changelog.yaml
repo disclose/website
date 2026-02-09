@@ -93,7 +93,6 @@
   date: "Apr 29, 2024"
   items:
     - html: '<a href="https://www.gov.uk/government/publications/the-uk-product-security-and-telecommunications-infrastructure-product-security-regime">First law requiring VDPs for consumer IoT devices takes effect</a>'
-    - html: '<a href="https://www.hackerone.com/vulnerability-management/uk-psti-act-security-requirements">HackerOne analysis of requirements</a>'
 
 - title: EU Cyber Resilience Act
   date: "Dec 10, 2024"
