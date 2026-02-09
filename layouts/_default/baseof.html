@@ -65,9 +65,17 @@
   {{/* Mobile menu */}}
   {{ partial "mobile-menu.html" . }}
 
-  {{/* Analytics */}}
+  {{/* Google Analytics */}}
   {{ if and (eq hugo.Environment "production") .Site.Params.enable_analytics }}
-    {{ template "_internal/google_analytics.html" . }}
+  {{ with .Site.Config.Services.GoogleAnalytics.ID }}
+  <script async src="https://www.googletagmanager.com/gtag/js?id={{ . }}"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', '{{ . }}');
+  </script>
+  {{ end }}
   {{ end }}
 
   {{ block "scripts" . }}{{ end }}

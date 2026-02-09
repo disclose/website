@@ -49,6 +49,11 @@ pygmentsUseClasses = true
   disableJS = false
   disableSVG = false
 
+# Google Analytics (modern Hugo config)
+[services]
+  [services.googleAnalytics]
+    ID = "UA-143424917-6"
+
 # Security settings
 [security]
   [security.funcs]
