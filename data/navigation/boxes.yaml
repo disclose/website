@@ -5,8 +5,8 @@
   icon: "pencil"
   url: "https://policymaker.disclose.io"
 
-- title: "Search for VDP and bug bounty programs"
-  description: "Search vulnerability disclosure and bug bounty programs in our database, get details on where to submit security findings, and understand their safe harbor status."
+- title: "Look up programs"
+  description: "Know before you go. Look up vulnerability disclosure programs to find submission details and safe harbor status for the organization you're researching."
   icon: "search"
   url: "/programs/"
 
