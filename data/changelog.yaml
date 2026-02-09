@@ -73,11 +73,6 @@
   items:
     - html: '<a href="https://www.justice.gov/opa/pr/department-justice-announces-new-policy-charging-cases-under-computer-fraud-and-abuse-act">DOJ announces it will not prosecute good-faith security research under CFAA</a>'
 
-- title: HackerOne Gold Standard Safe Harbor
-  date: "Nov 16, 2022"
-  items:
-    - html: '<a href="https://www.hackerone.com/press-release/hackerone-introduces-gold-standard-safe-harbor-legal-protection-hackers">HackerOne launches standardized safe harbor statement for customers</a>'
-
 - title: NIS2 Directive
   date: "Dec 14, 2022"
   items:
