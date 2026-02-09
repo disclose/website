@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en-gb" dir="ltr" class="uk-height-1-1">
+
+    <head>
+      <title>Disclose.io VDP Search</title>
+<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+<!-- UIkit CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.6.16/dist/css/uikit.min.css" />
+
+<!-- UIkit JS -->
+<script src="https://cdn.jsdelivr.net/npm/uikit@3.6.16/dist/js/uikit.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/uikit@3.6.16/dist/js/uikit-icons.min.js"></script>
+
+<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.23/js/dataTables.uikit.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.5/js/dataTables.buttons.min.js"></script> 
+<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.5/js/buttons.html5.min.js"></script> 
+
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/dataTables.uikit.min.css" />
+</head>
+<body>
+<div class="uk-container">
+<div class="uk-container">
+        <h2 class="uk-h1 uk-text-center">#diodb search</h2>
+    
+
+    <p class="uk-text-lead uk-text-center">Search bug bounty and vulnerability disclosure programs, details on where to submit reports, and safe harbor status.</p>
+
+    <p class="uk-text-lead uk-text-center">Contribute to the database by submitting a pull request to the <a href="https://github.com/disclose/diodb">Disclose.io database</a>!<br/><br/></p>
+</div>
+
+<div class="uk-flex uk-flex-center uk-margin-small-top">
+    <div class=" ">
+    <button class="uk-button uk-button-default " id="btnSaveCSV" style="border-radius: 0px;" type="button">Save as CSV</button>
+    <button class="uk-button uk-button-default " id="btnCopyTable" style="border-radius: 0px;" type="button">Copy To Clipboard</button>
+
+<button class="uk-button uk-button-default " style="border-radius: 0px;" type="button">Fields To Show</button>
+<div class="uk-width-large" uk-dropdown="animation: uk-animation-slide-top-small; duration: 300">  
+    <div class="uk-dropdown-grid uk-child-width-1-2@m " uk-grid>
+        <div>
+            <ul class="uk-nav uk-dropdown-nav">
+                <li class="uk-nav-header">Fields</li>
+                <li><a class="toggle-vis " data-column="0" href="#"><span uk-icon="icon: check"></span>Program Name</a></li>
+                <li><a class="toggle-vis" data-column="1" href="#"><span uk-icon="icon: check"></span>Policy URL</a></li>
+                <li><a class="toggle-vis" data-column="2" href="#">Policy URL Status</a></li>
+                <li><a class="toggle-vis" data-column="3" href="#"><span uk-icon="icon: check"></span>Contact URL</a></li>
+                <li><a class="toggle-vis" data-column="4" href="#">Contact Email</a></li>
+                <li><a class="toggle-vis" data-column="5" href="#">Launch Date</a></li>
+                <li><a class="toggle-vis" data-column="6" href="#"><span uk-icon="icon: check"></span>Bounty?</a></li>
+                <li><a class="toggle-vis" data-column="7" href="#">Swag?</a></li>
+                
+            </ul>
+        </div>
+        <div>
+            <ul class="uk-nav uk-dropdown-nav">
+                <li class="uk-nav-header">Fields</li>
+                
+                <li><a class="toggle-vis" data-column="8" href="#">Hall of Fame</a></li>
+                <li><a class="toggle-vis" data-column="9" href="#">Safe Harbor</a></li>
+                <li><a class="toggle-vis" data-column="10" href="#">Public Disclosure</a></li>
+                <li><a class="toggle-vis" data-column="11" href="#">Disclosure Timeline</a></li>
+                <li><a class="toggle-vis" data-column="12" href="#">PGP Key</a></li>
+                <li><a class="toggle-vis" data-column="13" href="#">Hiring</a></li>
+                <li><a class="toggle-vis" data-column="14" href="#">Security TXT</a></li>
+                <li><a class="toggle-vis" data-column="15" href="#">Pref Language</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+
+
+<div class="hero-search ">
+    
+    <!-- Html Elements for Search -->
+    <div class="uk-position-relative uk-margin-small-top">
+        
+        <form class="uk-search uk-search-default uk-width-1-1" name="search-hero" onsubmit="return false;">
+            <span class="uk-search-icon-flip uk-icon uk-search-icon" data-uk-search-icon=""><svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><circle fill="none" stroke="#000" stroke-width="1.1" cx="9" cy="9" r="7"></circle><path fill="none" stroke="#000" stroke-width="1.1" d="M14,14 L18,18 L14,14 Z"></path></svg></span>
+            <input id="vdp-search" class="uk-search-input uk-box-shadow-large" type="search" placeholder="Search for programs" autocomplete="off" />
+        </form>
+        <ul id="search-hero-results" class="uk-position-absolute uk-width-1-1 uk-list"></ul>
+    </div>
+
+   
+</div>
+
+
+
+<div class="uk-section">
+
+    
+    
+    <table id="example" class="uk-table uk-table-hover uk-table-striped uk-table-small uk-table-justify">
+        <thead class="thead-dark">
+            <tr>
+                <th>Program Name</th>
+                <th>Policy URL</th>
+                <th>Policy URL Status</th>
+                <th>Contact URL</th>
+                <th>Contact Email</th>
+                <th class="uk-width-small">Launch Date</th>
+                <th class="uk-width-small">Bounty?</th>
+                <th class="uk-width-small">Swag?</th>
+                <th>Hall of Fame</th>
+                <th>Safe Harbor</th>
+                <th>Public Disclosure</th>
+                <th>Disclosure Timeline</th>
+                <th>PGP Key</th>
+                <th>Hiring</th>
+                <th>Security TXT</th>
+                <th>Pref Language</th>
+                
+            </tr>
+        </thead>
+    </table>
+</div>
+</div>
+<!-- Include diodb JSON data -->
+<script>
+    var thisDataTable;
+    $(document).ready(function(){
+
+        $('#btnSaveCSV').on( 'click', function (e) { thisDataTable.button(0).trigger()})
+        $('#btnCopyTable').on( 'click', function (e) { thisDataTable.button(1).trigger()})
+        //return 1;
+        $('a.toggle-vis').on( 'click', function (e) {
+            
+            e.preventDefault();
+    
+            // Get the column API object
+            var column = thisDataTable.column( $(this).attr('data-column') );
+            currentvis = column.visible();
+            var currentLink = $(this)
+            if(currentvis == true)
+            {
+                currentLink.children('span').remove();
+            }
+            else
+            {
+                currentLink.prepend('<span uk-icon="icon: check"></span>')
+            }
+            // Toggle the visibility
+            column.visible( ! column.visible() );
+        } );
+
+        //Searchbar
+        $('#vdp-search').keyup(function(){
+            thisDataTable.search( $(this).val() ).draw();
+            })
+        
+            
+
+        var programInformation = [];
+        $.getJSON("https://raw.githubusercontent.com/disclose/diodb/master/program-list.json", function(data){
+            //console.log(data)
+            thisDataTable = $('#example').DataTable( {
+               
+                dom: 'rtip',
+                data: data,
+                buttons: [
+                {
+                    extend: 'csvHtml5',
+                    text: 'Save as CSV',
+                    exportOptions: {
+                        modifier: {
+                            page: 'current'
+                        }
+                    }
+                },
+                {
+                    extend: 'copyHtml5',
+                    text: 'Copy Table',
+                    exportOptions: {
+                        modifier: {
+                            page: 'current'
+                        }
+                    }
+                },
+            ],
+            "oLanguage": {
+                  "sZeroRecords": "Still searching? Try asking the <a href='https://community.disclose.io/' target='_blank'>community</a>. Are we missing your organization? Add it via a <a href='https://github.com/disclose/diodb' target='_blank'>pull request here</a>"
+            },
+            columns: [
+              { 
+                "data": "program_name",
+                "defaultContent": "N/A",
+                "visible": true,
+              },
+              { 
+                "data": "policy_url",
+                "defaultContent": "N/A",
+                "visible": true,
+              },
+              { 
+                "data": "policy_url_status",
+                "defaultContent": "N/A",
+                "visible": false,
+              },
+              { 
+                "data": "contact_url",
+                "defaultContent": "N/A",
+                "visible": true,
+              },
+              { 
+                "data": "contact_email",
+                "defaultContent": "N/A",
+                "visible": false,
+              },
+              { 
+                "data": "launch_date",
+                "defaultContent": "N/A",
+                "visible": false,
+              },
+              { 
+                "data": "offers_bounty",
+                "defaultContent": "N/A",
+                "visible": true,
+              },
+              { 
+                "data": "offers_swag",
+                "defaultContent": "N/A",
+                "visible": false,
+              },
+              { 
+                "data": "hall_of_fame",
+                "defaultContent": "N/A",
+                "visible": false,
+              },
+              { 
+                "data": "safe_harbor",
+                "defaultContent": "N/A",
+                "visible": false,
+              },
+              { 
+                "data": "public_disclosure",
+                "defaultContent": "N/A",
+                "visible": false,
+              },
+              { 
+                "data": "disclosure_timeline_days",
+                "defaultContent": "N/A",
+                "visible": false,
+              },
+              { 
+                "data": "pgp_key",
+                "defaultContent": "N/A",
+                "visible": false,
+              },
+              { 
+                "data": "hiring",
+                "defaultContent": "N/A",
+                "visible": false,
+              },
+              { 
+                "data": "securitytxt_url",
+                "defaultContent": "N/A",
+                "visible": false,
+              },
+              { 
+                "data": "preferred_languages",
+                "defaultContent": "N/A",
+                "visible": false,
+              },
+              { 
+                "data": "public_disclosure",
+                "defaultContent": "N/A",
+                "visible": false,
+              }
+              
+            ]}          
+            );
+
+            thisDataTable.on('click', 'tbody tr', function() {
+              //console.log('API row values : ', thisDataTable.row(this).data());
+              rowData = thisDataTable.row(this).data();
+              //$('#details').fadeOut().empty()
+              $('#details').empty()
+              for (const [key, value] of Object.entries(rowData)) {
+                //console.log(key, value);
+                if(value != "")
+                {
+                  appendRow = '<div class="row dark">\
+                    <div class="col-sm-4 p-2 border border-dark">' + key + '</div>\
+                    <div class="col-sm-8 p-2 border border-dark">' + value + '</div>\
+                  </div>'
+                  $('#details').append(appendRow)
+                }
+              }
+              //$('#details').fadeIn()
+            })
+
+
+            
+        }).fail(function(){
+            console.log("An error has occurred.");
+        });
+
+        
+    });
+    </script>
+
+    <p class="uk-text-lead uk-text-center">Can't find what you're looking for? Request contact assistance via the <a href="https://community.disclose.io/c/community-support/5">"Looking for contact"</a> thread in the Disclose.io Community Forum. Notice a missing/incorrect program? Submit a pull request to the <a href="https://github.com/disclose/diodb">Disclose.io database</a>!</p>
+
+
+</body>
+</html> 

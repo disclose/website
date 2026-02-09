@@ -1,0 +1,25 @@
+{{ define "main" }}
+<article class="section">
+  <div class="container-narrow">
+    {{/* Page header */}}
+    <header class="mb-12 text-center">
+      <h1 class="text-4xl md:text-5xl font-display font-bold mb-4">{{ .Title }}</h1>
+      {{ with .Params.description }}
+      <p class="text-xl text-gray-600 max-w-2xl mx-auto">{{ . }}</p>
+      {{ end }}
+    </header>
+
+    {{/* Content */}}
+    <div class="prose prose-lg max-w-none">
+      {{ .Content }}
+    </div>
+
+    {{/* Comments */}}
+    {{ if and .Site.Params.enable_comments (ne .Params.comments false) }}
+    <div class="mt-16 pt-8 border-t border-shade-200">
+      {{ template "_internal/disqus.html" . }}
+    </div>
+    {{ end }}
+  </div>
+</article>
+{{ end }}

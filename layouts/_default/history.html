@@ -1,0 +1,49 @@
+{{ define "main" }}
+<section class="section">
+  <div class="container-narrow">
+    {{/* Header */}}
+    <header class="mb-12 text-center">
+      <h1 class="text-4xl md:text-5xl font-display font-bold mb-4">{{ .Title }}</h1>
+      {{ with .Params.description }}
+      <p class="text-xl text-gray-600 max-w-2xl mx-auto">{{ . }}</p>
+      {{ end }}
+    </header>
+
+    {{/* Content */}}
+    <div class="prose prose-lg max-w-none mb-12">
+      {{ .Content }}
+    </div>
+
+    {{/* Timeline */}}
+    {{ $changelog := site.Data.changelog }}
+    {{ if $changelog }}
+    <div class="relative">
+      {{/* Timeline line */}}
+      <div class="absolute left-4 md:left-1/2 top-0 bottom-0 w-0.5 bg-purple/20 transform md:-translate-x-1/2"></div>
+
+      <div class="space-y-12">
+        {{ range $index, $entry := $changelog }}
+        <div class="relative flex items-start {{ if mod $index 2 }}md:flex-row-reverse{{ end }}">
+          {{/* Timeline dot */}}
+          <div class="absolute left-4 md:left-1/2 w-4 h-4 bg-purple rounded-full border-4 border-white shadow transform -translate-x-1/2"></div>
+
+          {{/* Content card */}}
+          <div class="ml-12 md:ml-0 md:w-1/2 {{ if mod $index 2 }}md:pl-12{{ else }}md:pr-12{{ end }}">
+            <div class="card p-6">
+              <div class="text-sm text-purple font-medium mb-1">{{ $entry.date }}</div>
+              <h3 class="text-xl font-semibold text-gray-900 mb-3">{{ $entry.title }}</h3>
+              <ul class="space-y-2 text-gray-600">
+                {{ range $entry.items }}
+                <li class="prose prose-sm max-w-none">{{ .html | safeHTML }}</li>
+                {{ end }}
+              </ul>
+            </div>
+          </div>
+        </div>
+        {{ end }}
+      </div>
+    </div>
+    {{ end }}
+  </div>
+</section>
+{{ end }}

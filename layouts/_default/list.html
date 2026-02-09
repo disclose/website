@@ -1,0 +1,37 @@
+{{ define "main" }}
+<section class="section">
+  <div class="container-wide">
+    {{/* Page header */}}
+    <header class="mb-12 text-center">
+      <h1 class="text-4xl md:text-5xl font-display font-bold mb-4">{{ .Title }}</h1>
+      {{ with .Params.description }}
+      <p class="text-xl text-gray-600 max-w-2xl mx-auto">{{ . }}</p>
+      {{ end }}
+    </header>
+
+    {{/* List of pages */}}
+    {{ if .Pages }}
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {{ range .Pages }}
+      <a href="{{ .Permalink }}" class="card card-hover p-6">
+        <h2 class="text-xl font-semibold text-gray-900 mb-2 group-hover:text-purple">{{ .Title }}</h2>
+        {{ with .Description }}
+        <p class="text-gray-600 text-sm">{{ . | truncate 120 }}</p>
+        {{ end }}
+        <div class="mt-4 text-purple text-sm font-medium">
+          Read more &rarr;
+        </div>
+      </a>
+      {{ end }}
+    </div>
+    {{ else }}
+    {{/* Content for section pages without children */}}
+    {{ if .Content }}
+    <div class="prose prose-lg max-w-3xl mx-auto">
+      {{ .Content }}
+    </div>
+    {{ end }}
+    {{ end }}
+  </div>
+</section>
+{{ end }}

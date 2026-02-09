@@ -1,0 +1,38 @@
+# Changelog page source
+
+- title: Netscape
+  date: "Oct 10, 1995"
+  items:
+    - html: '<a href="https://web.archive.org/web/19970501041756/http://www101.netscape.com/newsref/pr/newsrelease48.html">The first technology "bugs bounty" is launched by Netscape</a>'
+
+- title: RFPolicy
+  date: "Sep 28, 2001"
+  items:
+    - html: '<a href="https://web.archive.org/web/20010930194040/http://pcworld.com/news/article/0,aid,63944,00.asp">Version 1 of the Rain Forest Puppy disclosure policy template is released</a>'
+
+- title: ISO 24197/30111
+  date: "Feb, 2012"
+  items:
+    - html: '<a href="https://www.iso.org/standard/45170.html">ISO 24197/30111 released for paying customers</a>'
+
+- title: OSVDF
+  date: "Jul 24, 2014"
+  items:
+    - html: '<a href="https://github.com/bugcrowd/disclosure-policy">Bugcrowd and Cipherlaw collaborate to release the Open Source Vulnerability Disclosure Framework</a>'
+
+- title: Free ISO 24197
+  date: "Apr 18, 2016"
+  items:
+    - html: '<a href="https://www.itnews.com.au/news/iso-vulnerability-disclosure-standard-now-free-418253">ISO 24197 made free to download</a>'
+
+- title: '#legalbugbounty'
+  date: "2018"
+  items:
+    - html: '<a href="https://amitelazari.com/%23legalbugbounty-hof">Amit Elezari hits the cybersecurity talk circuit talking about legal "safe harbor" for hackers</a>'
+
+- title: Disclose.io launch
+  date: "Aug 3, 2018"
+  items:
+    - html: '<a href="https://arstechnica.com/information-technology/2018/08/new-open-source-effort-legal-code-to-make-reporting-security-bugs-safer">#legalbugbounty and OSVDF combine and create The disclose.io Project</a>'
+    - html: '<a href="https://www.crunchbase.com/organization/disclose-io">Crunchbase listing</a>'
+    - html: '<a href="https://wikitia.com/wiki/Disclose.io">Wiktia entry</a>'

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.LanguageCode | default "en" }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  {{ hugo.Generator }}
+
+  {{/* SEO */}}
+  <title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} | {{ .Site.Title }}{{ end }}</title>
+  <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ with .Site.Params.description }}{{ . }}{{ end }}{{ end }}">
+
+  {{/* Open Graph */}}
+  <meta property="og:title" content="{{ .Title }}">
+  <meta property="og:description" content="{{ with .Description }}{{ . }}{{ else }}{{ with .Site.Params.description }}{{ . }}{{ end }}{{ end }}">
+  <meta property="og:type" content="{{ if .IsPage }}article{{ else }}website{{ end }}">
+  <meta property="og:url" content="{{ .Permalink }}">
+  <meta property="og:image" content="{{ .Site.Params.og_image | absURL }}">
+  <meta property="og:site_name" content="{{ .Site.Title }}">
+
+  {{/* Twitter Card */}}
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="{{ .Site.Params.twitter }}">
+  <meta name="twitter:title" content="{{ .Title }}">
+  <meta name="twitter:description" content="{{ with .Description }}{{ . }}{{ else }}{{ with .Site.Params.description }}{{ . }}{{ end }}{{ end }}">
+  <meta name="twitter:image" content="{{ .Site.Params.og_image | absURL }}">
+
+  {{/* Favicon */}}
+  <link rel="icon" type="image/png" href="{{ "uploads/favicon.png" | relURL }}">
+
+  {{/* Styles */}}
+  <link rel="stylesheet" href="{{ "css/main.css" | relURL }}">
+
+  {{/* Alpine.js */}}
+  <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+  {{/* Pagefind search - only in production after build */}}
+  {{ if and .Site.Params.enable_search (eq hugo.Environment "production") }}
+  <link href="{{ "pagefind/pagefind-ui.css" | relURL }}" rel="stylesheet">
+  <script src="{{ "pagefind/pagefind-ui.js" | relURL }}"></script>
+  {{ end }}
+
+  {{/* RSS */}}
+  {{ with .OutputFormats.Get "rss" -}}
+  <link rel="alternate" type="application/rss+xml" title="{{ $.Site.Title }}" href="{{ .Permalink }}">
+  {{- end }}
+
+  {{/* Canonical */}}
+  <link rel="canonical" href="{{ .Permalink }}">
+
+  {{ block "head" . }}{{ end }}
+</head>
+
+<body class="min-h-screen flex flex-col" x-data="{ mobileMenuOpen: false, searchOpen: false }">
+  {{/* Header */}}
+  {{ partial "navbar.html" . }}
+
+  {{/* Main content */}}
+  <main class="flex-1">
+    {{ block "main" . }}{{ end }}
+  </main>
+
+  {{/* Footer */}}
+  {{ partial "footer.html" . }}
+
+  {{/* Mobile menu */}}
+  {{ partial "mobile-menu.html" . }}
+
+  {{/* Analytics */}}
+  {{ if and (eq hugo.Environment "production") .Site.Params.enable_analytics }}
+    {{ template "_internal/google_analytics.html" . }}
+  {{ end }}
+
+  {{ block "scripts" . }}{{ end }}
+</body>
+</html>

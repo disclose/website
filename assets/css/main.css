@@ -1,0 +1,210 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Noto Sans font imports */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Noto+Sans+Display:wght@400;500;600;700&display=swap');
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply font-sans text-gray-700 antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display text-gray-900;
+  }
+}
+
+@layer components {
+  /* Button styles */
+  .btn {
+    @apply inline-flex items-center justify-center px-6 py-3 font-medium rounded-lg transition-all duration-200;
+  }
+
+  .btn-primary {
+    @apply bg-purple text-white hover:bg-purple-dark focus:ring-2 focus:ring-purple focus:ring-offset-2;
+  }
+
+  .btn-secondary {
+    @apply bg-white text-purple border-2 border-purple hover:bg-purple hover:text-white;
+  }
+
+  .btn-ghost {
+    @apply text-gray-600 hover:text-purple hover:bg-shade-050;
+  }
+
+  /* Card styles */
+  .card {
+    @apply bg-white rounded-xl shadow-sm border border-shade-200 overflow-hidden;
+  }
+
+  .card-hover {
+    @apply transition-all duration-200 hover:shadow-md hover:border-purple/20;
+  }
+
+  /* Navigation styles */
+  .nav-link {
+    @apply text-gray-600 hover:text-purple transition-colors duration-200;
+  }
+
+  .nav-link-active {
+    @apply text-purple font-medium;
+  }
+
+  /* Sidebar styles for docs */
+  .sidebar-section {
+    @apply mb-6;
+  }
+
+  .sidebar-title {
+    @apply text-xs font-semibold uppercase tracking-wider text-gray-500 mb-2;
+  }
+
+  .sidebar-link {
+    @apply block py-1.5 px-3 text-sm text-gray-600 rounded-md hover:bg-shade-050 hover:text-purple transition-colors;
+  }
+
+  .sidebar-link-active {
+    @apply bg-purple/10 text-purple font-medium;
+  }
+
+  /* Form styles */
+  .form-input {
+    @apply w-full px-4 py-3 border border-shade-300 rounded-lg focus:ring-2 focus:ring-purple focus:border-purple transition-colors;
+  }
+
+  .form-label {
+    @apply block text-sm font-medium text-gray-700 mb-1;
+  }
+
+  /* Hero section */
+  .hero-gradient {
+    background: linear-gradient(135deg, #673ab6 0%, #322a41 100%);
+  }
+
+  /* Feature box */
+  .feature-box {
+    @apply card card-hover p-6;
+  }
+
+  .feature-icon {
+    @apply w-12 h-12 bg-purple/10 text-purple rounded-lg flex items-center justify-center mb-4;
+  }
+
+  /* FAQ accordion */
+  .faq-item {
+    @apply border-b border-shade-200;
+  }
+
+  .faq-question {
+    @apply w-full py-4 text-left font-medium text-gray-900 flex items-center justify-between hover:text-purple transition-colors;
+  }
+
+  .faq-answer {
+    @apply pb-4 text-gray-600 prose prose-sm max-w-none;
+  }
+
+  /* Table of contents */
+  .toc-link {
+    @apply text-sm text-gray-500 hover:text-purple transition-colors;
+  }
+
+  .toc-link-active {
+    @apply text-purple font-medium;
+  }
+
+  /* Alert/callout boxes */
+  .alert {
+    @apply p-4 rounded-lg border;
+  }
+
+  .alert-info {
+    @apply bg-blue-50 border-blue-200 text-blue-800;
+  }
+
+  .alert-warning {
+    @apply bg-yellow-50 border-yellow-200 text-yellow-800;
+  }
+
+  .alert-success {
+    @apply bg-green-50 border-green-200 text-green-800;
+  }
+
+  .alert-danger {
+    @apply bg-red-50 border-red-200 text-red-800;
+  }
+
+  /* Team member card */
+  .team-card {
+    @apply text-center;
+  }
+
+  .team-avatar {
+    @apply w-24 h-24 rounded-full mx-auto mb-4 object-cover;
+  }
+
+  /* Video thumbnail */
+  .video-thumbnail {
+    @apply relative rounded-lg overflow-hidden cursor-pointer group;
+  }
+
+  .video-play-icon {
+    @apply absolute inset-0 flex items-center justify-center bg-black/30 group-hover:bg-black/40 transition-colors;
+  }
+
+  /* Search */
+  .search-input {
+    @apply w-full pl-10 pr-4 py-2 border border-shade-300 rounded-lg focus:ring-2 focus:ring-purple focus:border-purple;
+  }
+
+  .search-icon {
+    @apply absolute left-3 top-1/2 -translate-y-1/2 text-gray-400;
+  }
+}
+
+@layer utilities {
+  /* Section spacing */
+  .section {
+    @apply py-16 md:py-24;
+  }
+
+  .section-sm {
+    @apply py-8 md:py-12;
+  }
+
+  /* Container */
+  .container-narrow {
+    @apply max-w-3xl mx-auto px-4;
+  }
+
+  .container-wide {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  /* Text utilities */
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /* Gradient text */
+  .text-gradient {
+    @apply bg-gradient-to-r from-purple to-purple-dark bg-clip-text text-transparent;
+  }
+}
+
+/* Pagefind search styling overrides */
+:root {
+  --pagefind-ui-scale: 1;
+  --pagefind-ui-primary: #673ab6;
+  --pagefind-ui-text: #334155;
+  --pagefind-ui-background: #ffffff;
+  --pagefind-ui-border: #e2e8f0;
+  --pagefind-ui-tag: #f1f5f9;
+  --pagefind-ui-border-width: 1px;
+  --pagefind-ui-border-radius: 8px;
+  --pagefind-ui-font: 'Noto Sans', system-ui, sans-serif;
+}

@@ -1,0 +1,37 @@
+{{/* Documentation sidebar navigation */}}
+{{ $currentPage := . }}
+{{ $docs := .Site.Menus.docs }}
+
+{{ range $docs }}
+{{ if .HasChildren }}
+{{/* Section header */}}
+<div class="sidebar-section">
+  <h3 class="sidebar-title">{{ .Name }}</h3>
+  <ul class="space-y-1">
+    {{ range .Children }}
+    <li>
+      <a href="{{ .URL }}"
+         class="sidebar-link{{ if eq $currentPage.RelPermalink .URL }} sidebar-link-active{{ end }}"
+         {{ if strings.HasPrefix .URL "http" }}target="_blank" rel="noopener noreferrer"{{ end }}>
+        {{ .Name }}
+        {{ if strings.HasPrefix .URL "http" }}
+        <svg class="w-3 h-3 inline-block ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+        </svg>
+        {{ end }}
+      </a>
+    </li>
+    {{ end }}
+  </ul>
+</div>
+{{ else }}
+{{/* Top-level link */}}
+<div class="sidebar-section">
+  <a href="{{ .URL }}"
+     class="sidebar-link{{ if eq $currentPage.RelPermalink .URL }} sidebar-link-active{{ end }}"
+     {{ if strings.HasPrefix .URL "http" }}target="_blank" rel="noopener noreferrer"{{ end }}>
+    {{ .Name }}
+  </a>
+</div>
+{{ end }}
+{{ end }}

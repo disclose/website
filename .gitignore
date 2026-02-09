@@ -1,0 +1,32 @@
+# Hugo
+/public/
+/resources/_gen/
+hugo_stats.json
+.hugo_build.lock
+
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Tailwind
+/static/css/main.css
+
+# IDE
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Build artifacts
+dist/

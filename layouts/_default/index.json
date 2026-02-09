@@ -1,0 +1,12 @@
+[
+  {{- $pages := where .Site.RegularPages "Type" "ne" "faqs" -}}
+  {{- range $index, $page := $pages -}}
+  {{- if $index }},{{ end }}
+  {
+    "title": {{ .Title | jsonify }},
+    "url": {{ .Permalink | jsonify }},
+    "content": {{ .Plain | truncate 5000 | jsonify }},
+    "description": {{ with .Description }}{{ . | jsonify }}{{ else }}""{{ end }}
+  }
+  {{- end }}
+]

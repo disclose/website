@@ -1,0 +1,43 @@
+{{/*
+  YouTube video embed shortcode
+  Usage: {{< video id="dQw4w9WgXcQ" >}}
+*/}}
+{{ $id := .Get "id" }}
+{{ $title := .Get "title" | default "Video" }}
+
+<div class="my-8 aspect-video" x-data="{ playing: false }">
+  <div class="relative w-full h-full bg-gray-900 rounded-lg overflow-hidden">
+    {{/* Thumbnail */}}
+    <template x-if="!playing">
+      <div class="absolute inset-0">
+        <img
+          src="https://img.youtube.com/vi/{{ $id }}/maxresdefault.jpg"
+          alt="{{ $title }}"
+          class="w-full h-full object-cover"
+          loading="lazy"
+        >
+        <button
+          @click="playing = true"
+          class="absolute inset-0 flex items-center justify-center bg-black/30 hover:bg-black/40 transition-colors group"
+          aria-label="Play video"
+        >
+          <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
+            <svg class="w-6 h-6 text-purple ml-1" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M8 5v14l11-7z"/>
+            </svg>
+          </div>
+        </button>
+      </div>
+    </template>
+    {{/* Embedded player */}}
+    <template x-if="playing">
+      <iframe
+        src="https://www.youtube.com/embed/{{ $id }}?autoplay=1"
+        class="absolute inset-0 w-full h-full"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen
+      ></iframe>
+    </template>
+  </div>
+</div>

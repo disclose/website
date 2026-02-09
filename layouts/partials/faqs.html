@@ -1,0 +1,52 @@
+{{/* FAQ accordion section using Alpine.js */}}
+{{ $faqs := .Site.GetPage "/faqs" }}
+{{ if $faqs }}
+<section class="section" id="faq">
+  <div class="container-narrow">
+    {{ with .Params.faq }}
+    {{ with .title }}
+    <h2 class="text-3xl md:text-4xl font-display font-bold text-center mb-4">{{ . }}</h2>
+    {{ end }}
+    {{ with .subtitle }}
+    <p class="text-xl text-gray-600 text-center mb-12 max-w-2xl mx-auto">{{ . }}</p>
+    {{ end }}
+    {{ end }}
+
+    <div class="space-y-2" x-data="{ active: null }">
+      {{ range $faqs.Pages }}
+      <div class="faq-item">
+        <button
+          class="faq-question"
+          @click="active = active === {{ .Weight }} ? null : {{ .Weight }}"
+          :aria-expanded="active === {{ .Weight }}"
+        >
+          <span>{{ .Title }}</span>
+          <svg
+            class="w-5 h-5 text-gray-500 transform transition-transform duration-200"
+            :class="{ 'rotate-180': active === {{ .Weight }} }"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+          </svg>
+        </button>
+        <div
+          x-show="active === {{ .Weight }}"
+          x-transition:enter="transition ease-out duration-200"
+          x-transition:enter-start="opacity-0 -translate-y-2"
+          x-transition:enter-end="opacity-100 translate-y-0"
+          x-transition:leave="transition ease-in duration-150"
+          x-transition:leave-start="opacity-100 translate-y-0"
+          x-transition:leave-end="opacity-0 -translate-y-2"
+          class="faq-answer"
+          style="display: none;"
+        >
+          {{ .Content }}
+        </div>
+      </div>
+      {{ end }}
+    </div>
+  </div>
+</section>
+{{ end }}

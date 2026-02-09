@@ -1,0 +1,51 @@
+{{/* Feature boxes section */}}
+{{ $boxes := site.Data.navigation.boxes }}
+{{ if $boxes }}
+<section class="section bg-shade-050">
+  <div class="container-wide">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      {{ range $boxes }}
+      <a href="{{ .url }}"
+         class="feature-box group"
+         {{ if strings.HasPrefix .url "http" }}target="_blank" rel="noopener noreferrer"{{ end }}>
+        <div class="feature-icon">
+          {{ if eq .icon "pencil" }}
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/>
+          </svg>
+          {{ else if eq .icon "search" }}
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+          </svg>
+          {{ else if eq .icon "menu" }}
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"/>
+          </svg>
+          {{ else if eq .icon "heart" }}
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+          </svg>
+          {{ else }}
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+          </svg>
+          {{ end }}
+        </div>
+        <h3 class="text-lg font-semibold text-gray-900 mb-2 group-hover:text-purple transition-colors">
+          {{ .title }}
+        </h3>
+        <p class="text-gray-600 text-sm">
+          {{ .description }}
+        </p>
+        <div class="mt-4 text-purple text-sm font-medium flex items-center group-hover:translate-x-1 transition-transform">
+          Learn more
+          <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+          </svg>
+        </div>
+      </a>
+      {{ end }}
+    </div>
+  </div>
+</section>
+{{ end }}

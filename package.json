@@ -1,0 +1,27 @@
+{
+  "name": "disclose-io-hugo",
+  "version": "1.0.0",
+  "description": "disclose.io website built with Hugo and Tailwind CSS",
+  "scripts": {
+    "dev": "npm-run-all --parallel dev:*",
+    "dev:hugo": "hugo server --buildDrafts --buildFuture",
+    "dev:css": "npx tailwindcss -i ./assets/css/main.css -o ./static/css/main.css --watch",
+    "build": "npm-run-all build:css build:hugo build:search",
+    "build:css": "npx tailwindcss -i ./assets/css/main.css -o ./static/css/main.css --minify",
+    "build:hugo": "hugo --minify",
+    "build:search": "npx pagefind --site public",
+    "preview": "hugo server --buildDrafts --buildFuture --port 1313"
+  },
+  "devDependencies": {
+    "@tailwindcss/forms": "^0.5.7",
+    "@tailwindcss/typography": "^0.5.12",
+    "autoprefixer": "^10.4.19",
+    "npm-run-all": "^4.1.5",
+    "pagefind": "^1.1.0",
+    "postcss": "^8.4.38",
+    "tailwindcss": "^3.4.3"
+  },
+  "dependencies": {
+    "alpinejs": "^3.13.10"
+  }
+}

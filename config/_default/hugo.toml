@@ -1,0 +1,55 @@
+baseURL = "https://disclose.io/"
+languageCode = "en-us"
+title = "disclose.io"
+# No external theme - using local layouts
+
+# Build settings
+enableRobotsTXT = true
+enableGitInfo = false
+
+# Disable Hugo's built-in syntax highlighting (we'll use custom CSS)
+pygmentsUseClasses = true
+
+# Content settings
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+  [markup.tableOfContents]
+    startLevel = 2
+    endLevel = 4
+    ordered = false
+
+# Taxonomies
+[taxonomies]
+  tag = "tags"
+  category = "categories"
+
+# Permalinks
+[permalinks]
+  docs = "/docs/:slug/"
+
+# Output formats
+[outputs]
+  home = ["HTML", "RSS", "JSON"]
+  section = ["HTML", "RSS"]
+  page = ["HTML"]
+
+# Custom JSON output for search
+[outputFormats]
+  [outputFormats.JSON]
+    mediaType = "application/json"
+    baseName = "index"
+    isPlainText = true
+
+# Minification
+[minify]
+  disableCSS = false
+  disableHTML = false
+  disableJS = false
+  disableSVG = false
+
+# Security settings
+[security]
+  [security.funcs]
+    getenv = ["^HUGO_", "^GOOGLE_ANALYTICS_ID$", "^DISQUS_SHORTNAME$"]

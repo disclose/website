@@ -1,0 +1,22 @@
+{{ define "main" }}
+<section class="section-sm">
+  <div class="container-wide">
+    {{/* Header */}}
+    <header class="mb-8 text-center">
+      <h1 class="text-3xl md:text-4xl font-display font-bold mb-4">{{ .Title }}</h1>
+      {{ with .Params.description }}
+      <p class="text-xl text-gray-600 max-w-2xl mx-auto">{{ . }}</p>
+      {{ end }}
+    </header>
+
+    {{/* Datatable iframe */}}
+    <div class="relative w-full" style="min-height: 800px;">
+      <iframe
+        src="{{ "standalone/programs-datatable-standalone.html" | relURL }}"
+        class="absolute inset-0 w-full h-full border-0"
+        title="VDP Programs Database"
+      ></iframe>
+    </div>
+  </div>
+</section>
+{{ end }}

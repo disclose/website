@@ -1,0 +1,16 @@
+{{/*
+  Alert/callout shortcode
+  Usage: {{< alert type="info" >}}Content here{{< /alert >}}
+  Types: info, warning, success, danger
+*/}}
+{{ $type := .Get "type" | default "info" }}
+{{ $title := .Get "title" }}
+
+<div class="alert alert-{{ $type }} my-6">
+  {{ with $title }}
+  <div class="font-semibold mb-1">{{ . }}</div>
+  {{ end }}
+  <div class="prose prose-sm max-w-none">
+    {{ .Inner | markdownify }}
+  </div>
+</div>

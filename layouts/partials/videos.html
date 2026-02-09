@@ -1,0 +1,61 @@
+{{/* Videos section */}}
+{{ $videos := site.Data.videos }}
+{{ if $videos }}
+<section class="section bg-shade-050">
+  <div class="container-wide">
+    {{ with .Params.videos }}
+    {{ with .title }}
+    <h2 class="text-3xl md:text-4xl font-display font-bold text-center mb-4">{{ . }}</h2>
+    {{ end }}
+    {{ with .subtitle }}
+    <p class="text-xl text-gray-600 text-center mb-12 max-w-2xl mx-auto">{{ . }}</p>
+    {{ end }}
+    {{ end }}
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+      {{ range $videos }}
+      <div class="card overflow-hidden" x-data="{ playing: false }">
+        <div class="relative aspect-video bg-gray-900">
+          {{/* Thumbnail */}}
+          <template x-if="!playing">
+            <div class="absolute inset-0">
+              <img
+                src="https://img.youtube.com/vi/{{ .youtube_id }}/maxresdefault.jpg"
+                alt="{{ .title }}"
+                class="w-full h-full object-cover"
+                loading="lazy"
+              >
+              <button
+                @click="playing = true"
+                class="absolute inset-0 flex items-center justify-center bg-black/30 hover:bg-black/40 transition-colors group"
+                aria-label="Play video"
+              >
+                <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
+                  <svg class="w-6 h-6 text-purple ml-1" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M8 5v14l11-7z"/>
+                  </svg>
+                </div>
+              </button>
+            </div>
+          </template>
+          {{/* Embedded player */}}
+          <template x-if="playing">
+            <iframe
+              src="https://www.youtube.com/embed/{{ .youtube_id }}?autoplay=1"
+              class="absolute inset-0 w-full h-full"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+            ></iframe>
+          </template>
+        </div>
+        <div class="p-4">
+          <h3 class="font-semibold text-gray-900">{{ .title }}</h3>
+          <p class="text-sm text-gray-600 mt-1">{{ .description }}</p>
+        </div>
+      </div>
+      {{ end }}
+    </div>
+  </div>
+</section>
+{{ end }}

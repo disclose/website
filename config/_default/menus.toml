@@ -1,0 +1,160 @@
+# Main navigation
+[[main]]
+  name = "Documentation"
+  url = "/docs/"
+  weight = 10
+
+[[main]]
+  name = "Programs"
+  url = "/programs/"
+  weight = 20
+
+[[main]]
+  name = "History"
+  url = "/history/"
+  weight = 30
+
+[[main]]
+  name = "Blog"
+  url = "https://blog.disclose.io"
+  weight = 40
+
+[[main]]
+  name = "Contact"
+  url = "/contact/"
+  weight = 50
+
+# Footer navigation - Resources
+[[footer_resources]]
+  name = "Documentation"
+  url = "/docs/"
+  weight = 10
+
+[[footer_resources]]
+  name = "FAQ"
+  url = "/#faq"
+  weight = 20
+
+[[footer_resources]]
+  name = "Programs"
+  url = "/programs/"
+  weight = 30
+
+[[footer_resources]]
+  name = "History"
+  url = "/history/"
+  weight = 40
+
+# Footer navigation - Community
+[[footer_community]]
+  name = "GitHub"
+  url = "https://github.com/disclose"
+  weight = 10
+
+[[footer_community]]
+  name = "Twitter"
+  url = "https://twitter.com/disaborcloseio"
+  weight = 20
+
+[[footer_community]]
+  name = "Blog"
+  url = "https://blog.disclose.io"
+  weight = 30
+
+[[footer_community]]
+  name = "Contact"
+  url = "/contact/"
+  weight = 40
+
+# Docs sidebar navigation
+[[docs]]
+  name = "Getting Started"
+  weight = 10
+
+[[docs]]
+  name = "What is disclose.io?"
+  url = "/docs/what-is-disclose/"
+  parent = "Getting Started"
+  weight = 10
+
+[[docs]]
+  name = "The disclose.io Community"
+  url = "/docs/community/"
+  parent = "Getting Started"
+  weight = 20
+
+[[docs]]
+  name = "Core Terms"
+  url = "/docs/core-terms/"
+  parent = "Getting Started"
+  weight = 30
+
+[[docs]]
+  name = "For Finders"
+  weight = 20
+
+[[docs]]
+  name = "Vulnerability Disclosure 101"
+  url = "/docs/vulnerability-disclosure-101/"
+  parent = "For Finders"
+  weight = 10
+
+[[docs]]
+  name = "Finder Rights"
+  url = "/docs/finder-rights/"
+  parent = "For Finders"
+  weight = 20
+
+[[docs]]
+  name = "Getting Started as a Finder"
+  url = "/docs/getting-started-finder/"
+  parent = "For Finders"
+  weight = 30
+
+[[docs]]
+  name = "For Organizations"
+  weight = 30
+
+[[docs]]
+  name = "Why Adopt disclose.io?"
+  url = "/docs/why-adopt/"
+  parent = "For Organizations"
+  weight = 10
+
+[[docs]]
+  name = "Getting Started as an Organization"
+  url = "/docs/getting-started-org/"
+  parent = "For Organizations"
+  weight = 20
+
+[[docs]]
+  name = "Tools"
+  weight = 40
+
+[[docs]]
+  name = "Policy Generator"
+  url = "https://policymaker.disclose.io"
+  parent = "Tools"
+  weight = 10
+
+[[docs]]
+  name = "Seal Generator"
+  url = "/docs/seal-generator/"
+  parent = "Tools"
+  weight = 20
+
+[[docs]]
+  name = "Resources"
+  weight = 50
+
+[[docs]]
+  name = "List of VDP Programs"
+  url = "/programs/"
+  parent = "Resources"
+  weight = 10
+
+[[docs]]
+  name = "Changelog"
+  url = "/docs/changelog/"
+  parent = "Resources"
+  weight = 20

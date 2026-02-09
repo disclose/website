@@ -1,0 +1,50 @@
+{{ define "main" }}
+{{/* Hero section */}}
+{{ partial "hero.html" . }}
+
+{{/* Feature boxes */}}
+{{ partial "boxes.html" . }}
+
+{{/* FAQs section */}}
+{{ partial "faqs.html" . }}
+
+{{/* Videos section */}}
+{{ partial "videos.html" . }}
+
+{{/* CTA section */}}
+{{ with .Params.cta }}
+<section class="section hero-gradient text-white">
+  <div class="container-narrow text-center">
+    <h2 class="text-3xl md:text-4xl font-display font-bold mb-4">{{ .title }}</h2>
+    {{ with .subtitle }}
+    <p class="text-xl text-white/80 mb-8 max-w-2xl mx-auto">{{ . }}</p>
+    {{ end }}
+    {{ with .buttons }}
+    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+      {{ range . }}
+      <a href="{{ .url }}"
+         class="{{ if eq .style "primary" }}bg-white text-purple hover:bg-gray-100{{ else }}border-2 border-white text-white hover:bg-white/10{{ end }} px-8 py-3 rounded-lg font-medium transition-colors"
+         {{ if strings.HasPrefix .url "http" }}target="_blank" rel="noopener noreferrer"{{ end }}>
+        {{ .text }}
+      </a>
+      {{ end }}
+    </div>
+    {{ end }}
+  </div>
+</section>
+{{ end }}
+{{ end }}
+
+{{/* JSON output for search */}}
+{{ define "index.json" }}
+[
+  {{ range $index, $page := .Site.RegularPages }}
+  {{ if $index }},{{ end }}
+  {
+    "title": {{ .Title | jsonify }},
+    "url": {{ .Permalink | jsonify }},
+    "content": {{ .Plain | jsonify }}
+  }
+  {{ end }}
+]
+{{ end }}

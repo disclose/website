@@ -1,0 +1,38 @@
+# Site metadata
+description = "disclose.io is a collaborative and vendor-agnostic project to standardize best practices around safe harbor for security researchers."
+author = "disclose.io"
+
+# Social/SEO
+twitter = "@disaborcloseio"
+og_image = "/uploads/og-image.png"
+
+# Analytics & Comments
+google_analytics = "UA-143424917-6"
+disqus_shortname = "disclose-io"
+
+# Contact
+contact_email = "hello@disclose.io"
+formspree_endpoint = "https://formspree.io/f/xrgrzrle"
+
+# Navigation
+docs_section = "docs"
+
+# Feature flags
+enable_search = true
+enable_comments = true
+enable_analytics = true
+
+# Design (matching policymaker.disclose.io)
+[colors]
+  primary = "#673ab6"
+  primary_dark = "#322a41"
+  shade_050 = "hsla(240, 8%, 97%, 1)"
+  shade_100 = "hsla(240, 5%, 93%, 1)"
+  shade_200 = "hsla(229, 5%, 89%, 1)"
+  shade_300 = "hsla(225, 4%, 82%, 1)"
+  shade_400 = "hsla(230, 4%, 73%, 1)"
+  shade_500 = "hsla(231, 4%, 63%, 1)"
+  shade_600 = "hsla(230, 4%, 56%, 1)"
+  shade_700 = "hsla(231, 3%, 51%, 1)"
+  shade_800 = "hsla(231, 3%, 46%, 1)"
+  shade_900 = "hsla(231, 3%, 41%, 1)"
