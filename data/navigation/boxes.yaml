@@ -1,16 +1,21 @@
-# Homepage feature boxes
+# Homepage feature boxes - Problem-Solution framing
 
-- title: "Deploy a VDP using Policymaker"
-  description: "Join the organizations researchers want to help. Generate a disclose.io-compliant VDP with safe harbor, security.txt, and everything needed to welcome good-faith research."
+- title: "I want to accept security reports"
+  description: "Launch a VDP that researchers trust. Policymaker generates everything you need: safe harbor language, security.txt, and disclose.io-compliant policies."
   icon: "pencil"
   url: "https://policymaker.disclose.io"
 
-- title: "Look up programs"
-  description: "Know before you go. Look up vulnerability disclosure programs to find submission details and safe harbor status for the organization you're researching."
+- title: "I found a vulnerability"
+  description: "Look up the organization's disclosure program, check their safe harbor status, and get help navigating the process if you need it."
   icon: "search"
   url: "/programs/"
 
-- title: "Get disclosure assistance"
-  description: "Want to do the right thing but don't know where to start? Our community helps you find contacts, navigate disclosures, and connect with others who get it."
+- title: "I want to protect researchers"
+  description: "Access model policies, legal frameworks, and safe harbor guidance. Help advance the legal protections security researchers need."
+  icon: "shield"
+  url: "/docs/key-objectives/"
+
+- title: "I want to contribute"
+  description: "Join the community, contribute to open resources, or help organizations adopt better disclosure practices."
   icon: "heart"
-  url: "https://community.disclose.io/c/hacker-connect/5"
+  url: "https://community.disclose.io"
