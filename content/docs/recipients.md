@@ -19,3 +19,15 @@ weight: 70
 ...who is seeking to improve the simplicity and utility of VDP language, we want to be able to **refer to the consensus of experts** to support our point of view.
 
 ...who is time poor, we want access to **free policy boilerplates** that have the power of market and legal consensus behind them.
+
+## How disclose.io can help
+
+> **Note:** While this project engages the legal opinion of many, it does not constitute legal advice. Please consult your legal counsel for the specific suitability of the disclose.io terms in your organization.
+
+![disclose.io workflow](/uploads/disclose-workflow-header.png)
+
+1. *Whether you're starting from scratch or updating an existing policy, choose the legal terms that best fit your vulnerability disclosure program (VDP) or bug bounty program (BBP).*
+2. *Publish your new policy, or add the safe harbor terms to your existing VDP or BBP policy.*
+3. *Submit a pull request to add your program to the open-source disclose.io program database. The diodb maintainers will confirm details, validate your disclose.io status, and merge your request.*
+4. *Select the appropriate disclose.io Seal based on your Disclose.io Status.*
+5. *Add the seal to your security page, vulnerability policy or reporting page, checkout page, and whatever else you like and let the world know you're joining the mission!*
