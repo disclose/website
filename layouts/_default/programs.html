@@ -9,14 +9,43 @@
       {{ end }}
     </header>
 
-    {{/* Datatable iframe */}}
-    <div class="relative w-full" style="min-height: 800px;">
+    {{/* Datatable iframe with auto-resize */}}
+    <div class="relative w-full">
       <iframe
+        id="programs-iframe"
         src="{{ "standalone/programs-datatable-standalone.html" | relURL }}"
-        class="absolute inset-0 w-full h-full border-0"
+        class="w-full border-0"
+        style="min-height: 800px;"
         title="VDP Programs Database"
       ></iframe>
     </div>
   </div>
 </section>
+
+<script>
+// Auto-resize iframe to fit content
+(function() {
+  var iframe = document.getElementById('programs-iframe');
+  if (!iframe) return;
+
+  function resize() {
+    try {
+      var body = iframe.contentDocument.body;
+      var html = iframe.contentDocument.documentElement;
+      if (body && html) {
+        var height = Math.max(body.scrollHeight, html.scrollHeight);
+        iframe.style.height = height + 'px';
+      }
+    } catch(e) {}
+  }
+
+  iframe.addEventListener('load', function() {
+    resize();
+    // Re-check after data loads (the JSON fetch)
+    setInterval(resize, 1000);
+    // Stop checking after 30 seconds
+    setTimeout(function() { clearInterval(); }, 30000);
+  });
+})();
+</script>
 {{ end }}

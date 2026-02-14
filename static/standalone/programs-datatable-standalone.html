@@ -1,308 +1,689 @@
 <!DOCTYPE html>
-<html lang="en-gb" dir="ltr" class="uk-height-1-1">
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>disclose.io VDP Search</title>
 
-    <head>
-      <title>Disclose.io VDP Search</title>
-<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
-<!-- UIkit CSS -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.6.16/dist/css/uikit.min.css" />
+  <!-- Noto Sans (matches main site) -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&family=Noto+Sans+Display:wght@400;500;600;700&display=swap">
 
-<!-- UIkit JS -->
-<script src="https://cdn.jsdelivr.net/npm/uikit@3.6.16/dist/js/uikit.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/uikit@3.6.16/dist/js/uikit-icons.min.js"></script>
+  <!-- jQuery + DataTables (core only, no UIkit integration) -->
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+  <script src="https://cdn.datatables.net/1.13.8/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/buttons/2.4.2/js/dataTables.buttons.min.js"></script>
+  <script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.html5.min.js"></script>
 
-<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
-<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.23/js/dataTables.uikit.min.js"></script>
-<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.5/js/dataTables.buttons.min.js"></script> 
-<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.5/js/buttons.html5.min.js"></script> 
+  <style>
+    /* ── Reset & Base ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/dataTables.uikit.min.css" />
+    :root {
+      --purple: #673ab6;
+      --purple-dark: #322a41;
+      --purple-light: #8b5cf6;
+      --purple-10: rgba(103, 58, 182, 0.1);
+      --gray-50: #f9fafb;
+      --gray-100: #f3f4f6;
+      --gray-200: #e5e7eb;
+      --gray-300: #d1d5db;
+      --gray-400: #9ca3af;
+      --gray-500: #6b7280;
+      --gray-600: #4b5563;
+      --gray-700: #374151;
+      --gray-900: #111827;
+      --shade-050: hsla(240, 8%, 97%, 1);
+      --shade-200: hsla(229, 5%, 89%, 1);
+      --shade-300: hsla(225, 4%, 82%, 1);
+      --radius: 0.5rem;
+      --radius-lg: 0.75rem;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Noto Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      color: var(--gray-700);
+      background: #fff;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: var(--purple); text-decoration: none; }
+    a:hover { color: var(--purple-dark); }
+
+    /* ── Layout ── */
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+
+    /* ── Toolbar ── */
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    /* ── Buttons ── */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.375rem;
+      padding: 0.5rem 1rem;
+      font-family: inherit;
+      font-size: 0.875rem;
+      font-weight: 500;
+      border-radius: var(--radius);
+      border: 1px solid var(--shade-300);
+      background: #fff;
+      color: var(--gray-600);
+      cursor: pointer;
+      transition: all 0.15s ease;
+      white-space: nowrap;
+    }
+
+    .btn:hover {
+      border-color: var(--purple);
+      color: var(--purple);
+      background: var(--purple-10);
+    }
+
+    .btn svg { width: 16px; height: 16px; flex-shrink: 0; }
+
+    /* ── Fields Dropdown ── */
+    .dropdown-wrap { position: relative; }
+
+    .dropdown-menu {
+      display: none;
+      position: absolute;
+      top: calc(100% + 4px);
+      left: 0;
+      z-index: 50;
+      min-width: 320px;
+      background: #fff;
+      border: 1px solid var(--shade-200);
+      border-radius: var(--radius-lg);
+      box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
+      padding: 0.75rem;
+    }
+
+    .dropdown-menu.open { display: block; }
+
+    .dropdown-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.25rem 1rem;
+    }
+
+    .dropdown-header {
+      grid-column: 1 / -1;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--gray-400);
+      padding: 0.25rem 0.5rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .field-toggle {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.375rem 0.5rem;
+      border-radius: 0.375rem;
+      font-size: 0.875rem;
+      color: var(--gray-600);
+      cursor: pointer;
+      transition: background 0.1s;
+      border: none;
+      background: none;
+      width: 100%;
+      text-align: left;
+      font-family: inherit;
+    }
+
+    .field-toggle:hover { background: var(--shade-050); }
+
+    .field-toggle .check {
+      width: 16px;
+      height: 16px;
+      border-radius: 4px;
+      border: 2px solid var(--shade-300);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: all 0.15s;
+    }
+
+    .field-toggle.active .check {
+      background: var(--purple);
+      border-color: var(--purple);
+    }
+
+    .field-toggle .check svg { display: none; }
+    .field-toggle.active .check svg { display: block; }
+
+    /* ── Search ── */
+    .search-wrap {
+      position: relative;
+      margin-bottom: 1.5rem;
+    }
+
+    .search-wrap svg {
+      position: absolute;
+      left: 0.875rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--gray-400);
+      pointer-events: none;
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 0.75rem 1rem 0.75rem 2.75rem;
+      font-family: inherit;
+      font-size: 1rem;
+      border: 1px solid var(--shade-300);
+      border-radius: var(--radius-lg);
+      background: #fff;
+      color: var(--gray-900);
+      transition: border-color 0.15s, box-shadow 0.15s;
+      outline: none;
+    }
+
+    .search-input::placeholder { color: var(--gray-400); }
+
+    .search-input:focus {
+      border-color: var(--purple);
+      box-shadow: 0 0 0 3px var(--purple-10);
+    }
+
+    /* ── DataTables Overrides ── */
+    .dataTables_wrapper { font-family: inherit; }
+
+    table.dataTable {
+      width: 100% !important;
+      border-collapse: collapse;
+      font-size: 0.875rem;
+    }
+
+    table.dataTable thead th {
+      font-family: 'Noto Sans Display', 'Noto Sans', sans-serif;
+      font-weight: 600;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--gray-500);
+      background: var(--shade-050);
+      border-bottom: 2px solid var(--shade-200);
+      padding: 0.75rem 1rem;
+      white-space: nowrap;
+    }
+
+    table.dataTable thead th:first-child { border-radius: var(--radius) 0 0 0; }
+    table.dataTable thead th:last-child { border-radius: 0 var(--radius) 0 0; }
+
+    table.dataTable tbody td {
+      padding: 0.625rem 1rem;
+      border-bottom: 1px solid var(--gray-100);
+      color: var(--gray-700);
+      max-width: 300px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    table.dataTable tbody tr:hover td {
+      background: var(--purple-10);
+    }
+
+    table.dataTable tbody tr.selected td {
+      background: var(--purple-10);
+    }
+
+    /* Sorting icons */
+    table.dataTable thead .sorting,
+    table.dataTable thead .sorting_asc,
+    table.dataTable thead .sorting_desc {
+      cursor: pointer;
+      position: relative;
+      padding-right: 1.75rem;
+    }
+
+    table.dataTable thead .sorting::after,
+    table.dataTable thead .sorting_asc::after,
+    table.dataTable thead .sorting_desc::after {
+      position: absolute;
+      right: 0.5rem;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 0.625rem;
+      color: var(--gray-400);
+    }
+
+    table.dataTable thead .sorting::after { content: "\25B2\25BC"; font-size: 0.5rem; letter-spacing: -2px; }
+    table.dataTable thead .sorting_asc::after { content: "\25B2"; color: var(--purple); }
+    table.dataTable thead .sorting_desc::after { content: "\25BC"; color: var(--purple); }
+
+    /* Pagination */
+    .dataTables_wrapper .dataTables_paginate {
+      padding: 1rem 0;
+      display: flex;
+      justify-content: center;
+      gap: 0.25rem;
+    }
+
+    .dataTables_wrapper .dataTables_paginate .paginate_button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 2rem;
+      height: 2rem;
+      padding: 0 0.5rem;
+      font-size: 0.875rem;
+      border-radius: 0.375rem;
+      border: 1px solid transparent;
+      cursor: pointer;
+      color: var(--gray-600);
+      transition: all 0.15s;
+    }
+
+    .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+      background: var(--shade-050);
+      border-color: var(--shade-200);
+      color: var(--purple);
+    }
+
+    .dataTables_wrapper .dataTables_paginate .paginate_button.current {
+      background: var(--purple);
+      color: #fff;
+      border-color: var(--purple);
+      font-weight: 600;
+    }
+
+    .dataTables_wrapper .dataTables_paginate .paginate_button.disabled {
+      color: var(--gray-300);
+      cursor: default;
+    }
+
+    .dataTables_wrapper .dataTables_paginate .paginate_button.disabled:hover {
+      background: transparent;
+      border-color: transparent;
+    }
+
+    /* Info text */
+    .dataTables_wrapper .dataTables_info {
+      font-size: 0.8125rem;
+      color: var(--gray-500);
+      padding: 0.5rem 0;
+      text-align: center;
+    }
+
+    /* ── Detail Panel ── */
+    .detail-panel {
+      display: none;
+      margin-top: 1.5rem;
+      border: 1px solid var(--shade-200);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+    }
+
+    .detail-panel.open { display: block; }
+
+    .detail-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.75rem 1rem;
+      background: var(--shade-050);
+      border-bottom: 1px solid var(--shade-200);
+      font-weight: 600;
+      color: var(--gray-900);
+    }
+
+    .detail-close {
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--gray-400);
+      padding: 0.25rem;
+      border-radius: 0.25rem;
+      display: flex;
+    }
+
+    .detail-close:hover { color: var(--gray-600); background: var(--shade-200); }
+
+    .detail-body {
+      display: grid;
+      grid-template-columns: auto 1fr;
+    }
+
+    .detail-key {
+      padding: 0.5rem 1rem;
+      font-size: 0.8125rem;
+      font-weight: 500;
+      color: var(--gray-500);
+      background: var(--shade-050);
+      border-bottom: 1px solid var(--gray-100);
+      white-space: nowrap;
+    }
+
+    .detail-val {
+      padding: 0.5rem 1rem;
+      font-size: 0.875rem;
+      color: var(--gray-700);
+      border-bottom: 1px solid var(--gray-100);
+      word-break: break-all;
+    }
+
+    .detail-val a { color: var(--purple); }
+    .detail-val a:hover { text-decoration: underline; }
+
+    /* ── Footer text ── */
+    .footer-text {
+      text-align: center;
+      font-size: 0.875rem;
+      color: var(--gray-500);
+      padding: 1.5rem 0;
+      line-height: 1.7;
+    }
+
+    .footer-text a { font-weight: 500; }
+
+    /* ── Loading state ── */
+    .loading {
+      text-align: center;
+      padding: 3rem;
+      color: var(--gray-400);
+    }
+
+    .loading-spinner {
+      width: 2rem;
+      height: 2rem;
+      border: 3px solid var(--shade-200);
+      border-top-color: var(--purple);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      margin: 0 auto 1rem;
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ── Responsive ── */
+    @media (max-width: 640px) {
+      .toolbar { flex-direction: column; align-items: stretch; }
+      .btn { justify-content: center; }
+      .dropdown-menu { right: 0; left: auto; min-width: 280px; }
+      .dropdown-grid { grid-template-columns: 1fr; }
+      table.dataTable tbody td { font-size: 0.8125rem; padding: 0.5rem 0.625rem; }
+      table.dataTable thead th { font-size: 0.6875rem; padding: 0.5rem 0.625rem; }
+    }
+  </style>
 </head>
+
 <body>
-<div class="uk-container">
-<div class="uk-container">
-        <h2 class="uk-h1 uk-text-center">#diodb search</h2>
-    
+<div class="container">
 
-    <p class="uk-text-lead uk-text-center">Search bug bounty and vulnerability disclosure programs, details on where to submit reports, and safe harbor status.</p>
-
-    <p class="uk-text-lead uk-text-center">Contribute to the database by submitting a pull request to the <a href="https://github.com/disclose/diodb">Disclose.io database</a>!<br/><br/></p>
-</div>
-
-<div class="uk-flex uk-flex-center uk-margin-small-top">
-    <div class=" ">
-    <button class="uk-button uk-button-default " id="btnSaveCSV" style="border-radius: 0px;" type="button">Save as CSV</button>
-    <button class="uk-button uk-button-default " id="btnCopyTable" style="border-radius: 0px;" type="button">Copy To Clipboard</button>
-
-<button class="uk-button uk-button-default " style="border-radius: 0px;" type="button">Fields To Show</button>
-<div class="uk-width-large" uk-dropdown="animation: uk-animation-slide-top-small; duration: 300">  
-    <div class="uk-dropdown-grid uk-child-width-1-2@m " uk-grid>
-        <div>
-            <ul class="uk-nav uk-dropdown-nav">
-                <li class="uk-nav-header">Fields</li>
-                <li><a class="toggle-vis " data-column="0" href="#"><span uk-icon="icon: check"></span>Program Name</a></li>
-                <li><a class="toggle-vis" data-column="1" href="#"><span uk-icon="icon: check"></span>Policy URL</a></li>
-                <li><a class="toggle-vis" data-column="2" href="#">Policy URL Status</a></li>
-                <li><a class="toggle-vis" data-column="3" href="#"><span uk-icon="icon: check"></span>Contact URL</a></li>
-                <li><a class="toggle-vis" data-column="4" href="#">Contact Email</a></li>
-                <li><a class="toggle-vis" data-column="5" href="#">Launch Date</a></li>
-                <li><a class="toggle-vis" data-column="6" href="#"><span uk-icon="icon: check"></span>Bounty?</a></li>
-                <li><a class="toggle-vis" data-column="7" href="#">Swag?</a></li>
-                
-            </ul>
+  <!-- Toolbar -->
+  <div class="toolbar">
+    <button class="btn" id="btnSaveCSV">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" /></svg>
+      Save as CSV
+    </button>
+    <button class="btn" id="btnCopyTable">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.666 3.888A2.25 2.25 0 0013.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 01-.75.75H9.75a.75.75 0 01-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 01-2.25 2.25H6.75A2.25 2.25 0 014.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 011.927-.184" /></svg>
+      Copy Table
+    </button>
+    <div class="dropdown-wrap">
+      <button class="btn" id="btnFields">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6h9.75M10.5 6a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-9.75 0h9.75" /></svg>
+        Fields
+      </button>
+      <div class="dropdown-menu" id="fieldsDropdown">
+        <div class="dropdown-grid">
+          <div class="dropdown-header">Visible columns</div>
         </div>
-        <div>
-            <ul class="uk-nav uk-dropdown-nav">
-                <li class="uk-nav-header">Fields</li>
-                
-                <li><a class="toggle-vis" data-column="8" href="#">Hall of Fame</a></li>
-                <li><a class="toggle-vis" data-column="9" href="#">Safe Harbor</a></li>
-                <li><a class="toggle-vis" data-column="10" href="#">Public Disclosure</a></li>
-                <li><a class="toggle-vis" data-column="11" href="#">Disclosure Timeline</a></li>
-                <li><a class="toggle-vis" data-column="12" href="#">PGP Key</a></li>
-                <li><a class="toggle-vis" data-column="13" href="#">Hiring</a></li>
-                <li><a class="toggle-vis" data-column="14" href="#">Security TXT</a></li>
-                <li><a class="toggle-vis" data-column="15" href="#">Pref Language</a></li>
-            </ul>
-        </div>
+      </div>
     </div>
-</div>
-</div>
-</div>
+  </div>
 
+  <!-- Search -->
+  <div class="search-wrap">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" /></svg>
+    <input id="vdp-search" class="search-input" type="search" placeholder="Search 2,400+ programs..." autocomplete="off">
+  </div>
 
-<div class="hero-search ">
-    
-    <!-- Html Elements for Search -->
-    <div class="uk-position-relative uk-margin-small-top">
-        
-        <form class="uk-search uk-search-default uk-width-1-1" name="search-hero" onsubmit="return false;">
-            <span class="uk-search-icon-flip uk-icon uk-search-icon" data-uk-search-icon=""><svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><circle fill="none" stroke="#000" stroke-width="1.1" cx="9" cy="9" r="7"></circle><path fill="none" stroke="#000" stroke-width="1.1" d="M14,14 L18,18 L14,14 Z"></path></svg></span>
-            <input id="vdp-search" class="uk-search-input uk-box-shadow-large" type="search" placeholder="Search for programs" autocomplete="off" />
-        </form>
-        <ul id="search-hero-results" class="uk-position-absolute uk-width-1-1 uk-list"></ul>
-    </div>
+  <!-- Loading state (shown before data loads) -->
+  <div id="loading" class="loading">
+    <div class="loading-spinner"></div>
+    Loading programs from diodb...
+  </div>
 
-   
-</div>
-
-
-
-<div class="uk-section">
-
-    
-    
-    <table id="example" class="uk-table uk-table-hover uk-table-striped uk-table-small uk-table-justify">
-        <thead class="thead-dark">
-            <tr>
-                <th>Program Name</th>
-                <th>Policy URL</th>
-                <th>Policy URL Status</th>
-                <th>Contact URL</th>
-                <th>Contact Email</th>
-                <th class="uk-width-small">Launch Date</th>
-                <th class="uk-width-small">Bounty?</th>
-                <th class="uk-width-small">Swag?</th>
-                <th>Hall of Fame</th>
-                <th>Safe Harbor</th>
-                <th>Public Disclosure</th>
-                <th>Disclosure Timeline</th>
-                <th>PGP Key</th>
-                <th>Hiring</th>
-                <th>Security TXT</th>
-                <th>Pref Language</th>
-                
-            </tr>
-        </thead>
+  <!-- Data table -->
+  <div id="table-wrap" style="display:none; overflow-x:auto;">
+    <table id="programs-table">
+      <thead>
+        <tr>
+          <th>Program Name</th>
+          <th>Policy URL</th>
+          <th>Policy URL Status</th>
+          <th>Contact URL</th>
+          <th>Contact Email</th>
+          <th>Launch Date</th>
+          <th>Bounty?</th>
+          <th>Swag?</th>
+          <th>Hall of Fame</th>
+          <th>Safe Harbor</th>
+          <th>Public Disclosure</th>
+          <th>Disclosure Timeline</th>
+          <th>PGP Key</th>
+          <th>Hiring</th>
+          <th>Security.txt</th>
+          <th>Language</th>
+        </tr>
+      </thead>
     </table>
+  </div>
+
+  <!-- Detail panel for row click -->
+  <div id="details" class="detail-panel">
+    <div class="detail-header">
+      <span id="detail-title">Program Details</span>
+      <button class="detail-close" id="detail-close" aria-label="Close">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
+      </button>
+    </div>
+    <div class="detail-body" id="detail-body"></div>
+  </div>
+
+  <!-- Footer -->
+  <p class="footer-text">
+    Can't find what you're looking for? Request contact assistance via the
+    <a href="https://community.disclose.io/c/community-support/5">"Looking for contact"</a>
+    thread in the disclose.io Community Forum.<br>
+    Notice a missing or incorrect program? Submit a pull request to the
+    <a href="https://github.com/disclose/diodb">disclose.io database</a>.
+  </p>
 </div>
-</div>
-<!-- Include diodb JSON data -->
+
 <script>
-    var thisDataTable;
-    $(document).ready(function(){
+var thisDataTable;
+var columnDefs = [
+  { data: 'program_name',           label: 'Program Name',       visible: true },
+  { data: 'policy_url',             label: 'Policy URL',         visible: true },
+  { data: 'policy_url_status',      label: 'Policy URL Status',  visible: false },
+  { data: 'contact_url',            label: 'Contact URL',        visible: true },
+  { data: 'contact_email',          label: 'Contact Email',      visible: false },
+  { data: 'launch_date',            label: 'Launch Date',        visible: false },
+  { data: 'offers_bounty',          label: 'Bounty?',            visible: true },
+  { data: 'offers_swag',            label: 'Swag?',              visible: false },
+  { data: 'hall_of_fame',           label: 'Hall of Fame',       visible: false },
+  { data: 'safe_harbor',            label: 'Safe Harbor',        visible: true },
+  { data: 'public_disclosure',      label: 'Public Disclosure',  visible: false },
+  { data: 'disclosure_timeline_days', label: 'Disclosure Timeline', visible: false },
+  { data: 'pgp_key',                label: 'PGP Key',            visible: false },
+  { data: 'hiring',                 label: 'Hiring',             visible: false },
+  { data: 'securitytxt_url',        label: 'Security.txt',       visible: false },
+  { data: 'preferred_languages',    label: 'Language',           visible: false },
+];
 
-        $('#btnSaveCSV').on( 'click', function (e) { thisDataTable.button(0).trigger()})
-        $('#btnCopyTable').on( 'click', function (e) { thisDataTable.button(1).trigger()})
-        //return 1;
-        $('a.toggle-vis').on( 'click', function (e) {
-            
-            e.preventDefault();
-    
-            // Get the column API object
-            var column = thisDataTable.column( $(this).attr('data-column') );
-            currentvis = column.visible();
-            var currentLink = $(this)
-            if(currentvis == true)
-            {
-                currentLink.children('span').remove();
-            }
-            else
-            {
-                currentLink.prepend('<span uk-icon="icon: check"></span>')
-            }
-            // Toggle the visibility
-            column.visible( ! column.visible() );
-        } );
+// Build field toggles
+function buildFieldToggles() {
+  var grid = $('#fieldsDropdown .dropdown-grid');
+  columnDefs.forEach(function(col, i) {
+    var active = col.visible ? ' active' : '';
+    var checkSvg = '<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="#fff"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>';
+    grid.append(
+      '<button class="field-toggle' + active + '" data-column="' + i + '">' +
+        '<span class="check">' + checkSvg + '</span>' +
+        col.label +
+      '</button>'
+    );
+  });
+}
 
-        //Searchbar
-        $('#vdp-search').keyup(function(){
-            thisDataTable.search( $(this).val() ).draw();
-            })
-        
-            
+// Pretty labels for detail view
+var prettyLabels = {
+  program_name: 'Program Name',
+  policy_url: 'Policy URL',
+  policy_url_status: 'Status',
+  contact_url: 'Contact URL',
+  contact_email: 'Contact Email',
+  launch_date: 'Launch Date',
+  offers_bounty: 'Offers Bounty',
+  offers_swag: 'Offers Swag',
+  hall_of_fame: 'Hall of Fame',
+  safe_harbor: 'Safe Harbor',
+  public_disclosure: 'Public Disclosure',
+  disclosure_timeline_days: 'Disclosure Timeline (days)',
+  pgp_key: 'PGP Key',
+  hiring: 'Hiring',
+  securitytxt_url: 'Security.txt',
+  preferred_languages: 'Preferred Languages',
+};
 
-        var programInformation = [];
-        $.getJSON("https://raw.githubusercontent.com/disclose/diodb/master/program-list.json", function(data){
-            //console.log(data)
-            thisDataTable = $('#example').DataTable( {
-               
-                dom: 'rtip',
-                data: data,
-                buttons: [
-                {
-                    extend: 'csvHtml5',
-                    text: 'Save as CSV',
-                    exportOptions: {
-                        modifier: {
-                            page: 'current'
-                        }
-                    }
-                },
-                {
-                    extend: 'copyHtml5',
-                    text: 'Copy Table',
-                    exportOptions: {
-                        modifier: {
-                            page: 'current'
-                        }
-                    }
-                },
-            ],
-            "oLanguage": {
-                  "sZeroRecords": "Still searching? Try asking the <a href='https://community.disclose.io/' target='_blank'>community</a>. Are we missing your organization? Add it via a <a href='https://github.com/disclose/diodb' target='_blank'>pull request here</a>"
-            },
-            columns: [
-              { 
-                "data": "program_name",
-                "defaultContent": "N/A",
-                "visible": true,
-              },
-              { 
-                "data": "policy_url",
-                "defaultContent": "N/A",
-                "visible": true,
-              },
-              { 
-                "data": "policy_url_status",
-                "defaultContent": "N/A",
-                "visible": false,
-              },
-              { 
-                "data": "contact_url",
-                "defaultContent": "N/A",
-                "visible": true,
-              },
-              { 
-                "data": "contact_email",
-                "defaultContent": "N/A",
-                "visible": false,
-              },
-              { 
-                "data": "launch_date",
-                "defaultContent": "N/A",
-                "visible": false,
-              },
-              { 
-                "data": "offers_bounty",
-                "defaultContent": "N/A",
-                "visible": true,
-              },
-              { 
-                "data": "offers_swag",
-                "defaultContent": "N/A",
-                "visible": false,
-              },
-              { 
-                "data": "hall_of_fame",
-                "defaultContent": "N/A",
-                "visible": false,
-              },
-              { 
-                "data": "safe_harbor",
-                "defaultContent": "N/A",
-                "visible": false,
-              },
-              { 
-                "data": "public_disclosure",
-                "defaultContent": "N/A",
-                "visible": false,
-              },
-              { 
-                "data": "disclosure_timeline_days",
-                "defaultContent": "N/A",
-                "visible": false,
-              },
-              { 
-                "data": "pgp_key",
-                "defaultContent": "N/A",
-                "visible": false,
-              },
-              { 
-                "data": "hiring",
-                "defaultContent": "N/A",
-                "visible": false,
-              },
-              { 
-                "data": "securitytxt_url",
-                "defaultContent": "N/A",
-                "visible": false,
-              },
-              { 
-                "data": "preferred_languages",
-                "defaultContent": "N/A",
-                "visible": false,
-              },
-              { 
-                "data": "public_disclosure",
-                "defaultContent": "N/A",
-                "visible": false,
-              }
-              
-            ]}          
-            );
+function isUrl(str) {
+  return typeof str === 'string' && /^https?:\/\//i.test(str);
+}
 
-            thisDataTable.on('click', 'tbody tr', function() {
-              //console.log('API row values : ', thisDataTable.row(this).data());
-              rowData = thisDataTable.row(this).data();
-              //$('#details').fadeOut().empty()
-              $('#details').empty()
-              for (const [key, value] of Object.entries(rowData)) {
-                //console.log(key, value);
-                if(value != "")
-                {
-                  appendRow = '<div class="row dark">\
-                    <div class="col-sm-4 p-2 border border-dark">' + key + '</div>\
-                    <div class="col-sm-8 p-2 border border-dark">' + value + '</div>\
-                  </div>'
-                  $('#details').append(appendRow)
-                }
-              }
-              //$('#details').fadeIn()
-            })
+function formatValue(val) {
+  if (val === '' || val === null || val === undefined) return '<span style="color:var(--gray-300)">-</span>';
+  if (typeof val === 'boolean') return val ? 'Yes' : 'No';
+  if (isUrl(val)) return '<a href="' + val + '" target="_blank" rel="noopener">' + val + '</a>';
+  return String(val).replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
 
+$(document).ready(function() {
+  buildFieldToggles();
 
-            
-        }).fail(function(){
-            console.log("An error has occurred.");
-        });
+  // Toolbar button handlers
+  $('#btnSaveCSV').on('click', function() { thisDataTable.button(0).trigger(); });
+  $('#btnCopyTable').on('click', function() { thisDataTable.button(1).trigger(); });
 
-        
+  // Fields dropdown toggle
+  $('#btnFields').on('click', function(e) {
+    e.stopPropagation();
+    $('#fieldsDropdown').toggleClass('open');
+  });
+
+  $(document).on('click', function(e) {
+    if (!$(e.target).closest('.dropdown-wrap').length) {
+      $('#fieldsDropdown').removeClass('open');
+    }
+  });
+
+  // Field visibility toggles
+  $(document).on('click', '.field-toggle', function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    var colIdx = $(this).data('column');
+    var column = thisDataTable.column(colIdx);
+    column.visible(!column.visible());
+    $(this).toggleClass('active');
+  });
+
+  // Detail panel close
+  $('#detail-close').on('click', function() {
+    $('#details').removeClass('open');
+    $('table.dataTable tbody tr.selected').removeClass('selected');
+  });
+
+  // Search
+  $('#vdp-search').on('input', function() {
+    thisDataTable.search($(this).val()).draw();
+  });
+
+  // Load data
+  $.getJSON('https://raw.githubusercontent.com/disclose/diodb/master/program-list.json', function(data) {
+    $('#loading').hide();
+    $('#table-wrap').show();
+
+    thisDataTable = $('#programs-table').DataTable({
+      dom: 'rtip',
+      data: data,
+      pageLength: 25,
+      order: [[0, 'asc']],
+      buttons: [
+        {
+          extend: 'csvHtml5',
+          text: 'Save as CSV',
+          exportOptions: { modifier: { page: 'current' } }
+        },
+        {
+          extend: 'copyHtml5',
+          text: 'Copy Table',
+          exportOptions: { modifier: { page: 'current' } }
+        },
+      ],
+      language: {
+        zeroRecords: 'No matching programs found. Try asking the <a href="https://community.disclose.io/" target="_blank">community</a> or <a href="https://github.com/disclose/diodb" target="_blank">submit a pull request</a> to add it.',
+        info: 'Showing _START_ to _END_ of _TOTAL_ programs',
+        infoFiltered: '(filtered from _MAX_ total)',
+        infoEmpty: 'No programs to show',
+      },
+      columns: columnDefs.map(function(col) {
+        return {
+          data: col.data,
+          defaultContent: '',
+          visible: col.visible,
+        };
+      }),
     });
-    </script>
 
-    <p class="uk-text-lead uk-text-center">Can't find what you're looking for? Request contact assistance via the <a href="https://community.disclose.io/c/community-support/5">"Looking for contact"</a> thread in the Disclose.io Community Forum. Notice a missing/incorrect program? Submit a pull request to the <a href="https://github.com/disclose/diodb">Disclose.io database</a>!</p>
+    // Row click: show detail panel
+    thisDataTable.on('click', 'tbody tr', function() {
+      var rowData = thisDataTable.row(this).data();
+      if (!rowData) return;
 
+      $('table.dataTable tbody tr.selected').removeClass('selected');
+      $(this).addClass('selected');
 
+      var body = $('#detail-body').empty();
+      $('#detail-title').text(rowData.program_name || 'Program Details');
+
+      for (var key in prettyLabels) {
+        if (!rowData.hasOwnProperty(key)) continue;
+        var val = rowData[key];
+        if (val === '' || val === null || val === undefined) continue;
+        body.append(
+          '<div class="detail-key">' + prettyLabels[key] + '</div>' +
+          '<div class="detail-val">' + formatValue(val) + '</div>'
+        );
+      }
+
+      $('#details').addClass('open');
+    });
+
+  }).fail(function() {
+    $('#loading').html('<p style="color:var(--gray-500)">Failed to load program data. <a href="https://github.com/disclose/diodb">View the database on GitHub</a>.</p>');
+  });
+});
+</script>
 </body>
-</html> 
+</html>
