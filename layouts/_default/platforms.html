@@ -1,0 +1,79 @@
+{{ define "main" }}
+<section class="section-sm">
+  <div class="container-wide">
+    {{/* Header */}}
+    <header class="mb-8 text-center">
+      <h1 class="text-3xl md:text-4xl font-display font-bold mb-4">{{ .Title }}</h1>
+      {{ with .Params.description }}
+      <p class="text-xl text-gray-600 max-w-2xl mx-auto mb-3">{{ . }}</p>
+      {{ end }}
+      <p class="text-sm text-gray-500">
+        Is there a platform or detail missing?
+        <a href="https://github.com/disclose/bug-bounty-platforms/edit/main/README.md"
+           class="text-purple hover:text-purple-dark underline"
+           target="_blank" rel="noopener noreferrer">Improve this page</a>!
+      </p>
+    </header>
+
+    {{/* Table from submodule */}}
+    {{ $raw := readFile "external/bug-bounty-platforms/README.md" }}
+    {{/* Extract just the table: find the first pipe character onward */}}
+    {{ $table := "" }}
+    {{ $lines := split $raw "\n" }}
+    {{ $inTable := false }}
+    {{ range $lines }}
+      {{ if hasPrefix . "|" }}
+        {{ $inTable = true }}
+      {{ end }}
+      {{ if $inTable }}
+        {{ $table = printf "%s%s\n" $table . }}
+      {{ end }}
+    {{ end }}
+
+    <div class="card overflow-hidden">
+      <div class="overflow-x-auto platforms-table">
+        {{ $table | markdownify }}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .platforms-table table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.8125rem;
+  }
+  .platforms-table thead th {
+    background: hsla(240, 8%, 97%, 1);
+    color: #111827;
+    font-weight: 600;
+    text-align: left;
+    padding: 0.625rem 0.75rem;
+    border-bottom: 2px solid hsla(229, 5%, 89%, 1);
+    white-space: nowrap;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+  }
+  .platforms-table tbody td {
+    padding: 0.5rem 0.75rem;
+    border-bottom: 1px solid hsla(240, 5%, 93%, 1);
+    vertical-align: top;
+  }
+  .platforms-table tbody tr:last-child td {
+    border-bottom: none;
+  }
+  .platforms-table tbody tr:hover {
+    background: hsla(240, 8%, 97%, 1);
+  }
+  .platforms-table a {
+    color: #673ab6;
+    font-weight: 500;
+  }
+  .platforms-table a:hover {
+    color: #322a41;
+    text-decoration: underline;
+  }
+</style>
+{{ end }}

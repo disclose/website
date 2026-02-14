@@ -1,0 +1,3 @@
+[submodule "external/bug-bounty-platforms"]
+	path = external/bug-bounty-platforms
+	url = https://github.com/disclose/bug-bounty-platforms.git

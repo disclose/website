@@ -20,6 +20,11 @@
   weight = 30
 
 [[main]]
+  name = "Platforms"
+  url = "/platforms/"
+  weight = 35
+
+[[main]]
   name = "Blog"
   url = "https://blog.disclose.io"
   weight = 40
