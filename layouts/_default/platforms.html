@@ -1,6 +1,6 @@
 {{ define "main" }}
 <section class="section-sm">
-  <div class="container-wide">
+  <div class="mx-auto max-w-[1440px] px-4">
     {{/* Header */}}
     <header class="mb-8 text-center">
       <h1 class="text-3xl md:text-4xl font-display font-bold mb-4">{{ .Title }}</h1>
@@ -30,9 +30,18 @@
       {{ end }}
     {{ end }}
 
+    {{/* Render markdown table, then shorten display text */}}
+    {{ $rendered := $table | markdownify }}
+    {{/* Strip https://www. , https:// , http:// from link display text (not href) */}}
+    {{ $rendered = $rendered | replaceRE `>https://www\.` `>` }}
+    {{ $rendered = $rendered | replaceRE `>https://` `>` }}
+    {{ $rendered = $rendered | replaceRE `>http://` `>` }}
+    {{/* Strip @ prefix from Twitter/X handles in link text */}}
+    {{ $rendered = $rendered | replaceRE `>@([^<]+)</a>` `>$1</a>` }}
+
     <div class="card overflow-hidden">
       <div class="overflow-x-auto platforms-table">
-        {{ $table | markdownify }}
+        {{ $rendered }}
       </div>
     </div>
   </div>
@@ -43,23 +52,27 @@
     width: 100%;
     border-collapse: collapse;
     font-size: 0.8125rem;
+    table-layout: fixed;
   }
   .platforms-table thead th {
     background: hsla(240, 8%, 97%, 1);
     color: #111827;
     font-weight: 600;
     text-align: left;
-    padding: 0.625rem 0.75rem;
+    padding: 0.5rem;
     border-bottom: 2px solid hsla(229, 5%, 89%, 1);
-    white-space: nowrap;
     position: sticky;
     top: 0;
     z-index: 1;
   }
   .platforms-table tbody td {
-    padding: 0.5rem 0.75rem;
+    padding: 0.375rem 0.5rem;
     border-bottom: 1px solid hsla(240, 5%, 93%, 1);
     vertical-align: top;
+    max-width: 200px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
   .platforms-table tbody tr:last-child td {
     border-bottom: none;
