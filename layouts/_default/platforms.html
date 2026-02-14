@@ -80,6 +80,11 @@
   .platforms-table tbody tr:hover {
     background: hsla(240, 8%, 97%, 1);
   }
+  /* Hide "Has Leaderboard" column (6th column) */
+  .platforms-table th:nth-child(6),
+  .platforms-table td:nth-child(6) {
+    display: none;
+  }
   .platforms-table a {
     color: #673ab6;
     font-weight: 500;
