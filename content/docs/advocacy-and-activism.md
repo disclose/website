@@ -15,3 +15,4 @@ Following is a collection of letters that Disclose.io and/or its members have ei
 - [An Open Letter on Election Security](https://www.eff.org/deeplinks/2020/11/elections-are-partisan-affairs-election-security-isnt) alongside the EFF, Bugcrowd, The Centre for Democracy and Technology, Verified Voting, and others.
 - [Open Letter to Columbus City Attorney Zach Klein](/uploads/open_letter_columbus_attorney_zach_klein.pdf) regarding the prosecution of a security researcher who reported vulnerabilities in city election systems.
 - [Response to Voatz](/voatz-response-letter) addressing Voatz's claims about security researchers who identified vulnerabilities in their mobile voting application.
+- [Security Researcher Statement on the DMCA](https://www.eff.org/deeplinks/2021/06/dmca-security-researcher-statement) — EFF statement on DMCA exemptions for good-faith security research, co-signed by disclose.io and others.
