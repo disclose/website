@@ -8,12 +8,7 @@ weight: 50
 
 Disclose.io Status provides recognition to early adopters of vulnerability disclosure programs, and a clear path towards best practices for those wanting to become more advanced.
 
-| | security.txt | Basic | Partial | Full | Full with CVD |
-|:--:|:--:|:--:|:--:|:--:|:--:|
-| **security.txt or dnssecuritytxt** | Yes | Optional | Optional | Optional | Optional |
-| **Written policy** | No | Yes | Yes | Yes | Yes |
-| **Safe harbor statement** | No | No | Partial | Full | Full |
-| **Coordinated disclosure** | No | No | No | No | Yes |
+![DIOstatus Maturity Model - The progression from Level 0 to Level 5](/uploads/discloseio-maturity-climb-v8.jpg)
 
 ## Plain-English Level Definitions
 
