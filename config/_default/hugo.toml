@@ -52,7 +52,7 @@ pygmentsUseClasses = true
 # Google Analytics (modern Hugo config)
 [services]
   [services.googleAnalytics]
-    ID = "UA-143424917-6"
+    ID = "G-NJQTCTSYCM"
 
 # Security settings
 [security]
