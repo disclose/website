@@ -20,7 +20,7 @@ weight: 130
 | 6/23/2021 | Partner Reference | Rapid7 | Rapid7 | [Rapid7 Joins Statement On DMCA Lawsuits Against Security Tools](https://www.rapid7.com/blog/post/2021/06/23/rapid7-joins-statement/) |
 | 6/23/2021 | Partner Reference | NCC Group | NCC Group | [NCC Group co-signs the EFF's Statement on DMCA Use Against Security Researchers](https://www.nccgroup.com/research-blog/ncc-group-co-signs-the-electronic-frontier-foundation-s-statement-on-dmca-use-against-security-researchers/) |
 | 3/9/2021 | Reference | NASS | NASS | [Coordinated Vulnerability Disclosure Issue Briefing](https://www.nass.org/sites/default/files/CVD_Issue_Briefing_3.9.21.pdf) |
-| 1/21/2021 | Press | Dataversity | Casey Ellis | [Cyberwarfare, Ethical Hacking, and Ransomware: 2021 Predictions](https://www.dataversity.net/cyberwarfare-ethical-hacking-and-ransomware-2021-predictions/) |
+| 1/21/2021 | Press | Dataversity | Casey Ellis | [Cyberwarfare, Ethical Hacking, and Ransomware: 2021 Predictions](https://web.archive.org/web/20250326213808/https://www.dataversity.net/cyberwarfare-ethical-hacking-and-ransomware-2021-predictions/) |
 | 11/17/2020 | Partner Reference | Center for Democracy and Technology | William T. Adler | [CDT Joins EFF, Other Experts in Open Letter on Election Security](https://cdt.org/insights/cdt-joins-eff-other-experts-in-open-letter-on-election-security/) |
 | 11/16/2020 | Reference | EFF | EFF | [Elections Are Partisan Affairs. Election Security Isn't.](https://www.eff.org/deeplinks/2020/11/elections-are-partisan-affairs-election-security-isnt) |
 | 11/7/2020 | Partner Reference | AWS | AWS | [Disclose.io adoption](https://aws.amazon.com/security/vulnerability-reporting/) |
@@ -33,7 +33,7 @@ weight: 130
 | 7/11/2019 | Partner Reference | Kaspersky | Kaspersky Team | [Building trust together with Disclose.io](https://www.kaspersky.com/blog/kaspersky-joins-disclose-io/27588/) |
 | 5/31/2019 | Press | TechCrunch | Zack Whittaker | [Security startup Bugcrowd on crowdsourcing bug bounties](https://techcrunch.com/2019/05/31/bugcrowd-crowdsourcing-cybersecurity/) |
 | 5/2/2019 | Partner Reference | Bugcrowd | Jason Haddix | [Disclose.io - The Movement Marches Forward](https://www.bugcrowd.com/blog/disclose-io-the-movement-marches-forward/) |
-| 1/29/2019 | Press | Total Security Advisor | Staff | [Open Source Collaborative Hopes to Make Reporting Security Bugs Safer for All](https://totalsecurityadvisor.blr.com/policies-training/open-source-collaborative-hopes-make-reporting-security-bugs-safer/) |
+| 1/29/2019 | Press | Total Security Advisor | Staff | [Open Source Collaborative Hopes to Make Reporting Security Bugs Safer for All](https://web.archive.org/web/20211204221841/https://totalsecurityadvisor.blr.com/policies-training/open-source-collaborative-hopes-make-reporting-security-bugs-safer/) |
 | 12/3/2018 | Partner Reference | Bugcrowd | Jason Haddix | [Protecting Hackers (by default) with Disclose.io](https://www.bugcrowd.com/blog/protecting-hackers-by-default-with-disclose-io/) |
 | 11/6/2018 | Press | The Daily Swig | Staff | [Open source Disclose.io framework bridges legal gap in bug reporting](https://portswigger.net/daily-swig/open-source-disclose-io-framework-bridges-legal-gap-in-bug-reporting) |
 | 9/5/2018 | Press | Threatpost | Tom Spring | [The Vulnerability Disclosure Process: Still Broken](https://threatpost.com/the-vulnerability-disclosure-process-still-broken/137180/) |

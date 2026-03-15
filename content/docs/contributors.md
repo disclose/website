@@ -10,7 +10,7 @@ Here are some of the ways you can contribute back:
 
 ## Keeping diodb up-to-date
 
-Help us maintain [diodb](https://github.com/disclose/diodb/blob/master/program-list/program-list.json) as the most comprehensive source of truth. Send us changes or additions to VDPs and bug bounty programs via PR to our Github repo.
+Help us maintain [diodb](https://github.com/disclose/diodb/blob/master/program-list.json) as the most comprehensive source of truth. Send us changes or additions to VDPs and bug bounty programs via PR to our Github repo.
 
 ## Help us translate policies
 
