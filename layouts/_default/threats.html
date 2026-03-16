@@ -1,0 +1,161 @@
+{{ define "main" }}
+<section class="section-sm">
+  <div class="mx-auto max-w-[1440px] px-4">
+    {{/* Header */}}
+    <header class="mb-8 text-center">
+      <h1 class="text-3xl md:text-4xl font-display font-bold mb-4">{{ .Title }}</h1>
+      {{ with .Params.description }}
+      <p class="text-xl text-gray-600 max-w-2xl mx-auto mb-3">{{ . }}</p>
+      {{ end }}
+      <p class="text-sm text-gray-500">
+        Is an incident missing or need updating?
+        <a href="https://github.com/disclose/research-threats/edit/master/README.md"
+           class="text-purple hover:text-purple-dark underline"
+           target="_blank" rel="noopener noreferrer">Improve this page</a>!
+      </p>
+    </header>
+
+    {{/* Content from submodule */}}
+    {{ $raw := readFile "external/research-threats/README.md" }}
+
+    {{/* Extract from after "### Confirmed Threats" heading onward (skip the heading itself) */}}
+    {{ $content := "" }}
+    {{ $lines := split $raw "\n" }}
+    {{ $capturing := false }}
+    {{ $skipNext := false }}
+    {{ range $lines }}
+      {{ if hasPrefix . "### Confirmed Threats" }}
+        {{ $capturing = true }}
+        {{ $skipNext = true }}
+      {{ else if $capturing }}
+        {{ if $skipNext }}
+          {{ $skipNext = false }}
+        {{ end }}
+        {{ $content = printf "%s%s\n" $content . }}
+      {{ end }}
+    {{ end }}
+
+    {{/* Strip trailing HTML link tag */}}
+    {{ $content = $content | replaceRE `<link[^>]*>` "" }}
+
+    {{/* Render markdown */}}
+    {{ $rendered := $content | markdownify }}
+
+    {{/* Clean up display text in links */}}
+    {{ $rendered = $rendered | replaceRE `>https://www\.` `>` }}
+    {{ $rendered = $rendered | replaceRE `>https://` `>` }}
+    {{ $rendered = $rendered | replaceRE `>http://` `>` }}
+
+    <div class="threats-content">
+      {{ $rendered | safeHTML }}
+    </div>
+  </div>
+</section>
+
+<style>
+  /* Section headings */
+  .threats-content h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #111827;
+    margin: 2rem 0 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #673ab6;
+  }
+  .threats-content h3:first-child {
+    margin-top: 0;
+  }
+
+  /* Prose text between tables */
+  .threats-content > p,
+  .threats-content > ul {
+    color: #4b5563;
+    font-size: 0.875rem;
+    line-height: 1.625;
+    margin: 0.75rem 0;
+    max-width: 80ch;
+  }
+  .threats-content > ul {
+    padding-left: 1.5rem;
+    list-style-type: disc;
+  }
+
+  /* Table wrapper — card style matching platforms */
+  .threats-content table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.8125rem;
+    margin: 1rem 0 2rem;
+    background: white;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+  }
+
+  /* Table headers — sticky */
+  .threats-content thead th {
+    background: hsla(240, 8%, 97%, 1);
+    color: #111827;
+    font-weight: 600;
+    text-align: left;
+    padding: 0.625rem 0.75rem;
+    border-bottom: 2px solid hsla(229, 5%, 89%, 1);
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    white-space: nowrap;
+  }
+
+  /* Table cells */
+  .threats-content tbody td {
+    padding: 0.5rem 0.75rem;
+    border-bottom: 1px solid hsla(240, 5%, 93%, 1);
+    vertical-align: top;
+  }
+  .threats-content tbody tr:last-child td {
+    border-bottom: none;
+  }
+  .threats-content tbody tr:hover {
+    background: hsla(240, 8%, 97%, 1);
+  }
+
+  /* Column widths — When/Entity/Researcher/Topic compact, Status gets space */
+  .threats-content td:nth-child(1) { /* When */
+    white-space: nowrap;
+    width: 7rem;
+  }
+  .threats-content td:nth-child(2) { /* Entity */
+    width: 10rem;
+  }
+  .threats-content td:nth-child(3) { /* Researcher(s) */
+    width: 10rem;
+  }
+  .threats-content td:nth-child(4) { /* Topic */
+    width: 14rem;
+  }
+  .threats-content td:nth-child(5) { /* Status — gets remaining space, word-wrap */
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    min-width: 20rem;
+  }
+
+  /* Links — purple */
+  .threats-content a {
+    color: #673ab6;
+    font-weight: 500;
+  }
+  .threats-content a:hover {
+    color: #322a41;
+    text-decoration: underline;
+  }
+
+  /* Horizontal scroll for tables on mobile */
+  @media (max-width: 1024px) {
+    .threats-content table {
+      display: block;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+  }
+</style>
+{{ end }}

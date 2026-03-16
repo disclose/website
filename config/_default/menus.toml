@@ -25,6 +25,11 @@
   weight = 35
 
 [[main]]
+  name = "Threats"
+  url = "/threats/"
+  weight = 37
+
+[[main]]
   name = "Blog"
   url = "https://blog.disclose.io"
   weight = 40
@@ -63,6 +68,11 @@
   name = "Programs"
   url = "/programs/"
   weight = 30
+
+[[footer_resources]]
+  name = "Threats"
+  url = "/threats/"
+  weight = 35
 
 [[footer_resources]]
   name = "History"
