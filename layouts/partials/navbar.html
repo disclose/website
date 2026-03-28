@@ -8,7 +8,7 @@
           <div class="relative" x-data="{ open: false }" @mouseenter="open = true" @mouseleave="open = false">
             <button @click="open = !open"
                     class="text-gray-600 hover:text-purple text-sm font-medium transition-colors whitespace-nowrap">
-              {{ .Name }} <svg style="display:inline;width:10px;height:10px;vertical-align:middle;opacity:0.4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"/></svg>
+              {{ .Name }} <svg style="display:inline;width:10px;height:10px;vertical-align:middle;opacity:0.4;margin-left:4px" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"/></svg>
             </button>
             <div x-show="open"
                  x-transition:enter="transition ease-out duration-150"
