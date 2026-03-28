@@ -2,6 +2,12 @@
 <section class="section-sm">
   <div class="container-wide">
     {{/* Header */}}
+    <header class="mb-8 text-center">
+      <h1 class="text-3xl md:text-4xl font-display font-bold mb-4">{{ .Title }}</h1>
+      {{ with .Params.description }}
+      <p class="text-xl text-gray-600 max-w-2xl mx-auto mb-3">{{ . }}</p>
+      {{ end }}
+    </header>
 
     {{/* Vultron Directory Widget */}}
     <div id="vultron-directory"></div>

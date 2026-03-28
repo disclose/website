@@ -47,6 +47,41 @@
   {{/* Canonical */}}
   <link rel="canonical" href="{{ .Permalink }}">
 
+  {{/* JSON-LD Structured Data */}}
+  {{ if .IsHome }}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": {{ .Site.Title | jsonify | safeJS }},
+    "url": {{ .Site.BaseURL | jsonify | safeJS }},
+    "logo": {{ "/uploads/logo.png" | absURL | jsonify | safeJS }},
+    "description": {{ .Site.Params.description | jsonify | safeJS }},
+    "sameAs": [
+      "https://github.com/disclose",
+      "https://x.com/disclose_io",
+      "https://www.linkedin.com/company/disclose-io",
+      "https://community.disclose.io"
+    ]
+  }
+  </script>
+  {{ else }}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": {{ .Title | jsonify | safeJS }},
+    "description": {{ with .Description }}{{ . | jsonify | safeJS }}{{ else }}{{ with .Site.Params.description }}{{ . | jsonify | safeJS }}{{ end }}{{ end }},
+    "url": {{ .Permalink | jsonify | safeJS }},
+    "isPartOf": {
+      "@type": "WebSite",
+      "name": {{ .Site.Title | jsonify | safeJS }},
+      "url": {{ .Site.BaseURL | jsonify | safeJS }}
+    }
+  }
+  </script>
+  {{ end }}
+
   {{ block "head" . }}{{ end }}
 </head>
 

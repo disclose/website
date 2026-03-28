@@ -82,6 +82,16 @@
   weight = 35
 
 [[footer_resources]]
+  name = "Policymaker"
+  url = "https://policymaker.disclose.io"
+  weight = 35
+
+[[footer_resources]]
+  name = "Lookup Tool"
+  url = "https://lookup.disclose.io"
+  weight = 37
+
+[[footer_resources]]
   name = "History"
   url = "/history/"
   weight = 40
