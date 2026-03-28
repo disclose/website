@@ -20,7 +20,7 @@
                  class="absolute left-0 top-full pt-2" style="display: none;">
               <div class="bg-white rounded-lg shadow-lg border border-gray-200 py-1 min-w-[10rem]">
                 {{ range .Children }}
-                {{ $href := cond (and .Params.use_directory_url (isset $.Site.Params "directory_url")) $.Site.Params.directory_url (.URL | absURL) }}
+                {{ $href := cond (and (eq .Params.use_directory_url true) (isset $.Site.Params "directory_url")) $.Site.Params.directory_url (.URL | absURL) }}
                 <a href="{{ $href }}"
                    class="block px-4 py-2 text-sm text-gray-600 hover:bg-gray-50 hover:text-purple transition-colors">
                   {{ .Name }}

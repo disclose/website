@@ -66,7 +66,7 @@
             </button>
             <ul x-show="expanded" x-transition class="ml-4 mt-1 space-y-1" style="display: none;">
               {{ range .Children }}
-              {{ $href := cond (and .Params.use_directory_url (isset $.Site.Params "directory_url")) $.Site.Params.directory_url (.URL | absURL) }}
+              {{ $href := cond (and (eq .Params.use_directory_url true) (isset $.Site.Params "directory_url")) $.Site.Params.directory_url (.URL | absURL) }}
               <li>
                 <a href="{{ $href }}"
                    @click="mobileMenuOpen = false"
