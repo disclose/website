@@ -4,11 +4,37 @@
       {{/* Left side - Nav links only (matching production) */}}
       <div class="hidden md:flex items-center space-x-6">
         {{ range .Site.Menus.main }}
-        <a href="{{ .URL }}"
-           class="text-gray-600 hover:text-purple text-sm font-medium transition-colors{{ if $.IsMenuCurrent "main" . }} text-purple{{ end }}"
-           {{ if strings.HasPrefix .URL "http" }}target="_blank" rel="noopener noreferrer"{{ end }}>
-          {{ .Name }}
-        </a>
+          {{ if .HasChildren }}
+          <div class="relative" x-data="{ open: false }" @mouseenter="open = true" @mouseleave="open = false">
+            <button @click="open = !open"
+                    class="text-gray-600 hover:text-purple text-sm font-medium transition-colors whitespace-nowrap">
+              {{ .Name }} <svg style="display:inline;width:10px;height:10px;vertical-align:middle;opacity:0.4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"/></svg>
+            </button>
+            <div x-show="open"
+                 x-transition:enter="transition ease-out duration-150"
+                 x-transition:enter-start="opacity-0 -translate-y-1"
+                 x-transition:enter-end="opacity-100 translate-y-0"
+                 x-transition:leave="transition ease-in duration-100"
+                 x-transition:leave-start="opacity-100 translate-y-0"
+                 x-transition:leave-end="opacity-0 -translate-y-1"
+                 class="absolute left-0 top-full pt-2" style="display: none;">
+              <div class="bg-white rounded-lg shadow-lg border border-gray-200 py-1 min-w-[10rem]">
+                {{ range .Children }}
+                {{ $href := cond (and .Params.use_directory_url (isset $.Site.Params "directory_url")) $.Site.Params.directory_url (.URL | absURL) }}
+                <a href="{{ $href }}"
+                   class="block px-4 py-2 text-sm text-gray-600 hover:bg-gray-50 hover:text-purple transition-colors">
+                  {{ .Name }}
+                </a>
+                {{ end }}
+              </div>
+            </div>
+          </div>
+          {{ else }}
+          <a href="{{ .URL | absURL }}"
+             class="text-gray-600 hover:text-purple text-sm font-medium transition-colors{{ if $.IsMenuCurrent "main" . }} text-purple{{ end }}">
+            {{ .Name }}
+          </a>
+          {{ end }}
         {{ end }}
       </div>
 
@@ -26,13 +52,13 @@
         {{/* Button links */}}
         {{ range .Site.Menus.main_buttons }}
         {{ if eq .Params.style "primary" }}
-        <a href="{{ .URL }}"
+        <a href="{{ .URL | absURL }}"
            class="bg-purple text-white px-4 py-2 rounded-full text-sm font-medium hover:bg-purple-dark transition-colors"
            {{ if strings.HasPrefix .URL "http" }}target="_blank" rel="noopener noreferrer"{{ end }}>
           {{ .Name }}
         </a>
         {{ else }}
-        <a href="{{ .URL }}"
+        <a href="{{ .URL | absURL }}"
            class="border border-gray-300 text-gray-600 px-4 py-2 rounded-full text-sm font-medium hover:border-purple hover:text-purple transition-colors"
            {{ if strings.HasPrefix .URL "http" }}target="_blank" rel="noopener noreferrer"{{ end }}>
           {{ .Name }}
@@ -43,7 +69,7 @@
 
       {{/* Mobile: Logo and menu button */}}
       <div class="flex md:hidden items-center justify-between w-full">
-        <a href="{{ "/" | relURL }}" class="flex items-center">
+        <a href="{{ "/" | absURL }}" class="flex items-center">
           <img src="{{ "uploads/logo-disclose-type.svg" | relURL }}" alt="{{ .Site.Title }}" class="h-8 w-auto">
         </a>
         <button @click="mobileMenuOpen = !mobileMenuOpen" class="p-2 text-gray-600 hover:text-gray-900" aria-label="Menu">

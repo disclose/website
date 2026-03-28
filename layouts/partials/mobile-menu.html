@@ -23,7 +23,7 @@
   <div class="flex flex-col h-full">
     {{/* Header */}}
     <div class="flex items-center justify-between p-4 border-b border-shade-200">
-      <a href="{{ "/" | relURL }}" class="flex items-center">
+      <a href="{{ "/" | absURL }}" class="flex items-center">
         <img src="{{ "uploads/logo.svg" | relURL }}" alt="{{ .Site.Title }}" class="h-8 w-auto">
       </a>
       <button @click="mobileMenuOpen = false" class="p-2 text-gray-600 hover:text-gray-900" aria-label="Close menu">
@@ -55,14 +55,37 @@
     <nav class="flex-1 overflow-y-auto p-4">
       <ul class="space-y-1">
         {{ range .Site.Menus.main }}
-        <li>
-          <a href="{{ .URL }}"
-             @click="mobileMenuOpen = false"
-             class="block py-3 px-4 text-gray-700 hover:bg-shade-050 rounded-lg transition-colors{{ if $.IsMenuCurrent "main" . }} bg-purple/10 text-purple font-medium{{ end }}"
-             {{ if strings.HasPrefix .URL "http" }}target="_blank" rel="noopener noreferrer"{{ end }}>
-            {{ .Name }}
-          </a>
-        </li>
+          {{ if .HasChildren }}
+          <li x-data="{ expanded: false }">
+            <button @click="expanded = !expanded"
+                    class="flex items-center justify-between w-full py-3 px-4 text-gray-700 hover:bg-shade-050 rounded-lg transition-colors">
+              {{ .Name }}
+              <svg class="w-4 h-4 transition-transform" :class="expanded && 'rotate-180'" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+              </svg>
+            </button>
+            <ul x-show="expanded" x-transition class="ml-4 mt-1 space-y-1" style="display: none;">
+              {{ range .Children }}
+              {{ $href := cond (and .Params.use_directory_url (isset $.Site.Params "directory_url")) $.Site.Params.directory_url (.URL | absURL) }}
+              <li>
+                <a href="{{ $href }}"
+                   @click="mobileMenuOpen = false"
+                   class="block py-2 px-4 text-gray-600 hover:bg-shade-050 rounded-lg transition-colors text-sm">
+                  {{ .Name }}
+                </a>
+              </li>
+              {{ end }}
+            </ul>
+          </li>
+          {{ else }}
+          <li>
+            <a href="{{ .URL | absURL }}"
+               @click="mobileMenuOpen = false"
+               class="block py-3 px-4 text-gray-700 hover:bg-shade-050 rounded-lg transition-colors{{ if $.IsMenuCurrent "main" . }} bg-purple/10 text-purple font-medium{{ end }}">
+              {{ .Name }}
+            </a>
+          </li>
+          {{ end }}
         {{ end }}
       </ul>
     </nav>

@@ -16,6 +16,7 @@ formspree_endpoint = "https://formspree.io/f/xrgrzrle"
 
 # Navigation
 docs_section = "docs"
+directory_url = "https://directory.disclose.io"
 
 # Feature flags
 enable_search = true

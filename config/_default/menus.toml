@@ -10,24 +10,31 @@
   weight = 10
 
 [[main]]
-  name = "History"
-  url = "/history/"
+  name = "Tools"
+  url = "#"
   weight = 20
+  [main.params]
+    dropdown = true
 
 [[main]]
-  name = "Lookup"
-  url = "/programs/"
-  weight = 30
+  name = "Directory"
+  url = "#directory"
+  parent = "Tools"
+  weight = 10
+  [main.params]
+    use_directory_url = true
 
 [[main]]
   name = "Platforms"
   url = "/platforms/"
-  weight = 35
+  parent = "Tools"
+  weight = 20
 
 [[main]]
   name = "Threats"
   url = "/threats/"
-  weight = 37
+  parent = "Tools"
+  weight = 30
 
 [[main]]
   name = "Blog"

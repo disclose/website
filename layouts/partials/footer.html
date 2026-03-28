@@ -3,7 +3,7 @@
     <div class="grid grid-cols-1 md:grid-cols-4 gap-12">
       {{/* Brand */}}
       <div class="md:col-span-2">
-        <a href="{{ "/" | relURL }}" class="inline-block mb-4">
+        <a href="{{ "/" | absURL }}" class="inline-block mb-4">
           <span class="text-2xl font-display font-bold text-white">disclose.io</span>
         </a>
         <p class="text-gray-300 text-sm max-w-md">
@@ -39,7 +39,7 @@
         <ul class="space-y-3">
           {{ range .Site.Menus.footer_resources }}
           <li>
-            <a href="{{ .URL }}" class="text-gray-300 hover:text-white text-sm transition-colors"
+            <a href="{{ .URL | absURL }}" class="text-gray-300 hover:text-white text-sm transition-colors"
                {{ if strings.HasPrefix .URL "http" }}target="_blank" rel="noopener noreferrer"{{ end }}>
               {{ .Name }}
             </a>
@@ -54,7 +54,7 @@
         <ul class="space-y-3">
           {{ range .Site.Menus.footer_community }}
           <li>
-            <a href="{{ .URL }}" class="text-gray-300 hover:text-white text-sm transition-colors"
+            <a href="{{ .URL | absURL }}" class="text-gray-300 hover:text-white text-sm transition-colors"
                {{ if strings.HasPrefix .URL "http" }}target="_blank" rel="noopener noreferrer"{{ end }}>
               {{ .Name }}
             </a>
