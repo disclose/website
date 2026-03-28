@@ -64,7 +64,7 @@ jobs:
           hugo \
             --gc \
             --minify \
-            --baseURL "${{ steps.pages.outputs.base_url }}/"
+            --baseURL "https://disclose.io/"
 
       - name: Build search index
         run: npx pagefind --site public
