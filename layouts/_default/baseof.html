@@ -80,6 +80,38 @@
     }
   }
   </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": {{ .Site.BaseURL | jsonify | safeJS }}
+      }{{ if .Section }},
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": {{ .Section | humanize | title | jsonify | safeJS }},
+        "item": {{ (printf "%s%s/" .Site.BaseURL .Section) | jsonify | safeJS }}
+      }{{ if ne .Title (.Section | humanize | title) }},
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": {{ .Title | jsonify | safeJS }},
+        "item": {{ .Permalink | jsonify | safeJS }}
+      }{{ end }}{{ else }},
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": {{ .Title | jsonify | safeJS }},
+        "item": {{ .Permalink | jsonify | safeJS }}
+      }{{ end }}
+    ]
+  }
+  </script>
   {{ end }}
 
   {{ block "head" . }}{{ end }}

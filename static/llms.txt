@@ -1,0 +1,40 @@
+# disclose.io
+
+> disclose.io is a collaborative, vendor-agnostic project to standardize best practices around safe harbor for security researchers engaged in good-faith vulnerability disclosure.
+
+We maintain open-source databases, policy templates, and educational resources to make vulnerability disclosure safe, simple, and standardized for everyone.
+
+## Databases
+
+- [VDP Programs](https://disclose.io/programs/): Searchable database of vulnerability disclosure and bug bounty programs.
+- [Bug Bounty Platforms](https://disclose.io/platforms/): Community-powered collection of all known bug bounty platforms, vulnerability disclosure platforms, and crowdsourced security platforms.
+- [Research Threats](https://disclose.io/threats/): Ongoing archive of legal threats made against security researchers engaged in good-faith vulnerability disclosure.
+
+## Documentation
+
+- [What is disclose.io](https://disclose.io/docs/what-is-disclose/): A cross-industry, vendor-agnostic standardization project for safe harbor best practices.
+- [Vision and Mission](https://disclose.io/docs/vision-and-mission/): Our vision for a healthy Internet Immune System.
+- [Design Strategy](https://disclose.io/docs/design-strategy/): Our design principles for making secure easy and insecure obvious.
+- [Key Objectives](https://disclose.io/docs/key-objectives/): The key objectives driving the disclose.io project.
+- [diostatus Maturity Model](https://disclose.io/docs/diostatus/): Recognition for early adopters and a clear path towards best practices.
+- [For Finders and Hackers](https://disclose.io/docs/finders/): How disclose.io helps security researchers and finders.
+- [For Organizations and Legal Teams](https://disclose.io/docs/recipients/): How disclose.io helps organizations and their legal teams.
+- [Project Directory](https://disclose.io/docs/project-directory/): All the projects under the disclose.io umbrella.
+
+## Tools
+
+- [Policymaker](https://policymaker.disclose.io): Interactive tool to generate a vulnerability disclosure policy (VDP) for your organization.
+- [Lookup](https://lookup.disclose.io): Security attribution tool to find the correct disclosure contact for any asset.
+
+## Community
+
+- [Community Forum](https://community.disclose.io): Join the disclose.io community Discourse forum.
+- [Blog](https://blog.disclose.io): The disclose.io blog — Running With Scissors.
+- [GitHub](https://github.com/disclose): Open-source repositories for all disclose.io projects.
+
+## Additional Resources
+
+- [History of Vulnerability Disclosure](https://disclose.io/history/): Major events in the standardization of vulnerability reporting and disclosure.
+- [Advocacy and Activism](https://disclose.io/docs/advocacy-and-activism/): Public policy work and open letters from disclose.io.
+- [Conference Talks and Videos](https://disclose.io/docs/talks-and-videos/): Talks and presentations about disclose.io and vulnerability disclosure.
+- [Press Mentions](https://disclose.io/docs/press-articles/): Media coverage and press mentions of disclose.io.

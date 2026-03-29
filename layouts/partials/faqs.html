@@ -49,4 +49,12 @@
     </div>
   </div>
 </section>
+
+{{ $faqSchema := slice }}
+{{ range $faqs.Pages }}
+  {{ $faqSchema = $faqSchema | append (dict "@type" "Question" "name" .Title "acceptedAnswer" (dict "@type" "Answer" "text" (.Plain | htmlUnescape))) }}
+{{ end }}
+<script type="application/ld+json">
+{{ dict "@context" "https://schema.org" "@type" "FAQPage" "mainEntity" $faqSchema | jsonify (dict "indent" "  ") | safeJS }}
+</script>
 {{ end }}

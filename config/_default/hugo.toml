@@ -5,7 +5,7 @@ title = "disclose.io"
 
 # Build settings
 enableRobotsTXT = true
-enableGitInfo = false
+enableGitInfo = true
 
 # Disable Hugo's built-in syntax highlighting (we'll use custom CSS)
 pygmentsUseClasses = true

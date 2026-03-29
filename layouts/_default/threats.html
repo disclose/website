@@ -1,3 +1,22 @@
+{{ define "head" }}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Dataset",
+  "name": "Security Research Threats Database",
+  "description": {{ .Description | jsonify | safeJS }},
+  "url": {{ .Permalink | jsonify | safeJS }},
+  "license": "https://github.com/disclose/research-threats/blob/master/LICENSE.md",
+  "creator": {
+    "@type": "Organization",
+    "name": "disclose.io",
+    "url": "https://disclose.io"
+  }{{ with .Lastmod }},
+  "dateModified": {{ .Format "2006-01-02" | jsonify | safeJS }}{{ end }}
+}
+</script>
+{{ end }}
+
 {{ define "main" }}
 <section class="section-sm">
   <div class="mx-auto max-w-[1440px] px-4">
@@ -13,6 +32,7 @@
            class="text-purple hover:text-purple-dark underline"
            target="_blank" rel="noopener noreferrer">Improve this page</a>!
       </p>
+      {{ with .Lastmod }}<p class="text-sm text-gray-400 mt-1">Last updated: {{ .Format "January 2, 2006" }}</p>{{ end }}
     </header>
 
     {{/* Content from submodule */}}
