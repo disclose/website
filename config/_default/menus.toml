@@ -37,6 +37,12 @@
   weight = 30
 
 [[main]]
+  name = "Community"
+  url = "https://community.disclose.io"
+  parent = "Tools"
+  weight = 40
+
+[[main]]
   name = "Blog"
   url = "https://blog.disclose.io"
   weight = 40

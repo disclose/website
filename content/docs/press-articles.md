@@ -6,6 +6,8 @@ weight: 130
 
 | Date | Type | Publication | Author | Title |
 |------|------|-------------|--------|-------|
+| 1/2026 | Reference | IoT Security Foundation | Copper Horse / IoTSF | [The State of VDP Usage in Global Consumer IoT in 2025](https://iotsecurityfoundation.org/the-state-of-vulnerability-disclosure-in-global-consumer-iot/) |
+| 12/11/2023 | Press | Dark Reading | Staff | [Safe Harbor Programs: Ensuring the Bounty Isn't on White Hat Hackers' Heads](https://www.darkreading.com/application-security/safe-harbor-programs-ensuring-the-bounty-isn-t-on-white-hat-hackers-heads) |
 | 12/13/2023 | Op-Ed | Dark Reading | Casey Ellis | [The Unlikely Romance of Hackers and Government Suitors](https://www.darkreading.com/cybersecurity-operations/unlikely-romance-hackers-government-suitors) |
 | 4/2023 | Press | TechTarget | Staff | [Hacking Policy Council launches, aims to improve bug disclosure](https://www.techtarget.com/searchsecurity/news/365535214/Hacking-Policy-Council-launches-aims-to-improve-bug-disclosure) |
 | 4/2023 | Reference | Center for Cybersecurity Policy | Staff | [Center for Cybersecurity Policy and Law Launches Initiatives To Support Detection and Remediation of Security Vulnerabilities](https://www.centerforcybersecuritypolicy.org/insights-and-research/center-for-cybersecurity-policy-and-law-launches-initiatives-to-support-detection-and-remediation-of-security-vulnerabilities) |
@@ -52,3 +54,6 @@ weight: 130
 | - | Reference | OWASP | OWASP | [Vulnerability Disclosure Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Vulnerability_Disclosure_Cheat_Sheet.html) |
 | - | Reference | CERT/CC | CERT/CC | [Guide to Coordinated Vulnerability Disclosure - Policy Templates](https://certcc.github.io/CERT-Guide-to-CVD/reference/policy_templates/other/) |
 | - | Reference | MIT Election Lab | MIT | [Coordinated Vulnerability Disclosure Research](https://electionlab.mit.edu/research/coordinated-vulnerability-disclosure) |
+| - | Partner Reference | HackerOne | HackerOne | [Safe Harbor Overview & FAQ](https://docs.hackerone.com/en/articles/8494502-safe-harbor-overview-faq) |
+| - | Partner Reference | Bugcrowd | Bugcrowd | [Disclose.io and Safe Harbor](https://docs.bugcrowd.com/researchers/disclosure/disclose-io-and-safe-harbor/) |
+| - | Reference | Wikitia | Wikitia | [Disclose.io](https://wikitia.com/wiki/Disclose.io) |
