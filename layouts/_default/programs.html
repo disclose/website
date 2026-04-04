@@ -1,15 +1,7 @@
 {{ define "main" }}
 <section class="section-sm">
   <div class="container-wide">
-    {{/* Header */}}
-    <header class="mb-8 text-center">
-      <h1 class="text-3xl md:text-4xl font-display font-bold mb-4">{{ .Title }}</h1>
-      {{ with .Params.description }}
-      <p class="text-xl text-gray-600 max-w-2xl mx-auto mb-3">{{ . }}</p>
-      {{ end }}
-    </header>
-
-    {{/* Vultron Directory Widget */}}
+    {{/* Vultron Directory Widget (renders its own header) */}}
     <div id="vultron-directory"></div>
     <script>
     (function(w,d,s,o,f,js,fjs){
@@ -42,7 +34,7 @@
         '.dio-maturity-tooltip {',
         '  display: none;',
         '  position: absolute;',
-        '  top: calc(100% + 8px);',
+        '  top: 100%;',
         '  right: 0;',
         '  z-index: 9999;',
         '  width: 340px;',
@@ -51,6 +43,7 @@
         '  border-radius: 8px;',
         '  box-shadow: 0 10px 25px -5px rgba(0,0,0,0.12), 0 4px 6px -2px rgba(0,0,0,0.06);',
         '  padding: 14px 16px;',
+        '  padding-top: 22px;',
         '  font-size: 12px;',
         '  line-height: 1.5;',
         '  color: #374151;',
@@ -58,7 +51,7 @@
         '  letter-spacing: normal;',
         '  font-weight: 400;',
         '  white-space: normal;',
-        '  pointer-events: none;',
+        '  pointer-events: auto;',
         '}',
         '.dio-maturity-th:hover .dio-maturity-tooltip { display: block; }',
         '.dio-tooltip-title {',
@@ -110,7 +103,7 @@
         '  <div class="dio-tooltip-row"><span class="dio-tooltip-label">Full</span><span class="dio-tooltip-desc">Authorises testing + law exemptions</span></div>',
         '  <div class="dio-tooltip-row"><span class="dio-tooltip-label">Full+CVD</span><span class="dio-tooltip-desc">Full + public disclosure timeline</span></div>',
         '  <div class="dio-tooltip-progression">Findable \u2192 Communicating \u2192 Safe \u2192 Accountable</div>',
-        '  <div class="dio-tooltip-link"><a href="/docs/diostatus/">Learn more about DIOstatus</a></div>',
+        '  <div class="dio-tooltip-link"><a href="/docs/diostatus/">Learn more about diostatus</a></div>',
         '</div>',
       ].join('\n');
 
