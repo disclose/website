@@ -20,6 +20,189 @@
 
     VultronDirectory('init', { directoryId: 'adf701' });
     </script>
+
+    {{/* ── Maturity tooltip, purple styling, badge colors ── */}}
+    <script>
+    (function() {
+      var PURPLE = '#673AB6';
+      var PURPLE_10 = 'rgba(103,58,182,0.1)';
+
+      // Maturity badge color map: [bg, text, border]
+      var BADGE_COLORS = {
+        'security.txt': ['#f3f0ff', '#7c3aed', '#ddd6fe'],
+        'basic':        ['#ede9fe', '#6d28d9', '#c4b5fd'],
+        'partial':      ['#e0d4fc', '#5b21b6', '#a78bfa'],
+        'full':         ['#d4c4fb', '#4c1d95', '#8b5cf6'],
+        'full+cvd':     ['#673AB6', '#ffffff', '#673AB6'],
+        'portal':       ['#ede9fe', '#6d28d9', '#c4b5fd'],
+      };
+
+      var TOOLTIP_CSS = [
+        '.dio-maturity-th { position: relative; }',
+        '.dio-maturity-tooltip {',
+        '  display: none;',
+        '  position: absolute;',
+        '  top: calc(100% + 8px);',
+        '  right: 0;',
+        '  z-index: 9999;',
+        '  width: 340px;',
+        '  background: #fff;',
+        '  border: 1px solid #e5e7eb;',
+        '  border-radius: 8px;',
+        '  box-shadow: 0 10px 25px -5px rgba(0,0,0,0.12), 0 4px 6px -2px rgba(0,0,0,0.06);',
+        '  padding: 14px 16px;',
+        '  font-size: 12px;',
+        '  line-height: 1.5;',
+        '  color: #374151;',
+        '  text-transform: none;',
+        '  letter-spacing: normal;',
+        '  font-weight: 400;',
+        '  white-space: normal;',
+        '  pointer-events: none;',
+        '}',
+        '.dio-maturity-th:hover .dio-maturity-tooltip { display: block; }',
+        '.dio-tooltip-title {',
+        '  font-weight: 600;',
+        '  font-size: 13px;',
+        '  color: ' + PURPLE + ';',
+        '  margin-bottom: 8px;',
+        '}',
+        '.dio-tooltip-row {',
+        '  display: flex;',
+        '  gap: 8px;',
+        '  margin-bottom: 4px;',
+        '  align-items: baseline;',
+        '}',
+        '.dio-tooltip-label {',
+        '  font-weight: 600;',
+        '  min-width: 80px;',
+        '  flex-shrink: 0;',
+        '  color: #4b5563;',
+        '}',
+        '.dio-tooltip-desc { color: #6b7280; }',
+        '.dio-tooltip-progression {',
+        '  margin-top: 10px;',
+        '  padding-top: 8px;',
+        '  border-top: 1px solid #e5e7eb;',
+        '  font-size: 11px;',
+        '  color: ' + PURPLE + ';',
+        '  font-weight: 500;',
+        '  text-align: center;',
+        '}',
+        '.dio-tooltip-link {',
+        '  margin-top: 6px;',
+        '  text-align: center;',
+        '  font-size: 11px;',
+        '}',
+        '.dio-tooltip-link a {',
+        '  color: ' + PURPLE + ';',
+        '  text-decoration: underline;',
+        '  pointer-events: auto;',
+        '}',
+      ].join('\n');
+
+      var TOOLTIP_HTML = [
+        '<div class="dio-maturity-tooltip">',
+        '  <div class="dio-tooltip-title">disclose.io Maturity Levels</div>',
+        '  <div class="dio-tooltip-row"><span class="dio-tooltip-label">security.txt</span><span class="dio-tooltip-desc">Findable contact only</span></div>',
+        '  <div class="dio-tooltip-row"><span class="dio-tooltip-label">Basic</span><span class="dio-tooltip-desc">Public policy + channel</span></div>',
+        '  <div class="dio-tooltip-row"><span class="dio-tooltip-label">Partial</span><span class="dio-tooltip-desc">Won\'t pursue legal action</span></div>',
+        '  <div class="dio-tooltip-row"><span class="dio-tooltip-label">Full</span><span class="dio-tooltip-desc">Authorises testing + law exemptions</span></div>',
+        '  <div class="dio-tooltip-row"><span class="dio-tooltip-label">Full+CVD</span><span class="dio-tooltip-desc">Full + public disclosure timeline</span></div>',
+        '  <div class="dio-tooltip-progression">Findable \u2192 Communicating \u2192 Safe \u2192 Accountable</div>',
+        '  <div class="dio-tooltip-link"><a href="/docs/diostatus/">Learn more about DIOstatus</a></div>',
+        '</div>',
+      ].join('\n');
+
+      function applyCustomizations(shadowRoot) {
+        // 1. Inject styles
+        var style = document.createElement('style');
+        style.textContent = TOOLTIP_CSS;
+        shadowRoot.appendChild(style);
+
+        // 2. Find and style the MATURITY header
+        var ths = shadowRoot.querySelectorAll('th');
+        ths.forEach(function(th) {
+          if (th.textContent.trim().toLowerCase().indexOf('maturity') === 0) {
+            th.style.color = PURPLE;
+            th.style.fontWeight = '700';
+            th.classList.add('dio-maturity-th');
+            th.insertAdjacentHTML('beforeend', TOOLTIP_HTML);
+          }
+        });
+
+        // 3. Purple-ify the Maturity filter button
+        var buttons = shadowRoot.querySelectorAll('button');
+        buttons.forEach(function(btn) {
+          var text = btn.textContent.trim();
+          if (text === 'Maturity') {
+            btn.style.color = PURPLE;
+            btn.style.borderColor = PURPLE;
+            btn.style.background = PURPLE_10;
+          }
+        });
+
+        // 4. Color-code maturity badges
+        var badges = shadowRoot.querySelectorAll('span[title*="Maturity Score"]');
+        badges.forEach(function(badge) {
+          colorBadge(badge);
+        });
+      }
+
+      function colorBadge(badge) {
+        var text = badge.textContent.trim().toLowerCase();
+        var colors = BADGE_COLORS[text];
+        if (colors) {
+          badge.style.backgroundColor = colors[0];
+          badge.style.color = colors[1];
+          badge.style.borderColor = colors[2];
+        }
+      }
+
+      // Watch for shadow DOM and table mutations
+      function waitForWidget() {
+        var host = document.getElementById('vultron-directory');
+        if (!host) { setTimeout(waitForWidget, 200); return; }
+
+        // Poll for shadow root (Vultron creates it async)
+        var pollShadow = setInterval(function() {
+          var sr = host.shadowRoot;
+          if (!sr) return;
+          clearInterval(pollShadow);
+
+          // Wait for table to render, then apply
+          var observer = new MutationObserver(function(mutations) {
+            var table = sr.querySelector('table');
+            if (table) {
+              observer.disconnect();
+              applyCustomizations(sr);
+
+              // Re-color badges on pagination/sort/filter changes
+              var tableObserver = new MutationObserver(function() {
+                var badges = sr.querySelectorAll('span[title*="Maturity Score"]');
+                badges.forEach(colorBadge);
+
+                // Re-apply header purple on re-render
+                var ths = sr.querySelectorAll('th');
+                ths.forEach(function(th) {
+                  if (th.textContent.trim().toLowerCase().indexOf('maturity') === 0 && !th.classList.contains('dio-maturity-th')) {
+                    th.style.color = PURPLE;
+                    th.style.fontWeight = '700';
+                    th.classList.add('dio-maturity-th');
+                    th.insertAdjacentHTML('beforeend', TOOLTIP_HTML);
+                  }
+                });
+              });
+              tableObserver.observe(sr, { childList: true, subtree: true });
+            }
+          });
+          observer.observe(sr, { childList: true, subtree: true });
+        }, 200);
+      }
+
+      waitForWidget();
+    })();
+    </script>
   </div>
 </section>
 {{ end }}
