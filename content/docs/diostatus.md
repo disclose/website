@@ -1,6 +1,9 @@
 ---
 title: "diostatus - The disclose.io Maturity Model"
 description: "Recognition for early adopters and a clear path towards best practices."
+slug: "diostatus"
+aliases:
+  - /docs/diostatus-the-disclose.io-maturity-model/
 weight: 50
 ---
 

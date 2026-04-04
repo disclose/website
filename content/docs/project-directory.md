@@ -26,7 +26,7 @@ A proposed standard for publishing security contact and vulnerability disclosure
 
 ### diostatus — The Maturity Model and Seal
 
-A five-level maturity model for vulnerability disclosure programs, from "no contact" to "full safe harbor with coordinated disclosure." The disclose.io seal provides a recognizable mark indicating an organization's level of best-practice adoption. See the [full maturity model documentation](/docs/diostatus-the-disclose.io-maturity-model/).
+A five-level maturity model for vulnerability disclosure programs, from "no contact" to "full safe harbor with coordinated disclosure." The disclose.io seal provides a recognizable mark indicating an organization's level of best-practice adoption. See the [full maturity model documentation](/docs/diostatus/).
 
 [Repository](https://github.com/disclose/dioseal)
 
