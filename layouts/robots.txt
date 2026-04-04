@@ -1,6 +1,7 @@
 User-agent: *
 Allow: /
 Sitemap: {{ .Site.BaseURL }}sitemap.xml
+Sitemap: https://directory.disclose.io/sitemap.xml
 
 # AI Crawlers - explicitly welcome
 User-agent: GPTBot
