@@ -1,5 +1,6 @@
 ---
 title: "Open-source Contributors"
+slug: "open-source-contributors"
 description: "Ways you can contribute to the disclose.io project."
 weight: 80
 ---

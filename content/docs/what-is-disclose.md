@@ -1,5 +1,6 @@
 ---
 title: "What is disclose.io"
+slug: "what-is-disclose.io"
 description: "A cross-industry, vendor-agnostic standardization project for safe harbor best practices."
 weight: 10
 aliases:

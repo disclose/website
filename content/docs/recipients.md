@@ -1,5 +1,6 @@
 ---
 title: "For Organizations and Legal Teams"
+slug: "for-organizations-and-legal-teams"
 description: "How disclose.io helps organizations and their legal teams."
 weight: 70
 ---

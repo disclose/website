@@ -1,5 +1,6 @@
 ---
 title: "For Finders and Hackers"
+slug: "for-finders-and-hackers"
 description: "How disclose.io helps security researchers and finders."
 weight: 60
 ---

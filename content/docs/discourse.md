@@ -1,5 +1,6 @@
 ---
 title: "The disclose.io Community"
+slug: "the-disclose.io-community"
 description: "Join our community Discourse forum."
 weight: 110
 ---

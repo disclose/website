@@ -46,7 +46,7 @@ A multi-lingual, guided VDP policy generator. Answer a few questions about your 
 
 A security attribution and contact lookup tool. Given a domain, IP, package name, or other identifier, find the right place to report a vulnerability — pulling from security.txt, DNS, WHOIS, bug bounty platforms, and the disclose.io database.
 
-[lookup.disclose.io](https://lookup.disclose.io) | [Repository](https://github.com/disclose/lookup.disclose.io)
+[lookup.disclose.io](https://lookup.disclose.io)
 
 ### diosts — Security.txt Scanner
 
@@ -70,7 +70,7 @@ The definitive community-powered database of every known vulnerability disclosur
 
 Internet-wide survey data on vulnerability disclosure program adoption, generated from diosts scans and community contributions. Used by researchers, policymakers, and organizations for tracking industry progress.
 
-[data.disclose.io](https://data.disclose.io)
+[data.disclose.io](https://data.disclose.io) *(currently offline)*
 
 ### research-threats — Legal Threats Archive
 

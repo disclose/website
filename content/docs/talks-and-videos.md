@@ -1,5 +1,6 @@
 ---
 title: "Conference Talks and Videos"
+slug: "conference-talks-and-videos"
 description: "Talks and presentations about disclose.io and vulnerability disclosure."
 weight: 140
 ---

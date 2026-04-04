@@ -1,5 +1,6 @@
 ---
 title: "Press Mentions"
+slug: "press-mentions"
 description: "Media coverage and press mentions of disclose.io."
 weight: 130
 ---
