@@ -3,8 +3,7 @@
 - name: "Security Research Legal Defense Fund"
   short_name: "SRLDF"
   url: "https://srldf.org"
-  logo: "/uploads/partners/srldf.svg"
-  logo_bg: "#ffffff"
+  logo: "/uploads/partners/srldf.png"
   description: |
     <p>A 501(c)(3) nonprofit that helps fund legal representation for security researchers who face legal threats as a result of good-faith security research.</p>
     <p>If you (or someone you know) is facing legal action for good-faith research, you can <a href="mailto:grants@srldf.org" class="text-purple hover:underline">apply for a defense grant</a>.</p>
