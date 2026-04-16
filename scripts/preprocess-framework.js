@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // Generates content/framework/ from external/dioterms/ across three pillars:
 // terms (legal boilerplate with mustache variables), practices (operational
-// playbooks), and maturity (DIOstatus levels). Idempotent — writes only when
+// playbooks), and maturity (diostatus levels). Idempotent — writes only when
 // bytes change so the Hugo watcher doesn't see phantom rebuilds.
 
 const fs = require('fs');
@@ -47,7 +47,7 @@ const PRACTICES = [
   { src: 'practices/researcher-relations.md',        slug: 'researcher-relations',        title: 'Researcher Relations',        description: 'Communication cadence, recognition, escalation, program transparency.',   weight: 50 },
 ];
 
-// Pillar 3: Maturity — DIOstatus levels. No variable replacement; keep first H1.
+// Pillar 3: Maturity — diostatus levels. No variable replacement; keep first H1.
 const MATURITY = [
   { src: 'maturity/level-0.md', slug: 'level-0', title: 'Level 0 — Not Present',              description: 'No findable contact, no policy, no intake method.',                         weight: 10 },
   { src: 'maturity/level-1.md', slug: 'level-1', title: 'Level 1 — Contact Only',             description: 'security.txt published; a researcher can reach someone. No policy yet.',    weight: 20 },

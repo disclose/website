@@ -1,5 +1,5 @@
 ---
-title: "Framework — Maturity (DIOstatus)"
+title: "Framework — Maturity (diostatus)"
 description: "The disclose.io Maturity Model — a six-level self-assessment for vulnerability disclosure program readiness."
 type: framework
 weight: 30
@@ -8,9 +8,9 @@ aliases:
   - /docs/diostatus-the-disclose.io-maturity-model/
 ---
 
-**DIOstatus** is a six-level self-assessment describing how prepared an organisation is to receive and handle external vulnerability reports.
+**diostatus** is a six-level self-assessment describing how prepared an organisation is to receive and handle external vulnerability reports.
 
-![DIOstatus Maturity Model — the progression from Level 0 to Level 5](/uploads/discloseio-maturity-climb-v8.jpg)
+![diostatus Maturity Model — the progression from Level 0 to Level 5](/uploads/discloseio-maturity-climb-v8.jpg)
 
 ## The progression in one line
 
