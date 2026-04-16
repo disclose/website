@@ -10,6 +10,11 @@
   weight = 10
 
 [[main]]
+  name = "Framework"
+  url = "/framework/"
+  weight = 15
+
+[[main]]
   name = "Tools"
   url = "#"
   weight = 20
@@ -204,4 +209,184 @@
   name = "Open-source Contributors"
   url = "/docs/open-source-contributors/"
   parent = "Community"
+  weight = 20
+
+# Framework sidebar navigation — three pillars
+[[framework]]
+  name = "Overview"
+  url = "/framework/"
+  weight = 5
+
+# Pillar 1: Terms
+[[framework]]
+  name = "Terms"
+  weight = 10
+
+[[framework]]
+  name = "Vulnerability Disclosure Policy"
+  url = "/framework/terms/core-vdp/"
+  parent = "Terms"
+  weight = 10
+
+[[framework]]
+  name = "Bug Bounty Program Policy"
+  url = "/framework/terms/core-bbp/"
+  parent = "Terms"
+  weight = 20
+
+[[framework]]
+  name = "Simple Safe Harbor"
+  url = "/framework/terms/simple-safe-harbor/"
+  parent = "Terms"
+  weight = 30
+
+[[framework]]
+  name = "Regional Variants"
+  weight = 20
+
+[[framework]]
+  name = "United States"
+  url = "/framework/terms/regional/usa/"
+  parent = "Regional Variants"
+  weight = 10
+
+[[framework]]
+  name = "Netherlands"
+  url = "/framework/terms/regional/nld/"
+  parent = "Regional Variants"
+  weight = 20
+
+[[framework]]
+  name = "Belgium"
+  url = "/framework/terms/regional/bel/"
+  parent = "Regional Variants"
+  weight = 30
+
+[[framework]]
+  name = "Switzerland"
+  url = "/framework/terms/regional/che/"
+  parent = "Regional Variants"
+  weight = 40
+
+[[framework]]
+  name = "Canada"
+  url = "/framework/terms/regional/can/"
+  parent = "Regional Variants"
+  weight = 50
+
+[[framework]]
+  name = "Australia (draft)"
+  url = "/framework/terms/regional/aus/"
+  parent = "Regional Variants"
+  weight = 60
+
+[[framework]]
+  name = "United Kingdom (draft)"
+  url = "/framework/terms/regional/gbr/"
+  parent = "Regional Variants"
+  weight = 70
+
+[[framework]]
+  name = "New Zealand (draft)"
+  url = "/framework/terms/regional/nzd/"
+  parent = "Regional Variants"
+  weight = 80
+
+# Pillar 2: Practices
+[[framework]]
+  name = "Practices"
+  weight = 30
+
+[[framework]]
+  name = "Program Launch"
+  url = "/framework/practices/program-launch/"
+  parent = "Practices"
+  weight = 10
+
+[[framework]]
+  name = "Triage"
+  url = "/framework/practices/triage/"
+  parent = "Practices"
+  weight = 20
+
+[[framework]]
+  name = "Coordinated Disclosure"
+  url = "/framework/practices/coordinated-disclosure/"
+  parent = "Practices"
+  weight = 30
+
+[[framework]]
+  name = "Safe Harbor Implementation"
+  url = "/framework/practices/safe-harbor-implementation/"
+  parent = "Practices"
+  weight = 40
+
+[[framework]]
+  name = "Researcher Relations"
+  url = "/framework/practices/researcher-relations/"
+  parent = "Practices"
+  weight = 50
+
+# Pillar 3: Maturity (DIOstatus)
+[[framework]]
+  name = "Maturity (DIOstatus)"
+  weight = 40
+
+[[framework]]
+  name = "Overview"
+  url = "/framework/maturity/"
+  parent = "Maturity (DIOstatus)"
+  weight = 5
+
+[[framework]]
+  name = "Level 0 — Not Present"
+  url = "/framework/maturity/level-0/"
+  parent = "Maturity (DIOstatus)"
+  weight = 10
+
+[[framework]]
+  name = "Level 1 — Contact Only"
+  url = "/framework/maturity/level-1/"
+  parent = "Maturity (DIOstatus)"
+  weight = 20
+
+[[framework]]
+  name = "Level 2 — Basic VDP"
+  url = "/framework/maturity/level-2/"
+  parent = "Maturity (DIOstatus)"
+  weight = 30
+
+[[framework]]
+  name = "Level 3 — Partial Safe Harbor"
+  url = "/framework/maturity/level-3/"
+  parent = "Maturity (DIOstatus)"
+  weight = 40
+
+[[framework]]
+  name = "Level 4 — Full Safe Harbor"
+  url = "/framework/maturity/level-4/"
+  parent = "Maturity (DIOstatus)"
+  weight = 50
+
+[[framework]]
+  name = "Level 5 — Full Safe Harbor + CVD"
+  url = "/framework/maturity/level-5/"
+  parent = "Maturity (DIOstatus)"
+  weight = 60
+
+# Source & tools
+[[framework]]
+  name = "Source"
+  weight = 90
+
+[[framework]]
+  name = "dioterms repo"
+  url = "https://github.com/disclose/dioterms"
+  parent = "Source"
+  weight = 10
+
+[[framework]]
+  name = "Policymaker"
+  url = "https://policymaker.disclose.io"
+  parent = "Source"
   weight = 20

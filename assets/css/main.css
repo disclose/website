@@ -200,6 +200,15 @@
   }
 }
 
+/* Framework page placeholder styling */
+.framework-placeholder {
+  @apply inline-block bg-purple/10 text-purple font-medium font-mono text-[0.95em] px-1 py-0.5 rounded border border-purple/20;
+}
+
+.framework-prose .framework-placeholder {
+  font-style: normal;
+}
+
 /* Pagefind search styling overrides */
 :root {
   --pagefind-ui-scale: 1;

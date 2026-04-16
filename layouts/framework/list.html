@@ -1,0 +1,48 @@
+{{ define "main" }}
+{{ $isRoot := eq .RelPermalink "/framework/" }}
+<div class="flex min-h-[calc(100vh-4rem)]">
+  {{/* Root /framework/ page has no sidebar; nested list pages (regional index) do. */}}
+  {{ if not $isRoot }}
+  <aside class="hidden lg:block w-64 flex-shrink-0 border-r border-shade-200 bg-shade-050">
+    <nav class="sticky top-16 p-6 overflow-y-auto max-h-[calc(100vh-4rem)]">
+      {{ partial "menu-sidebar.html" (dict "page" . "menu" .Site.Menus.framework) }}
+    </nav>
+  </aside>
+  {{ end }}
+
+  <main class="flex-1 min-w-0">
+    <div class="{{ if $isRoot }}container-wide{{ else }}container-narrow{{ end }} py-12">
+      {{ if not $isRoot }}
+      {{ partial "framework-breadcrumb.html" . }}
+      {{ end }}
+
+      <header class="mb-10 {{ if $isRoot }}text-center{{ end }}">
+        <h1 class="text-4xl md:text-5xl font-display font-bold mb-4">{{ .Title }}</h1>
+        {{ with .Params.description }}
+        <p class="text-xl text-gray-600 {{ if $isRoot }}max-w-2xl mx-auto{{ end }}">{{ . }}</p>
+        {{ end }}
+      </header>
+
+      {{ if .Content }}
+      <div class="prose prose-lg {{ if $isRoot }}max-w-3xl mx-auto{{ else }}max-w-none{{ end }} mb-12">
+        {{ .Content }}
+      </div>
+      {{ end }}
+
+      {{ if .Pages }}
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {{ range .Pages }}
+        <a href="{{ .Permalink }}" class="card card-hover p-6">
+          <h2 class="text-xl font-semibold text-gray-900 mb-2 group-hover:text-purple">{{ .Title }}</h2>
+          {{ with .Description }}
+          <p class="text-gray-600 text-sm">{{ . | truncate 140 }}</p>
+          {{ end }}
+          <div class="mt-4 text-purple text-sm font-medium">Read policy &rarr;</div>
+        </a>
+        {{ end }}
+      </div>
+      {{ end }}
+    </div>
+  </main>
+</div>
+{{ end }}

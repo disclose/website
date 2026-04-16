@@ -1,0 +1,18 @@
+{{/* Breadcrumb for framework pages. Context: the page. */}}
+<nav class="mb-8" aria-label="Breadcrumb">
+  <ol class="flex items-center space-x-2 text-sm text-gray-500">
+    <li><a href="{{ "/" | relURL }}" class="hover:text-purple">Home</a></li>
+    <li>
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+      </svg>
+    </li>
+    <li><a href="{{ "/framework/" | relURL }}" class="hover:text-purple">Framework</a></li>
+    <li>
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+      </svg>
+    </li>
+    <li class="text-gray-900 font-medium">{{ .Title }}</li>
+  </ol>
+</nav>

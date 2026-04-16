@@ -3,14 +3,16 @@
   "version": "1.0.0",
   "description": "disclose.io website built with Hugo and Tailwind CSS",
   "scripts": {
-    "dev": "npm-run-all --parallel dev:*",
+    "dev": "npm run prebuild && npm-run-all --parallel dev:*",
     "dev:hugo": "hugo server --buildDrafts --buildFuture",
     "dev:css": "npx tailwindcss -i ./assets/css/main.css -o ./static/css/main.css --watch",
-    "build": "npm-run-all build:css build:hugo build:search",
+    "prebuild": "node scripts/preprocess-framework.js",
+    "build": "npm-run-all prebuild build:css build:hugo build:search",
     "build:css": "npx tailwindcss -i ./assets/css/main.css -o ./static/css/main.css --minify",
     "build:hugo": "hugo --minify",
     "build:search": "npx pagefind --site public",
-    "preview": "hugo server --buildDrafts --buildFuture --port 1313"
+    "preview": "hugo server --buildDrafts --buildFuture --port 1313",
+    "framework:build": "node scripts/preprocess-framework.js"
   },
   "devDependencies": {
     "@tailwindcss/forms": "^0.5.7",

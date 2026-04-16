@@ -30,3 +30,14 @@ Thumbs.db
 
 # Build artifacts
 dist/
+
+# content/framework/ is regenerated from external/dioterms/ by scripts/preprocess-framework.js.
+# Authored section landing pages (_index.md) are tracked; generated per-page files are not.
+/content/framework/**
+!/content/framework/_index.md
+!/content/framework/terms/
+!/content/framework/terms/_index.md
+!/content/framework/practices/
+!/content/framework/practices/_index.md
+!/content/framework/maturity/
+!/content/framework/maturity/_index.md
