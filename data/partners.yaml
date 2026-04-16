@@ -1,0 +1,21 @@
+# Partners and friends - organizations that share the disclose.io mission
+
+- name: "Security Research Legal Defense Fund"
+  short_name: "SRLDF"
+  url: "https://srldf.org"
+  logo: "/uploads/partners/srldf.svg"
+  logo_bg: "#ffffff"
+  description: |
+    <p>A 501(c)(3) nonprofit that helps fund legal representation for security researchers who face legal threats as a result of good-faith security research.</p>
+    <p>If you (or someone you know) is facing legal action for good-faith research, you can <a href="mailto:grants@srldf.org" class="text-purple hover:underline">apply for a defense grant</a>.</p>
+    <p>If you want to help keep the chilling effect in check, you can <a href="mailto:donate@srldf.org" class="text-purple hover:underline">donate to the fund</a> — donations are tax-deductible.</p>
+
+- name: "The Hacking Games"
+  short_name: "The Hacking Games"
+  url: "https://thehackinggames.com"
+  logo: "/uploads/partners/thehackinggames.png"
+  logo_bg: "#000000"
+  description: |
+    <p>A community and pipeline that helps unconventional thinkers — gamers, CTF players, and bug bounty hunters — turn their talents into legitimate cybersecurity careers.</p>
+    <p>If you've got the hacker mindset and are looking for a way in, <a href="https://discord.gg/RcpQHB3utN" target="_blank" rel="noopener" class="text-purple hover:underline">join their Discord community</a>.</p>
+    <p>If your organization wants to hire outside the traditional pipeline, <a href="https://www.thehackinggames.com/membership#contact-form" target="_blank" rel="noopener" class="text-purple hover:underline">work with them as a partner</a> to connect with their talent pool.</p>
