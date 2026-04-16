@@ -16,6 +16,9 @@ hero:
 faq:
   title: "Frequently asked questions"
   subtitle: "Got a quick question? Let's get you a quick answer"
+partners:
+  title: "Partners and friends"
+  subtitle: "Organizations that share our mission — folks worth knowing, and ways to engage with them"
 videos:
   title: "Why does disclose.io exist?"
   subtitle: "A couple of talks to get you started..."
