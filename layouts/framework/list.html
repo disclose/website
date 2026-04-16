@@ -30,7 +30,7 @@
       {{ end }}
 
       {{ if and .Pages (not .Params.hide_child_pages) }}
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {{ range .Pages }}
         <a href="{{ .Permalink }}" class="card card-hover p-6">
           <h2 class="text-xl font-semibold text-gray-900 mb-2 group-hover:text-purple">{{ .Title }}</h2>
