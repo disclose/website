@@ -26,13 +26,15 @@
           <span class="text-gray-500 italic">Replace <span class="framework-placeholder">[bracketed]</span> values with your own.</span>
         </div>
 
-        {{ if .TableOfContents }}
+        {{ if gt .WordCount 200 }}
+        {{ with .TableOfContents }}
         <div class="bg-shade-050 rounded-lg p-4 mb-8">
           <h2 class="text-sm font-semibold uppercase tracking-wider text-gray-500 mb-3">On this page</h2>
           <nav class="toc prose prose-sm prose-gray">
-            {{ .TableOfContents }}
+            {{ . }}
           </nav>
         </div>
+        {{ end }}
         {{ end }}
 
         <div class="prose prose-lg max-w-none framework-prose">

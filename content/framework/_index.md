@@ -1,18 +1,16 @@
 ---
 title: "The disclose.io Framework"
-description: "Three pillars for vulnerability disclosure: canonical legal terms, operational practices, and the DIOstatus maturity model."
+description: "Three pillars for vulnerability disclosure: canonical legal terms, operational practices, and the diostatus maturity model."
 type: framework
 weight: 1
 ---
 
-The disclose.io Framework is the canonical, citable, public-domain reference for running a vulnerability disclosure program. It exists to give organisations sound starting-point boilerplate, a shared operational vocabulary, and a way to measure progress — and to give security researchers a common anchor when reading, critiquing, or recommending programs.
+The disclose.io Framework is an open-source, public-domain reference for running a vulnerability disclosure program.
 
-All framework content is sourced directly from the [disclose/dioterms](https://github.com/disclose/dioterms) repository, licensed under [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/). Copy, adapt, and redistribute without attribution or permission.
+It gives organisations starting-point boilerplate, a shared vocabulary, and a way to measure maturity. It helps security researchers know what good looks like when reading, critiquing, or recommending programs.
 
-## How to use this
+Everything here is open for review, critique, and contribution. Spot an issue or want to propose a change? Open a PR at [github.com/disclose/dioterms](https://github.com/disclose/dioterms) — licensed [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/).
 
-Policy text on this site appears with styled placeholders like `[Organization Name]` where your details go. To generate a personalised, parameterised copy, use [policymaker.disclose.io](https://policymaker.disclose.io).
+## How to use
 
-## Contribute
-
-The framework is a community resource. Spot an issue, want to propose a regional variant, contribute a practice guide, or refine a clause? Open an issue or PR at [github.com/disclose/dioterms](https://github.com/disclose/dioterms).
+Policy text appears with styled placeholders like `[Organization Name]`. Fill them in manually, or generate a personalised copy via [policymaker.disclose.io](https://policymaker.disclose.io).
