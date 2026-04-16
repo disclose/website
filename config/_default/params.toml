@@ -17,6 +17,8 @@ formspree_endpoint = "https://formspree.io/f/xrgrzrle"
 # Navigation
 docs_section = "docs"
 directory_url = "https://directory.disclose.io"
+dioterms_repo = "https://github.com/disclose/dioterms"
+policymaker_url = "https://policymaker.disclose.io"
 
 # Feature flags
 enable_search = true

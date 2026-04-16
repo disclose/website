@@ -4,3 +4,6 @@
 [submodule "external/research-threats"]
 	path = external/research-threats
 	url = https://github.com/disclose/research-threats.git
+[submodule "external/dioterms"]
+	path = external/dioterms
+	url = https://github.com/disclose/dioterms.git
