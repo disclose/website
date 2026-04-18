@@ -292,42 +292,7 @@
   parent = "Regional Variants"
   weight = 80
 
-# Pillar 2: Practices
-[[framework]]
-  name = "Practices"
-  weight = 30
-
-[[framework]]
-  name = "Program Launch"
-  url = "/framework/practices/program-launch/"
-  parent = "Practices"
-  weight = 10
-
-[[framework]]
-  name = "Triage"
-  url = "/framework/practices/triage/"
-  parent = "Practices"
-  weight = 20
-
-[[framework]]
-  name = "Coordinated Disclosure"
-  url = "/framework/practices/coordinated-disclosure/"
-  parent = "Practices"
-  weight = 30
-
-[[framework]]
-  name = "Safe Harbor Implementation"
-  url = "/framework/practices/safe-harbor-implementation/"
-  parent = "Practices"
-  weight = 40
-
-[[framework]]
-  name = "Researcher Relations"
-  url = "/framework/practices/researcher-relations/"
-  parent = "Practices"
-  weight = 50
-
-# Pillar 3: Maturity (diostatus)
+# Pillar 2: Maturity (diostatus)
 [[framework]]
   name = "Maturity (diostatus)"
   weight = 40

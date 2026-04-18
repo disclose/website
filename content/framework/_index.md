@@ -1,6 +1,6 @@
 ---
 title: "The disclose.io Framework"
-description: "Three pillars for vulnerability disclosure: canonical legal terms, operational practices, and the diostatus maturity model."
+description: "The disclose.io Framework: canonical legal terms for vulnerability disclosure, plus the diostatus program-maturity model."
 type: framework
 weight: 1
 ---
