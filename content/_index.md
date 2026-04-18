@@ -22,6 +22,9 @@ partners:
 videos:
   title: "Why does disclose.io exist?"
   subtitle: "A couple of talks to get you started..."
+superheroes:
+  title: "Internet superheroes"
+  subtitle: "Some of the legends working on disclose.io who eat, sleep, and breathe making the Internet safer."
 cta:
   title: "Didn't find what you were looking for?"
   subtitle: "We're always happy to help answer your questions about vulnerability disclosure."

@@ -1,0 +1,42 @@
+{{/* Internet superheroes section — homepage, immediately under the "Why does disclose.io exist?" videos block.
+     Tight 10-across grid on sm+; handle under avatar; tier labels hidden to keep vertical rhythm clean. */}}
+{{ $superheroes := site.Data.superheroes }}
+{{ if $superheroes }}
+<section class="section bg-white" id="superheroes">
+  <div class="container-wide">
+    {{ with .Params.superheroes }}
+    {{ with .title }}
+    <h2 class="text-3xl md:text-4xl font-display font-bold text-center text-purple mb-4">{{ . }}</h2>
+    {{ end }}
+    {{ with .subtitle }}
+    <p class="text-xl text-gray-600 text-center mb-10 max-w-2xl mx-auto">{{ . }}</p>
+    {{ end }}
+    {{ end }}
+
+    <div class="grid grid-cols-5 sm:grid-cols-10 gap-x-2 gap-y-5 max-w-6xl mx-auto">
+      {{ range $superheroes }}
+      {{ $display := or .handle .name }}
+      <div class="text-center">
+        {{ if .url }}
+        <a href="{{ .url }}" target="_blank" rel="noopener noreferrer" class="group block" title="{{ or .name $display }}{{ with .tier }} — {{ . }}{{ end }}">
+          {{ if .avatar }}
+          <img src="{{ .avatar }}" alt="{{ $display }}" loading="lazy" class="w-14 h-14 mx-auto rounded-full object-cover ring-2 ring-shade-200 group-hover:ring-purple transition" />
+          {{ else }}
+          <div class="w-14 h-14 mx-auto rounded-full ring-2 ring-shade-200 bg-purple-light/20 text-purple flex items-center justify-center text-2xl font-display font-bold group-hover:ring-purple transition">{{ .initials }}</div>
+          {{ end }}
+          <p class="mt-2 text-xs text-gray-700 group-hover:text-purple font-medium break-all leading-tight">{{ $display }}</p>
+        </a>
+        {{ else }}
+        {{ if .avatar }}
+        <img src="{{ .avatar }}" alt="{{ $display }}" loading="lazy" class="w-14 h-14 mx-auto rounded-full object-cover ring-2 ring-shade-200" title="{{ or .name $display }}" />
+        {{ else }}
+        <div class="w-14 h-14 mx-auto rounded-full ring-2 ring-shade-200 bg-purple-light/20 text-purple flex items-center justify-center text-2xl font-display font-bold">{{ .initials }}</div>
+        {{ end }}
+        <p class="mt-2 text-xs text-gray-700 font-medium break-all leading-tight">{{ $display }}</p>
+        {{ end }}
+      </div>
+      {{ end }}
+    </div>
+  </div>
+</section>
+{{ end }}
