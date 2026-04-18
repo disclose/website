@@ -1,8 +1,9 @@
 #!/usr/bin/env node
-// Generates content/framework/ from external/dioterms/ across three pillars:
-// terms (legal boilerplate with mustache variables), practices (operational
-// playbooks), and maturity (diostatus levels). Idempotent — writes only when
-// bytes change so the Hugo watcher doesn't see phantom rebuilds.
+// Generates content/framework/ from external/dioterms/ across two pillars:
+// terms (legal boilerplate with mustache variables, including the four
+// policymaker-aligned canonicals plus BBP) and maturity (diostatus levels).
+// Idempotent — writes only when bytes change so the Hugo watcher doesn't see
+// phantom rebuilds.
 
 const fs = require('fs');
 const path = require('path');
@@ -20,34 +21,20 @@ const VARIABLES = {
 const PLACEHOLDER_OPEN = '<span class="framework-placeholder">[';
 const PLACEHOLDER_CLOSE = ']</span>';
 
-// Pillar 1: Terms — legal boilerplate. Mustache variables get replaced.
+// Pillar 1: Terms — legal boilerplate. Mustache variables get replaced. The
+// first four mirror policymaker.disclose.io's canonical template families 1:1;
+// BBP is retained as a fifth canonical that policymaker does not currently
+// carry. English renders for the website; other locales live in the dioterms
+// folders alongside but aren't rendered here (policymaker serves them directly).
 const TERMS = [
-  { src: 'core-terms-vdp.md',                       out: 'terms/core-vdp.md',            title: 'Vulnerability Disclosure Policy',   description: 'Canonical VDP boilerplate with safe harbor, from the disclose.io framework.', weight: 10 },
-  { src: 'core-terms-bbp.md',                       out: 'terms/core-bbp.md',            title: 'Bug Bounty Program Policy',         description: 'Canonical BBP boilerplate with rewards structure and safe harbor.',          weight: 20 },
-  { src: 'simple-safeharbor/simple-safe-harbor.md', out: 'terms/simple-safe-harbor.md',  title: 'Simple Safe Harbor',                 description: 'Condensed safe harbor clause for quick adoption.',                            weight: 30 },
+  { src: 'terms/vdp/en-US.md',                out: 'terms/vdp.md',                title: 'Vulnerability Disclosure Policy',         description: 'Canonical VDP boilerplate with safe harbor, from the disclose.io framework.',             weight: 10 },
+  { src: 'terms/vdp-with-cvd/en-US.md',       out: 'terms/vdp-with-cvd.md',       title: 'VDP with Coordinated Disclosure Window',  description: 'Canonical VDP with an explicit coordinated-disclosure timeline.',                          weight: 15 },
+  { src: 'terms/safe-harbor/en-US.md',        out: 'terms/safe-harbor.md',        title: 'Safe Harbor',                             description: 'Standalone full safe-harbor clause for attaching to an existing policy.',                  weight: 20 },
+  { src: 'terms/simple-safe-harbor/en-US.md', out: 'terms/simple-safe-harbor.md', title: 'Simple Safe Harbor',                      description: 'Condensed safe harbor clause for quick adoption.',                                         weight: 25 },
+  { src: 'bbp/en-US.md',                      out: 'terms/bbp.md',                title: 'Bug Bounty Program Policy',               description: 'Canonical BBP boilerplate with rewards structure and safe harbor.',                        weight: 30 },
 ];
 
-const REGIONAL = [
-  { src: 'regional/USA-core-terms.md',        slug: 'usa', title: 'United States',           weight: 10 },
-  { src: 'regional/NLD-core-terms.md',        slug: 'nld', title: 'Netherlands',             weight: 20 },
-  { src: 'regional/BEL-core-terms.md',        slug: 'bel', title: 'Belgium',                 weight: 30 },
-  { src: 'regional/CHE-core-terms.md',        slug: 'che', title: 'Switzerland',             weight: 40 },
-  { src: 'regional/CAN-core-terms.md',        slug: 'can', title: 'Canada',                  weight: 50 },
-  { src: 'regional/AUS-core-terms-draft.md',  slug: 'aus', title: 'Australia (draft)',       weight: 60 },
-  { src: 'regional/GBR-core-terms-draft.md',  slug: 'gbr', title: 'United Kingdom (draft)',  weight: 70 },
-  { src: 'regional/NZD-core-terms-draft.md',  slug: 'nzd', title: 'New Zealand (draft)',     weight: 80 },
-];
-
-// Pillar 2: Practices — operational playbooks. No variable replacement; keep first H1.
-const PRACTICES = [
-  { src: 'practices/program-launch.md',              slug: 'program-launch',              title: 'Program Launch',              description: 'Preflight decisions, scoping, approvals, go-live checklist.',             weight: 10 },
-  { src: 'practices/triage.md',                      slug: 'triage',                      title: 'Triage',                      description: 'Intake, severity calibration, deduplication, validation, routing.',       weight: 20 },
-  { src: 'practices/coordinated-disclosure.md',      slug: 'coordinated-disclosure',      title: 'Coordinated Disclosure',      description: 'Timelines, negotiation, public disclosure, multi-party coordination.',    weight: 30 },
-  { src: 'practices/safe-harbor-implementation.md',  slug: 'safe-harbor-implementation',  title: 'Safe Harbor Implementation',  description: 'Aligning Legal, TOS/AUP, platform agreements, and internal procedures.',  weight: 40 },
-  { src: 'practices/researcher-relations.md',        slug: 'researcher-relations',        title: 'Researcher Relations',        description: 'Communication cadence, recognition, escalation, program transparency.',   weight: 50 },
-];
-
-// Pillar 3: Maturity — diostatus levels. No variable replacement; keep first H1.
+// Pillar 2: Maturity — diostatus levels. No variable replacement; keep first H1.
 const MATURITY = [
   { src: 'maturity/level-0.md', slug: 'level-0', title: 'Level 0 — Not Present',              description: 'No findable contact, no policy, no intake method.',                         weight: 10 },
   { src: 'maturity/level-1.md', slug: 'level-1', title: 'Level 1 — Contact Only',             description: 'security.txt published; a researcher can reach someone. No policy yet.',    weight: 20 },
@@ -159,63 +146,18 @@ function pruneStale(keep) {
   walk(OUT);
 }
 
-function writeRegionalIndex() {
-  const body = [
-    '---',
-    'title: "Regional Variants"',
-    'description: "Jurisdiction-specific adaptations of the core dioterms."',
-    'weight: 40',
-    'type: framework',
-    '---',
-    '',
-    'The following regional variants adapt the core dioterms language to the legal and regulatory context of specific jurisdictions. Drafts are marked as such.',
-    '',
-  ].join('\n');
-  return writeIfChanged(path.join(OUT, 'terms', 'regional', '_index.md'), body) && path.join(OUT, 'terms', 'regional', '_index.md');
-}
-
 function main() {
   fs.mkdirSync(OUT, { recursive: true });
   const wrote = new Set();
   let count = 0;
 
-  // Pillar 1 — Terms (core + regional)
+  // Pillar 1 — Terms
   for (const m of TERMS) {
     const p = processFile({ ...m, replaceVariables: true, stripFirstH1: true });
     if (p) { wrote.add(p); count++; }
   }
 
-  wrote.add(path.join(OUT, 'terms', 'regional', '_index.md'));
-  writeRegionalIndex();
-
-  for (const r of REGIONAL) {
-    const p = processFile({
-      src: r.src,
-      out: `terms/regional/${r.slug}.md`,
-      title: r.title,
-      description: `Regional dioterms variant for ${r.title}.`,
-      weight: r.weight,
-      replaceVariables: true,
-      stripFirstH1: true,
-    });
-    if (p) { wrote.add(p); count++; }
-  }
-
-  // Pillar 2 — Practices
-  for (const m of PRACTICES) {
-    const p = processFile({
-      src: m.src,
-      out: `practices/${m.slug}.md`,
-      title: m.title,
-      description: m.description,
-      weight: m.weight,
-      replaceVariables: false,
-      stripFirstH1: true,
-    });
-    if (p) { wrote.add(p); count++; }
-  }
-
-  // Pillar 3 — Maturity (with /docs/diostatus/ alias on _index)
+  // Pillar 2 — Maturity (with /docs/diostatus/ alias on _index)
   for (const m of MATURITY) {
     const p = processFile({
       src: m.src,

@@ -240,97 +240,16 @@
   parent = "Terms"
   weight = 30
 
-[[framework]]
-  name = "Regional Variants"
-  weight = 20
-
-[[framework]]
-  name = "United States"
-  url = "/framework/terms/regional/usa/"
-  parent = "Regional Variants"
-  weight = 10
-
-[[framework]]
-  name = "Netherlands"
-  url = "/framework/terms/regional/nld/"
-  parent = "Regional Variants"
-  weight = 20
-
-[[framework]]
-  name = "Belgium"
-  url = "/framework/terms/regional/bel/"
-  parent = "Regional Variants"
-  weight = 30
-
-[[framework]]
-  name = "Switzerland"
-  url = "/framework/terms/regional/che/"
-  parent = "Regional Variants"
-  weight = 40
-
-[[framework]]
-  name = "Canada"
-  url = "/framework/terms/regional/can/"
-  parent = "Regional Variants"
-  weight = 50
-
-[[framework]]
-  name = "Australia (draft)"
-  url = "/framework/terms/regional/aus/"
-  parent = "Regional Variants"
-  weight = 60
-
-[[framework]]
-  name = "United Kingdom (draft)"
-  url = "/framework/terms/regional/gbr/"
-  parent = "Regional Variants"
-  weight = 70
-
-[[framework]]
-  name = "New Zealand (draft)"
-  url = "/framework/terms/regional/nzd/"
-  parent = "Regional Variants"
-  weight = 80
-
 # Pillar 2: Practices
 [[framework]]
   name = "Practices"
-  weight = 30
-
-[[framework]]
-  name = "Program Launch"
-  url = "/framework/practices/program-launch/"
-  parent = "Practices"
-  weight = 10
-
-[[framework]]
-  name = "Triage"
-  url = "/framework/practices/triage/"
-  parent = "Practices"
+  url = "/framework/practices/"
   weight = 20
-
-[[framework]]
-  name = "Coordinated Disclosure"
-  url = "/framework/practices/coordinated-disclosure/"
-  parent = "Practices"
-  weight = 30
-
-[[framework]]
-  name = "Safe Harbor Implementation"
-  url = "/framework/practices/safe-harbor-implementation/"
-  parent = "Practices"
-  weight = 40
-
-[[framework]]
-  name = "Researcher Relations"
-  url = "/framework/practices/researcher-relations/"
-  parent = "Practices"
-  weight = 50
 
 # Pillar 3: Maturity (diostatus)
 [[framework]]
   name = "Maturity (diostatus)"
-  weight = 40
+  weight = 30
 
 [[framework]]
   name = "Overview"
