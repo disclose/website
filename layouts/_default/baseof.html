@@ -145,11 +145,6 @@
   {{ end }}
   {{ end }}
 
-  {{/* Fathom Analytics */}}
-  {{ if eq hugo.Environment "production" }}
-  <script src="https://cdn.usefathom.com/script.js" data-site="OYTNWTTU" defer></script>
-  {{ end }}
-
   {{ block "scripts" . }}{{ end }}
 </body>
 </html>
