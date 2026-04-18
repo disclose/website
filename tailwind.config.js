@@ -79,6 +79,11 @@ module.exports = {
       }),
     },
   },
+  safelist: [
+    'grid-cols-5',
+    'grid-cols-10',
+    'sm:grid-cols-10',
+  ],
   plugins: [
     require('@tailwindcss/typography'),
     require('@tailwindcss/forms'),
