@@ -34,17 +34,6 @@ const TERMS = [
   { src: 'bbp/en-US.md',                      out: 'terms/bbp.md',                title: 'Bug Bounty Program Policy',               description: 'Canonical BBP boilerplate with rewards structure and safe harbor.',                        weight: 30 },
 ];
 
-const REGIONAL = [
-  { src: 'regional/USA-core-terms.md',        slug: 'usa', title: 'United States',           weight: 10 },
-  { src: 'regional/NLD-core-terms.md',        slug: 'nld', title: 'Netherlands',             weight: 20 },
-  { src: 'regional/BEL-core-terms.md',        slug: 'bel', title: 'Belgium',                 weight: 30 },
-  { src: 'regional/CHE-core-terms.md',        slug: 'che', title: 'Switzerland',             weight: 40 },
-  { src: 'regional/CAN-core-terms.md',        slug: 'can', title: 'Canada',                  weight: 50 },
-  { src: 'regional/AUS-core-terms-draft.md',  slug: 'aus', title: 'Australia (draft)',       weight: 60 },
-  { src: 'regional/GBR-core-terms-draft.md',  slug: 'gbr', title: 'United Kingdom (draft)',  weight: 70 },
-  { src: 'regional/NZD-core-terms-draft.md',  slug: 'nzd', title: 'New Zealand (draft)',     weight: 80 },
-];
-
 // Pillar 2: Maturity — diostatus levels. No variable replacement; keep first H1.
 const MATURITY = [
   { src: 'maturity/level-0.md', slug: 'level-0', title: 'Level 0 — Not Present',              description: 'No findable contact, no policy, no intake method.',                         weight: 10 },
@@ -157,45 +146,14 @@ function pruneStale(keep) {
   walk(OUT);
 }
 
-function writeRegionalIndex() {
-  const body = [
-    '---',
-    'title: "Regional Variants"',
-    'description: "Jurisdiction-specific adaptations of the core dioterms."',
-    'weight: 40',
-    'type: framework',
-    '---',
-    '',
-    'The following regional variants adapt the core dioterms language to the legal and regulatory context of specific jurisdictions. Drafts are marked as such.',
-    '',
-  ].join('\n');
-  return writeIfChanged(path.join(OUT, 'terms', 'regional', '_index.md'), body) && path.join(OUT, 'terms', 'regional', '_index.md');
-}
-
 function main() {
   fs.mkdirSync(OUT, { recursive: true });
   const wrote = new Set();
   let count = 0;
 
-  // Pillar 1 — Terms (core + regional)
+  // Pillar 1 — Terms
   for (const m of TERMS) {
     const p = processFile({ ...m, replaceVariables: true, stripFirstH1: true });
-    if (p) { wrote.add(p); count++; }
-  }
-
-  wrote.add(path.join(OUT, 'terms', 'regional', '_index.md'));
-  writeRegionalIndex();
-
-  for (const r of REGIONAL) {
-    const p = processFile({
-      src: r.src,
-      out: `terms/regional/${r.slug}.md`,
-      title: r.title,
-      description: `Regional dioterms variant for ${r.title}.`,
-      weight: r.weight,
-      replaceVariables: true,
-      stripFirstH1: true,
-    });
     if (p) { wrote.add(p); count++; }
   }
 

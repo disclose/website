@@ -240,62 +240,16 @@
   parent = "Terms"
   weight = 30
 
+# Pillar 2: Practices
 [[framework]]
-  name = "Regional Variants"
+  name = "Practices"
+  url = "/framework/practices/"
   weight = 20
 
-[[framework]]
-  name = "United States"
-  url = "/framework/terms/regional/usa/"
-  parent = "Regional Variants"
-  weight = 10
-
-[[framework]]
-  name = "Netherlands"
-  url = "/framework/terms/regional/nld/"
-  parent = "Regional Variants"
-  weight = 20
-
-[[framework]]
-  name = "Belgium"
-  url = "/framework/terms/regional/bel/"
-  parent = "Regional Variants"
-  weight = 30
-
-[[framework]]
-  name = "Switzerland"
-  url = "/framework/terms/regional/che/"
-  parent = "Regional Variants"
-  weight = 40
-
-[[framework]]
-  name = "Canada"
-  url = "/framework/terms/regional/can/"
-  parent = "Regional Variants"
-  weight = 50
-
-[[framework]]
-  name = "Australia (draft)"
-  url = "/framework/terms/regional/aus/"
-  parent = "Regional Variants"
-  weight = 60
-
-[[framework]]
-  name = "United Kingdom (draft)"
-  url = "/framework/terms/regional/gbr/"
-  parent = "Regional Variants"
-  weight = 70
-
-[[framework]]
-  name = "New Zealand (draft)"
-  url = "/framework/terms/regional/nzd/"
-  parent = "Regional Variants"
-  weight = 80
-
-# Pillar 2: Maturity (diostatus)
+# Pillar 3: Maturity (diostatus)
 [[framework]]
   name = "Maturity (diostatus)"
-  weight = 40
+  weight = 30
 
 [[framework]]
   name = "Overview"
