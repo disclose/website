@@ -1,0 +1,183 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 920" role="img" aria-labelledby="title desc" font-family="ui-sans-serif, system-ui, -apple-system, sans-serif">
+  <title id="title">The disclose.io Universe — ecosystem map</title>
+  <desc id="desc">A diagram showing how disclose.io components relate: the framework at the core, tools and open-source projects helping organizations climb the DIOstatus maturity ladder and helping researchers operate around it, with community support and SRLDF legal backstop.</desc>
+
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#4A5568"/>
+    </marker>
+    <marker id="arrow-purple" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#673AB6"/>
+    </marker>
+  </defs>
+
+  <style>
+    .bg { fill: #FFFBF5; }
+    .title-main { font-size: 28px; font-weight: 700; fill: #1A202C; }
+    .title-sub  { font-size: 14px; fill: #4A5568; font-style: italic; }
+    .group-label { font-size: 13px; font-weight: 700; fill: #673AB6; letter-spacing: 0.08em; text-transform: uppercase; }
+    .box { fill: #FFFFFF; stroke: #CBD5E0; stroke-width: 1.5; }
+    .box-core { fill: #F5EFFB; stroke: #673AB6; stroke-width: 2; }
+    .box-safety { fill: #FEF5E7; stroke: #B7791F; stroke-width: 1.5; }
+    .item-name { font-size: 14px; font-weight: 600; fill: #1A202C; }
+    .item-desc { font-size: 12px; fill: #4A5568; }
+    .core-name { font-size: 18px; font-weight: 700; fill: #1A202C; }
+    .core-desc { font-size: 13px; fill: #4A5568; }
+    .edge { fill: none; stroke: #4A5568; stroke-width: 1.5; }
+    .edge-dash { fill: none; stroke: #A0AEC0; stroke-width: 1.25; stroke-dasharray: 4 3; }
+    .edge-purple { fill: none; stroke: #673AB6; stroke-width: 1.75; }
+    .ladder-bar { fill: #673AB6; }
+    .ladder-step { fill: #FFFFFF; stroke: #673AB6; stroke-width: 2; }
+    .ladder-num { font-size: 16px; font-weight: 700; fill: #673AB6; }
+    .ladder-name { font-size: 12px; font-weight: 600; fill: #1A202C; }
+    .ladder-desc { font-size: 11px; fill: #4A5568; }
+    .audience { font-size: 12px; font-weight: 700; fill: #4A5568; letter-spacing: 0.06em; text-transform: uppercase; }
+    .note { font-size: 11px; fill: #718096; font-style: italic; }
+  </style>
+
+  <rect class="bg" width="1200" height="920"/>
+
+  <!-- Title -->
+  <text class="title-main" x="600" y="44" text-anchor="middle">The disclose.io Universe</text>
+  <text class="title-sub"  x="600" y="68" text-anchor="middle">how the ecosystem fits together</text>
+
+  <!-- Audience banners -->
+  <text class="audience" x="260"  y="110" text-anchor="middle">Organizations climb ↓</text>
+  <text class="audience" x="940"  y="110" text-anchor="middle">Researchers operate ↓</text>
+
+  <!-- CORE -->
+  <g>
+    <rect class="box-core" x="370" y="130" width="460" height="96" rx="8"/>
+    <text class="group-label" x="600" y="155" text-anchor="middle">Core · the framework</text>
+    <text class="core-name"   x="600" y="183" text-anchor="middle">disclose.io</text>
+    <text class="core-desc"   x="600" y="204" text-anchor="middle">docs · programs · platforms · threats · history</text>
+  </g>
+
+  <!-- LEFT COLUMN: HELPS ORGS CLIMB -->
+  <g>
+    <text class="group-label" x="215" y="272" text-anchor="middle">Helps orgs climb</text>
+    <rect class="box" x="65" y="290" width="300" height="210" rx="8"/>
+
+    <text class="item-name" x="85" y="320">dioterms</text>
+    <text class="item-desc" x="85" y="338">safe-harbor policy templates (L2–L5)</text>
+
+    <text class="item-name" x="85" y="368">policymaker</text>
+    <text class="item-desc" x="85" y="386">guided VDP policy generator (L2–L5)</text>
+
+    <text class="item-name" x="85" y="416">dnssecuritytxt</text>
+    <text class="item-desc" x="85" y="434">DNS-based security.txt discovery (L1)</text>
+
+    <text class="item-name" x="85" y="464">diodb</text>
+    <text class="item-desc" x="85" y="482">open catalog of programs + levels</text>
+  </g>
+
+  <!-- RIGHT COLUMN: HELPS RESEARCHERS OPERATE -->
+  <g>
+    <text class="group-label" x="985" y="272" text-anchor="middle">Helps researchers operate</text>
+    <rect class="box" x="835" y="290" width="300" height="160" rx="8"/>
+
+    <text class="item-name" x="855" y="320">lookup.disclose.io</text>
+    <text class="item-desc" x="855" y="338">vendor → contact, program, safe-harbor</text>
+
+    <text class="item-name" x="855" y="368">disclose.io/threats</text>
+    <text class="item-desc" x="855" y="386">catalog of legal threats &amp; chilling cases</text>
+
+    <text class="item-name" x="855" y="416">diodb</text>
+    <text class="item-desc" x="855" y="434">the same catalog, read the other way</text>
+  </g>
+
+  <!-- Edges: Core → two columns -->
+  <path class="edge" d="M 460 226 C 420 250, 350 260, 300 290" marker-end="url(#arrow)"/>
+  <path class="edge" d="M 740 226 C 780 250, 850 260, 900 290" marker-end="url(#arrow)"/>
+
+  <!-- DIOstatus ladder -->
+  <g transform="translate(0, 560)">
+    <text class="group-label" x="600" y="0" text-anchor="middle">DIOstatus · the maturity scale</text>
+
+    <!-- base bar -->
+    <rect class="ladder-bar" x="100" y="32" width="1000" height="4" rx="2"/>
+
+    <!-- steps -->
+    <g>
+      <circle class="ladder-step" cx="150"  cy="34" r="18"/>
+      <text class="ladder-num"  x="150"  y="40" text-anchor="middle">0</text>
+      <text class="ladder-name" x="150"  y="74" text-anchor="middle">Not present</text>
+      <text class="ladder-desc" x="150"  y="92" text-anchor="middle">no contact, no policy</text>
+    </g>
+    <g>
+      <circle class="ladder-step" cx="340"  cy="34" r="18"/>
+      <text class="ladder-num"  x="340"  y="40" text-anchor="middle">1</text>
+      <text class="ladder-name" x="340"  y="74" text-anchor="middle">Contact only</text>
+      <text class="ladder-desc" x="340"  y="92" text-anchor="middle">security.txt, reachable</text>
+    </g>
+    <g>
+      <circle class="ladder-step" cx="530"  cy="34" r="18"/>
+      <text class="ladder-num"  x="530"  y="40" text-anchor="middle">2</text>
+      <text class="ladder-name" x="530"  y="74" text-anchor="middle">Basic VDP</text>
+      <text class="ladder-desc" x="530"  y="92" text-anchor="middle">public policy + channel</text>
+    </g>
+    <g>
+      <circle class="ladder-step" cx="720"  cy="34" r="18"/>
+      <text class="ladder-num"  x="720"  y="40" text-anchor="middle">3</text>
+      <text class="ladder-name" x="720"  y="74" text-anchor="middle">Partial safe harbor</text>
+      <text class="ladder-desc" x="720"  y="92" text-anchor="middle">promise not to pursue</text>
+    </g>
+    <g>
+      <circle class="ladder-step" cx="910"  cy="34" r="18"/>
+      <text class="ladder-num"  x="910"  y="40" text-anchor="middle">4</text>
+      <text class="ladder-name" x="910"  y="74" text-anchor="middle">Full safe harbor</text>
+      <text class="ladder-desc" x="910"  y="92" text-anchor="middle">testing authorised + CFAA/DMCA</text>
+    </g>
+    <g>
+      <circle class="ladder-step" cx="1080" cy="34" r="18"/>
+      <text class="ladder-num"  x="1080" y="40" text-anchor="middle">5</text>
+      <text class="ladder-name" x="1080" y="74" text-anchor="middle">+ CVD</text>
+      <text class="ladder-desc" x="1080" y="92" text-anchor="middle">public disclosure timeline</text>
+    </g>
+  </g>
+
+  <!-- Dashed mapping lines: tools → ladder levels they enable -->
+  <!-- dnssecuritytxt (y=416–434 in left box) to L1 (x=340, y=560+34=594) -->
+  <path class="edge-dash" d="M 215 500 C 240 540, 300 560, 340 578"/>
+  <!-- dioterms (~y=320) and policymaker (~y=368): mapping sweep across L2–L5 -->
+  <path class="edge-dash" d="M 215 500 C 260 520, 400 560, 530 578"/>
+  <path class="edge-dash" d="M 215 500 C 300 520, 550 560, 720 578"/>
+  <path class="edge-dash" d="M 215 500 C 350 520, 700 560, 910 578"/>
+  <path class="edge-dash" d="M 215 500 C 400 520, 820 560, 1080 578"/>
+
+  <!-- lookup / diodb → ladder (researchers read levels off) -->
+  <path class="edge-dash" d="M 985 450 C 950 500, 900 550, 910 578"/>
+  <path class="edge-dash" d="M 985 450 C 900 500, 800 550, 720 578"/>
+  <path class="edge-dash" d="M 985 450 C 850 500, 650 550, 530 578"/>
+
+  <!-- COMMUNITY band -->
+  <g transform="translate(0, 720)">
+    <rect class="box" x="200" y="0" width="360" height="80" rx="8"/>
+    <text class="group-label" x="380" y="22" text-anchor="middle">Community</text>
+    <text class="item-name"   x="220" y="48">community.disclose.io</text>
+    <text class="item-desc"   x="220" y="66">the forum — peer support across every level</text>
+  </g>
+  <g transform="translate(0, 720)">
+    <rect class="box" x="580" y="0" width="220" height="80" rx="8"/>
+    <text class="group-label" x="690" y="22" text-anchor="middle">Signal</text>
+    <text class="item-name"   x="600" y="48">blog.disclose.io</text>
+    <text class="item-desc"   x="600" y="66">updates, commentary, research</text>
+  </g>
+
+  <!-- SRLDF safety net -->
+  <g transform="translate(0, 720)">
+    <rect class="box-safety" x="820" y="0" width="320" height="80" rx="8"/>
+    <text class="group-label" x="980" y="22" text-anchor="middle" fill="#B7791F">Legal backstop</text>
+    <text class="item-name"   x="840" y="48">SRLDF</text>
+    <text class="item-desc"   x="840" y="66">legal defense when things go wrong</text>
+  </g>
+
+  <!-- edge from ladder to SRLDF (purple, emphasized) -->
+  <path class="edge-purple" d="M 980 670 C 980 690, 980 705, 980 720" marker-end="url(#arrow-purple)"/>
+  <text class="note" x="980" y="708" text-anchor="middle">when the framework isn't enough</text>
+
+  <!-- Footer caption -->
+  <text class="note" x="600" y="890" text-anchor="middle">
+    Solid arrows = component relationships · Dashed lines = maturity levels each tool acts on
+  </text>
+</svg>

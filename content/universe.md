@@ -7,6 +7,11 @@ The disclose.io project is the open-source layer between raw standards (ISO 2914
 
 Below is the full ecosystem. Every component answers a real question someone asks when they hit the VDP wall.
 
+<figure class="not-prose my-10">
+  <img src="/images/universe-diagram.svg" alt="Diagram of the disclose.io ecosystem showing the core framework at the centre, tools and open-source projects that help organisations climb the DIOstatus maturity ladder, the researcher-facing lookup tools, the community and blog, and SRLDF as the legal backstop." class="w-full h-auto" />
+  <figcaption class="text-sm text-gray-500 text-center mt-3 italic">The ecosystem, organised around the DIOstatus maturity scale.</figcaption>
+</figure>
+
 ## Core
 
 - [disclose.io](/) — the framework, docs, and project home
