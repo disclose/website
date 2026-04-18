@@ -52,6 +52,9 @@ jobs:
         id: pages
         uses: actions/configure-pages@v5
 
+      - name: Preprocess framework content
+        run: npm run prebuild
+
       - name: Build CSS
         run: npm run build:css
 
