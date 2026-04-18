@@ -70,7 +70,7 @@ The definitive community-powered database of every known vulnerability disclosur
 
 Internet-wide survey data on vulnerability disclosure program adoption, generated from diosts scans and community contributions. Used by researchers, policymakers, and organizations for tracking industry progress.
 
-[data.disclose.io](https://data.disclose.io) *(currently offline)*
+data.disclose.io *(currently offline)*
 
 ### research-threats — Legal Threats Archive
 

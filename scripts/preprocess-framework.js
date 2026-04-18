@@ -66,6 +66,29 @@ function replaceVariables(content) {
   return out;
 }
 
+// Rewrites README-style `.md` links (which work on GitHub) into Hugo slug URLs
+// so they don't 404 in production. Hugo's Goldmark emits `href` literally, so
+// `[text](./file.md)` must become `[text](./file/)` to match the rendered URL.
+function rewriteLinks(content) {
+  // Fix stale "terms/core/vdp.md" reference from the dioterms source — the
+  // real Hugo slug after preprocess is terms/core-vdp/, and the text path is
+  // from an older layout.
+  let out = content.replace(
+    /\[terms\/core\/vdp\.md\]\(\.\.\/terms\/\)/g,
+    '[terms/core-vdp.md](../terms/core-vdp/)'
+  );
+
+  // Strip .md extension from relative markdown link hrefs: `(./x.md)` → `(./x/)`,
+  // `(../d/x.md#anchor)` → `(../d/x/#anchor)`. External (http/https/mailto) and
+  // root-absolute (/...) hrefs are left alone because they match neither prefix.
+  out = out.replace(
+    /(\]\()(\.{1,2}\/[^)\s]+?)\.md(#[^)\s]*)?(\))/g,
+    (_, open, path, anchor = '', close) => `${open}${path}/${anchor}${close}`
+  );
+
+  return out;
+}
+
 function stripFirstH1(content) {
   const lines = content.split('\n');
   const idx = lines.findIndex((line) => line.trim().startsWith('# '));
@@ -112,6 +135,7 @@ function processFile({ src, out, title, description, weight, replaceVariables: d
   let content = fs.readFileSync(srcPath, 'utf8');
   if (doStrip) content = stripFirstH1(content);
   if (doReplace) content = replaceVariables(content);
+  content = rewriteLinks(content);
   const body = frontMatter({ title, description, weight, extra }) + content.trimStart();
   const outPath = path.join(OUT, out);
   const status = writeIfChanged(outPath, body);
