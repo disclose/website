@@ -23,9 +23,11 @@
 
 [[main]]
   name = "Directory"
-  url = "/programs/#/"
+  url = "#directory"
   parent = "Tools"
   weight = 10
+  [main.params]
+    use_directory_url = true
 
 [[main]]
   name = "Platforms"
