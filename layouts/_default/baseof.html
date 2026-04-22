@@ -132,17 +132,9 @@
   {{/* Mobile menu */}}
   {{ partial "mobile-menu.html" . }}
 
-  {{/* Google Analytics */}}
-  {{ if and (eq hugo.Environment "production") .Site.Params.enable_analytics }}
-  {{ with .Site.Config.Services.GoogleAnalytics.ID }}
-  <script async src="https://www.googletagmanager.com/gtag/js?id={{ . }}"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', '{{ . }}');
-  </script>
-  {{ end }}
+  {{/* Google Analytics — loader, cross-domain linker, event tracking */}}
+  {{ if eq hugo.Environment "production" }}
+  {{ partial "analytics.html" . }}
   {{ end }}
 
   {{ block "scripts" . }}{{ end }}

@@ -1,0 +1,141 @@
+{{/*
+  Analytics partial — GA4 loader + event tracking.
+
+  Safe to include unconditionally; it self-guards against dev/local/staging
+  hostnames at runtime (in addition to Hugo's environment gate in baseof).
+
+  Emits:
+    - Standard page_view / session_start / first_visit via gtag config
+    - Enhanced Measurement events (scroll, outbound click, file_download,
+      view_search_results, video_*, form_*) — configured server-side in GA4
+    - `outbound` with {link_class, link_domain, link_url} — classifies all
+      external clicks (github-framework, github, platform, social, ally, other)
+    - `search` with {search_term} — debounced Pagefind input events
+    - `search_zero_results` with {search_term} — detected via MutationObserver
+
+  Cross-domain linker covers the *.disclose.io family so users bouncing
+  between disclose.io and directory/policymaker/lookup/community/blog/vault
+  are stitched into single sessions.
+*/}}
+{{ if .Site.Params.enable_analytics }}
+{{ with .Site.Config.Services.GoogleAnalytics.ID }}
+<script>
+(function() {
+  var h = (window.location.hostname || '').toLowerCase();
+
+  // Guard: do not load GA on local/dev/staging/preview hostnames.
+  var isDev =
+    h === '' || h === 'localhost' || h === '127.0.0.1' || h === '::1' ||
+    h.endsWith('.local') || h.endsWith('.localdev') ||
+    h.indexOf('.localdev:') !== -1 ||
+    /^dev\./.test(h) || /^staging\./.test(h) || /^preview\./.test(h) ||
+    /\.pages\.dev$/.test(h) || /\.netlify\.app$/.test(h) ||
+    /deploy-preview/.test(h);
+  if (isDev) {
+    if (window.console && console.info) {
+      console.info('[ga4] skipped on dev/local/staging hostname: ' + h);
+    }
+    return;
+  }
+
+  // Inject gtag.js
+  var s = document.createElement('script');
+  s.async = true;
+  s.src = 'https://www.googletagmanager.com/gtag/js?id={{ . }}';
+  document.head.appendChild(s);
+
+  window.dataLayer = window.dataLayer || [];
+  function gtag() { dataLayer.push(arguments); }
+  window.gtag = gtag;
+  gtag('js', new Date());
+  gtag('config', '{{ . }}', {
+    linker: {
+      domains: [
+        'disclose.io',
+        'directory.disclose.io',
+        'policymaker.disclose.io',
+        'lookup.disclose.io',
+        'community.disclose.io',
+        'blog.disclose.io',
+        'vault.disclose.io'
+      ]
+    }
+  });
+
+  // ── Outbound link classification ────────────────────────────────
+  document.addEventListener('click', function(e) {
+    var a = e.target && e.target.closest ? e.target.closest('a[href]') : null;
+    if (!a) return;
+    var href = a.getAttribute('href');
+    if (!href || !/^https?:\/\//i.test(href)) return;
+    var url;
+    try { url = new URL(href); } catch (_) { return; }
+
+    var host = url.hostname.toLowerCase();
+    if (host === location.hostname.toLowerCase()) return;
+    if (/(^|\.)disclose\.io$/.test(host)) return; // internal subdomain family
+
+    var linkClass = 'other';
+    if (/github\.com\/disclose/i.test(href))                                         linkClass = 'github-framework';
+    else if (host === 'github.com' || host.endsWith('.github.com'))                  linkClass = 'github';
+    else if (/^(www\.)?(bugcrowd|hackerone|intigriti|yeswehack|immunefi)\.com$/i.test(host)) linkClass = 'platform';
+    else if (/(^|\.)(twitter|x)\.com$/.test(host) ||
+             /(^|\.)linkedin\.com$/.test(host) ||
+             /(^|\.)bsky\.app$/.test(host) ||
+             /mastodon/i.test(host) ||
+             /(^|\.)reddit\.com$/.test(host) ||
+             host === 'infosec.exchange')                                            linkClass = 'social';
+    else if (/(^|\.)(eff\.org|mvsp\.dev|owasp\.org)$/i.test(host))                   linkClass = 'ally';
+    else if (/(^|\.)(chatgpt\.com|gemini\.google\.com|claude\.ai|perplexity\.ai)$/i.test(host)) linkClass = 'ai';
+
+    gtag('event', 'outbound', {
+      link_class: linkClass,
+      link_domain: host,
+      link_url: href
+    });
+  }, true);
+
+  // ── Pagefind search tracking (debounced) ────────────────────────
+  var searchTimer;
+  document.addEventListener('input', function(e) {
+    var t = e.target;
+    if (!t || !t.matches) return;
+    if (!t.matches('.pagefind-ui__search-input, #search input[type="search"], #search input[type="text"]')) return;
+    var term = (t.value || '').trim();
+    if (term.length < 3) return;
+    clearTimeout(searchTimer);
+    searchTimer = setTimeout(function() {
+      gtag('event', 'search', {
+        search_term: term,
+        content_pillar: 'site'
+      });
+    }, 1500);
+  });
+
+  // ── Zero-results detector (observes Pagefind UI mutations) ─────
+  function initZeroResultsObserver() {
+    var container = document.getElementById('search');
+    if (!container || !('MutationObserver' in window)) return;
+    var lastReported = '';
+    var obs = new MutationObserver(function() {
+      var message = container.querySelector('.pagefind-ui__message');
+      if (!message) return;
+      var txt = (message.textContent || '').toLowerCase();
+      if (!/no results/.test(txt)) return;
+      var input = container.querySelector('.pagefind-ui__search-input, input[type="search"], input[type="text"]');
+      var term = input ? (input.value || '').trim() : '';
+      if (term.length < 3 || term === lastReported) return;
+      lastReported = term;
+      gtag('event', 'search_zero_results', { search_term: term });
+    });
+    obs.observe(container, { childList: true, subtree: true, characterData: true });
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initZeroResultsObserver);
+  } else {
+    initZeroResultsObserver();
+  }
+})();
+</script>
+{{ end }}
+{{ end }}
