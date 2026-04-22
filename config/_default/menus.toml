@@ -76,6 +76,11 @@
   weight = 10
 
 [[footer_resources]]
+  name = "Security"
+  url = "/security/"
+  weight = 15
+
+[[footer_resources]]
   name = "FAQ"
   url = "/#faq"
   weight = 20
