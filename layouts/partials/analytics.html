@@ -38,6 +38,27 @@
     return;
   }
 
+  // Internal-traffic self-flag (for project maintainers on any device/network).
+  // Toggle via URL: ?internal=1 sets, ?internal=0 clears. Stored in localStorage.
+  // When set, every event is tagged debug_mode=true + traffic_type=internal so
+  // GA4's built-in Developer-traffic filter (Testing mode) excludes it from
+  // standard reports while still surfacing in DebugView.
+  var internalFlag = false;
+  try {
+    var qs = new URLSearchParams(window.location.search);
+    if (qs.has('internal')) {
+      var v = qs.get('internal');
+      if (v === '0' || v === 'off' || v === 'false') {
+        localStorage.removeItem('ga4_internal');
+        if (window.console) console.info('[ga4] internal flag CLEARED for this browser');
+      } else {
+        localStorage.setItem('ga4_internal', '1');
+        if (window.console) console.info('[ga4] internal flag SET — traffic from this browser will be excluded from reports');
+      }
+    }
+    internalFlag = localStorage.getItem('ga4_internal') === '1';
+  } catch (_) {}
+
   // Inject gtag.js
   var s = document.createElement('script');
   s.async = true;
@@ -48,7 +69,7 @@
   function gtag() { dataLayer.push(arguments); }
   window.gtag = gtag;
   gtag('js', new Date());
-  gtag('config', '{{ . }}', {
+  var configParams = {
     linker: {
       domains: [
         'disclose.io',
@@ -60,7 +81,15 @@
         'vault.disclose.io'
       ]
     }
-  });
+  };
+  if (internalFlag) {
+    configParams.debug_mode = true;
+    configParams.traffic_type = 'internal';
+  }
+  gtag('config', '{{ . }}', configParams);
+  if (internalFlag) {
+    gtag('set', { traffic_type: 'internal', debug_mode: true });
+  }
 
   // ── Outbound link classification ────────────────────────────────
   document.addEventListener('click', function(e) {
