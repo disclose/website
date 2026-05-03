@@ -8,6 +8,7 @@ weight: 130
 | Date | Type | Publication | Author | Title |
 |------|------|-------------|--------|-------|
 | 1/2026 | Reference | IoT Security Foundation | Copper Horse / IoTSF | [The State of VDP Usage in Global Consumer IoT in 2025](https://iotsecurityfoundation.org/the-state-of-vulnerability-disclosure-in-global-consumer-iot/) |
+| 3/6/2025 | Partner Reference | Intigriti | Intigriti | [Safe harbor legal framework for ethical hackers officially launches in Belgium](https://www.intigriti.com/researchers/blog/hacker-spotlight/eu-whistleblower-directive-officially-launches-in-belgium) |
 | 12/11/2023 | Press | Dark Reading | Staff | [Safe Harbor Programs: Ensuring the Bounty Isn't on White Hat Hackers' Heads](https://www.darkreading.com/application-security/safe-harbor-programs-ensuring-the-bounty-isn-t-on-white-hat-hackers-heads) |
 | 12/13/2023 | Op-Ed | Dark Reading | Casey Ellis | [The Unlikely Romance of Hackers and Government Suitors](https://www.darkreading.com/cybersecurity-operations/unlikely-romance-hackers-government-suitors) |
 | 4/2023 | Press | TechTarget | Staff | [Hacking Policy Council launches, aims to improve bug disclosure](https://www.techtarget.com/searchsecurity/news/365535214/Hacking-Policy-Council-launches-aims-to-improve-bug-disclosure) |
