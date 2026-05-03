@@ -56,7 +56,7 @@
   date: "Jun 3, 2021"
   items:
     - html: '<a href="https://www.supremecourt.gov/opinions/20pdf/19-783_k53l.pdf">Supreme Court narrows CFAA "exceeds authorized access" in landmark 6-3 ruling</a>'
-    - html: '<a href="https://www.eff.org/deeplinks/2021/06/supreme-court-substantially-limits-scope-controversial-hacking-law">EFF analysis of the decision</a>'
+    - html: '<a href="https://www.eff.org/deeplinks/2021/06/supreme-court-overturns-overbroad-interpretation-cfaa-protecting-security">EFF analysis of the decision</a>'
 
 - title: CISA VDP Platform
   date: "Jul 30, 2021"
@@ -82,7 +82,7 @@
 - title: NIST SP 800-216
   date: "May, 2023"
   items:
-    - html: '<a href="https://csrc.nist.gov/pubs/sp/800/216/final">NIST publishes federal vulnerability disclosure guidelines framework</a>'
+    - html: '<a href="https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-216.pdf">NIST publishes federal vulnerability disclosure guidelines framework</a>'
 
 - title: UK PSTI Act Enforced
   date: "Apr 29, 2024"

@@ -8,7 +8,7 @@
 - title: "I found a vulnerability"
   description: "Look up the organization's disclosure program, check their safe harbor status, and get help navigating the process if you need it."
   icon: "search"
-  url: "/programs/"
+  url: "https://directory.disclose.io"
 
 - title: "I want to protect researchers"
   description: "Access model policies, legal frameworks, and safe harbor guidance. Help advance the legal protections security researchers need."
