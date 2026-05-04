@@ -6,9 +6,9 @@
  * and `#`-comments ignored). Returns 401 with WWW-Authenticate when missing or
  * invalid; calls next() to serve the static asset on success.
  *
- * If BASIC_AUTH_USERS is unset (e.g. local `wrangler pages dev` without the
- * env), the wall is open — set the var in the Cloudflare Pages dashboard
- * before relying on the deployment for collaborator preview.
+ * Fail-closed: if BASIC_AUTH_USERS is unset or empty, every request returns
+ * 503 "Setup required". This guarantees the dev preview cannot be public for
+ * the gap between Pages project creation and the env var being set.
  */
 
 interface Env {
@@ -22,7 +22,7 @@ export const onRequest: PagesFunction<Env> = async (context) => {
 
   const configured = parseUsers(env.BASIC_AUTH_USERS ?? "");
   if (configured.length === 0) {
-    return next();
+    return setupRequired();
   }
 
   const header = request.headers.get("Authorization") ?? "";
@@ -78,6 +78,20 @@ function unauthorized(): Response {
       "Cache-Control": "no-store",
     },
   });
+}
+
+function setupRequired(): Response {
+  return new Response(
+    "dev.disclose.io setup incomplete: BASIC_AUTH_USERS env var is not configured on this Pages project.\n",
+    {
+      status: 503,
+      headers: {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Robots-Tag": "noindex, nofollow",
+        "Cache-Control": "no-store",
+      },
+    },
+  );
 }
 
 function timingSafeEqual(a: string, b: string): boolean {
