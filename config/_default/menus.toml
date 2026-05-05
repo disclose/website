@@ -265,6 +265,12 @@
   url = "/framework/practices/"
   weight = 20
 
+[[framework]]
+  name = "Good-Faith Security Research"
+  url = "/framework/practices/good-faith-security-research/"
+  parent = "Practices"
+  weight = 10
+
 # Pillar 3: Maturity (diostatus)
 [[framework]]
   name = "Maturity (diostatus)"

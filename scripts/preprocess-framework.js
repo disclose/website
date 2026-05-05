@@ -34,6 +34,20 @@ const TERMS = [
   { src: 'bbp/en-US.md',                      out: 'terms/bbp.md',                title: 'Bug Bounty Program Policy',               description: 'Canonical BBP boilerplate with rewards structure and safe harbor.',                        weight: 30 },
 ];
 
+// Pillar 3: Practices — operational conduct guidance. External authors retain
+// rights; the file header carries attribution + license, which we surface in
+// frontmatter so layouts can render an appropriate badge.
+const PRACTICES = [
+  {
+    src: 'practices/good-faith-security-research.md',
+    slug: 'good-faith-security-research',
+    title: 'Accepted Practices for Good-Faith Security Research',
+    description: 'Operational conduct for good-faith security research, originally published by NextJenSecurity (2026). Aligns with the disclose.io framework.',
+    weight: 10,
+    license: 'See file header — author retains rights, reproduced with attribution',
+  },
+];
+
 // Pillar 2: Maturity — diostatus levels. No variable replacement; keep first H1.
 const MATURITY = [
   { src: 'maturity/level-0.md', slug: 'level-0', title: 'Level 0 — Not Present',              description: 'No findable contact, no policy, no intake method.',                         weight: 10 },
@@ -85,7 +99,7 @@ function stripFirstH1(content) {
   return lines.join('\n');
 }
 
-function frontMatter({ title, description, weight, extra = {} }) {
+function frontMatter({ title, description, weight, license = 'CC0-1.0', extra = {} }) {
   const lines = [
     '---',
     `title: ${JSON.stringify(title)}`,
@@ -93,7 +107,7 @@ function frontMatter({ title, description, weight, extra = {} }) {
     `weight: ${weight}`,
     'type: framework',
     'source_repo: "https://github.com/disclose/dioterms"',
-    'license: "CC0-1.0"',
+    `license: ${JSON.stringify(license)}`,
   ];
   for (const [k, v] of Object.entries(extra)) {
     lines.push(`${k}: ${JSON.stringify(v)}`);
@@ -113,7 +127,7 @@ function writeIfChanged(outPath, body) {
   return 'written';
 }
 
-function processFile({ src, out, title, description, weight, replaceVariables: doReplace, stripFirstH1: doStrip, extra }) {
+function processFile({ src, out, title, description, weight, license, replaceVariables: doReplace, stripFirstH1: doStrip, extra }) {
   const srcPath = path.join(SRC, src);
   if (!fs.existsSync(srcPath)) {
     console.warn(`[skip] source not found: ${src}`);
@@ -123,7 +137,7 @@ function processFile({ src, out, title, description, weight, replaceVariables: d
   if (doStrip) content = stripFirstH1(content);
   if (doReplace) content = replaceVariables(content);
   content = rewriteLinks(content);
-  const body = frontMatter({ title, description, weight, extra }) + content.trimStart();
+  const body = frontMatter({ title, description, weight, license, extra }) + content.trimStart();
   const outPath = path.join(OUT, out);
   const status = writeIfChanged(outPath, body);
   console.log(`[${status}] ${src} -> content/framework/${out}`);
@@ -165,6 +179,21 @@ function main() {
       title: m.title,
       description: m.description,
       weight: m.weight,
+      replaceVariables: false,
+      stripFirstH1: true,
+    });
+    if (p) { wrote.add(p); count++; }
+  }
+
+  // Pillar 3 — Practices (operational conduct, external authorship preserved)
+  for (const m of PRACTICES) {
+    const p = processFile({
+      src: m.src,
+      out: `practices/${m.slug}.md`,
+      title: m.title,
+      description: m.description,
+      weight: m.weight,
+      license: m.license,
       replaceVariables: false,
       stripFirstH1: true,
     });
