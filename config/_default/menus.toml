@@ -36,6 +36,18 @@
   weight = 20
 
 [[main]]
+  name = "State of Disclosure"
+  url = "https://state.disclose.io"
+  parent = "Tools"
+  weight = 25
+
+[[main]]
+  name = "Chrome Extension"
+  url = "https://github.com/disclose/chrome-extension-v2"
+  parent = "Tools"
+  weight = 28
+
+[[main]]
   name = "Threats"
   url = "/threats/"
   parent = "Tools"
@@ -252,6 +264,12 @@
   name = "Practices"
   url = "/framework/practices/"
   weight = 20
+
+[[framework]]
+  name = "Good-Faith Security Research"
+  url = "/framework/practices/good-faith-security-research/"
+  parent = "Practices"
+  weight = 10
 
 # Pillar 3: Maturity (diostatus)
 [[framework]]

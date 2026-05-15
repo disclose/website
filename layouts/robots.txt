@@ -1,3 +1,7 @@
+{{- if eq hugo.Environment "preview" -}}
+User-agent: *
+Disallow: /
+{{- else -}}
 User-agent: *
 Allow: /
 Sitemap: {{ .Site.BaseURL }}sitemap.xml
@@ -21,3 +25,4 @@ Allow: /
 
 User-agent: CCBot
 Allow: /
+{{- end }}

@@ -18,3 +18,12 @@
     <p>A community and pipeline that helps unconventional thinkers — gamers, CTF players, and bug bounty hunters — turn their talents into legitimate cybersecurity careers.</p>
     <p>If you've got the hacker mindset and are looking for a way in, <a href="https://discord.gg/RcpQHB3utN" target="_blank" rel="noopener" class="text-purple hover:underline">join their Discord community</a>.</p>
     <p>If your organization wants to hire outside the traditional pipeline, <a href="https://www.thehackinggames.com/membership#contact-form" target="_blank" rel="noopener" class="text-purple hover:underline">work with them as a partner</a> to connect with their talent pool.</p>
+
+- name: "Hackers on the Hill"
+  short_name: "HotH"
+  url: "https://hackersonthehill.org"
+  logo: "/uploads/partners/hackersonthehill.svg"
+  description: |
+    <p>An <a href="https://iamthecavalry.org" target="_blank" rel="noopener" class="text-purple hover:underline">I Am The Cavalry</a> initiative that brings security researchers face-to-face with policymakers. Founded in 2017 and now global.</p>
+    <p>2026 events run in Den Haag (May 8) and Washington DC (June 16), with a new state-capitol pilot in Denver.</p>
+    <p>If you're a researcher who wants policymakers to hear from you directly, <a href="https://hackersonthehill.org" target="_blank" rel="noopener" class="text-purple hover:underline">join the mailing list</a> to get notified about upcoming events.</p>
