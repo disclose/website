@@ -12,19 +12,21 @@
     {{ end }}
     {{ end }}
 
+    {{ $count := len $partners }}
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-      {{ range $partners }}
-      <div class="rounded-lg overflow-hidden flex flex-col">
-        <a href="{{ .url }}" target="_blank" rel="noopener noreferrer"
+      {{ range $i, $p := $partners }}
+      {{ $isOrphan := and (eq $i (sub $count 1)) (eq (mod $count 2) 1) }}
+      <div class="rounded-lg overflow-hidden flex flex-col{{ if $isOrphan }} md:col-span-2 max-w-sm mx-auto w-full{{ end }}">
+        <a href="{{ $p.url }}" target="_blank" rel="noopener noreferrer"
            class="flex items-center justify-center h-40 p-6 group"
-           aria-label="{{ .name }}"
-           {{ with .logo_bg }}style="background-color: {{ . }};"{{ end }}>
-          <img src="{{ .logo }}"
-               alt="{{ .name }} logo"
+           aria-label="{{ $p.name }}"
+           {{ with $p.logo_bg }}style="background-color: {{ . }};"{{ end }}>
+          <img src="{{ $p.logo }}"
+               alt="{{ $p.name }} logo"
                class="max-h-full max-w-full object-contain group-hover:opacity-80 transition-opacity" />
         </a>
-        <div class="pt-8 text-gray-700 leading-relaxed space-y-10">
-          {{ .description | safeHTML }}
+        <div class="pt-8 text-gray-700 leading-relaxed space-y-4">
+          {{ $p.description | safeHTML }}
         </div>
       </div>
       {{ end }}

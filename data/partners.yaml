@@ -24,5 +24,6 @@
   url: "https://hackersonthehill.org"
   logo: "/uploads/partners/hackersonthehill.svg"
   description: |
-    <p>An <a href="https://iamthecavalry.org" target="_blank" rel="noopener" class="text-purple hover:underline">I Am The Cavalry</a> initiative that brings security researchers face-to-face with policymakers. Founded in 2017 and now global, with 2026 events in Den Haag (May 8) and Washington DC (June 16), plus a state-capitol pilot in Denver.</p>
+    <p>An <a href="https://iamthecavalry.org" target="_blank" rel="noopener" class="text-purple hover:underline">I Am The Cavalry</a> initiative that brings security researchers face-to-face with policymakers. Founded in 2017 and now global.</p>
+    <p>2026 events run in Den Haag (May 8) and Washington DC (June 16), with a new state-capitol pilot in Denver.</p>
     <p>If you're a researcher who wants policymakers to hear from you directly, <a href="https://hackersonthehill.org" target="_blank" rel="noopener" class="text-purple hover:underline">join the mailing list</a> to get notified about upcoming events.</p>
