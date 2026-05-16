@@ -23,8 +23,6 @@ Below is the full ecosystem. Every component answers a real question someone ask
 ## Tools
 
 - [lookup.disclose.io](https://lookup.disclose.io?utm_source=universe&utm_medium=onepager&utm_campaign=lookup) — vendor → security contact, program, and safe harbor status
-- [state.disclose.io](https://state.disclose.io?utm_source=universe&utm_medium=onepager&utm_campaign=stateofdisclosure) — living one-page snapshot of the ecosystem mapped against the disclose.io maturity model
-- [Chrome extension](https://github.com/disclose/chrome-extension-v2?utm_source=universe&utm_medium=onepager&utm_campaign=chromeext) — toolbar icon shows the VDP posture of the site you're on
 - [dnssecuritytxt.org](https://dnssecuritytxt.org?utm_source=universe&utm_medium=onepager&utm_campaign=dnssecuritytxt) — DNS-based security contact discovery
 
 ## Community
