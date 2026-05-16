@@ -36,18 +36,6 @@
   weight = 20
 
 [[main]]
-  name = "State of Disclosure"
-  url = "https://state.disclose.io"
-  parent = "Tools"
-  weight = 25
-
-[[main]]
-  name = "Chrome Extension"
-  url = "https://github.com/disclose/chrome-extension-v2"
-  parent = "Tools"
-  weight = 28
-
-[[main]]
   name = "Threats"
   url = "/threats/"
   parent = "Tools"
