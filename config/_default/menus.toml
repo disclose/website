@@ -30,6 +30,12 @@
     use_directory_url = true
 
 [[main]]
+  name = "Lookup"
+  url = "https://lookup.disclose.io"
+  parent = "Tools"
+  weight = 15
+
+[[main]]
   name = "Platforms"
   url = "/platforms/"
   parent = "Tools"
