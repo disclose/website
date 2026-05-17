@@ -43,7 +43,6 @@ pygmentsUseClasses = true
     mediaType = "text/plain"
     baseName = "llms-full"
     isPlainText = true
-    notAlternative = true
 
 # Minification
 [minify]

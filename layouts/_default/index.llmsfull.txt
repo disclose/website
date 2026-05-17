@@ -6,11 +6,11 @@
 {{- with .Description -}}
   {{- $homeParts = $homeParts | append (printf "Description: %s" .) -}}
 {{- end -}}
-{{- $homePlain := trim .Plain " \n\r\t" -}}
+{{- $homePlain := trim (.Plain | htmlUnescape) " \n\r\t" -}}
 {{- with $homePlain -}}
   {{- $homeParts = $homeParts | append . -}}
 {{- end -}}
-{{- $entries = $entries | append (printf "%s\n\n" (delimit $homeParts "\n\n")) -}}
+{{- $entries = $entries | append (printf "%s\n\n--------------------------------------------------------------------------------\n\n" (delimit $homeParts "\n\n")) -}}
 
 {{- $pageItems := slice -}}
 {{- range .Site.RegularPages -}}
@@ -23,7 +23,7 @@
 
 {{- range sort $pageItems "SortKey" "asc" -}}
   {{- $page := .Page -}}
-  {{- $plain := trim $page.Plain " \n\r\t" -}}
+  {{- $plain := trim ($page.Plain | htmlUnescape) " \n\r\t" -}}
   {{- $shellSource := index $shellSources $page.RelPermalink -}}
   {{- if or $plain $shellSource -}}
     {{- $body := $plain -}}
@@ -38,7 +38,7 @@
       {{- $parts = $parts | append (printf "TLDR: %s" .) -}}
     {{- end -}}
     {{- $parts = $parts | append $body -}}
-    {{- $entries = $entries | append (printf "%s\n\n" (delimit $parts "\n\n")) -}}
+    {{- $entries = $entries | append (printf "%s\n\n--------------------------------------------------------------------------------\n\n" (delimit $parts "\n\n")) -}}
   {{- end -}}
 {{- end -}}
 
