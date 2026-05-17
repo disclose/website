@@ -52,16 +52,64 @@
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "Organization",
-    "name": {{ .Site.Title | jsonify | safeJS }},
-    "url": {{ .Site.BaseURL | jsonify | safeJS }},
-    "logo": {{ "/uploads/logo.png" | absURL | jsonify | safeJS }},
-    "description": {{ .Site.Params.description | jsonify | safeJS }},
-    "sameAs": [
-      "https://github.com/disclose",
-      "https://x.com/disclose_io",
-      "https://www.linkedin.com/company/disclose-io",
-      "https://community.disclose.io"
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://disclose.io/#org",
+        "name": {{ .Site.Title | jsonify | safeJS }},
+        "url": {{ .Site.BaseURL | jsonify | safeJS }},
+        "logo": {{ "/uploads/logo.png" | absURL | jsonify | safeJS }},
+        "description": {{ .Site.Params.description | jsonify | safeJS }},
+        "sameAs": [
+          "https://github.com/disclose",
+          "https://x.com/disclose_io",
+          "https://www.linkedin.com/company/disclose-io",
+          "https://community.disclose.io",
+          "https://blog.disclose.io"
+        ],
+        "subOrganization": [
+          { "@id": "https://lookup.disclose.io/#org" },
+          { "@id": "https://vault.disclose.io/#org" },
+          { "@id": "https://policymaker.disclose.io/#org" }
+        ]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://disclose.io/#website",
+        "url": "https://disclose.io/",
+        "name": {{ .Site.Title | jsonify | safeJS }},
+        "publisher": { "@id": "https://disclose.io/#org" }
+      },
+      {
+        "@type": "SoftwareApplication",
+        "name": "lookup.disclose.io",
+        "applicationCategory": "SecurityApplication",
+        "operatingSystem": "Web, API, MCP",
+        "url": "https://lookup.disclose.io/",
+        "description": "Resolve any asset (domain, IP, ASN, email, URL, mobile app, npm package, CIDR) to its security contacts, bug bounty programs, and vulnerability disclosure policies.",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "provider": { "@id": "https://disclose.io/#org" }
+      },
+      {
+        "@type": "SoftwareApplication",
+        "name": "vault.disclose.io",
+        "applicationCategory": "SecurityApplication",
+        "operatingSystem": "Web, API",
+        "url": "https://vault.disclose.io/",
+        "description": "Cryptographic timelock-encrypted vulnerability disclosure deadline enforcer. Once committed, the disclosure cannot be suppressed — on expiry it becomes publicly readable.",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "provider": { "@id": "https://disclose.io/#org" }
+      },
+      {
+        "@type": "SoftwareApplication",
+        "name": "policymaker.disclose.io",
+        "applicationCategory": "SecurityApplication",
+        "operatingSystem": "Web",
+        "url": "https://policymaker.disclose.io/",
+        "description": "Interactive tool to generate a customized vulnerability disclosure policy (VDP) for any organization, using the disclose.io Framework's canonical legal terms.",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "provider": { "@id": "https://disclose.io/#org" }
+      }
     ]
   }
   </script>
