@@ -110,7 +110,33 @@ side first.
 
 ---
 
-## Shipped in this commit (no follow-up needed)
+## Cross-property AI-readiness rollout (shipped across all addressable repos)
+
+The 2026-05-17 round shipped AI-readiness across every disclose.io property
+where I had source-tree access and the change was surgical enough to ship
+unattended. Status:
+
+| Property | Shipped? | What landed | Where |
+|---|---|---|---|
+| **disclose.io** (main) | ✅ | llms.txt refresh, llms-full.txt, Dataset/CreativeWork schema on /programs and /framework, TL;DR blocks on 4 pages, newsletter CTA on 4 pages | this repo, `preview` branch (commits `8a4cb7c` + `d73aadf`) |
+| **lookup.disclose.io** | ✅ | /llms.txt route (schema was already comprehensive) | `disclose/lookup.disclose.io` `feat/seo-static-landing-pages` (`1b96913`) |
+| **vault.disclose.io** | ✅ | /llms.txt + /robots.txt routes (both were 404), full @graph schema with WebSite/Organization/SoftwareApplication/FAQPage, missing og: + twitter: meta tags | `disclosure-vault` `main` (`12e4be2`) |
+| **dnssecuritytxt.org** | ✅ | docs/llms.txt (Jekyll site, picked up automatically on next push) | `disclose/dnssecuritytxt` `main` (`ea35c71`) |
+| **blog.disclose.io** (Ghost) | ⏭️ | Needs admin-panel code injection (head + footer settings). Schema can be added that way without theme changes. | Ghost admin UI |
+| **community.disclose.io** (Discourse) | ⏭️ | Needs a Discourse theme component (custom HTML in `<head>`) — Discourse has good native SEO, so the marginal value is lower than the other properties | Discourse admin → Customize → Themes |
+| **policymaker.disclose.io** (Nuxt) | ⏭️ | Local repo at `~/Projects/policymaker/` is scaffold-only (empty subdirs). Real source likely lives on bucky — need to land on the right host before editing | bucky (presumed) |
+| **directory.disclose.io** | ⏭️ | Repo not located in `~/Projects/` — referenced as a config URL only. Schema/llms.txt should go where the directory's HTML is actually served | TBD |
+
+### After deploy, expected new endpoints
+
+- https://disclose.io/llms-full.txt (currently 404 — needs Cloudflare Pages rebuild on `preview` → `main`)
+- https://lookup.disclose.io/llms.txt (currently 404)
+- https://vault.disclose.io/llms.txt + /robots.txt (currently 404)
+- https://dnssecuritytxt.org/llms.txt (currently 404)
+
+---
+
+## Originally shipped (disclose.io main repo only — kept for history)
 
 - **C1 AI-readiness:**
   - Refreshed `static/llms.txt` with deeper page index (Framework terms, all
