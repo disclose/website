@@ -1,0 +1,62 @@
+{{- $limit := 512000 -}}
+{{- $footer := "\n\n---\nOutput truncated at a page boundary because llms-full.txt is capped at 512000 bytes.\n" -}}
+{{- $shellSources := dict "/platforms/" "external/bug-bounty-platforms/README.md" "/threats/" "external/research-threats/README.md" "/programs/" "the Vultron directory widget embedded on /programs/" -}}
+{{- $entries := slice -}}
+{{- $homeParts := slice (printf "# %s" .Title) (printf "URL: %s" .Permalink) -}}
+{{- with .Description -}}
+  {{- $homeParts = $homeParts | append (printf "Description: %s" .) -}}
+{{- end -}}
+{{- $homePlain := trim .Plain " \n\r\t" -}}
+{{- with $homePlain -}}
+  {{- $homeParts = $homeParts | append . -}}
+{{- end -}}
+{{- $entries = $entries | append (printf "%s\n\n" (delimit $homeParts "\n\n")) -}}
+
+{{- $pageItems := slice -}}
+{{- range .Site.RegularPages -}}
+  {{- $weight := 999999 -}}
+  {{- if isset .Params "weight" -}}
+    {{- $weight = .Weight -}}
+  {{- end -}}
+  {{- $pageItems = $pageItems | append (dict "SortKey" (printf "%s|%06d|%s" .Section $weight .RelPermalink) "Page" .) -}}
+{{- end -}}
+
+{{- range sort $pageItems "SortKey" "asc" -}}
+  {{- $page := .Page -}}
+  {{- $plain := trim $page.Plain " \n\r\t" -}}
+  {{- $shellSource := index $shellSources $page.RelPermalink -}}
+  {{- if or $plain $shellSource -}}
+    {{- $body := $plain -}}
+    {{- if and (not $body) $shellSource -}}
+      {{- $body = printf "(content lives at %s)" $shellSource -}}
+    {{- end -}}
+    {{- $parts := slice (printf "## %s" $page.Title) (printf "URL: %s" $page.Permalink) -}}
+    {{- with $page.Description -}}
+      {{- $parts = $parts | append (printf "Description: %s" .) -}}
+    {{- end -}}
+    {{- with $page.Params.tldr -}}
+      {{- $parts = $parts | append (printf "TLDR: %s" .) -}}
+    {{- end -}}
+    {{- $parts = $parts | append $body -}}
+    {{- $entries = $entries | append (printf "%s\n\n" (delimit $parts "\n\n")) -}}
+  {{- end -}}
+{{- end -}}
+
+{{- $out := "" -}}
+{{- $truncated := false -}}
+{{- $entryCount := len $entries -}}
+{{- range $index, $entry := $entries -}}
+  {{- $candidate := printf "%s%s" $out $entry -}}
+  {{- $isLast := eq (add $index 1) $entryCount -}}
+  {{- $candidateWithFooter := cond $isLast $candidate (printf "%s%s" $candidate $footer) -}}
+  {{- if le (len $candidateWithFooter) $limit -}}
+    {{- $out = $candidate -}}
+  {{- else -}}
+    {{- $truncated = true -}}
+    {{- break -}}
+  {{- end -}}
+{{- end -}}
+{{- if $truncated -}}
+  {{- $out = printf "%s%s" $out $footer -}}
+{{- end -}}
+{{- $out -}}
