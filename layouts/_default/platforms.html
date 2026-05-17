@@ -18,6 +18,7 @@
 {{ end }}
 
 {{ define "main" }}
+{{ partial "page-tldr.html" . }}
 <section class="section-sm">
   <div class="mx-auto max-w-[1440px] px-4">
     {{/* Header */}}
@@ -66,6 +67,8 @@
     </div>
   </div>
 </section>
+
+{{ partial "newsletter-cta.html" . }}
 
 <style>
   .platforms-table table {

@@ -1,4 +1,36 @@
+{{ define "head" }}
+{{ if eq .RelPermalink "/framework/" }}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CreativeWork",
+  "name": "The disclose.io Framework",
+  "alternateName": ["dioterms", "diostatus"],
+  "description": {{ .Description | jsonify | safeJS }},
+  "url": {{ .Permalink | jsonify | safeJS }},
+  "license": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "creator": {
+    "@type": "Organization",
+    "name": "disclose.io",
+    "url": "https://disclose.io"
+  },
+  "keywords": [
+    "vulnerability disclosure policy",
+    "VDP terms",
+    "safe harbor",
+    "good-faith security research",
+    "diostatus maturity model"
+  ],
+  "isAccessibleForFree": true,
+  "inLanguage": "en"{{ with .Lastmod }},
+  "dateModified": {{ .Format "2006-01-02" | jsonify | safeJS }}{{ end }}
+}
+</script>
+{{ end }}
+{{ end }}
+
 {{ define "main" }}
+{{ partial "page-tldr.html" . }}
 {{ $isRoot := eq .RelPermalink "/framework/" }}
 <div class="flex min-h-[calc(100vh-4rem)]">
   {{/* Root /framework/ page has no sidebar; nested list pages (regional index) do. */}}
@@ -45,4 +77,8 @@
     </div>
   </main>
 </div>
+
+{{ if eq .RelPermalink "/framework/" }}
+{{ partial "newsletter-cta.html" . }}
+{{ end }}
 {{ end }}

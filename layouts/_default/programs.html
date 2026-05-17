@@ -1,4 +1,33 @@
+{{ define "head" }}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Dataset",
+  "name": "Vulnerability Disclosure and Bug Bounty Programs Directory",
+  "description": {{ .Description | jsonify | safeJS }},
+  "url": {{ .Permalink | jsonify | safeJS }},
+  "keywords": [
+    "vulnerability disclosure",
+    "bug bounty",
+    "VDP",
+    "responsible disclosure",
+    "security.txt",
+    "safe harbor"
+  ],
+  "license": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "creator": {
+    "@type": "Organization",
+    "name": "disclose.io",
+    "url": "https://disclose.io"
+  },
+  "isAccessibleForFree": true{{ with .Lastmod }},
+  "dateModified": {{ .Format "2006-01-02" | jsonify | safeJS }}{{ end }}
+}
+</script>
+{{ end }}
+
 {{ define "main" }}
+{{ partial "page-tldr.html" . }}
 <section class="section-sm">
   <div class="container-wide">
     {{/* Vultron Directory Widget (renders its own header) */}}
@@ -14,4 +43,6 @@
     </script>
   </div>
 </section>
+
+{{ partial "newsletter-cta.html" . }}
 {{ end }}

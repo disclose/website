@@ -1,0 +1,11 @@
+{{/* Quote-friendly TL;DR block — renders if a page has `tldr` in frontmatter.
+     Designed for LLM/AI crawlers to lift verbatim. Keep tldr to 2-3 sentences,
+     written as standalone fact statements that read well out of context. */}}
+{{ with .Params.tldr }}
+<aside class="mx-auto max-w-3xl my-6 px-4">
+  <div class="rounded-lg border-l-4 border-purple bg-shade-050 p-4 text-base text-gray-800">
+    <p class="font-semibold text-purple mb-1">In short</p>
+    <p>{{ . | safeHTML }}</p>
+  </div>
+</aside>
+{{ end }}
