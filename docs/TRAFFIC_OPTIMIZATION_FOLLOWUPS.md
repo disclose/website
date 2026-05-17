@@ -5,27 +5,34 @@ Generated from the 2026-05-17 GA 7-day analysis. The unattended work
 in commit alongside this file. The items below need your input before
 they can ship — each is scoped so it's ready to execute on approval.
 
-## A1 — Block bot traffic in GA4 admin (HIGH leverage, but irreversible)
+## A1 — Block bot traffic in GA4 admin ✅ SHIPPED 2026-05-17
 
-**Why:** 5/10 main property got 12,179 "users" from Singapore at 0.74% engagement
-with 8,507 distinct directory.disclose.io pagePaths in a single day. Same signature
-ran into 5/11. This contaminates every cohort, channel, and engagement metric.
+Audience `Likely Crawlers` (id `properties/365274897/audiences/14895335664`)
+now lives on the main property. Conditions: country=Singapore AND
+sessionDefaultChannelGroup=Direct AND hostName=directory.disclose.io.
+Scope: across all sessions, 30-day membership.
 
-**Proposed action:**
-1. Create a GA4 audience named `Likely Crawlers` with these conditions:
-   - `country` equals `Singapore` AND
-   - `sessionDefaultChannelGroup` equals `Direct` AND
-   - `hostName` equals `directory.disclose.io` AND
-   - session engagement rate < 5%
-2. Use it as an exclusion filter in standard reports going forward.
+**How to use:** GA4 → Reports → Library → Customize → add Comparison →
+"Audience" → exclude `Likely Crawlers`. Or use it in Explore as a segment
+exclusion. Reversible via the audience admin if unwanted.
 
-**Why I didn't just do it:** audience definitions are property-wide and affect
-every historical and future report. Want your eyes on the criteria before it
-goes live. If you say "ship it," I'll do it via the Admin API v1alpha (audiences
-endpoint).
+**Note on the original spec:** the engagement-rate < 5% condition was
+dropped because GA4 audience builders don't support that metric threshold
+directly. The 3-AND-condition signature is precise enough on its own — the
+5/10 bot wave wouldn't pass the country + direct + directory filter without
+also having near-zero engagement.
 
-**Alternative (cleaner if available):** add IP-based Developer/Internal Traffic
-filter — but we'd need the bot's IP range, and Cloudflare obscures it.
+Provisioner script: `~/.claude/skills/GoogleAnalytics/Tools/provision-likely-crawlers.ts`
+(idempotent, safe to re-run).
+
+---
+
+## A1.5 — IP-based Developer/Internal Traffic filter
+
+Still on the table as a stronger complement to the audience. Cloudflare
+obscures the actual origin IP in the GA dimension, so this needs either:
+(a) a server-side fix that surfaces the real client IP back to GA, or
+(b) acceptance that the audience filter is the practical ceiling here.
 
 ---
 
@@ -48,25 +55,20 @@ those subdomains' HTML headers (or wherever they're injected) in one pass.
 
 ---
 
-## A3 — Fire SPA route-change pageviews on lookup.disclose.io (MEDIUM)
+## A3 — Fire SPA route-change pageviews on lookup.disclose.io ✅ SHIPPED 2026-05-17
 
-**Why:** GA only sees `/` for lookup property — the post-search result state is
-invisible. Sessions average 331s, so users ARE doing things; we can't see what.
+`renderResults` in `~/Projects/lookup-disclose-io/web/index.html` now fires
+a gtag virtual page_view on every result render:
+- `page_path: /result/<assetType>/<status>` — e.g. `/result/domain/complete`
+- `page_title: Lookup result — <assetType> (<status>)`
 
-**Proposed action:** Find the lookup search-submit handler in
-`~/Projects/lookup-disclose-io/server.ts` (HTML is inlined there) or the
-client-side JS that processes results, and fire:
-```js
-gtag('event', 'page_view', {
-  page_path: '/result/' + assetTypeOrHash,
-  page_title: 'Lookup result — ' + assetType,
-});
-```
+assetType is sanitized to lowercase a-z/0-9/hyphen/underscore for a clean
+virtual path. Status is one of `complete | partial | failed | unknown`.
+Defensive guard ensures the call no-ops if gtag isn't loaded.
 
-**Why I didn't just do it:** lookup serves HTML inline from a Hono server file,
-which means the client JS and the server template are coupled in a single
-`.ts` file. Surgical change but deserves a dedicated session — I want to read
-the full request lifecycle before injecting tracking calls.
+Commit `fd0b812` on `feat/seo-static-landing-pages`. After deploy, GA will
+show per-asset-type traffic distribution and per-status success rates
+instead of one `/` aggregate.
 
 ---
 
@@ -85,16 +87,34 @@ non-obvious and I'd rather not guess at the routing convention.
 
 ---
 
-## A4 — UTM discipline (ongoing process, not code)
+## A4 — UTM discipline ✅ HELPER SHIPPED 2026-05-17, ongoing discipline still on you
 
-Every outbound link from your Bluesky/X/LinkedIn/newsletter posts going forward
-should carry `?utm_source=<channel>&utm_medium=social&utm_campaign=<topic>`.
-Eighty percent of main-property traffic is "(direct) / (none)" — most of that
-is untagged social, not brand strength.
+UTM builder page lives at `https://disclose.io/internal/utm-builder.html`
+(after deploy). noindex+nofollow, self-contained HTML/JS form, disclose.io
+brand colors. Pre-loaded with the channels you actually use (Bluesky, X,
+LinkedIn, Mastodon, newsletter, email, slack, discord, podcast, HN,
+reddit, github).
 
-**A no-code helper option:** I can add a small UTM-builder page at
-`/internal/utm-builder.html` (gated behind a query param) that you bookmark and
-use to generate tagged URLs before posting. Say the word.
+**Bookmark it.** Two-week test: tag every outbound link going forward.
+Then run a `sessionSource` report and see if "(direct)" share of weekly
+users drops below 70%. If yes, UTM discipline is paying off; if no, the
+direct traffic is genuinely dark (privacy browsers, AI-assistant referrals
+that strip referer headers, etc.) rather than untagged-by-us.
+
+---
+
+## B2 — Investigate /threats engagement collapse ✅ DIAGNOSED 2026-05-17
+
+Opened https://disclose.io/threats/ live via Interceptor (real Chrome). Page
+renders correctly — full nav, 60+ case entries (Columbus / Modern Solution /
+NEWAG / Ford / Apple / FreeHour / Josh Renaud / etc.), all links working,
+no console errors, accessibility tree clean.
+
+**Diagnosis:** /threats is NOT broken. The 4.9% engagement rate on 60-of-61
+"direct" sessions is the bot signature (a scoped scanner hitting /threats
+specifically). Now excluded by the `Likely Crawlers` audience created in A1.
+
+No code change needed for /threats itself.
 
 ---
 
