@@ -29,7 +29,7 @@ pygmentsUseClasses = true
 
 # Output formats
 [outputs]
-  home = ["HTML", "RSS", "JSON"]
+  home = ["HTML", "RSS", "JSON", "LLMSFULL"]
   section = ["HTML", "RSS"]
   page = ["HTML"]
 
@@ -38,6 +38,10 @@ pygmentsUseClasses = true
   [outputFormats.JSON]
     mediaType = "application/json"
     baseName = "index"
+    isPlainText = true
+  [outputFormats.LLMSFULL]
+    mediaType = "text/plain"
+    baseName = "llms-full"
     isPlainText = true
 
 # Minification

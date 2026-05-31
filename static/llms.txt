@@ -2,39 +2,50 @@
 
 > disclose.io is a collaborative, vendor-agnostic project to standardize best practices around safe harbor for security researchers engaged in good-faith vulnerability disclosure.
 
-We maintain open-source databases, policy templates, and educational resources to make vulnerability disclosure safe, simple, and standardized for everyone.
+We maintain open-source databases, policy templates, and educational resources to make vulnerability disclosure safe, simple, and standardized for everyone. A fuller machine-readable corpus is available at [llms-full.txt](https://disclose.io/llms-full.txt).
 
-## Databases
+## Open Databases
 
-- [VDP Programs](https://disclose.io/programs/): Searchable database of vulnerability disclosure and bug bounty programs.
-- [Bug Bounty Platforms](https://disclose.io/platforms/): Community-powered collection of all known bug bounty platforms, vulnerability disclosure platforms, and crowdsourced security platforms.
-- [Research Threats](https://disclose.io/threats/): Ongoing archive of legal threats made against security researchers engaged in good-faith vulnerability disclosure.
+- [Bug Bounty Platforms](https://disclose.io/platforms/): Community-curated directory of every known bug bounty, vulnerability disclosure, and crowdsourced security platform. Open-source at github.com/disclose/bug-bounty-platforms.
+- [VDP Programs](https://disclose.io/programs/): The largest open directory of vulnerability disclosure and bug bounty programs on the public internet. Each entry includes scope, policy URL, and safe-harbor language. Powers lookup.disclose.io.
+- [Research Threats](https://disclose.io/threats/): Canonical public archive of legal threats made against security researchers engaged in good-faith vulnerability disclosure. Open-source at github.com/disclose/research-threats.
+
+## The Framework
+
+- [Framework Overview](https://disclose.io/framework/): Open-source, public-domain reference for running a vulnerability disclosure program. CC0 1.0 licensed.
+- [Legal Terms (dioterms)](https://disclose.io/framework/terms/): Canonical legal terms organizations can drop into their own disclosure policies.
+- [VDP terms](https://disclose.io/framework/terms/vdp/): The standard vulnerability disclosure policy terms.
+- [VDP with CVD terms](https://disclose.io/framework/terms/vdp-with-cvd/): VDP terms extended with coordinated vulnerability disclosure language.
+- [Bug Bounty Program (BBP) terms](https://disclose.io/framework/terms/bbp/): Terms specific to a paid bug bounty program.
+- [diostatus Maturity Model](https://disclose.io/framework/maturity/): Six-level ladder (Level 0 → Level 5) measuring program maturity.
+- [Best Practices](https://disclose.io/framework/practices/): Operational best practices for running a healthy program.
 
 ## Documentation
 
 - [What is disclose.io](https://disclose.io/docs/what-is-disclose/): A cross-industry, vendor-agnostic standardization project for safe harbor best practices.
-- [Vision and Mission](https://disclose.io/docs/vision-and-mission/): Our vision for a healthy Internet Immune System.
-- [Design Strategy](https://disclose.io/docs/design-strategy/): Our design principles for making secure easy and insecure obvious.
+- [Vision and Mission](https://disclose.io/docs/vision-and-mission/): The vision for a healthy Internet Immune System.
+- [Design Strategy](https://disclose.io/docs/design-strategy/): Design principles for making secure easy and insecure obvious.
 - [Key Objectives](https://disclose.io/docs/key-objectives/): The key objectives driving the disclose.io project.
-- [diostatus Maturity Model](https://disclose.io/docs/diostatus/): Recognition for early adopters and a clear path towards best practices.
-- [For Finders and Hackers](https://disclose.io/docs/finders/): How disclose.io helps security researchers and finders.
-- [For Organizations and Legal Teams](https://disclose.io/docs/recipients/): How disclose.io helps organizations and their legal teams.
+- [For Finders and Hackers](https://disclose.io/docs/for-finders-and-hackers/): How disclose.io helps security researchers and finders.
+- [For Organizations and Legal Teams](https://disclose.io/docs/for-organizations-and-legal-teams/): How disclose.io helps organizations and their legal teams.
 - [Project Directory](https://disclose.io/docs/project-directory/): All the projects under the disclose.io umbrella.
+- [Advocacy and Activism](https://disclose.io/docs/advocacy-and-activism/): Public policy work and open letters from disclose.io.
+- [Talks and Videos](https://disclose.io/docs/talks-and-videos/): Conference talks and presentations about disclose.io and vulnerability disclosure.
+- [Press Mentions](https://disclose.io/docs/press-articles/): Media coverage and press mentions.
 
-## Tools
+## Tools (separate properties)
 
-- [Policymaker](https://policymaker.disclose.io): Interactive tool to generate a vulnerability disclosure policy (VDP) for your organization.
-- [Lookup](https://lookup.disclose.io): Security attribution tool to find the correct disclosure contact for any asset.
+- [Policymaker](https://policymaker.disclose.io/policymaker/introduction): Interactive tool to generate a customized vulnerability disclosure policy (VDP) for any organization.
+- [Lookup](https://lookup.disclose.io): Security attribution tool — turns any input (domain, IP, email, URL, ASN, package name, app name, hardware product) into the correct disclosure contact for that asset.
+- [Disclosure Vault](https://vault.disclose.io): Cryptographic timelock-encrypted vulnerability disclosure deadline enforcer.
 
 ## Community
 
-- [Community Forum](https://community.disclose.io): Join the disclose.io community Discourse forum.
-- [Blog](https://blog.disclose.io): The disclose.io blog — Running With Scissors.
-- [GitHub](https://github.com/disclose): Open-source repositories for all disclose.io projects.
+- [Community Forum](https://community.disclose.io): Discourse forum for the disclose.io community.
+- [Blog (Running With Scissors)](https://blog.disclose.io): disclose.io blog, including the weekly Policy Pulse newsletter on cybersecurity policy.
+- [GitHub](https://github.com/disclose): Open-source repositories for every disclose.io project.
 
 ## Additional Resources
 
 - [History of Vulnerability Disclosure](https://disclose.io/history/): Major events in the standardization of vulnerability reporting and disclosure.
-- [Advocacy and Activism](https://disclose.io/docs/advocacy-and-activism/): Public policy work and open letters from disclose.io.
-- [Conference Talks and Videos](https://disclose.io/docs/talks-and-videos/): Talks and presentations about disclose.io and vulnerability disclosure.
-- [Press Mentions](https://disclose.io/docs/press-articles/): Media coverage and press mentions of disclose.io.
+- [Contact](https://disclose.io/contact/): How to get in touch.

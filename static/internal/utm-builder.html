@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>UTM Builder — disclose.io internal</title>
+<style>
+  :root {
+    --purple: #673ab6;
+    --purple-dark: #322a41;
+    --bg: #fafafa;
+    --surface: #ffffff;
+    --border: #e5e7eb;
+    --text: #111827;
+    --muted: #6b7280;
+    --mono: 'SF Mono', Menlo, Consolas, monospace;
+  }
+  *, *::before, *::after { box-sizing: border-box; }
+  body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif; background: var(--bg); color: var(--text); line-height: 1.5; padding: 2rem 1rem; }
+  main { max-width: 720px; margin: 0 auto; }
+  h1 { font-size: 1.75rem; margin: 0 0 0.5rem; color: var(--purple); }
+  .lede { color: var(--muted); margin: 0 0 2rem; }
+  form { background: var(--surface); border: 1px solid var(--border); border-radius: 0.75rem; padding: 1.5rem; }
+  fieldset { border: none; padding: 0; margin: 0 0 1.5rem; }
+  label { display: block; font-weight: 600; font-size: 0.875rem; margin-bottom: 0.25rem; }
+  .hint { display: block; color: var(--muted); font-size: 0.75rem; font-weight: 400; margin-top: 0.125rem; }
+  input, select { width: 100%; padding: 0.5rem 0.75rem; border: 1px solid var(--border); border-radius: 0.375rem; font-size: 0.9375rem; font-family: inherit; background: var(--surface); }
+  input:focus, select:focus { outline: 2px solid var(--purple); outline-offset: -1px; border-color: var(--purple); }
+  .row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  @media (max-width: 540px) { .row { grid-template-columns: 1fr; } }
+  .out { margin-top: 1.5rem; padding: 1rem; background: #f3f4f6; border: 1px solid var(--border); border-radius: 0.5rem; font-family: var(--mono); font-size: 0.8125rem; word-break: break-all; min-height: 3rem; }
+  .out a { color: var(--purple); text-decoration: none; }
+  .out a:hover { text-decoration: underline; }
+  .btn-row { display: flex; gap: 0.5rem; margin-top: 0.75rem; }
+  button { padding: 0.5rem 1rem; border: 1px solid var(--border); background: var(--surface); border-radius: 0.375rem; font-size: 0.875rem; font-family: inherit; cursor: pointer; transition: all 0.15s; }
+  button.primary { background: var(--purple); color: white; border-color: var(--purple); }
+  button.primary:hover { background: var(--purple-dark); border-color: var(--purple-dark); }
+  button:hover { background: #f3f4f6; }
+  button.primary:hover { background: var(--purple-dark); color: white; }
+  .status { font-size: 0.8125rem; color: var(--muted); margin-left: 0.5rem; align-self: center; }
+  footer { margin-top: 2rem; color: var(--muted); font-size: 0.75rem; text-align: center; }
+  footer code { background: #eef2ff; color: var(--purple-dark); padding: 0.125rem 0.375rem; border-radius: 0.25rem; font-family: var(--mono); }
+</style>
+</head>
+<body>
+<main>
+  <h1>UTM Builder</h1>
+  <p class="lede">Internal tool. Tags outbound social/newsletter links so GA stops bucketing them as "(direct) / (none)".</p>
+
+  <form id="utm-form" autocomplete="off">
+    <fieldset>
+      <label for="url">Destination URL
+        <span class="hint">The disclose.io page you're linking to. Existing query params are preserved.</span>
+      </label>
+      <input id="url" type="url" placeholder="https://directory.disclose.io/" required>
+    </fieldset>
+
+    <div class="row">
+      <fieldset>
+        <label for="source">utm_source <span class="hint">where the click came from</span></label>
+        <select id="source">
+          <option value="">— pick one —</option>
+          <option value="bluesky">bluesky</option>
+          <option value="x">x</option>
+          <option value="linkedin">linkedin</option>
+          <option value="mastodon">mastodon</option>
+          <option value="newsletter">newsletter</option>
+          <option value="email">email</option>
+          <option value="slack">slack</option>
+          <option value="discord">discord</option>
+          <option value="podcast">podcast</option>
+          <option value="hn">hn</option>
+          <option value="reddit">reddit</option>
+          <option value="github">github</option>
+        </select>
+      </fieldset>
+
+      <fieldset>
+        <label for="medium">utm_medium <span class="hint">what kind of placement</span></label>
+        <select id="medium">
+          <option value="social">social</option>
+          <option value="email">email</option>
+          <option value="referral">referral</option>
+          <option value="organic">organic</option>
+          <option value="cpc">cpc</option>
+          <option value="banner">banner</option>
+        </select>
+      </fieldset>
+    </div>
+
+    <fieldset>
+      <label for="campaign">utm_campaign <span class="hint">topic or thing being announced (lowercase, hyphens — e.g. policy-pulse-15, framework-launch)</span></label>
+      <input id="campaign" type="text" placeholder="policy-pulse-15" required>
+    </fieldset>
+
+    <div class="row">
+      <fieldset>
+        <label for="content">utm_content <span class="hint">(optional) variant — e.g. headline-a, button-cta</span></label>
+        <input id="content" type="text" placeholder="">
+      </fieldset>
+
+      <fieldset>
+        <label for="term">utm_term <span class="hint">(optional) keyword if paid</span></label>
+        <input id="term" type="text" placeholder="">
+      </fieldset>
+    </div>
+
+    <div class="out" id="out">
+      <span style="color: var(--muted);">Fill the fields above. The tagged URL appears here as you type.</span>
+    </div>
+
+    <div class="btn-row">
+      <button type="button" class="primary" id="copy">Copy URL</button>
+      <button type="button" id="open">Open in new tab</button>
+      <span class="status" id="status"></span>
+    </div>
+  </form>
+
+  <footer>
+    Casey, this lives at <code>/internal/utm-builder.html</code> — unlisted, bookmark it. Filter your GA reports by <code>sessionSourceMedium</code> to see what comes back.
+  </footer>
+</main>
+
+<script>
+  const $url = document.getElementById('url');
+  const $source = document.getElementById('source');
+  const $medium = document.getElementById('medium');
+  const $campaign = document.getElementById('campaign');
+  const $content = document.getElementById('content');
+  const $term = document.getElementById('term');
+  const $out = document.getElementById('out');
+  const $copy = document.getElementById('copy');
+  const $open = document.getElementById('open');
+  const $status = document.getElementById('status');
+
+  function clean(v) {
+    return (v || '').trim().toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9_\-.]/g, '');
+  }
+
+  function build() {
+    const raw = $url.value.trim();
+    if (!raw) {
+      $out.innerHTML = '<span style="color: var(--muted);">Fill the fields above. The tagged URL appears here as you type.</span>';
+      return null;
+    }
+    let u;
+    try { u = new URL(raw); }
+    catch { $out.innerHTML = '<span style="color: #b91c1c;">Invalid URL.</span>'; return null; }
+
+    const source = clean($source.value);
+    const medium = clean($medium.value);
+    const campaign = clean($campaign.value);
+    const content = clean($content.value);
+    const term = clean($term.value);
+
+    if (source) u.searchParams.set('utm_source', source);
+    if (medium) u.searchParams.set('utm_medium', medium);
+    if (campaign) u.searchParams.set('utm_campaign', campaign);
+    if (content) u.searchParams.set('utm_content', content);
+    if (term) u.searchParams.set('utm_term', term);
+
+    const out = u.toString();
+    $out.innerHTML = '<a href="' + out.replace(/"/g, '&quot;') + '" target="_blank" rel="noopener">' + out.replace(/</g, '&lt;') + '</a>';
+    return out;
+  }
+
+  ['input', 'change'].forEach(evt => {
+    [$url, $source, $medium, $campaign, $content, $term].forEach(el => el.addEventListener(evt, build));
+  });
+
+  $copy.addEventListener('click', async () => {
+    const url = build();
+    if (!url) return;
+    try {
+      await navigator.clipboard.writeText(url);
+      $status.textContent = 'Copied.';
+      setTimeout(() => $status.textContent = '', 2000);
+    } catch {
+      $status.textContent = 'Copy failed — select the URL above and copy manually.';
+    }
+  });
+
+  $open.addEventListener('click', () => {
+    const url = build();
+    if (url) window.open(url, '_blank', 'noopener');
+  });
+
+  build();
+</script>
+</body>
+</html>
