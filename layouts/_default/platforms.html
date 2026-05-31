@@ -6,11 +6,16 @@
   "name": "Bug Bounty Platforms Directory",
   "description": {{ .Description | jsonify | safeJS }},
   "url": {{ .Permalink | jsonify | safeJS }},
-  "license": "https://github.com/disclose/bug-bounty-platforms/blob/main/LICENSE.md",
+  "license": "https://creativecommons.org/publicdomain/zero/1.0/",
   "creator": {
     "@type": "Organization",
     "name": "disclose.io",
     "url": "https://disclose.io"
+  },
+  "isPartOf": {
+    "@type": "Dataset",
+    "name": "disclose.io directory",
+    "url": "https://directory.disclose.io/"
   }{{ with .Lastmod }},
   "dateModified": {{ .Format "2006-01-02" | jsonify | safeJS }}{{ end }}
 }
@@ -28,10 +33,11 @@
       <p class="text-xl text-gray-600 max-w-2xl mx-auto mb-3">{{ . }}</p>
       {{ end }}
       <p class="text-sm text-gray-500">
-        Is there a platform or detail missing?
-        <a href="https://github.com/disclose/bug-bounty-platforms/edit/main/README.md"
-           class="text-purple hover:text-purple-dark underline"
-           target="_blank" rel="noopener noreferrer">Improve this page</a>!
+        The canonical disclose.io database lives at
+        <a href="https://directory.disclose.io/"
+           class="text-purple hover:text-purple-dark underline">directory.disclose.io</a>.
+        Is there a platform or detail missing? <a href="mailto:hello@disclose.io?subject=disclose.io%2Fplatforms%20update"
+           class="text-purple hover:text-purple-dark underline">Let us know</a>.
       </p>
       {{ with .Lastmod }}<p class="text-sm text-gray-400 mt-1">Last updated: {{ .Format "January 2, 2006" }}</p>{{ end }}
     </header>
