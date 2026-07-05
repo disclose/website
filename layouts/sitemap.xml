@@ -15,7 +15,7 @@
     {{- end }}
   </url>
   {{- end }}
-  {{/* AI-readable canonical files — Hugo doesn't add /static/ files to the sitemap automatically,
+  {{/* AI-readable canonical files, Hugo doesn't add /static/ files to the sitemap automatically,
        and llms-full.txt is generated at build time as a separate output format. Include them
        explicitly so search engines and AI crawlers find them. */}}
   <url>

@@ -239,7 +239,7 @@
   parent = "Community"
   weight = 20
 
-# Framework sidebar navigation — three pillars
+# Framework sidebar navigation: three pillars
 [[framework]]
   name = "Overview"
   url = "/framework/"
@@ -292,37 +292,37 @@
   weight = 5
 
 [[framework]]
-  name = "Level 0 — Not Present"
+  name = "Level 0: Not Present"
   url = "/framework/maturity/level-0/"
   parent = "Maturity (diostatus)"
   weight = 10
 
 [[framework]]
-  name = "Level 1 — Contact Only"
+  name = "Level 1: Contact Only"
   url = "/framework/maturity/level-1/"
   parent = "Maturity (diostatus)"
   weight = 20
 
 [[framework]]
-  name = "Level 2 — Basic VDP"
+  name = "Level 2: Basic VDP"
   url = "/framework/maturity/level-2/"
   parent = "Maturity (diostatus)"
   weight = 30
 
 [[framework]]
-  name = "Level 3 — Partial Safe Harbor"
+  name = "Level 3: Partial Safe Harbor"
   url = "/framework/maturity/level-3/"
   parent = "Maturity (diostatus)"
   weight = 40
 
 [[framework]]
-  name = "Level 4 — Full Safe Harbor"
+  name = "Level 4: Full Safe Harbor"
   url = "/framework/maturity/level-4/"
   parent = "Maturity (diostatus)"
   weight = 50
 
 [[framework]]
-  name = "Level 5 — Full Safe Harbor + CVD"
+  name = "Level 5: Full Safe Harbor + CVD"
   url = "/framework/maturity/level-5/"
   parent = "Maturity (diostatus)"
   weight = 60

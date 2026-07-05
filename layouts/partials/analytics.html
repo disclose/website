@@ -1,5 +1,5 @@
 {{/*
-  Analytics partial — GA4 loader + event tracking.
+  Analytics partial, GA4 loader + event tracking.
 
   Safe to include unconditionally; it self-guards against dev/local/staging
   hostnames at runtime (in addition to Hugo's environment gate in baseof).
@@ -7,11 +7,11 @@
   Emits:
     - Standard page_view / session_start / first_visit via gtag config
     - Enhanced Measurement events (scroll, outbound click, file_download,
-      view_search_results, video_*, form_*) — configured server-side in GA4
-    - `outbound` with {link_class, link_domain, link_url} — classifies all
+      view_search_results, video_*, form_*), configured server-side in GA4
+    - `outbound` with {link_class, link_domain, link_url}, classifies all
       external clicks (github-framework, github, platform, social, ally, other)
-    - `search` with {search_term} — debounced Pagefind input events
-    - `search_zero_results` with {search_term} — detected via MutationObserver
+    - `search` with {search_term}, debounced Pagefind input events
+    - `search_zero_results` with {search_term}, detected via MutationObserver
 
   Cross-domain linker covers the *.disclose.io family so users bouncing
   between disclose.io and directory/policymaker/lookup/community/blog/vault
@@ -53,7 +53,7 @@
         if (window.console) console.info('[ga4] internal flag CLEARED for this browser');
       } else {
         localStorage.setItem('ga4_internal', '1');
-        if (window.console) console.info('[ga4] internal flag SET — traffic from this browser will be excluded from reports');
+        if (window.console) console.info('[ga4] internal flag SET, traffic from this browser will be excluded from reports');
       }
     }
     internalFlag = localStorage.getItem('ga4_internal') === '1';

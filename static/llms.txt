@@ -1,6 +1,6 @@
 # disclose.io
 
-> disclose.io is the open, vendor-neutral infrastructure that powers vulnerability disclosure and security reporting — safe, simple, and standardized for everyone.
+> disclose.io is the open, vendor-neutral infrastructure that powers vulnerability disclosure and security reporting, safe, simple, and standardized for everyone.
 
 We maintain open-source databases, policy templates, tools, and resources to make vulnerability disclosure safe, simple, and standardized for everyone. A fuller machine-readable corpus is available at [llms-full.txt](https://disclose.io/llms-full.txt).
 
@@ -37,7 +37,7 @@ We maintain open-source databases, policy templates, tools, and resources to mak
 ## Tools (separate properties)
 
 - [Policymaker](https://policymaker.disclose.io/policymaker/introduction): Interactive tool to generate a customized vulnerability disclosure policy (VDP) for any organization.
-- [Lookup](https://lookup.disclose.io): Security attribution tool — turns any input (domain, IP, email, URL, ASN, package name, app name, hardware product) into the correct disclosure contact for that asset.
+- [Lookup](https://lookup.disclose.io): Security attribution tool, turns any input (domain, IP, email, URL, ASN, package name, app name, hardware product) into the correct disclosure contact for that asset.
 - [Disclosure Vault](https://vault.disclose.io): Cryptographic timelock-encrypted vulnerability disclosure deadline enforcer.
 
 ## Community

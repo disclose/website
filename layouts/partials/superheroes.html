@@ -1,4 +1,4 @@
-{{/* Internet superheroes section — homepage, immediately under the "Why does disclose.io exist?" videos block.
+{{/* Internet superheroes section, homepage, immediately under the "Why does disclose.io exist?" videos block.
      Tight 10-across grid on sm+; handle under avatar; tier labels hidden to keep vertical rhythm clean. */}}
 {{ $superheroes := site.Data.superheroes }}
 {{ if $superheroes }}
@@ -18,7 +18,7 @@
       {{ $display := or .handle .name }}
       <div class="text-center">
         {{ if .url }}
-        <a href="{{ .url }}" target="_blank" rel="noopener noreferrer" class="group block" title="{{ or .name $display }}{{ with .tier }} — {{ . }}{{ end }}">
+        <a href="{{ .url }}" target="_blank" rel="noopener noreferrer" class="group block" title="{{ or .name $display }}{{ with .tier }}, {{ . }}{{ end }}">
           {{ if .avatar }}
           <img src="{{ .avatar }}" alt="{{ $display }}" loading="lazy" class="w-14 h-14 mx-auto rounded-full object-cover ring-2 ring-shade-200 group-hover:ring-purple transition" />
           {{ else }}

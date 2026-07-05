@@ -1,9 +1,9 @@
 ---
 title: "disclose.io"
-description: "The open, vendor-neutral infrastructure that powers vulnerability disclosure and security reporting — safe, simple, and standardized for everyone."
+description: "The open, vendor-neutral infrastructure that powers vulnerability disclosure and security reporting. Safe, simple, and standardized for everyone."
 hero:
   title: "disclose.io"
-  subtitle: "The infrastructure that powers vulnerability disclosure and security reporting — safe, simple, and standardized for everyone."
+  subtitle: "The infrastructure that powers vulnerability disclosure and security reporting. Safe, simple, and standardized for everyone."
   supporting: "Open source · vendor-neutral · home of the safe-harbor scoreboard."
   image: "uploads/tug-of-war.png"
   search: true
@@ -19,7 +19,7 @@ faq:
   subtitle: "Got a quick question? Let's get you a quick answer"
 partners:
   title: "Partners and friends"
-  subtitle: "Organizations that share our mission — folks worth knowing, and ways to engage with them"
+  subtitle: "Organizations that share our mission, and ways to engage with them"
 videos:
   title: "Why does disclose.io exist?"
   subtitle: "A couple of talks to get you started..."

@@ -1,10 +1,10 @@
 ---
-title: "Is disclose.io a 501.c3 (Not For Profit)?"
+title: "Is disclose.io a 501(c)(3) nonprofit?"
 weight: 50
 ---
 
-disclose.io was formed as a merge of separate standardization projects initiated by RainForest Puppy, Bugcrowd, Cipherlaw, Dropbox, Dr. Amit Elazari, UC Berkeley, the National Transport and Information Authority, the US Department of Justice, and others.
+disclose.io grew out of a merge of earlier standardization efforts by RainForest Puppy, Bugcrowd, CipherLaw, Dropbox, Dr. Amit Elazari, UC Berkeley, the National Telecommunications and Information Administration (NTIA), the US Department of Justice, and others.
 
 ![disclose.io timeline](/uploads/dio-timeline.png)
 
-We're currently in the process of incorporating and pursuing status as a 501.c3 Not For Profit.
+disclose.io is incorporated as a Delaware nonprofit corporation. We're completing the steps toward federal 501(c)(3) status, so contributions aren't tax-deductible yet.

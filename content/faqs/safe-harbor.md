@@ -3,10 +3,10 @@ title: "What is Safe Harbor?"
 weight: 20
 ---
 
-Most of the existing anti-hacking laws pre-date the notion of hacking for good or widespread knowledge of the "digital locksmiths" who are increasingly influencing modern-day digital safety.
+Most anti-hacking laws pre-date the idea of hacking for good, or the "digital locksmiths" who increasingly shape modern digital safety.
 
-These anti-hacking laws have been **used by organizations to suppress good-faith security research** in the pursuit of limiting negative publicity for the vendor, which nets out to a "chilling effect" on the input from the people the Internet needs to hear from most. **If hackers are the Internet's Immune System, then right now, even in 2026, the Internet still has an auto-immune problem.**
+Those laws get **used to suppress good-faith research** and limit bad publicity for vendors. The result is a "chilling effect" that silences the very people the Internet most needs to hear from. If hackers are the Internet's immune system, the Internet still has an auto-immune problem.
 
-"Safe Harbor" is the term used to describe clauses added to public policies which allow folks acting in good faith, as defined clearly and proactively by the recipient, to **provide security feedback without fear of legal repercussions.**
+**Safe Harbor** is language added to a policy that lets people acting in good faith, as the recipient defines it, **report security issues without fear of legal repercussions.**
 
-disclose.io intends to help define, spread, and reward the adoption of vulnerability disclosure programs with best practices like Safe Harbor.
+disclose.io helps define, spread, and reward Safe Harbor and other disclosure best practices.

@@ -6,7 +6,7 @@
   url: "https://policymaker.disclose.io"
 
 - title: "I found a vulnerability"
-  description: "Look up who to report to. Lookup resolves any asset to its security contact, disclosure program, and safe harbor status — and helps you navigate the process."
+  description: "Look up who to report to. Lookup resolves any asset to its security contact, disclosure program, and safe harbor status, and helps you navigate the process."
   icon: "search"
   url: "https://lookup.disclose.io"
 
