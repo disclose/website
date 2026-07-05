@@ -96,7 +96,7 @@
         "applicationCategory": "SecurityApplication",
         "operatingSystem": "Web, API",
         "url": "https://vault.disclose.io/",
-        "description": "Cryptographic timelock-encrypted vulnerability disclosure deadline enforcer. Once committed, the disclosure cannot be suppressed — on expiry it becomes publicly readable.",
+        "description": "Cryptographic timelock-encrypted vulnerability disclosure deadline enforcer. Once committed, the disclosure cannot be suppressed, on expiry it becomes publicly readable.",
         "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
         "provider": { "@id": "https://disclose.io/#org" }
       },
@@ -180,7 +180,7 @@
   {{/* Mobile menu */}}
   {{ partial "mobile-menu.html" . }}
 
-  {{/* Google Analytics — loader, cross-domain linker, event tracking */}}
+  {{/* Google Analytics, loader, cross-domain linker, event tracking */}}
   {{ if eq hugo.Environment "production" }}
   {{ partial "analytics.html" . }}
   {{ end }}

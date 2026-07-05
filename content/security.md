@@ -1,6 +1,6 @@
 ---
 title: "Security"
-description: "disclose.io's own vulnerability disclosure policy — report issues to security@disclose.io."
+description: "disclose.io's own vulnerability disclosure policy, report issues to security@disclose.io."
 source_repo: "https://github.com/disclose/dioterms"
 license: "CC0-1.0"
 ---

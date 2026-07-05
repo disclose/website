@@ -6,9 +6,9 @@
   url: "https://policymaker.disclose.io"
 
 - title: "I found a vulnerability"
-  description: "Look up the organization's disclosure program, check their safe harbor status, and get help navigating the process if you need it."
+  description: "Look up who to report to. Lookup resolves any asset to its security contact, disclosure program, and safe harbor status, and helps you navigate the process."
   icon: "search"
-  url: "https://directory.disclose.io"
+  url: "https://lookup.disclose.io"
 
 - title: "I'm researching a program"
   description: "Browse the open directory of every known vulnerability disclosure and bug bounty program, with scope, policy URLs, and safe-harbor language."
@@ -19,8 +19,3 @@
   description: "Access model policies, legal frameworks, and safe harbor guidance. Help advance the legal protections security researchers need."
   icon: "shield"
   url: "/docs/key-objectives/"
-
-- title: "I want to contribute"
-  description: "Join the community, contribute to open resources, or help organizations adopt better disclosure practices."
-  icon: "heart"
-  url: "https://community.disclose.io"

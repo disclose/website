@@ -1,6 +1,6 @@
 ---
 title: "Project Directory"
-description: "The full ecosystem of disclose.io projects — standards, tools, data, and community resources for vulnerability disclosure."
+description: "The full ecosystem of disclose.io projects, standards, tools, data, and community resources for vulnerability disclosure."
 weight: 90
 ---
 
@@ -12,19 +12,19 @@ Everything below is free, open-source, and community-maintained.
 
 The policy and legal building blocks that underpin everything else.
 
-### dioterms — VDP Policy Templates
+### dioterms: VDP Policy Templates
 
 The core set of boilerplate vulnerability disclosure policy templates. Available in multiple languages and adapted for specific geographies, verticals, and regulatory frameworks. These templates are what the Policymaker tool generates from.
 
 [Repository](https://github.com/disclose/dioterms)
 
-### dnssecuritytxt — DNS Security TXT
+### dnssecuritytxt: DNS Security TXT
 
-A proposed standard for publishing security contact and vulnerability disclosure information via DNS TXT records — extending the security.txt concept to organizations and assets where web-based paths aren't available.
+A proposed standard for publishing security contact and vulnerability disclosure information via DNS TXT records, extending the security.txt concept to organizations and assets where web-based paths aren't available.
 
 [Repository](https://github.com/disclose/dnssecuritytxt)
 
-### diostatus — The Maturity Model and Seal
+### diostatus: The Maturity Model and Seal
 
 A five-level maturity model for vulnerability disclosure programs, from "no contact" to "full safe harbor with coordinated disclosure." The disclose.io seal provides a recognizable mark indicating an organization's level of best-practice adoption. See the [full maturity model documentation](/docs/diostatus/).
 
@@ -38,17 +38,17 @@ Free tools that put the standards into practice.
 
 ### Policymaker
 
-A multi-lingual, guided VDP policy generator. Answer a few questions about your organization and get a ready-to-publish vulnerability disclosure policy, safe harbor language, and security.txt — all based on the dioterms templates.
+A multi-lingual, guided VDP policy generator. Answer a few questions about your organization and get a ready-to-publish vulnerability disclosure policy, safe harbor language, and security.txt, all based on the dioterms templates.
 
 [policymaker.disclose.io](https://policymaker.disclose.io) | [Repository](https://github.com/disclose/policymaker)
 
 ### lookup.disclose.io
 
-A security attribution and contact lookup tool. Given a domain, IP, package name, or other identifier, find the right place to report a vulnerability — pulling from security.txt, DNS, WHOIS, bug bounty platforms, and the disclose.io database.
+A security attribution and contact lookup tool. Given a domain, IP, package name, or other identifier, find the right place to report a vulnerability, pulling from security.txt, DNS, WHOIS, bug bounty platforms, and the disclose.io database.
 
 [lookup.disclose.io](https://lookup.disclose.io)
 
-### diosts — Security.txt Scanner
+### diosts: Security.txt Scanner
 
 A Go-based scanner that validates security.txt files at internet scale. Powers the data behind the disclose.io VDP adoption surveys.
 
@@ -60,19 +60,17 @@ A Go-based scanner that validates security.txt files at internet scale. Powers t
 
 Tracking adoption, documenting threats, and building the evidence base for policy work.
 
-### diodb — The VDP/BBP Database
+### diodb: The VDP/BBP Database
 
-The definitive community-powered database of every known vulnerability disclosure program and public bug bounty program, along with their disclose.io maturity status. The most active project in the ecosystem — contributions welcome via pull request.
+The definitive community-powered database of every known vulnerability disclosure program and public bug bounty program, along with their disclose.io maturity status. The most active project in the ecosystem, contributions welcome via pull request.
 
 [Repository](https://github.com/disclose/diodb)
 
-### data.disclose.io — VDP Adoption Survey
+### Data survey: retired
 
-Internet-wide survey data on vulnerability disclosure program adoption, generated from diosts scans and community contributions. Used by researchers, policymakers, and organizations for tracking industry progress.
+The legacy `data.disclose.io` VDP adoption survey surface has been retired. Use the current disclose.io directory, state-of-disclosure snapshot, and ranked-list disclosure audits for active adoption/maturity data.
 
-data.disclose.io *(currently offline)*
-
-### research-threats — Legal Threats Archive
+### research-threats: Legal Threats Archive
 
 A structured archive of legal threats, cease-and-desist letters, and prosecutions targeting good-faith security researchers. Documents the chilling effect and provides evidence for policy advocacy.
 

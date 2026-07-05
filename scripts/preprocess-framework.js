@@ -127,7 +127,37 @@ function writeIfChanged(outPath, body) {
   return 'written';
 }
 
-function processFile({ src, out, title, description, weight, license, replaceVariables: doReplace, stripFirstH1: doStrip, extra }) {
+// Replace em-dashes with sensible punctuation so generated pages match the
+// disclose.io house style (no em-dashes). Applied to maturity descriptions
+// (disclose.io's own content) only — NOT the canonical legal terms or the
+// externally-attributed practices doc.
+function dedashText(text) {
+  return text.split('\n').map((line) => {
+    const isHeading = /^\s{0,3}#{1,6}\s/.test(line);
+    const isLabel = /^\s*(title|name)\s*[:=]/.test(line);
+    let out = '';
+    let i = 0;
+    let first = true;
+    while (i < line.length) {
+      if (line[i] === ' ' && line[i + 1] === '—' && line[i + 2] === ' ') {
+        const prev = out.length ? out[out.length - 1] : '';
+        const colon = prev === ')' || prev === '*' || ((isHeading || isLabel) && first);
+        out += colon ? ': ' : ', ';
+        i += 3; first = false; continue;
+      }
+      if (line[i] === '—') {
+        if (out.endsWith(' ')) out = out.slice(0, -1);
+        out += ','; i += 1;
+        if (line[i] !== ' ') out += ' ';
+        continue;
+      }
+      out += line[i]; i += 1;
+    }
+    return out;
+  }).join('\n');
+}
+
+function processFile({ src, out, title, description, weight, license, replaceVariables: doReplace, stripFirstH1: doStrip, dedash: doDedash, extra }) {
   const srcPath = path.join(SRC, src);
   if (!fs.existsSync(srcPath)) {
     console.warn(`[skip] source not found: ${src}`);
@@ -137,6 +167,7 @@ function processFile({ src, out, title, description, weight, license, replaceVar
   if (doStrip) content = stripFirstH1(content);
   if (doReplace) content = replaceVariables(content);
   content = rewriteLinks(content);
+  if (doDedash) content = dedashText(content);
   const body = frontMatter({ title, description, weight, license, extra }) + content.trimStart();
   const outPath = path.join(OUT, out);
   const status = writeIfChanged(outPath, body);
@@ -176,11 +207,12 @@ function main() {
     const p = processFile({
       src: m.src,
       out: `maturity/${m.slug}.md`,
-      title: m.title,
+      title: m.title.replace(/\s—\s/g, ': '),
       description: m.description,
       weight: m.weight,
       replaceVariables: false,
       stripFirstH1: true,
+      dedash: true,
     });
     if (p) { wrote.add(p); count++; }
   }

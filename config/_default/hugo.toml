@@ -20,7 +20,7 @@ pygmentsUseClasses = true
     endLevel = 4
     ordered = false
 
-# Taxonomies (disabled — no content uses tags or categories)
+# Taxonomies (disabled: no content uses tags or categories)
 [taxonomies]
 
 # Permalinks

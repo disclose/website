@@ -1,7 +1,7 @@
 ---
 title: "Contributors"
 slug: "open-source-contributors"
-description: "The people behind disclose.io — legends, maintainers, and open-source contributors keeping the Internet safer."
+description: "The people behind disclose.io, legends, maintainers, and open-source contributors keeping the Internet safer."
 weight: 80
 ---
 

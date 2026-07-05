@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex,nofollow">
-<title>UTM Builder — disclose.io internal</title>
+<title>UTM Builder: disclose.io internal</title>
 <style>
   :root {
     --purple: #673ab6;
@@ -60,7 +60,7 @@
       <fieldset>
         <label for="source">utm_source <span class="hint">where the click came from</span></label>
         <select id="source">
-          <option value="">— pick one —</option>
+          <option value="">pick one</option>
           <option value="bluesky">bluesky</option>
           <option value="x">x</option>
           <option value="linkedin">linkedin</option>
@@ -90,13 +90,13 @@
     </div>
 
     <fieldset>
-      <label for="campaign">utm_campaign <span class="hint">topic or thing being announced (lowercase, hyphens — e.g. policy-pulse-15, framework-launch)</span></label>
+      <label for="campaign">utm_campaign <span class="hint">topic or thing being announced (lowercase, hyphens, e.g. policy-pulse-15, framework-launch)</span></label>
       <input id="campaign" type="text" placeholder="policy-pulse-15" required>
     </fieldset>
 
     <div class="row">
       <fieldset>
-        <label for="content">utm_content <span class="hint">(optional) variant — e.g. headline-a, button-cta</span></label>
+        <label for="content">utm_content <span class="hint">(optional) variant, e.g. headline-a, button-cta</span></label>
         <input id="content" type="text" placeholder="">
       </fieldset>
 
@@ -118,7 +118,7 @@
   </form>
 
   <footer>
-    Casey, this lives at <code>/internal/utm-builder.html</code> — unlisted, bookmark it. Filter your GA reports by <code>sessionSourceMedium</code> to see what comes back.
+    Casey, this lives at <code>/internal/utm-builder.html</code>. Unlisted, bookmark it. Filter your GA reports by <code>sessionSourceMedium</code> to see what comes back.
   </footer>
 </main>
 
@@ -177,7 +177,7 @@
       $status.textContent = 'Copied.';
       setTimeout(() => $status.textContent = '', 2000);
     } catch {
-      $status.textContent = 'Copy failed — select the URL above and copy manually.';
+      $status.textContent = 'Copy failed. Select the URL above and copy manually.';
     }
   });
 

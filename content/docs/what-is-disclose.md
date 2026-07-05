@@ -1,24 +1,34 @@
 ---
 title: "What is disclose.io"
 slug: "what-is-disclose.io"
-description: "A cross-industry, vendor-agnostic standardization project for safe harbor best practices."
+description: "The open, vendor-neutral infrastructure that powers vulnerability disclosure and security reporting."
 weight: 10
 aliases:
   - /docs/
 ---
 
-Disclose.io is a **cross-industry, vendor-agnostic standardization project** for safe harbor best practices to enable good-faith security research.
+disclose.io is the **open, vendor-neutral infrastructure that powers vulnerability disclosure and security reporting.** We make it **safe, simple, and standardized** for everyone.
 
 ![tug-of-war 2021](/uploads/tug-of-war.jpg)
 
-We provide free, open-source tools and data to help **establish and improve vulnerability disclosure programs** and an easily recognizable seal for those taking part in "Neighbourhood Watch for the Internet."
+We didn't join this movement. We started it. disclose.io is the vendor-neutral home for safe harbor, and we publish the free, lawyer-reviewed policy language (**dioterms**, CC0) the ecosystem runs on.
 
 ![tug-of-war 2026](/uploads/becausemath-2026.png)
 
+## One mission, many tools
+
+Open, vendor-neutral properties, each answering a real question:
+
+- **Standards:** [dioterms](https://github.com/disclose/dioterms) (safe-harbor language) and [dnssecuritytxt](https://dnssecuritytxt.org) (contacts at the DNS layer).
+- **Tools:** [policymaker](https://policymaker.disclose.io) (draft a policy), [lookup](https://lookup.disclose.io) (find who to report to), and [vault](https://vault.disclose.io) (coordinate disclosure).
+- **Data:** [directory.disclose.io](https://directory.disclose.io), the open system of record for every program.
+- **Measurement:** [state.disclose.io](https://state.disclose.io), the safe-harbor scoreboard for the world's biggest companies.
+- **Record and commons:** [/threats](/threats), [community.disclose.io](https://community.disclose.io), and the weekly [PolicyPulse](https://blog.disclose.io).
+
 ## Powered by experts
 
-With the help of expert maintainers and by harnessing the power of open-source, disclose.io provides:
+Open-source and expert-maintained, disclose.io provides:
 
-- **Free boilerplate policies**, tools, contact lists, and data-sets;
-- A **straight-forward maturity model** with recognition of all levels of best practice adoption, and
-- **Centralized assistance, information**, activism, advocacy for security researchers and those wanting to report security issues.
+- **Free** policies, tools, contact lists, and data;
+- A **maturity model** that recognizes every level of adoption; and
+- **Help** for researchers and anyone reporting a security issue.

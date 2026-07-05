@@ -21,6 +21,13 @@
         {{ . }}
       </p>
       {{ end }}
+
+      {{/* Supporting line (open-source, vendor-neutral, scoreboard). Reuses existing type and colour, no new component. */}}
+      {{ with .supporting }}
+      <p class="text-sm text-gray-500 max-w-3xl mx-auto">
+        {{ . }}
+      </p>
+      {{ end }}
     </div>
   </div>
 </section>

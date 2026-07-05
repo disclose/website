@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 920" role="img" aria-labelledby="title desc" font-family="ui-sans-serif, system-ui, -apple-system, sans-serif">
-  <title id="title">The disclose.io Universe — ecosystem map</title>
+  <title id="title">The disclose.io Universe: ecosystem map</title>
   <desc id="desc">A diagram showing how disclose.io components relate: the framework at the core, tools and open-source projects helping organizations climb the DIOstatus maturity ladder and helping researchers operate around it, with community support and SRLDF legal backstop.</desc>
 
   <defs>
@@ -155,7 +155,7 @@
     <rect class="box" x="200" y="0" width="360" height="80" rx="8"/>
     <text class="group-label" x="380" y="22" text-anchor="middle">Community</text>
     <text class="item-name"   x="220" y="48">community.disclose.io</text>
-    <text class="item-desc"   x="220" y="66">the forum — peer support across every level</text>
+    <text class="item-desc"   x="220" y="66">the forum: peer support across every level</text>
   </g>
   <g transform="translate(0, 720)">
     <rect class="box" x="580" y="0" width="220" height="80" rx="8"/>

@@ -1,17 +1,20 @@
 /**
- * dev.disclose.io basic-auth wall.
+ * dev.disclose.io basic-auth wall — OPT-IN (disabled by default).
  *
- * Runs on every request to the Cloudflare Pages deployment. Reads credentials
- * from the BASIC_AUTH_USERS env var (one `user:password` per line, blank lines
- * and `#`-comments ignored). Returns 401 with WWW-Authenticate when missing or
- * invalid; calls next() to serve the static asset on success.
+ * The wall only enforces when REQUIRE_AUTH === "true". When enabled it reads
+ * credentials from BASIC_AUTH_USERS (one `user:password` per line, blank lines
+ * and `#`-comments ignored), returns 401 with WWW-Authenticate on missing/
+ * invalid creds, 503 if enabled but no users are configured, and calls next()
+ * on success.
  *
- * Fail-closed: if BASIC_AUTH_USERS is unset or empty, every request returns
- * 503 "Setup required". This guarantees the dev preview cannot be public for
- * the gap between Pages project creation and the env var being set.
+ * dev.disclose.io is intentionally public (Casey, 2026-07-05): REQUIRE_AUTH is
+ * unset, so requests pass straight through. noindex is still enforced via
+ * static/_headers. To re-enable the wall on any environment, set
+ * REQUIRE_AUTH="true" and BASIC_AUTH_USERS on that Pages project.
  */
 
 interface Env {
+  REQUIRE_AUTH?: string;
   BASIC_AUTH_USERS?: string;
 }
 
@@ -19,6 +22,11 @@ const REALM = "dev.disclose.io";
 
 export const onRequest: PagesFunction<Env> = async (context) => {
   const { request, next, env } = context;
+
+  // Opt-in gate: the wall stays off unless explicitly enabled.
+  if (env.REQUIRE_AUTH !== "true") {
+    return next();
+  }
 
   const configured = parseUsers(env.BASIC_AUTH_USERS ?? "");
   if (configured.length === 0) {
