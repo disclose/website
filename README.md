@@ -1,3 +1,23 @@
+<div align="center">
+
+# disclose.io — website
+
+### The **front door** that explains disclosure, safe harbor, and how to adopt best practice in minutes. The Hugo source for [disclose.io](https://disclose.io).
+
+<p>
+<a href="LICENSE"><img src="https://img.shields.io/github/license/disclose/website?color=5B3AB6&label=license" alt="license"></a>
+<a href="https://disclose.io"><img src="https://img.shields.io/badge/live-disclose.io-5B3AB6" alt="live disclose.io"></a>
+<a href="https://gohugo.io"><img src="https://img.shields.io/badge/built%20with-Hugo-5B3AB6" alt="built%20with Hugo"></a>
+<a href="https://github.com/disclose/website/issues"><img src="https://img.shields.io/badge/PRs-welcome-5B3AB6" alt="PRs welcome"></a>
+</p>
+
+*Part of **[the disclose.io Project](https://disclose.io)** — the open, vendor-neutral infrastructure for vulnerability disclosure. [Browse the ecosystem →](https://github.com/disclose)*
+
+</div>
+
+---
+
+
 # disclose.io Website
 
 The official [disclose.io](https://disclose.io) website, built with Hugo and Tailwind CSS.
