@@ -31,7 +31,7 @@ const TERMS = [
   { src: 'terms/vdp-with-cvd/en-US.md',       out: 'terms/vdp-with-cvd.md',       title: 'VDP with Coordinated Disclosure Window',  description: 'Canonical VDP with an explicit coordinated-disclosure timeline.',                          weight: 15 },
   { src: 'terms/safe-harbor/en-US.md',        out: 'terms/safe-harbor.md',        title: 'Safe Harbor',                             description: 'Standalone full safe-harbor clause for attaching to an existing policy.',                  weight: 20 },
   { src: 'terms/simple-safe-harbor/en-US.md', out: 'terms/simple-safe-harbor.md', title: 'Simple Safe Harbor',                      description: 'Condensed safe harbor clause for quick adoption.',                                         weight: 25 },
-  { src: 'bbp/en-US.md',                      out: 'terms/bbp.md',                title: 'Bug Bounty Program Policy',               description: 'Canonical BBP boilerplate with rewards structure and safe harbor.',                        weight: 30 },
+  { src: 'terms/bbp/en-US.md',                      out: 'terms/bbp.md',                title: 'Bug Bounty Program Policy',               description: 'Canonical BBP boilerplate with rewards structure and safe harbor.',                        weight: 30 },
 ];
 
 // Pillar 3: Practices — operational conduct guidance. External authors retain
