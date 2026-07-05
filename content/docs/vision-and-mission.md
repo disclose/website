@@ -1,17 +1,17 @@
 ---
 title: "Vision and Mission"
-description: "Make vulnerability disclosure safe, simple, and standardized for researchers and organizations everywhere."
+description: "Make vulnerability disclosure safe, simple, and standardized for everyone."
 weight: 20
 ---
 
 ## Mission
 
-> Make vulnerability disclosure **safe, simple, and standardized** for researchers and organizations everywhere — the open, vendor-neutral infrastructure that powers vulnerability disclosure and security reporting, Internet-wide.
+> Make vulnerability disclosure **safe, simple, and standardized** for everyone — the open, vendor-neutral infrastructure that powers disclosure and security reporting.
 
 ## Vision
 
-> A world where every organization welcomes good-faith security research under safe harbor, and no researcher risks legal harm for helping.
+> Every organization welcomes good-faith security research under safe harbor, and no researcher risks legal harm for helping.
 
-Or, as we've long put it: a healthy and ubiquitous **Internet Immune System** enabled by security research, reporting, and disclosure — "Neighborhood Watch for the Internet."
+Our shorthand: a healthy **Internet Immune System** — "Neighborhood Watch for the Internet."
 
 ![disclose.io timeline](/uploads/diotimeline.png)
