@@ -19,8 +19,3 @@
   description: "Access model policies, legal frameworks, and safe harbor guidance. Help advance the legal protections security researchers need."
   icon: "shield"
   url: "/docs/key-objectives/"
-
-- title: "I want to contribute"
-  description: "Join the community, contribute to open resources, or help organizations adopt better disclosure practices."
-  icon: "heart"
-  url: "https://community.disclose.io"
