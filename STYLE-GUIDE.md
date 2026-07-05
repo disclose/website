@@ -13,6 +13,8 @@ A reference for writing consistent, on-brand content for disclose.io.
 - Confident and aspirational about vulnerability disclosure
 - Empathetic to all audiences (researchers, legal teams, organizations)
 - Direct without being cold
+- Brevity is critical (wide, mixed audience): don't use ten words when three will do
+- No drift-prone stats in copy (org counts, per-cohort tallies, founding years); refer qualitatively and link the live source
 
 **Examples:**
 - Good: "disclose.io provides free, open-source tools and data..."
@@ -93,8 +95,8 @@ Use code formatting, lowercase: `dioterms`, `diodb`, `dioseal`
 Always use: "security researchers, lawyers, and technology vendors"
 
 ### Dashes
-- Em dashes without spaces for parenthetical phrases
-- Example: "...security research—in a way that balances risk..."
+- **No em-dashes.** Use a period, comma, or colon instead (a comma for asides, "term: description" for lists).
+- Example: "...security research, in a way that balances risk..."
 
 ### Exclamation Points
 Use sparingly for enthusiasm: "Let's send best practice viral!"
@@ -105,7 +107,7 @@ Use sparingly for enthusiasm: "Let's send best practice viral!"
 
 ### Bold
 Use strategically for:
-- Key concepts: "**cross-industry, vendor-agnostic standardization project**"
+- Key concepts: "**open, vendor-neutral infrastructure**"
 - Audience segments: "**hackers and finders**"
 - Important phrases: "**good-faith security research**"
 
@@ -137,11 +139,12 @@ Use for:
 
 Use these recurring phrases for consistency:
 
+- "the infrastructure that powers vulnerability disclosure and security reporting"
 - "safe, simple, and standardized for everyone"
+- "open, vendor-neutral"
 - "Neighborhood Watch for the Internet"
 - "Internet Immune System"
 - "good-faith security research"
-- "cross-industry, vendor-agnostic"
 
 ---
 
