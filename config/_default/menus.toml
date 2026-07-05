@@ -118,6 +118,21 @@
   url = "/history/"
   weight = 40
 
+[[footer_resources]]
+  name = "Directory"
+  url = "https://directory.disclose.io"
+  weight = 45
+
+[[footer_resources]]
+  name = "Scoreboard"
+  url = "https://state.disclose.io"
+  weight = 50
+
+[[footer_resources]]
+  name = "Vault"
+  url = "https://vault.disclose.io"
+  weight = 55
+
 # Footer navigation - Community
 [[footer_community]]
   name = "GitHub"

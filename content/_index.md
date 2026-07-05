@@ -1,9 +1,10 @@
 ---
 title: "disclose.io"
-description: "We're here to make vulnerability disclosure safe, simple, and standardized for everyone."
+description: "disclose.io is the open, vendor-neutral infrastructure that powers vulnerability disclosure and security reporting, Internet-wide — safe, simple, and standardized for researchers and organizations everywhere."
 hero:
   title: "disclose.io"
-  subtitle: "We're here to make vulnerability disclosure safe, simple, and standardized for everyone."
+  subtitle: "We're the infrastructure that powers vulnerability disclosure and security reporting, Internet-wide — making it safe, simple, and standardized for researchers and organizations everywhere."
+  supporting: "Open source and vendor-neutral since 2018 · 27,583 disclosure programs tracked · home of the Fortune 100 safe-harbor scoreboard."
   image: "uploads/tug-of-war.png"
   search: true
   buttons:
