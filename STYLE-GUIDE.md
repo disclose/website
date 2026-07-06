@@ -226,4 +226,32 @@ This single sentence validates researchers (protection) AND organizations (confi
 
 ---
 
+## Visual & UI Consistency
+
+The site's visual language lives in `tailwind.config.js` (colors: `purple` #673ab6, `shade-050..900`; `font-display` = Noto Sans Display) and the component classes in `assets/css/main.css` (notably `.card` = white / `rounded-xl` / `shadow-sm` / `border-shade-200`). Compose these tokens; do not invent one-off colors, radii, or shadows.
+
+### Table / directory pages (platforms, threats)
+
+Pages that render a large table from a submodule README (`layouts/_default/platforms.html`, `layouts/_default/threats.html`) follow one shared convention so they read as one system:
+
+- **Contain the content** to `max-w-6xl`, never `max-w-[1440px]` (edge-to-edge reads as an unstyled data dump).
+- **Card the tables.** Each logical table uses the `.card` treatment (white, `rounded-xl`, `border-shade-200`, `shadow-sm`, `overflow-hidden`). On platforms each category is its own card; on threats each incident table is a card.
+- **Section headers** are purple `font-display` (the site h2/h3 convention), not plain gray. Platforms adds a per-card platform-count badge.
+- **Soft table chrome:** uppercase `gray-600` labels on `shade-050`, `shade-100` row borders, `shade-050` hover tint. No sticky headers; no hard black-on-gray.
+- **Columns are per-page:** platforms cells are compact and truncate with shared `th` widths so all sections align; threats keeps the narrative `Status` column wrapping (never truncate prose) and mutes/emphasizes by column position.
+- Jump-nav (platforms) is pill chips rebuilt from the section list so anchor ids always match; `scroll-mt-24` clears the fixed navbar.
+
+### Acceptance gates (verify before shipping any table-page change)
+
+1. **Data conserved:** rendered row count == source README row count (nothing dropped by extraction/rendering).
+2. **Contrast ≥ WCAG AA 4.5:1** on every new text/background pair. Compute it: tokens frequently miss AA (`gray-500` on `shade-050` is 4.38:1, use `gray-600`).
+3. **No prose truncation** where a cell holds narrative (threats `Status`); short-data cells may truncate.
+4. **Mobile:** wide tables scroll inside their card; the page body must not scroll horizontally.
+5. **Verify against a FULL production build** (`npm run build` = prebuild + `build:css --minify` + hugo + pagefind), not `hugo server` — the dev server throws a `PagefindUI is not defined` console error and skips Tailwind purge.
+6. **After deploy, cache-bust before trusting the render:** `/css/main.css` is unfingerprinted, so a browser that visited earlier serves stale CSS — hard-reload (cmd+shift+r) or `curl https://disclose.io/css/main.css` and grep for the new classes. Also: the GitHub Pages deploy step can transiently fail with "Deployment failed, try again later" — re-run it (`gh run rerun <id> --failed`), it is not a code problem.
+
+**Footgun:** column emphasis/sizing by `nth-child` is positional — it only works if every table on the page shares the same column *order* (threats' 4 tables all run When / Entity / Researcher / Topic / Status even though their headers differ).
+
+---
+
 *This style guide reflects disclose.io's commitment to being accessible across diverse audiences while maintaining professional authority in the vulnerability disclosure space.*
