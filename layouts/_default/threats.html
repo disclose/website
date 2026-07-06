@@ -20,7 +20,7 @@
 {{ define "main" }}
 {{ partial "page-tldr.html" . }}
 <section class="section-sm">
-  <div class="mx-auto max-w-[1440px] px-4">
+  <div class="mx-auto max-w-6xl px-4">
     {{/* Header */}}
     <header class="mb-8 text-center">
       <h1 class="text-3xl md:text-4xl font-display font-bold mb-4">{{ .Title }}</h1>
@@ -62,7 +62,7 @@
     {{/* Render markdown */}}
     {{ $rendered := $content | markdownify }}
 
-    {{/* Clean up display text in links */}}
+    {{/* Clean up display text in links (href untouched) */}}
     {{ $rendered = $rendered | replaceRE `>https://www\.` `>` }}
     {{ $rendered = $rendered | replaceRE `>https://` `>` }}
     {{ $rendered = $rendered | replaceRE `>http://` `>` }}
@@ -76,104 +76,79 @@
 {{ partial "newsletter-cta.html" . }}
 
 <style>
-  /* Section headings */
-  .threats-content h3 {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: #111827;
-    margin: 2rem 0 1rem;
-    padding-bottom: 0.5rem;
-    border-bottom: 2px solid #673ab6;
+  /* Descriptive intro + notes prose between the tables */
+  .threats-content > p {
+    color: #4b5563;                 /* gray-600 */
+    font-size: 0.9375rem;
+    line-height: 1.7;
+    margin: 2.25rem 0 0.75rem;
+    max-width: 75ch;
   }
-  .threats-content h3:first-child {
-    margin-top: 0;
-  }
-
-  /* Prose text between tables */
-  .threats-content > p,
+  .threats-content > p:first-child { margin-top: 0; }
   .threats-content > ul {
     color: #4b5563;
-    font-size: 0.875rem;
-    line-height: 1.625;
-    margin: 0.75rem 0;
-    max-width: 80ch;
-  }
-  .threats-content > ul {
+    font-size: 0.9375rem;
+    line-height: 1.7;
+    margin: 0.5rem 0 0.75rem;
     padding-left: 1.5rem;
     list-style-type: disc;
+    max-width: 75ch;
   }
+  .threats-content > ul li { margin: 0.25rem 0; }
 
-  /* Table wrapper, card style matching platforms */
+  /* Each incident table rendered as an on-brand card (matches .card token + /platforms) */
   .threats-content table {
     width: 100%;
     border-collapse: collapse;
     font-size: 0.8125rem;
-    margin: 1rem 0 2rem;
-    background: white;
-    border-radius: 0.5rem;
+    margin: 1rem 0 2.5rem;
+    background: #ffffff;
+    border: 1px solid hsla(229, 5%, 89%, 1);          /* shade-200 */
+    border-radius: 0.75rem;                            /* rounded-xl */
+    box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);        /* shadow-sm */
     overflow: hidden;
-    box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
   }
 
-  /* Table headers, sticky */
   .threats-content thead th {
-    background: hsla(240, 8%, 97%, 1);
-    color: #111827;
+    background: hsla(240, 8%, 97%, 1);                 /* shade-050 */
+    color: #4b5563;                                    /* gray-600 */
     font-weight: 600;
+    font-size: 0.6875rem;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
     text-align: left;
-    padding: 0.625rem 0.75rem;
-    border-bottom: 2px solid hsla(229, 5%, 89%, 1);
-    position: sticky;
-    top: 0;
-    z-index: 1;
+    padding: 0.625rem 0.875rem;
+    border-bottom: 1px solid hsla(229, 5%, 89%, 1);    /* shade-200 */
     white-space: nowrap;
   }
 
-  /* Table cells */
   .threats-content tbody td {
-    padding: 0.5rem 0.75rem;
-    border-bottom: 1px solid hsla(240, 5%, 93%, 1);
+    padding: 0.625rem 0.875rem;
+    border-bottom: 1px solid hsla(240, 5%, 93%, 1);    /* shade-100 */
     vertical-align: top;
+    color: #374151;                                    /* gray-700 */
+    line-height: 1.6;
   }
-  .threats-content tbody tr:last-child td {
-    border-bottom: none;
-  }
-  .threats-content tbody tr:hover {
-    background: hsla(240, 8%, 97%, 1);
-  }
+  .threats-content tbody tr:last-child td { border-bottom: none; }
+  .threats-content tbody tr:hover { background: hsla(240, 8%, 97%, 0.6); }
+  .threats-content th:first-child,
+  .threats-content td:first-child { padding-left: 1.25rem; }
+  .threats-content th:last-child,
+  .threats-content td:last-child { padding-right: 1.25rem; }
 
-  /* Column widths, When/Entity/Researcher/Topic compact, Status gets space */
-  .threats-content td:nth-child(1) { /* When */
-    white-space: nowrap;
-    width: 7rem;
-  }
-  .threats-content td:nth-child(2) { /* Entity */
-    width: 10rem;
-  }
-  .threats-content td:nth-child(3) { /* Researcher(s) */
-    width: 10rem;
-  }
-  .threats-content td:nth-child(4) { /* Topic */
-    width: 14rem;
-  }
-  .threats-content td:nth-child(5) { /* Status, gets remaining space, word-wrap */
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-    min-width: 20rem;
-  }
+  /* Column sizing — narrative Status gets the room; the rest stay compact */
+  .threats-content td:nth-child(1),
+  .threats-content th:nth-child(1) { white-space: nowrap; width: 6.5rem; color: #6b7280; }   /* When (muted date) */
+  .threats-content td:nth-child(2) { width: 9rem; font-weight: 600; color: #111827; }          /* Entity / Company */
+  .threats-content td:nth-child(3) { width: 9rem; }                                             /* Researcher(s) */
+  .threats-content td:nth-child(4) { width: 13rem; }                                            /* Topic */
+  .threats-content td:nth-child(5) { word-wrap: break-word; overflow-wrap: break-word; min-width: 18rem; }  /* Status */
 
-  /* Links, purple */
-  .threats-content a {
-    color: #673ab6;
-    font-weight: 500;
-  }
-  .threats-content a:hover {
-    color: #322a41;
-    text-decoration: underline;
-  }
+  .threats-content a { color: #673ab6; font-weight: 500; }
+  .threats-content a:hover { color: #322a41; text-decoration: underline; }
 
-  /* Horizontal scroll for tables on mobile */
-  @media (max-width: 1024px) {
+  /* Mobile: let a wide table scroll inside its card */
+  @media (max-width: 900px) {
     .threats-content table {
       display: block;
       overflow-x: auto;
