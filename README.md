@@ -1,5 +1,7 @@
 <div align="center">
 
+<a href="https://disclose.io"><img src="docs/marquee.png" alt="disclose.io website · disclose.io" width="820"></a>
+
 # disclose.io — website
 
 ### The **front door** that explains disclosure, safe harbor, and how to adopt best practice in minutes. The Hugo source for [disclose.io](https://disclose.io).
