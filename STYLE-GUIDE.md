@@ -236,7 +236,7 @@ Pages that render a large table from a submodule README (`layouts/_default/platf
 
 - **Contain the content** to `max-w-6xl`, never `max-w-[1440px]` (edge-to-edge reads as an unstyled data dump).
 - **Card the tables.** Each logical table uses the `.card` treatment (white, `rounded-xl`, `border-shade-200`, `shadow-sm`, `overflow-hidden`). On platforms each category is its own card; on threats each incident table is a card.
-- **Section headers** are purple `font-display` (the site h2/h3 convention), not plain gray. Platforms adds a per-card platform-count badge.
+- **Section headers** are purple `font-display` (the site h2/h3 convention), not plain gray, each with a per-card count badge (platforms: platform count per category; threats: incident count per group). On threats the labels are positional, so `threats.html` only applies them when the table count matches the label list exactly (else it degrades to unlabelled cards and warns at build).
 - **Soft table chrome:** uppercase `gray-600` labels on `shade-050`, `shade-100` row borders, `shade-050` hover tint. No sticky headers; no hard black-on-gray.
 - **Columns are per-page:** platforms cells are compact and truncate with shared `th` widths so all sections align; threats keeps the narrative `Status` column wrapping (never truncate prose) and mutes/emphasizes by column position.
 - Jump-nav (platforms) is pill chips rebuilt from the section list so anchor ids always match; `scroll-mt-24` clears the fixed navbar.
