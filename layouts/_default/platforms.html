@@ -44,16 +44,22 @@
 
     {{/* Table from submodule */}}
     {{ $raw := readFile "external/bug-bounty-platforms/README.md" }}
-    {{/* Extract just the table: find the first pipe character onward */}}
     {{ $table := "" }}
-    {{ $lines := split $raw "\n" }}
-    {{ $inTable := false }}
-    {{ range $lines }}
-      {{ if hasPrefix . "|" }}
-        {{ $inTable = true }}
-      {{ end }}
-      {{ if $inTable }}
-        {{ $table = printf "%s%s\n" $table . }}
+    {{ $marker := "<!-- platforms:start -->" }}
+    {{ if in $raw $marker }}
+      {{ $parts := split $raw $marker }}
+      {{ $table = delimit (after 1 $parts) $marker }}
+    {{ else }}
+      {{/* Extract just the table: find the first pipe character onward */}}
+      {{ $lines := split $raw "\n" }}
+      {{ $inTable := false }}
+      {{ range $lines }}
+        {{ if hasPrefix . "|" }}
+          {{ $inTable = true }}
+        {{ end }}
+        {{ if $inTable }}
+          {{ $table = printf "%s%s\n" $table . }}
+        {{ end }}
       {{ end }}
     {{ end }}
 
@@ -65,6 +71,11 @@
     {{ $rendered = $rendered | replaceRE `>http://` `>` }}
     {{/* Strip @ prefix from Twitter/X handles in link text */}}
     {{ $rendered = $rendered | replaceRE `>@([^<]+)</a>` `>$1</a>` }}
+    {{ range findRE `<h2>[^<]*</h2>` $rendered }}
+      {{ $text := . | replaceRE `^<h2>` `` | replaceRE `</h2>$` `` }}
+      {{ $id := anchorize $text }}
+      {{ $rendered = replace $rendered . (printf `<h2 id="%s">%s</h2>` $id $text) }}
+    {{ end }}
 
     <div class="card overflow-hidden">
       <div class="overflow-x-auto platforms-table">
@@ -108,6 +119,41 @@
   }
   .platforms-table tbody tr:hover {
     background: hsla(240, 8%, 97%, 1);
+  }
+  .platforms-table h2 {
+    margin-top: 2rem;
+    color: #374151;
+    font-size: 1.25rem;
+    font-weight: 600;
+  }
+  .platforms-table h2:first-of-type {
+    margin-top: 1rem;
+  }
+  .platforms-table p {
+    color: #6b7280;
+    font-size: 0.875rem;
+    line-height: 1.6;
+  }
+  .platforms-table th:nth-child(1) {
+    width: 15%;
+  }
+  .platforms-table th:nth-child(2) {
+    width: 22%;
+  }
+  .platforms-table th:nth-child(3) {
+    width: 9%;
+  }
+  .platforms-table th:nth-child(4) {
+    width: 11%;
+  }
+  .platforms-table th:nth-child(5) {
+    width: 15%;
+  }
+  .platforms-table th:nth-child(7) {
+    width: 14%;
+  }
+  .platforms-table th:nth-child(8) {
+    width: 14%;
   }
   /* Hide "Has Leaderboard" column (6th column) */
   .platforms-table th:nth-child(6),
