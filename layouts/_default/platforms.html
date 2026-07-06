@@ -25,7 +25,7 @@
 {{ define "main" }}
 {{ partial "page-tldr.html" . }}
 <section class="section-sm">
-  <div class="mx-auto max-w-[1440px] px-4">
+  <div class="mx-auto max-w-6xl px-4">
     {{/* Header */}}
     <header class="mb-8 text-center">
       <h1 class="text-3xl md:text-4xl font-display font-bold mb-4">{{ .Title }}</h1>
@@ -42,7 +42,7 @@
       {{ with .Lastmod }}<p class="text-sm text-gray-400 mt-1">Last updated: {{ .Format "January 2, 2006" }}</p>{{ end }}
     </header>
 
-    {{/* Table from submodule */}}
+    {{/* Table content from submodule */}}
     {{ $raw := readFile "external/bug-bounty-platforms/README.md" }}
     {{ $table := "" }}
     {{ $marker := "<!-- platforms:start -->" }}
@@ -50,7 +50,7 @@
       {{ $parts := split $raw $marker }}
       {{ $table = delimit (after 1 $parts) $marker }}
     {{ else }}
-      {{/* Extract just the table: find the first pipe character onward */}}
+      {{/* Fallback: extract just the table from the first pipe character onward */}}
       {{ $lines := split $raw "\n" }}
       {{ $inTable := false }}
       {{ range $lines }}
@@ -63,25 +63,57 @@
       {{ end }}
     {{ end }}
 
-    {{/* Render markdown table, then shorten display text */}}
+    {{/* Render markdown, then shorten display text (href untouched) */}}
     {{ $rendered := $table | markdownify }}
-    {{/* Strip https://www. , https:// , http:// from link display text (not href) */}}
     {{ $rendered = $rendered | replaceRE `>https://www\.` `>` }}
     {{ $rendered = $rendered | replaceRE `>https://` `>` }}
     {{ $rendered = $rendered | replaceRE `>http://` `>` }}
-    {{/* Strip @ prefix from Twitter/X handles in link text */}}
     {{ $rendered = $rendered | replaceRE `>@([^<]+)</a>` `>$1</a>` }}
-    {{ range findRE `<h2>[^<]*</h2>` $rendered }}
-      {{ $text := . | replaceRE `^<h2>` `` | replaceRE `</h2>$` `` }}
-      {{ $id := anchorize $text }}
-      {{ $rendered = replace $rendered . (printf `<h2 id="%s">%s</h2>` $id $text) }}
+
+    {{/* Split into per-section chunks on <h2 ; index 0 is the pre-heading "Jump to" line (dropped) */}}
+    {{ $chunks := split $rendered "<h2" }}
+    {{ $sections := slice }}
+    {{ range $i, $chunk := $chunks }}
+      {{ if gt $i 0 }}
+        {{ $titleMatches := findRE `>[^<]+</h2>` $chunk 1 }}
+        {{ if $titleMatches }}
+          {{ $title := index $titleMatches 0 | replaceRE `^>` `` | replaceRE `</h2>$` `` }}
+          {{ $id := anchorize $title }}
+          {{ $body := index (split $chunk "</h2>") 1 }}
+          {{ $rows := sub (len (findRE `<tr` $body)) 1 }}
+          {{ $sections = $sections | append (dict "id" $id "title" $title "body" $body "rows" $rows) }}
+        {{ end }}
+      {{ end }}
     {{ end }}
 
-    <div class="card overflow-hidden">
-      <div class="overflow-x-auto platforms-table">
-        {{ $rendered | safeHTML }}
+    {{/* Jump-to chip nav (rebuilt from the section list so ids always match) */}}
+    {{ if $sections }}
+    <nav aria-label="Jump to category" class="mb-10 flex flex-wrap justify-center gap-2">
+      {{ range $sections }}
+      <a href="#{{ .id }}"
+         class="inline-flex items-center rounded-full border border-shade-200 bg-shade-050 px-3.5 py-1.5 text-sm font-medium text-purple transition-colors hover:border-purple hover:bg-purple hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple focus-visible:ring-offset-2">
+        {{ .title }}
+      </a>
+      {{ end }}
+    </nav>
+    {{ end }}
+
+    {{/* One card per category */}}
+    {{ range $sections }}
+    <section id="{{ .id }}" class="card mb-6 scroll-mt-24">
+      <div class="flex items-baseline justify-between gap-4 border-b border-shade-100 px-5 py-4">
+        <h2 class="!mt-0 text-lg md:text-xl font-display font-semibold text-purple">{{ .title }}</h2>
+        {{ if gt .rows 0 }}
+        <span class="shrink-0 rounded-full bg-shade-050 px-2.5 py-1 text-xs font-medium text-gray-600">
+          {{ .rows }} platform{{ if ne .rows 1 }}s{{ end }}
+        </span>
+        {{ end }}
       </div>
-    </div>
+      <div class="overflow-x-auto platforms-table">
+        {{ .body | safeHTML }}
+      </div>
+    </section>
+    {{ end }}
   </div>
 </section>
 
@@ -95,20 +127,22 @@
     table-layout: fixed;
   }
   .platforms-table thead th {
-    background: hsla(240, 8%, 97%, 1);
-    color: #111827;
+    background: hsla(240, 8%, 97%, 1);      /* shade-050 */
+    color: #4b5563;                          /* gray-600 */
     font-weight: 600;
+    font-size: 0.6875rem;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
     text-align: left;
-    padding: 0.5rem;
-    border-bottom: 2px solid hsla(229, 5%, 89%, 1);
-    position: sticky;
-    top: 0;
-    z-index: 1;
+    padding: 0.625rem 0.75rem;
+    border-bottom: 1px solid hsla(229, 5%, 89%, 1);  /* shade-200 */
+    white-space: nowrap;
   }
   .platforms-table tbody td {
-    padding: 0.375rem 0.5rem;
-    border-bottom: 1px solid hsla(240, 5%, 93%, 1);
+    padding: 0.5rem 0.75rem;
+    border-bottom: 1px solid hsla(240, 5%, 93%, 1);  /* shade-100 */
     vertical-align: top;
+    color: #374151;                          /* gray-700 */
     max-width: 200px;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -118,43 +152,28 @@
     border-bottom: none;
   }
   .platforms-table tbody tr:hover {
-    background: hsla(240, 8%, 97%, 1);
+    background: hsla(240, 8%, 97%, 0.6);
   }
-  .platforms-table h2 {
-    margin-top: 2rem;
-    color: #374151;
-    font-size: 1.25rem;
+  .platforms-table td:first-child {
     font-weight: 600;
+    color: #111827;                          /* platform name emphasis */
   }
-  .platforms-table h2:first-of-type {
-    margin-top: 1rem;
+  .platforms-table th:first-child,
+  .platforms-table td:first-child {
+    padding-left: 1.25rem;
   }
-  .platforms-table p {
-    color: #6b7280;
-    font-size: 0.875rem;
-    line-height: 1.6;
+  .platforms-table th:last-child,
+  .platforms-table td:last-child {
+    padding-right: 1.25rem;
   }
-  .platforms-table th:nth-child(1) {
-    width: 15%;
-  }
-  .platforms-table th:nth-child(2) {
-    width: 22%;
-  }
-  .platforms-table th:nth-child(3) {
-    width: 9%;
-  }
-  .platforms-table th:nth-child(4) {
-    width: 11%;
-  }
-  .platforms-table th:nth-child(5) {
-    width: 15%;
-  }
-  .platforms-table th:nth-child(7) {
-    width: 14%;
-  }
-  .platforms-table th:nth-child(8) {
-    width: 14%;
-  }
+  /* Shared column widths so every section table stays aligned */
+  .platforms-table th:nth-child(1) { width: 16%; }
+  .platforms-table th:nth-child(2) { width: 21%; }
+  .platforms-table th:nth-child(3) { width: 10%; }
+  .platforms-table th:nth-child(4) { width: 12%; }
+  .platforms-table th:nth-child(5) { width: 13%; }
+  .platforms-table th:nth-child(7) { width: 14%; }
+  .platforms-table th:nth-child(8) { width: 14%; }
   /* Hide "Has Leaderboard" column (6th column) */
   .platforms-table th:nth-child(6),
   .platforms-table td:nth-child(6) {
