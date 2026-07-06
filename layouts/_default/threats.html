@@ -110,7 +110,7 @@
           {{ $rendered = $rendered | replaceRE `>http://` `>` }}
           <section class="card mb-6">
             {{ with $label }}
-            <div class="flex items-baseline justify-between gap-4 border-b border-shade-100 px-5 py-4">
+            <div class="flex items-baseline justify-between gap-4 border-b border-shade-100 px-8 py-4">
               <h2 class="!mt-0 text-lg md:text-xl font-display font-semibold text-purple">{{ . }}</h2>
               {{ if gt $rows 0 }}
               <span class="shrink-0 rounded-full bg-shade-050 px-2.5 py-1 text-xs font-medium text-gray-600">
@@ -189,9 +189,9 @@
   .threats-table tbody tr:last-child td { border-bottom: none; }
   .threats-table tbody tr:hover { background: hsla(240, 8%, 97%, 0.6); }
   .threats-table th:first-child,
-  .threats-table td:first-child { padding-left: 1.25rem; }
+  .threats-table td:first-child { padding-left: 2rem; }
   .threats-table th:last-child,
-  .threats-table td:last-child { padding-right: 1.25rem; }
+  .threats-table td:last-child { padding-right: 2rem; }
 
   /* Column sizing — narrative Status gets the room; the rest stay compact.
      Only the date VALUES are muted; the WHEN header stays gray-600 like its siblings. */

@@ -88,7 +88,7 @@
 
     {{/* Jump-to chip nav (rebuilt from the section list so ids always match) */}}
     {{ if $sections }}
-    <nav aria-label="Jump to category" class="mb-10 flex flex-wrap justify-center gap-2">
+    <nav aria-label="Jump to category" class="mb-10 flex flex-wrap justify-center gap-x-4 gap-y-3">
       {{ range $sections }}
       <a href="#{{ .id }}"
          class="inline-flex items-center rounded-full border border-shade-200 bg-shade-050 px-3.5 py-1.5 text-sm font-medium text-purple transition-colors hover:border-purple hover:bg-purple hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple focus-visible:ring-offset-2">
@@ -101,7 +101,7 @@
     {{/* One card per category */}}
     {{ range $sections }}
     <section id="{{ .id }}" class="card mb-6 scroll-mt-24">
-      <div class="flex items-baseline justify-between gap-4 border-b border-shade-100 px-5 py-4">
+      <div class="flex items-baseline justify-between gap-4 border-b border-shade-100 px-8 py-4">
         <h2 class="!mt-0 text-lg md:text-xl font-display font-semibold text-purple">{{ .title }}</h2>
         {{ if gt .rows 0 }}
         <span class="shrink-0 rounded-full bg-shade-050 px-2.5 py-1 text-xs font-medium text-gray-600">
@@ -160,11 +160,11 @@
   }
   .platforms-table th:first-child,
   .platforms-table td:first-child {
-    padding-left: 1.25rem;
+    padding-left: 2rem;
   }
   .platforms-table th:last-child,
   .platforms-table td:last-child {
-    padding-right: 1.25rem;
+    padding-right: 2rem;
   }
   /* Shared column widths so every section table stays aligned */
   .platforms-table th:nth-child(1) { width: 16%; }
