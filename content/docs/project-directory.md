@@ -60,11 +60,11 @@ A Go-based scanner that validates security.txt files at internet scale. Powers t
 
 Tracking adoption, documenting threats, and building the evidence base for policy work.
 
-### diodb: The VDP/BBP Database
+### The program directory
 
-The definitive community-powered database of every known vulnerability disclosure program and public bug bounty program, along with their disclose.io maturity status. The most active project in the ecosystem, contributions welcome via pull request.
+[directory.disclose.io](https://directory.disclose.io) is the live, community-powered system of record for every known vulnerability disclosure program and public bug bounty program, along with their disclose.io maturity status. Add or update a program directly in the directory.
 
-[Repository](https://github.com/disclose/diodb)
+The legacy [diodb](https://github.com/disclose/diodb) dataset — the original open-data prototype — is archived and read-only.
 
 ### Data survey: retired
 

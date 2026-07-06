@@ -29,6 +29,6 @@ weight: 70
 
 1. *Whether you're starting from scratch or updating an existing policy, choose the legal terms that best fit your vulnerability disclosure program (VDP) or bug bounty program (BBP).*
 2. *Publish your new policy, or add the safe harbor terms to your existing VDP or BBP policy.*
-3. *Submit a pull request to add your program to the open-source disclose.io program database. The diodb maintainers will confirm details, validate your disclose.io status, and merge your request.*
+3. *Add your program to the disclose.io directory at [directory.disclose.io](https://directory.disclose.io) — the live system of record. The disclose.io team will confirm details and validate your disclose.io status.*
 4. *Select the appropriate disclose.io Seal based on your Disclose.io Status.*
 5. *Add the seal to your security page, vulnerability policy or reporting page, checkout page, and whatever else you like and let the world know you're joining the mission!*
