@@ -59,16 +59,79 @@
     {{/* Strip trailing HTML link tag */}}
     {{ $content = $content | replaceRE `<link[^>]*>` "" }}
 
-    {{/* Render markdown */}}
-    {{ $rendered := $content | markdownify }}
+    {{/* Faithful section labels for each incident table, in document order.
+         Extra tables (if the source grows) render as an unlabelled card. */}}
+    {{ $labels := slice "Confirmed threats" "Unconfirmed or partially confirmed" "Related incidents that crossed the line" "Cancelled talks" }}
 
-    {{/* Clean up display text in links (href untouched) */}}
-    {{ $rendered = $rendered | replaceRE `>https://www\.` `>` }}
-    {{ $rendered = $rendered | replaceRE `>https://` `>` }}
-    {{ $rendered = $rendered | replaceRE `>http://` `>` }}
+    {{/* Group the markdown into ordered blocks: a contiguous run of pipe-lines is a
+         table; any other contiguous run of non-blank lines is prose. Blank lines break blocks. */}}
+    {{ $blocks := slice }}
+    {{ $cur := "" }}
+    {{ $curType := "" }}
+    {{ range $ln := split $content "\n" }}
+      {{ $trimmed := trim $ln " " }}
+      {{ if eq $trimmed "" }}
+        {{ if ne $cur "" }}
+          {{ $blocks = $blocks | append (dict "type" $curType "md" $cur) }}
+          {{ $cur = "" }}
+          {{ $curType = "" }}
+        {{ end }}
+      {{ else }}
+        {{ $t := cond (hasPrefix $trimmed "|") "table" "prose" }}
+        {{ if and (ne $curType "") (ne $t $curType) }}
+          {{ $blocks = $blocks | append (dict "type" $curType "md" $cur) }}
+          {{ $cur = "" }}
+        {{ end }}
+        {{ $cur = cond (eq $cur "") $ln (printf "%s\n%s" $cur $ln) }}
+        {{ $curType = $t }}
+      {{ end }}
+    {{ end }}
+    {{ if ne $cur "" }}{{ $blocks = $blocks | append (dict "type" $curType "md" $cur) }}{{ end }}
 
+    {{/* Fail-safe: labels are positional, so only apply them when the table count matches
+         exactly. If the source README ever adds/removes/reorders a table, degrade to
+         unlabelled cards (never a WRONG label) and warn at build time. */}}
+    {{ $tableCount := 0 }}
+    {{ range $blocks }}{{ if eq .type "table" }}{{ $tableCount = add $tableCount 1 }}{{ end }}{{ end }}
+    {{ $applyLabels := eq $tableCount (len $labels) }}
+    {{ if not $applyLabels }}{{ warnf "threats.html: expected %d incident tables, found %d — rendering unlabelled to avoid mislabelling; update the $labels slice in layouts/_default/threats.html" (len $labels) $tableCount }}{{ end }}
+
+    {{/* Render: each table becomes a labelled card (matches /platforms); prose flows between them */}}
+    {{ $ti := 0 }}
     <div class="threats-content">
-      {{ $rendered | safeHTML }}
+      {{ range $blocks }}
+        {{ if eq .type "table" }}
+          {{ $label := "" }}
+          {{ if and $applyLabels (lt $ti (len $labels)) }}{{ $label = index $labels $ti }}{{ end }}
+          {{ $rows := sub (len (findRE `(?m)^\|` .md)) 2 }}
+          {{ $rendered := .md | markdownify }}
+          {{ $rendered = $rendered | replaceRE `>https://www\.` `>` }}
+          {{ $rendered = $rendered | replaceRE `>https://` `>` }}
+          {{ $rendered = $rendered | replaceRE `>http://` `>` }}
+          <section class="card mb-6">
+            {{ with $label }}
+            <div class="flex items-baseline justify-between gap-4 border-b border-shade-100 px-5 py-4">
+              <h2 class="!mt-0 text-lg md:text-xl font-display font-semibold text-purple">{{ . }}</h2>
+              {{ if gt $rows 0 }}
+              <span class="shrink-0 rounded-full bg-shade-050 px-2.5 py-1 text-xs font-medium text-gray-600">
+                {{ $rows }} incident{{ if ne $rows 1 }}s{{ end }}
+              </span>
+              {{ end }}
+            </div>
+            {{ end }}
+            <div class="overflow-x-auto threats-table">
+              {{ $rendered | safeHTML }}
+            </div>
+          </section>
+          {{ $ti = add $ti 1 }}
+        {{ else }}
+          {{ $rendered := .md | markdownify }}
+          {{ $rendered = $rendered | replaceRE `>https://www\.` `>` }}
+          {{ $rendered = $rendered | replaceRE `>https://` `>` }}
+          {{ $rendered = $rendered | replaceRE `>http://` `>` }}
+          <div class="threats-prose">{{ $rendered | safeHTML }}</div>
+        {{ end }}
+      {{ end }}
     </div>
   </div>
 </section>
@@ -76,40 +139,35 @@
 {{ partial "newsletter-cta.html" . }}
 
 <style>
-  /* Descriptive intro + notes prose between the tables */
-  .threats-content > p {
+  /* Descriptive intro / notes prose between the incident cards */
+  .threats-prose {
+    max-width: 75ch;
+    margin: 2rem 0 0.75rem;
+  }
+  .threats-prose:first-child { margin-top: 0; }
+  .threats-prose p,
+  .threats-prose ul {
     color: #4b5563;                 /* gray-600 */
     font-size: 0.9375rem;
     line-height: 1.7;
-    margin: 2.25rem 0 0.75rem;
-    max-width: 75ch;
+    margin: 0.5rem 0;
   }
-  .threats-content > p:first-child { margin-top: 0; }
-  .threats-content > ul {
-    color: #4b5563;
-    font-size: 0.9375rem;
-    line-height: 1.7;
-    margin: 0.5rem 0 0.75rem;
+  .threats-prose ul {
     padding-left: 1.5rem;
     list-style-type: disc;
-    max-width: 75ch;
   }
-  .threats-content > ul li { margin: 0.25rem 0; }
+  .threats-prose li { margin: 0.25rem 0; }
+  .threats-prose a { color: #673ab6; font-weight: 500; }
+  .threats-prose a:hover { color: #322a41; text-decoration: underline; }
 
-  /* Each incident table rendered as an on-brand card (matches .card token + /platforms) */
-  .threats-content table {
+  /* Table inside each card — mirrors the /platforms chrome; Status column wraps */
+  .threats-table table {
     width: 100%;
     border-collapse: collapse;
     font-size: 0.8125rem;
-    margin: 1rem 0 2.5rem;
-    background: #ffffff;
-    border: 1px solid hsla(229, 5%, 89%, 1);          /* shade-200 */
-    border-radius: 0.75rem;                            /* rounded-xl */
-    box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);        /* shadow-sm */
-    overflow: hidden;
+    table-layout: auto;
   }
-
-  .threats-content thead th {
+  .threats-table thead th {
     background: hsla(240, 8%, 97%, 1);                 /* shade-050 */
     color: #4b5563;                                    /* gray-600 */
     font-weight: 600;
@@ -117,43 +175,37 @@
     letter-spacing: 0.03em;
     text-transform: uppercase;
     text-align: left;
-    padding: 0.625rem 0.875rem;
+    padding: 0.625rem 0.75rem;
     border-bottom: 1px solid hsla(229, 5%, 89%, 1);    /* shade-200 */
     white-space: nowrap;
   }
-
-  .threats-content tbody td {
-    padding: 0.625rem 0.875rem;
+  .threats-table tbody td {
+    padding: 0.5rem 0.75rem;
     border-bottom: 1px solid hsla(240, 5%, 93%, 1);    /* shade-100 */
     vertical-align: top;
     color: #374151;                                    /* gray-700 */
     line-height: 1.6;
   }
-  .threats-content tbody tr:last-child td { border-bottom: none; }
-  .threats-content tbody tr:hover { background: hsla(240, 8%, 97%, 0.6); }
-  .threats-content th:first-child,
-  .threats-content td:first-child { padding-left: 1.25rem; }
-  .threats-content th:last-child,
-  .threats-content td:last-child { padding-right: 1.25rem; }
+  .threats-table tbody tr:last-child td { border-bottom: none; }
+  .threats-table tbody tr:hover { background: hsla(240, 8%, 97%, 0.6); }
+  .threats-table th:first-child,
+  .threats-table td:first-child { padding-left: 1.25rem; }
+  .threats-table th:last-child,
+  .threats-table td:last-child { padding-right: 1.25rem; }
 
-  /* Column sizing — narrative Status gets the room; the rest stay compact */
-  .threats-content td:nth-child(1),
-  .threats-content th:nth-child(1) { white-space: nowrap; width: 6.5rem; color: #6b7280; }   /* When (muted date) */
-  .threats-content td:nth-child(2) { width: 9rem; font-weight: 600; color: #111827; }          /* Entity / Company */
-  .threats-content td:nth-child(3) { width: 9rem; }                                             /* Researcher(s) */
-  .threats-content td:nth-child(4) { width: 13rem; }                                            /* Topic */
-  .threats-content td:nth-child(5) { word-wrap: break-word; overflow-wrap: break-word; min-width: 18rem; }  /* Status */
+  /* Column sizing — narrative Status gets the room; the rest stay compact.
+     Only the date VALUES are muted; the WHEN header stays gray-600 like its siblings. */
+  .threats-table th:nth-child(1),
+  .threats-table td:nth-child(1) { white-space: nowrap; width: 6.5rem; }
+  .threats-table td:nth-child(1) { color: #6b7280; }
+  .threats-table td:nth-child(2) { width: 9rem; font-weight: 600; color: #111827; }
+  .threats-table th:nth-child(3),
+  .threats-table td:nth-child(3) { width: 9rem; }
+  .threats-table th:nth-child(4),
+  .threats-table td:nth-child(4) { width: 13rem; }
+  .threats-table td:nth-child(5) { word-wrap: break-word; overflow-wrap: break-word; min-width: 18rem; }
 
-  .threats-content a { color: #673ab6; font-weight: 500; }
-  .threats-content a:hover { color: #322a41; text-decoration: underline; }
-
-  /* Mobile: let a wide table scroll inside its card */
-  @media (max-width: 900px) {
-    .threats-content table {
-      display: block;
-      overflow-x: auto;
-      -webkit-overflow-scrolling: touch;
-    }
-  }
+  .threats-table a { color: #673ab6; font-weight: 500; }
+  .threats-table a:hover { color: #322a41; text-decoration: underline; }
 </style>
 {{ end }}
