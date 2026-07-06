@@ -215,9 +215,9 @@ Folks who have shipped meaningful commits across the [disclose.io GitHub org](ht
 
 Here are some of the ways you can contribute back:
 
-### Keeping diodb up-to-date
+### Keeping the directory up-to-date
 
-Help us maintain [diodb](https://github.com/disclose/diodb/blob/master/program-list.json) as the most comprehensive source of truth. Send us changes or additions to VDPs and bug bounty programs via PR to our Github repo.
+Help us keep [directory.disclose.io](https://directory.disclose.io) — the live system of record — comprehensive and current. Add or update VDPs and bug bounty programs directly in the directory. (The legacy [diodb](https://github.com/disclose/diodb) dataset is archived and read-only.)
 
 ### Help us translate policies
 
