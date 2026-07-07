@@ -16,7 +16,6 @@ Below is the full ecosystem. Every component answers a real question someone ask
 
 - [disclose.io](/): the framework, docs, and project home
 - [directory.disclose.io](https://directory.disclose.io?utm_source=universe&utm_medium=onepager&utm_campaign=directory): the open **system of record** for every known VDP and bug bounty program
-- [state.disclose.io](https://state.disclose.io?utm_source=universe&utm_medium=onepager&utm_campaign=state): maturity metrics for coordinated disclosure adoption
 - [disclose.io/programs](/programs): curated programs with safe harbor language
 - [disclose.io/platforms](/platforms): bug bounty platforms supporting safe harbor
 - [disclose.io/threats](/threats): the public archive of legal threats to security researchers
