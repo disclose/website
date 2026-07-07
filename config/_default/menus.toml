@@ -124,11 +124,6 @@
   weight = 45
 
 [[footer_resources]]
-  name = "Scoreboard"
-  url = "https://state.disclose.io"
-  weight = 50
-
-[[footer_resources]]
   name = "Vault"
   url = "https://vault.disclose.io"
   weight = 55

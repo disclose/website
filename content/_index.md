@@ -4,7 +4,7 @@ description: "The open, vendor-neutral infrastructure that powers vulnerability 
 hero:
   title: "disclose.io"
   subtitle: "The infrastructure that powers vulnerability disclosure and security reporting. Safe, simple, and standardized for everyone."
-  supporting: "Open source · vendor-neutral · home of the safe-harbor scoreboard."
+  supporting: "Open source · vendor-neutral."
   image: "uploads/tug-of-war.png"
   search: true
   buttons:
