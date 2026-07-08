@@ -10,160 +10,110 @@
     --purple: #673ab6;
     --purple-dark: #322a41;
     --purple-light: #8b5cf6;
-
     --bg: #fafafa;
     --surface: #ffffff;
     --surface-2: hsla(240, 8%, 97%, 1);
     --border: hsla(229, 5%, 89%, 1);
     --ink: #111827;
-    --muted: #6b7280;
-    --faint: hsla(231, 4%, 63%, 1);
-
-    --edge: #9ca3af;
-    --hero: #673ab6;
-    --hero-bg: rgba(103, 58, 182, 0.08);
-
-    --c-standards: #4c2a8a;
-    --c-standards-bg: rgba(76, 42, 138, 0.10);
-    --c-tools: #673ab6;
-    --c-tools-bg: rgba(103, 58, 182, 0.10);
-    --c-data: #322a41;
-    --c-data-bg: rgba(50, 42, 65, 0.10);
-    --c-measure: #8b5cf6;
-    --c-measure-bg: rgba(139, 92, 246, 0.12);
-    --c-commons: #a78bfa;
-    --c-commons-bg: rgba(167, 139, 250, 0.16);
-
+    --muted: #5b5b66;
+    --faint: hsla(231, 4%, 55%, 1);
+    --finder-bg: rgba(103, 58, 182, 0.06);
+    --org-bg: rgba(139, 92, 246, 0.08);
     --mono: 'SF Mono', Menlo, Consolas, monospace;
     --sans: 'Noto Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     --display: 'Noto Sans Display', 'Noto Sans', system-ui, sans-serif;
   }
-
   :root[data-theme="dark"] {
-    --bg: #141317;
-    --surface: #1d1b23;
-    --surface-2: #24222c;
-    --border: #37343f;
-    --ink: #f2f2f5;
-    --muted: #a6a3b2;
-    --faint: #7d7a89;
-
-    --edge: #7b7788;
-    --hero: #b79df7;
-    --hero-bg: rgba(183, 157, 247, 0.14);
-
-    --c-standards: #a78bfa;
-    --c-standards-bg: rgba(167, 139, 250, 0.14);
-    --c-tools: #b79df7;
-    --c-tools-bg: rgba(183, 157, 247, 0.14);
-    --c-data: #cfc4ea;
-    --c-data-bg: rgba(207, 196, 234, 0.12);
-    --c-measure: #9f7aea;
-    --c-measure-bg: rgba(159, 122, 234, 0.16);
-    --c-commons: #c4b5fd;
-    --c-commons-bg: rgba(196, 181, 253, 0.16);
+    --bg: #141317; --surface: #1d1b23; --surface-2: #24222c; --border: #37343f;
+    --ink: #f2f2f5; --muted: #b7b4c2; --faint: #8d8a99;
+    --purple: #b79df7; --purple-light: #cbb6fb;
+    --finder-bg: rgba(183, 157, 247, 0.10); --org-bg: rgba(139, 92, 246, 0.12);
   }
-
   @media (prefers-color-scheme: dark) {
     :root:not([data-theme="light"]) {
       --bg: #141317; --surface: #1d1b23; --surface-2: #24222c; --border: #37343f;
-      --ink: #f2f2f5; --muted: #a6a3b2; --faint: #7d7a89;
-      --edge: #7b7788; --hero: #b79df7; --hero-bg: rgba(183, 157, 247, 0.14);
-      --c-standards: #a78bfa; --c-standards-bg: rgba(167, 139, 250, 0.14);
-      --c-tools: #b79df7; --c-tools-bg: rgba(183, 157, 247, 0.14);
-      --c-data: #cfc4ea; --c-data-bg: rgba(207, 196, 234, 0.12);
-      --c-measure: #9f7aea; --c-measure-bg: rgba(159, 122, 234, 0.16);
-      --c-commons: #c4b5fd; --c-commons-bg: rgba(196, 181, 253, 0.16);
+      --ink: #f2f2f5; --muted: #b7b4c2; --faint: #8d8a99;
+      --purple: #b79df7; --purple-light: #cbb6fb;
+      --finder-bg: rgba(183, 157, 247, 0.10); --org-bg: rgba(139, 92, 246, 0.12);
     }
   }
 
   *, *::before, *::after { box-sizing: border-box; }
-  body {
-    margin: 0; background: var(--bg); color: var(--ink);
-    font-family: var(--sans); line-height: 1.55;
-    padding: 2rem 1rem 4rem;
-  }
-  .wrap { max-width: 1180px; margin: 0 auto; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--sans); line-height: 1.55; padding: 2rem 1rem 4rem; }
+  .wrap { max-width: 1080px; margin: 0 auto; }
+  body.bleed .wrap { max-width: 100%; }
 
-  h1 { font-family: var(--display); font-size: clamp(1.6rem, 3vw, 2.25rem); color: var(--purple); margin: 0 0 .4rem; letter-spacing: -0.01em; }
-  :root[data-theme="dark"] h1 { color: var(--purple-light); }
-  h2 { font-family: var(--display); font-size: 1.2rem; margin: 0 0 .25rem; color: var(--ink); }
-  .lede { color: var(--muted); margin: 0 0 1.5rem; max-width: 70ch; }
-  .idea { color: var(--muted); font-size: .9rem; margin: 0 0 1rem; max-width: 78ch; }
+  h1 { font-family: var(--display); font-size: clamp(1.7rem, 3.2vw, 2.4rem); color: var(--purple); margin: 0 0 .5rem; letter-spacing: -0.015em; }
+  .lede { color: var(--muted); margin: 0 0 1.75rem; max-width: 66ch; font-size: 1.05rem; }
+  h2 { font-family: var(--display); font-size: clamp(1.25rem, 2.2vw, 1.6rem); margin: 0 0 .35rem; color: var(--ink); letter-spacing: -0.01em; }
+  .v-lead { color: var(--muted); margin: 0 0 1.5rem; max-width: 70ch; }
 
   .bar { display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; margin: 0 0 2rem; }
-  button {
-    font: inherit; font-size: .85rem; padding: .4rem .8rem; cursor: pointer;
-    background: var(--surface); color: var(--ink);
-    border: 1px solid var(--border); border-radius: .5rem; transition: all .15s;
-  }
+  button { font: inherit; font-size: .85rem; padding: .4rem .8rem; cursor: pointer; background: var(--surface); color: var(--ink); border: 1px solid var(--border); border-radius: .5rem; transition: all .15s; }
   button[aria-pressed="true"] { background: var(--purple); color: #fff; border-color: var(--purple); }
+  :root[data-theme="dark"] button[aria-pressed="true"] { color: #17151c; }
   button:focus-visible { outline: 2px solid var(--purple); outline-offset: 2px; }
   .barlbl { font-size: .75rem; text-transform: uppercase; letter-spacing: .06em; color: var(--faint); margin-right: .25rem; }
 
-  .card {
-    background: var(--surface); border: 1px solid var(--border);
-    border-radius: 12px; box-shadow: 0 1px 2px rgba(0,0,0,.04);
-    padding: 1.5rem; margin: 0 0 2rem; overflow: hidden;
-  }
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; box-shadow: 0 1px 2px rgba(0,0,0,.04); padding: 1.75rem; margin: 0 0 2rem; }
   body.bleed .card.variation { border-radius: 0; border-left: 0; border-right: 0; }
-  body.bleed .wrap { max-width: 100%; }
 
-  .figure { overflow-x: auto; margin-top: 1rem; }
-  .figure svg { display: block; width: 100%; min-width: 720px; height: auto; }
+  a.tool { color: var(--purple); text-decoration: none; font-weight: 600; }
+  a.tool:hover { text-decoration: underline; }
 
-  .legend { display: flex; flex-wrap: wrap; gap: 1.25rem; align-items: center; font-size: .8rem; color: var(--muted); }
-  .legend .k { display: inline-flex; align-items: center; gap: .45rem; }
-  .legend svg { width: 42px; height: 10px; overflow: visible; }
+  /* ---------- Variation 1: two sides ---------- */
+  .sides { display: grid; grid-template-columns: 1fr minmax(150px, 0.7fr) 1fr; gap: 1rem; align-items: stretch; }
+  .side { border: 1px solid var(--border); border-radius: 14px; padding: 1.25rem; }
+  .side.finder { background: var(--finder-bg); }
+  .side.org { background: var(--org-bg); }
+  .side-h { display: flex; align-items: center; gap: .6rem; margin-bottom: 1rem; }
+  .side-h .ic { width: 40px; height: 40px; border-radius: 10px; background: var(--surface); border: 1px solid var(--border); display: grid; place-items: center; flex: none; }
+  .side-h .ic svg { width: 22px; height: 22px; stroke: var(--purple); fill: none; stroke-width: 2; }
+  .side-h b { font-family: var(--display); font-size: 1.02rem; color: var(--ink); line-height: 1.25; }
+  .job { padding: .7rem 0; border-top: 1px solid var(--border); }
+  .job:first-of-type { border-top: 0; }
+  .job .jh { font-weight: 700; font-size: 1rem; color: var(--ink); margin-bottom: .1rem; }
+  .job .jd { color: var(--muted); font-size: .875rem; }
+  .job .jt { font-size: .78rem; color: var(--faint); }
+  .meet { background: var(--purple); color: #fff; border-radius: 14px; padding: 1.25rem; display: flex; flex-direction: column; justify-content: center; text-align: center; }
+  :root[data-theme="dark"] .meet { color: #17151c; }
+  .meet .lbl { font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; opacity: .85; margin-bottom: .5rem; }
+  .meet .big { font-family: var(--display); font-weight: 800; font-size: clamp(1.1rem, 1.8vw, 1.35rem); line-height: 1.2; margin-bottom: .5rem; }
+  .meet .sub { font-size: .84rem; opacity: .92; }
+  .commons { margin-top: 1rem; border-top: 1px dashed var(--border); padding-top: 1rem; color: var(--muted); font-size: .9rem; text-align: center; }
+  .commons b { color: var(--ink); font-weight: 600; }
+  @media (max-width: 760px) { .sides { grid-template-columns: 1fr; } .meet { order: 2; } .side.org { order: 3; } }
 
-  /* SVG shared classes */
-  .n-box { fill: var(--surface); stroke: var(--border); stroke-width: 1.5; }
-  .cl-title { font-family: var(--display); font-size: 13px; font-weight: 700; letter-spacing: .08em; text-anchor: middle; }
-  .cl-title.l { text-anchor: start; }
-  .prop { font-size: 13px; fill: var(--muted); text-anchor: middle; }
-  .prop.l { text-anchor: start; }
-  .hub-t { font-family: var(--display); font-size: 17px; font-weight: 700; fill: var(--purple); text-anchor: middle; }
-  .hub-s { font-size: 11.5px; fill: var(--muted); text-anchor: middle; }
+  /* ---------- Variation 2: journey ---------- */
+  .journey { display: flex; flex-wrap: wrap; align-items: stretch; gap: .5rem; }
+  .jstep { flex: 1 1 130px; min-width: 130px; background: var(--surface-2); border: 1px solid var(--border); border-radius: 12px; padding: .9rem; }
+  .jstep .n { font-size: .72rem; font-weight: 700; color: var(--purple); letter-spacing: .04em; }
+  .jstep .jh { font-weight: 700; font-size: .98rem; margin: .15rem 0 .3rem; color: var(--ink); line-height: 1.2; }
+  .jstep .jt { font-size: .78rem; color: var(--faint); }
+  .jstep.key { background: var(--purple); border-color: var(--purple); }
+  .jstep.key .n, .jstep.key .jh { color: #fff; }
+  .jstep.key .jt { color: rgba(255,255,255,.85); }
+  :root[data-theme="dark"] .jstep.key .n, :root[data-theme="dark"] .jstep.key .jh { color: #17151c; }
+  :root[data-theme="dark"] .jstep.key .jt { color: rgba(23,21,28,.8); }
+  .chev { align-self: center; color: var(--faint); font-size: 1.3rem; flex: none; }
+  @media (max-width: 700px) { .chev { display: none; } .jstep { flex-basis: 100%; } }
 
-  .edge { fill: none; stroke: var(--edge); stroke-width: 2; }
-  .edge.human { stroke-dasharray: 7 6; }
-  .ring { fill: none; stroke: var(--border); stroke-width: 2; stroke-dasharray: 9 11; }
+  /* ---------- Variation 3: intent cards ---------- */
+  .intent { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .icard { border: 1px solid var(--border); border-radius: 14px; padding: 1.25rem; background: var(--surface-2); }
+  .icard .q { font-family: var(--display); font-size: 1.12rem; font-weight: 700; color: var(--purple); margin-bottom: .85rem; }
+  .icard .opt { padding: .4rem 0; border-top: 1px solid var(--border); }
+  .icard .opt:first-of-type { border-top: 0; }
+  .icard .opt .oh { font-weight: 600; color: var(--ink); }
+  .icard .opt .od { color: var(--muted); font-size: .85rem; }
+  @media (max-width: 680px) { .intent { grid-template-columns: 1fr; } }
 
-  .hero-path { fill: none; stroke: var(--hero); stroke-width: 3.75; stroke-dasharray: 9 6; stroke-linecap: round; }
-  .hero-back { fill: none; stroke: var(--edge); stroke-width: 1.75; }
-  .hero-box { fill: var(--hero-bg); stroke: var(--hero); stroke-width: 1.5; }
-  .hero-t { font-size: 12.5px; fill: var(--hero); font-weight: 700; }
-  .hero-s { font-size: 11px; fill: var(--muted); }
-  .elbl { font-size: 11px; fill: var(--faint); }
-
-  .s-standards { fill: var(--c-standards-bg); stroke: var(--c-standards); stroke-width: 1.75; }
-  .s-tools     { fill: var(--c-tools-bg);     stroke: var(--c-tools);     stroke-width: 1.75; }
-  .s-data      { fill: var(--c-data-bg);      stroke: var(--c-data);      stroke-width: 1.75; }
-  .s-measure   { fill: var(--c-measure-bg);   stroke: var(--c-measure);   stroke-width: 1.75; }
-  .s-commons   { fill: var(--c-commons-bg);   stroke: var(--c-commons);   stroke-width: 1.75; }
-  .t-standards { fill: var(--c-standards); }
-  .t-tools     { fill: var(--c-tools); }
-  .t-data      { fill: var(--c-data); }
-  .t-measure   { fill: var(--c-measure); }
-  .t-commons   { fill: var(--c-commons); }
-
-  .step-n { font-size: 11px; font-weight: 700; fill: var(--purple); }
-  .step-t { font-family: var(--display); font-size: 13.5px; font-weight: 700; fill: var(--ink); }
-  .step-p { font-size: 11.5px; fill: var(--muted); }
-
-  .station { fill: var(--surface); stroke-width: 3; }
-  .st-lbl { font-size: 12px; fill: var(--ink); text-anchor: middle; font-weight: 600; }
-  .line-tag { font-family: var(--display); font-size: 10.5px; font-weight: 700; letter-spacing: .09em; }
-
-  .index { display: grid; grid-template-columns: minmax(190px, max-content) 1fr; gap: .35rem 1.25rem; font-size: .875rem; }
+  /* ---------- property index ---------- */
+  .index { display: grid; grid-template-columns: minmax(190px, max-content) 1fr; gap: .4rem 1.25rem; font-size: .9rem; }
   .index a { color: var(--purple); text-decoration: none; font-weight: 600; }
-  :root[data-theme="dark"] .index a { color: var(--purple-light); }
   .index a:hover { text-decoration: underline; }
   .index .d { color: var(--muted); }
   @media (max-width: 620px) { .index { grid-template-columns: 1fr; gap: .1rem 0; } .index .d { margin-bottom: .5rem; } }
-
-  .notes li { margin-bottom: .6rem; color: var(--muted); font-size: .9rem; }
-  .notes strong { color: var(--ink); }
   code { font-family: var(--mono); font-size: .85em; background: var(--surface-2); padding: .1rem .35rem; border-radius: .25rem; border: 1px solid var(--border); }
   footer { color: var(--faint); font-size: .8rem; text-align: center; margin-top: 2.5rem; }
 </style>
@@ -171,11 +121,10 @@
 <body>
 <div class="wrap">
 
-  <h1>The disclose.io ecosystem: four ways to draw it</h1>
+  <h1>The disclose.io ecosystem: three ways to draw it</h1>
   <p class="lede">
-    Internal preview. Four structurally distinct treatments of a front-page graphic showing the eleven public
-    properties and how they relate. Same content model, same palette, same type. Only the structure changes,
-    so you are comparing structure and nothing else. Pick one.
+    Internal preview, take two: built for a first-time visitor who has never heard of us. Plain language leads,
+    tool names sit quietly underneath. Same idea drawn three ways. Pick the one a stranger would understand fastest.
   </p>
 
   <div class="bar">
@@ -187,371 +136,125 @@
     <button id="w-bleed" aria-pressed="false">Full bleed</button>
   </div>
 
-  <div class="card">
-    <h2>How to read the edges</h2>
-    <p class="idea" style="margin-bottom:.9rem">
-      One convention runs through all four. It is the thing that makes the picture honest, and it came out of
-      auditing the actual code behind each arrow.
-    </p>
-    <div class="legend">
-      <span class="k">
-        <svg viewBox="0 0 42 10" aria-hidden="true"><line x1="0" y1="5" x2="42" y2="5" class="edge"/></svg>
-        solid: a machine does this
-      </span>
-      <span class="k">
-        <svg viewBox="0 0 42 10" aria-hidden="true"><line x1="0" y1="5" x2="42" y2="5" class="edge human"/></svg>
-        dashed: a person does this
-      </span>
-      <span class="k">
-        <svg viewBox="0 0 42 10" aria-hidden="true"><line x1="0" y1="5" x2="42" y2="5" class="hero-path"/></svg>
-        the one relationship that makes disclose.io a commons
-      </span>
-    </div>
-  </div>
-
-  <!-- ============================= VARIATION 1: FLYWHEEL ============================= -->
+  <!-- ================= VARIATION 1: TWO SIDES ================= -->
   <section class="card variation">
-    <h2>Variation 1: The flywheel</h2>
-    <p class="idea">
-      Loop first. The shape says "self-reinforcing system" before a single word is read. The hub sits at the
-      centre as a multiplier on every edge, not as a sixth stage. Strongest claim, hardest to fit labels into.
-    </p>
-    <div class="figure">
-      <svg viewBox="0 0 920 640" role="img" aria-labelledby="v1t">
-        <title id="v1t">The disclose.io ecosystem drawn as a reinforcing flywheel: standards, tools, data, measurement and commons circulating around the disclose.io hub, with lookup's failed queries repairing the directory.</title>
-        <defs>
-          <marker id="a1" markerWidth="10" markerHeight="10" refX="7" refY="4" orient="auto">
-            <path d="M1,1 L7,4 L1,7" fill="none" stroke="var(--edge)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-          </marker>
-          <marker id="a1h" markerWidth="11" markerHeight="11" refX="7" refY="4.5" orient="auto">
-            <path d="M1,1 L8,4.5 L1,8" fill="none" stroke="var(--hero)" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/>
-          </marker>
-        </defs>
+    <h2>Variation 1: Two sides of every security bug</h2>
+    <p class="v-lead">Someone finds it. Someone needs to fix it. disclose.io is where they meet, safely. Your side tells you where to start.</p>
 
-        <circle cx="460" cy="320" r="230" class="ring"/>
+    <div class="sides">
+      <div class="side finder">
+        <div class="side-h">
+          <span class="ic"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></span>
+          <b>You found a<br>security bug</b>
+        </div>
+        <div class="job"><div class="jh">Find who to tell</div><div class="jd">Type in a domain, get the security contact.</div><div class="jt"><a class="tool" href="https://lookup.disclose.io" target="_blank" rel="noopener">lookup</a></div></div>
+        <div class="job"><div class="jh">Report without fear</div><div class="jd">Know good-faith reports are welcome, not punished.</div><div class="jt"><a class="tool" href="https://github.com/disclose/dioterms" target="_blank" rel="noopener">Safe Harbor</a></div></div>
+        <div class="job"><div class="jh">Agree on a fair deadline</div><div class="jd">Coordinate the fix on a clear timeline.</div><div class="jt"><a class="tool" href="https://vault.disclose.io" target="_blank" rel="noopener">vault</a></div></div>
+      </div>
 
-        <!-- circulation arcs -->
-        <path d="M568,117 A230,230 0 0 1 651,191" class="edge" marker-end="url(#a1)"/>
-        <path d="M690,328 A230,230 0 0 1 651,449" class="edge" marker-end="url(#a1)"/>
-        <path d="M523,541 A230,230 0 0 1 397,541" class="edge human" marker-end="url(#a1)"/>
-        <path d="M269,449 A230,230 0 0 1 230,328" class="edge human" marker-end="url(#a1)"/>
-        <path d="M279,178 A230,230 0 0 1 381,104" class="edge human" marker-end="url(#a1)"/>
+      <div class="meet">
+        <div class="lbl">Where you meet</div>
+        <div class="big">Safe Harbor</div>
+        <div class="sub">Report bugs in good faith. Don't get sued for helping.</div>
+      </div>
 
-        <!-- hero: directory <-> lookup -->
-        <path d="M640,473 C 640,420 652,358 666,301" class="hero-back" marker-end="url(#a1)"/>
-        <path d="M702,300 C 714,372 692,442 668,470" class="hero-path" marker-end="url(#a1h)"/>
-        <line x1="706" y1="372" x2="772" y2="372" class="edge" stroke-dasharray="2 3"/>
-        <rect x="772" y="324" width="140" height="98" rx="10" class="hero-box"/>
-        <text class="hero-t" x="786" y="346">Your query</text>
-        <text class="hero-t" x="786" y="362">repairs the record.</text>
-        <text class="hero-s" x="786" y="382">Every failed lookup</text>
-        <text class="hero-s" x="786" y="396">is a bug report for</text>
-        <text class="hero-s" x="786" y="410">the directory.</text>
+      <div class="side org">
+        <div class="side-h">
+          <span class="ic"><svg viewBox="0 0 24 24"><path d="M3 21h18M5 21V7l7-4 7 4v14"/><path d="M9 21v-5h6v5"/></svg></span>
+          <b>You run a website<br>or product</b>
+        </div>
+        <div class="job"><div class="jh">Set up a policy in minutes</div><div class="jd">Generate a disclosure policy and security contact.</div><div class="jt"><a class="tool" href="https://policymaker.disclose.io" target="_blank" rel="noopener">Policymaker</a></div></div>
+        <div class="job"><div class="jh">Get your program listed</div><div class="jd">Join the open record every researcher checks.</div><div class="jt"><a class="tool" href="https://directory.disclose.io" target="_blank" rel="noopener">directory</a></div></div>
+        <div class="job"><div class="jh">See how you compare</div><div class="jd">The safe-harbor scoreboard for the biggest companies.</div><div class="jt"><a class="tool" href="https://state.disclose.io" target="_blank" rel="noopener">state</a></div></div>
+      </div>
+    </div>
 
-        <!-- hub -->
-        <circle cx="460" cy="320" r="76" fill="var(--surface)" stroke="var(--purple)" stroke-width="2"/>
-        <text class="hub-t" x="460" y="316">disclose.io</text>
-        <text class="hub-s" x="460" y="336">the front door</text>
-        <text class="hub-s" x="460" y="352">/threats · /platforms</text>
-
-        <!-- STANDARDS -->
-        <g><title>Standards: dioterms (github.com/disclose/dioterms), dnssecuritytxt.org</title>
-          <rect x="365" y="52" width="190" height="78" rx="12" class="s-standards"/>
-          <text class="cl-title t-standards" x="460" y="75">STANDARDS</text>
-          <text class="prop" x="460" y="97">dioterms · dioseal</text>
-          <text class="prop" x="460" y="116">dnssecuritytxt</text>
-        </g>
-        <!-- TOOLS -->
-        <g><title>Tools: policymaker.disclose.io, lookup.disclose.io, vault.disclose.io</title>
-          <rect x="579" y="203" width="190" height="96" rx="12" class="s-tools"/>
-          <text class="cl-title t-tools" x="674" y="226">TOOLS</text>
-          <text class="prop" x="674" y="248">Policymaker</text>
-          <text class="prop" x="674" y="267">lookup</text>
-          <text class="prop" x="674" y="286">vault</text>
-        </g>
-        <!-- DATA -->
-        <g><title>Data: directory.disclose.io, the open system of record (repo: disclose/diodb)</title>
-          <rect x="497" y="473" width="190" height="60" rx="12" class="s-data"/>
-          <text class="cl-title t-data" x="592" y="496">DATA</text>
-          <text class="prop" x="592" y="518">directory: the record</text>
-        </g>
-        <!-- MEASUREMENT -->
-        <g><title>Measurement: state.disclose.io and /top-100</title>
-          <rect x="233" y="473" width="190" height="60" rx="12" class="s-measure"/>
-          <text class="cl-title t-measure" x="328" y="496">MEASUREMENT</text>
-          <text class="prop" x="328" y="518">state · /top-100</text>
-        </g>
-        <!-- COMMONS -->
-        <g><title>Commons: community.disclose.io, blog.disclose.io (PolicyPulse), dates.disclose.io</title>
-          <rect x="151" y="203" width="190" height="96" rx="12" class="s-commons"/>
-          <text class="cl-title t-commons" x="246" y="226">COMMONS</text>
-          <text class="prop" x="246" y="248">community</text>
-          <text class="prop" x="246" y="267">blog · PolicyPulse</text>
-          <text class="prop" x="246" y="286">dates</text>
-        </g>
-      </svg>
+    <div class="commons">
+      <b>And an open community around all of it:</b>
+      <a class="tool" href="https://community.disclose.io" target="_blank" rel="noopener">a forum</a> to ask questions,
+      <a class="tool" href="https://blog.disclose.io" target="_blank" rel="noopener">weekly policy news</a>, and
+      <a class="tool" href="https://dates.disclose.io/upcoming-dates.ics" target="_blank" rel="noopener">a shared calendar</a> of key dates.
     </div>
   </section>
 
-  <!-- ============================= VARIATION 2: FOUNDATION ============================= -->
+  <!-- ================= VARIATION 2: THE JOURNEY ================= -->
   <section class="card variation">
-    <h2>Variation 2: The foundation</h2>
-    <p class="idea">
-      Dependency first. Everything rests on the standard. Reads as durable infrastructure, which is the language
-      an enterprise legal or security leader already thinks in. Weakest at conveying circulation.
+    <h2>Variation 2: How a bug gets reported, safely</h2>
+    <p class="v-lead">Read it left to right, start to finish. The disclose.io tool for each step is named underneath.</p>
+
+    <div class="journey">
+      <div class="jstep"><div class="n">START</div><div class="jh">Someone finds a bug</div><div class="jt">in a site or product</div></div>
+      <div class="chev">&rsaquo;</div>
+      <div class="jstep"><div class="n">STEP 1</div><div class="jh">They find who to tell</div><div class="jt"><a class="tool" href="https://lookup.disclose.io" target="_blank" rel="noopener">lookup</a></div></div>
+      <div class="chev">&rsaquo;</div>
+      <div class="jstep key"><div class="n">STEP 2</div><div class="jh">They report it, protected</div><div class="jt"><a class="tool" href="https://github.com/disclose/dioterms" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline">Safe Harbor</a></div></div>
+      <div class="chev">&rsaquo;</div>
+      <div class="jstep"><div class="n">STEP 3</div><div class="jh">Both sides agree a timeline</div><div class="jt"><a class="tool" href="https://vault.disclose.io" target="_blank" rel="noopener">vault</a></div></div>
+      <div class="chev">&rsaquo;</div>
+      <div class="jstep"><div class="n">STEP 4</div><div class="jh">It gets fixed</div><div class="jt">everyone is safer</div></div>
+      <div class="chev">&rsaquo;</div>
+      <div class="jstep"><div class="n">RESULT</div><div class="jh">The field gets measurably safer</div><div class="jt"><a class="tool" href="https://state.disclose.io" target="_blank" rel="noopener">state</a></div></div>
+    </div>
+    <p class="commons" style="border-top:1px dashed var(--border)">
+      Setting it up on the other side (policy, listing, contact) is
+      <a class="tool" href="https://policymaker.disclose.io" target="_blank" rel="noopener">Policymaker</a>,
+      <a class="tool" href="https://directory.disclose.io" target="_blank" rel="noopener">directory</a>, and
+      <a class="tool" href="https://dnssecuritytxt.org" target="_blank" rel="noopener">dnssecuritytxt</a>.
     </p>
-    <div class="figure">
-      <svg viewBox="0 0 1000 620" role="img" aria-labelledby="v2t">
-        <title id="v2t">The disclose.io ecosystem drawn as a dependency stack: standards at the foundation, then the data record, then tools, then measurement, then the commons, with lookup's failures repairing the record and public pressure driving adoption back to the standard.</title>
-        <defs>
-          <marker id="a2" markerWidth="10" markerHeight="10" refX="7" refY="4" orient="auto">
-            <path d="M1,1 L7,4 L1,7" fill="none" stroke="var(--edge)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-          </marker>
-          <marker id="a2h" markerWidth="11" markerHeight="11" refX="7" refY="4.5" orient="auto">
-            <path d="M1,1 L8,4.5 L1,8" fill="none" stroke="var(--hero)" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/>
-          </marker>
-        </defs>
+  </section>
 
-        <!-- layers, bottom is the foundation -->
-        <g><title>Commons: community.disclose.io, blog.disclose.io, dates.disclose.io</title>
-          <rect x="210" y="60" width="520" height="80" rx="12" class="s-commons"/>
-          <text class="cl-title l t-commons" x="232" y="92">COMMONS</text>
-          <text class="prop l" x="232" y="116">community · blog · PolicyPulse · dates</text>
-        </g>
-        <g><title>Measurement: state.disclose.io and /top-100</title>
-          <rect x="210" y="170" width="520" height="80" rx="12" class="s-measure"/>
-          <text class="cl-title l t-measure" x="232" y="202">MEASUREMENT</text>
-          <text class="prop l" x="232" y="226">state.disclose.io · /top-100 audits</text>
-        </g>
-        <g><title>Tools: policymaker.disclose.io, lookup.disclose.io, vault.disclose.io</title>
-          <rect x="210" y="280" width="520" height="80" rx="12" class="s-tools"/>
-          <text class="cl-title l t-tools" x="232" y="312">TOOLS</text>
-          <text class="prop l" x="232" y="336">Policymaker · lookup · vault</text>
-        </g>
-        <g><title>Data: directory.disclose.io, the open system of record</title>
-          <rect x="210" y="390" width="520" height="80" rx="12" class="s-data"/>
-          <text class="cl-title l t-data" x="232" y="422">DATA</text>
-          <text class="prop l" x="232" y="446">directory.disclose.io: the open system of record</text>
-        </g>
-        <g><title>Standards: dioterms, dioseal, dnssecuritytxt.org</title>
-          <rect x="180" y="500" width="580" height="86" rx="12" class="s-standards"/>
-          <text class="cl-title l t-standards" x="204" y="534">STANDARDS: THE FOUNDATION</text>
-          <text class="prop l" x="204" y="558">dioterms · dioseal · dnssecuritytxt</text>
-        </g>
+  <!-- ================= VARIATION 3: START WITH WHAT YOU NEED ================= -->
+  <section class="card variation">
+    <h2>Variation 3: What brought you here?</h2>
+    <p class="v-lead">No jargon, no arrows. Pick the line that sounds like you and go straight to the right tool.</p>
 
-        <!-- rests-on arrows -->
-        <path d="M470,500 L470,472" class="edge" marker-end="url(#a2)"/>
-        <path d="M470,390 L470,362" class="edge" marker-end="url(#a2)"/>
-        <path d="M470,280 L470,252" class="edge human" marker-end="url(#a2)"/>
-        <path d="M470,170 L470,142" class="edge human" marker-end="url(#a2)"/>
+    <div class="intent">
+      <div class="icard">
+        <div class="q">&ldquo;I found a security bug.&rdquo;</div>
+        <div class="opt"><span class="oh">Find who to report it to</span> <span class="od">· <a class="tool" href="https://lookup.disclose.io" target="_blank" rel="noopener">lookup</a></span></div>
+        <div class="opt"><span class="oh">Check that you're protected</span> <span class="od">· <a class="tool" href="https://github.com/disclose/dioterms" target="_blank" rel="noopener">Safe Harbor</a></span></div>
+        <div class="opt"><span class="oh">Coordinate a fix deadline</span> <span class="od">· <a class="tool" href="https://vault.disclose.io" target="_blank" rel="noopener">vault</a></span></div>
+      </div>
 
-        <!-- hub badge -->
-        <rect x="330" y="16" width="340" height="34" rx="17" fill="var(--surface)" stroke="var(--purple)" stroke-width="1.75"/>
-        <text class="hub-t" x="500" y="38" style="font-size:14px">disclose.io: the front door over all of it</text>
+      <div class="icard">
+        <div class="q">&ldquo;I run a website or product.&rdquo;</div>
+        <div class="opt"><span class="oh">Create a disclosure policy</span> <span class="od">· <a class="tool" href="https://policymaker.disclose.io" target="_blank" rel="noopener">Policymaker</a></span></div>
+        <div class="opt"><span class="oh">Get your program listed</span> <span class="od">· <a class="tool" href="https://directory.disclose.io" target="_blank" rel="noopener">directory</a></span></div>
+        <div class="opt"><span class="oh">Publish a security contact</span> <span class="od">· <a class="tool" href="https://dnssecuritytxt.org" target="_blank" rel="noopener">dnssecuritytxt</a></span></div>
+      </div>
 
-        <!-- hero return channel, left -->
-        <path d="M210,320 L160,320 L160,430 L206,430" class="hero-path" marker-end="url(#a2h)"/>
-        <rect x="10" y="336" width="140" height="78" rx="10" class="hero-box"/>
-        <text class="hero-t" x="24" y="358">Your query</text>
-        <text class="hero-t" x="24" y="374">repairs the record.</text>
-        <text class="hero-s" x="24" y="393">Every failed lookup</text>
-        <text class="hero-s" x="24" y="406">is a bug report.</text>
+      <div class="icard">
+        <div class="q">&ldquo;I want the big picture.&rdquo;</div>
+        <div class="opt"><span class="oh">The safe-harbor scoreboard</span> <span class="od">· <a class="tool" href="https://state.disclose.io" target="_blank" rel="noopener">state</a></span></div>
+        <div class="opt"><span class="oh">Real cases of researchers threatened</span> <span class="od">· <a class="tool" href="https://disclose.io/threats" target="_blank" rel="noopener">/threats</a></span></div>
+        <div class="opt"><span class="oh">Where bug bounties live</span> <span class="od">· <a class="tool" href="https://disclose.io/platforms" target="_blank" rel="noopener">/platforms</a></span></div>
+      </div>
 
-        <!-- pressure channel, right -->
-        <path d="M730,210 L800,210 L800,543 L764,543" class="edge human" marker-end="url(#a2)"/>
-        <rect x="818" y="300" width="172" height="62" rx="10" fill="var(--surface)" stroke="var(--border)" stroke-width="1.5"/>
-        <text class="elbl" x="832" y="322" style="font-size:11.5px">Public pressure drives</text>
-        <text class="elbl" x="832" y="337" style="font-size:11.5px">adoption of the standard,</text>
-        <text class="elbl" x="832" y="352" style="font-size:11.5px">through people, not pipes.</text>
-      </svg>
+      <div class="icard">
+        <div class="q">&ldquo;I just want to keep up.&rdquo;</div>
+        <div class="opt"><span class="oh">Ask and share</span> <span class="od">· <a class="tool" href="https://community.disclose.io" target="_blank" rel="noopener">community forum</a></span></div>
+        <div class="opt"><span class="oh">Weekly policy news</span> <span class="od">· <a class="tool" href="https://blog.disclose.io" target="_blank" rel="noopener">PolicyPulse</a></span></div>
+        <div class="opt"><span class="oh">Never miss a key date</span> <span class="od">· <a class="tool" href="https://dates.disclose.io/upcoming-dates.ics" target="_blank" rel="noopener">shared calendar</a></span></div>
+      </div>
     </div>
   </section>
 
-  <!-- ============================= VARIATION 3: TRANSIT MAP ============================= -->
-  <section class="card variation">
-    <h2>Variation 3: The transit map</h2>
-    <p class="idea">
-      Network first. Five lines, eleven stations, one interchange. Carries far more named properties legibly
-      than a constellation can, and the interchange makes disclose.io's role obvious. Risk: the idiom is
-      friendly, which may read as unserious to a general counsel.
-    </p>
-    <div class="figure">
-      <svg viewBox="0 0 1000 560" role="img" aria-labelledby="v3t">
-        <title id="v3t">The disclose.io ecosystem drawn as a transit map: five coloured lines for standards, tools, data, measurement and commons, all passing through the disclose.io interchange, with a connector where lookup's failures repair the directory.</title>
-        <defs>
-          <marker id="a3h" markerWidth="11" markerHeight="11" refX="7" refY="4.5" orient="auto">
-            <path d="M1,1 L8,4.5 L1,8" fill="none" stroke="var(--hero)" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/>
-          </marker>
-          <marker id="a3" markerWidth="10" markerHeight="10" refX="7" refY="4" orient="auto">
-            <path d="M1,1 L7,4 L1,7" fill="none" stroke="var(--edge)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-          </marker>
-        </defs>
-
-        <!-- lines -->
-        <line x1="140" y1="110" x2="530" y2="110" stroke="var(--c-standards)" stroke-width="6" stroke-linecap="round"/>
-        <line x1="160" y1="190" x2="710" y2="190" stroke="var(--c-tools)" stroke-width="6" stroke-linecap="round"/>
-        <line x1="310" y1="285" x2="530" y2="285" stroke="var(--c-data)" stroke-width="6" stroke-linecap="round"/>
-        <line x1="470" y1="375" x2="700" y2="375" stroke="var(--c-measure)" stroke-width="6" stroke-linecap="round"/>
-        <line x1="470" y1="460" x2="880" y2="460" stroke="var(--c-commons)" stroke-width="6" stroke-linecap="round"/>
-
-        <!-- interchange -->
-        <rect x="468" y="70" width="64" height="420" rx="32" fill="var(--surface)" stroke="var(--purple)" stroke-width="2.25"/>
-        <text class="hub-t" x="500" y="270" transform="rotate(-90 500 270)" style="font-size:16px">disclose.io</text>
-        <text class="hub-s" x="500" y="352" transform="rotate(-90 500 352)" style="font-size:10.5px">the interchange</text>
-
-        <!-- line tags -->
-        <text class="line-tag t-standards" x="40" y="114">STANDARDS</text>
-        <text class="line-tag t-tools" x="40" y="194">TOOLS</text>
-        <text class="line-tag t-data" x="210" y="289">DATA</text>
-        <text class="line-tag t-measure" x="730" y="379">MEASUREMENT</text>
-        <text class="line-tag t-commons" x="905" y="464">COMMONS</text>
-
-        <!-- stations -->
-        <g><title>dioterms: github.com/disclose/dioterms</title>
-          <circle cx="160" cy="110" r="7.5" class="station" stroke="var(--c-standards)"/>
-          <text class="st-lbl" x="160" y="93">dioterms</text></g>
-        <g><title>dnssecuritytxt.org</title>
-          <circle cx="320" cy="110" r="7.5" class="station" stroke="var(--c-standards)"/>
-          <text class="st-lbl" x="320" y="93">dnssecuritytxt</text></g>
-
-        <g><title>policymaker.disclose.io</title>
-          <circle cx="180" cy="190" r="7.5" class="station" stroke="var(--c-tools)"/>
-          <text class="st-lbl" x="180" y="173">Policymaker</text></g>
-        <g><title>lookup.disclose.io</title>
-          <circle cx="320" cy="190" r="7.5" class="station" stroke="var(--c-tools)"/>
-          <text class="st-lbl" x="320" y="173">lookup</text></g>
-        <g><title>vault.disclose.io</title>
-          <circle cx="690" cy="190" r="7.5" class="station" stroke="var(--c-tools)"/>
-          <text class="st-lbl" x="690" y="173">vault</text></g>
-
-        <g><title>directory.disclose.io: the open system of record</title>
-          <circle cx="320" cy="285" r="9" class="station" stroke="var(--c-data)"/>
-          <text class="st-lbl" x="320" y="310">directory: the record</text></g>
-
-        <g><title>state.disclose.io and /top-100</title>
-          <circle cx="680" cy="375" r="7.5" class="station" stroke="var(--c-measure)"/>
-          <text class="st-lbl" x="680" y="358">state · /top-100</text></g>
-
-        <g><title>community.disclose.io</title>
-          <circle cx="620" cy="460" r="7.5" class="station" stroke="var(--c-commons)"/>
-          <text class="st-lbl" x="620" y="443">community</text></g>
-        <g><title>blog.disclose.io: PolicyPulse</title>
-          <circle cx="750" cy="460" r="7.5" class="station" stroke="var(--c-commons)"/>
-          <text class="st-lbl" x="750" y="443">PolicyPulse</text></g>
-        <g><title>dates.disclose.io</title>
-          <circle cx="860" cy="460" r="7.5" class="station" stroke="var(--c-commons)"/>
-          <text class="st-lbl" x="860" y="443">dates</text></g>
-
-        <!-- hero connector: lookup <-> directory -->
-        <path d="M310,198 C 292,225 292,250 310,276" class="hero-back" marker-end="url(#a3)"/>
-        <path d="M332,278 C 350,252 350,225 332,199" class="hero-path" marker-end="url(#a3h)"/>
-        <rect x="366" y="205" width="96" height="66" rx="9" class="hero-box"/>
-        <text class="hero-t" x="378" y="226">Your query</text>
-        <text class="hero-t" x="378" y="241">repairs the</text>
-        <text class="hero-t" x="378" y="256">record.</text>
-        <text class="elbl" x="196" y="240">interchange:</text>
-        <text class="elbl" x="196" y="254">use repairs data</text>
-      </svg>
-    </div>
-  </section>
-
-  <!-- ============================= VARIATION 4: THE JOURNEY ============================= -->
-  <section class="card variation">
-    <h2>Variation 4: The journey</h2>
-    <p class="idea">
-      Narrative first. Reads left to right as one sentence: a standard is set, a policy is drafted, a program is
-      recorded, a contact is found, disclosure is coordinated, the result is measured and shared. Easiest to
-      understand cold. The loop is the hardest thing to keep visible.
-    </p>
-    <div class="figure">
-      <svg viewBox="0 0 1000 440" role="img" aria-labelledby="v4t">
-        <title id="v4t">The disclose.io ecosystem drawn as a left-to-right journey through six steps, from a standard being set to the outcome being measured and shared, with a loop back to adoption and a return arrow where lookup's failures repair the directory.</title>
-        <defs>
-          <marker id="a4" markerWidth="10" markerHeight="10" refX="7" refY="4" orient="auto">
-            <path d="M1,1 L7,4 L1,7" fill="none" stroke="var(--edge)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-          </marker>
-          <marker id="a4h" markerWidth="11" markerHeight="11" refX="7" refY="4.5" orient="auto">
-            <path d="M1,1 L8,4.5 L1,8" fill="none" stroke="var(--hero)" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/>
-          </marker>
-        </defs>
-
-        <rect x="330" y="10" width="340" height="32" rx="16" fill="var(--surface)" stroke="var(--purple)" stroke-width="1.75"/>
-        <text class="hub-t" x="500" y="31" style="font-size:13.5px">disclose.io: the front door over all of it</text>
-
-        <g><title>Standards: dioterms, dnssecuritytxt</title>
-          <rect x="20" y="80" width="140" height="118" rx="12" class="s-standards"/>
-          <text class="step-n" x="36" y="102">01</text>
-          <text class="step-t" x="36" y="124">A standard</text><text class="step-t" x="36" y="140">is set.</text>
-          <text class="step-p" x="36" y="162">dioterms</text><text class="step-p" x="36" y="178">dnssecuritytxt</text></g>
-
-        <g><title>policymaker.disclose.io</title>
-          <rect x="180" y="80" width="140" height="118" rx="12" class="s-tools"/>
-          <text class="step-n" x="196" y="102">02</text>
-          <text class="step-t" x="196" y="124">A policy</text><text class="step-t" x="196" y="140">is drafted.</text>
-          <text class="step-p" x="196" y="162">Policymaker</text></g>
-
-        <g><title>directory.disclose.io</title>
-          <rect x="340" y="80" width="140" height="118" rx="12" class="s-data"/>
-          <text class="step-n" x="356" y="102">03</text>
-          <text class="step-t" x="356" y="124">The program</text><text class="step-t" x="356" y="140">is recorded.</text>
-          <text class="step-p" x="356" y="162">directory</text></g>
-
-        <g><title>lookup.disclose.io</title>
-          <rect x="500" y="80" width="140" height="118" rx="12" class="s-tools"/>
-          <text class="step-n" x="516" y="102">04</text>
-          <text class="step-t" x="516" y="124">The contact</text><text class="step-t" x="516" y="140">is found.</text>
-          <text class="step-p" x="516" y="162">lookup</text></g>
-
-        <g><title>vault.disclose.io</title>
-          <rect x="660" y="80" width="140" height="118" rx="12" class="s-tools"/>
-          <text class="step-n" x="676" y="102">05</text>
-          <text class="step-t" x="676" y="124">Disclosure is</text><text class="step-t" x="676" y="140">coordinated.</text>
-          <text class="step-p" x="676" y="162">vault</text></g>
-
-        <g><title>state.disclose.io, community, PolicyPulse, dates</title>
-          <rect x="820" y="80" width="160" height="118" rx="12" class="s-measure"/>
-          <text class="step-n" x="836" y="102">06</text>
-          <text class="step-t" x="836" y="124">It is measured</text><text class="step-t" x="836" y="140">and shared.</text>
-          <text class="step-p" x="836" y="162">state · community</text>
-          <text class="step-p" x="836" y="178">PolicyPulse · dates</text></g>
-
-        <!-- forward arrows -->
-        <path d="M162,139 L176,139" class="edge" marker-end="url(#a4)"/>
-        <path d="M322,139 L336,139" class="edge human" marker-end="url(#a4)"/>
-        <path d="M482,139 L496,139" class="edge" marker-end="url(#a4)"/>
-        <path d="M642,139 L656,139" class="edge" marker-end="url(#a4)"/>
-        <path d="M802,139 L816,139" class="edge human" marker-end="url(#a4)"/>
-
-        <!-- hero: step 04 back into step 03 -->
-        <path d="M560,200 C 560,244 452,244 424,220" class="hero-path" marker-end="url(#a4h)"/>
-        <rect x="470" y="252" width="212" height="46" rx="9" class="hero-box"/>
-        <text class="hero-t" x="484" y="272">Your query repairs the record.</text>
-        <text class="hero-s" x="484" y="288">Every failed lookup is a bug report.</text>
-
-        <!-- loop back -->
-        <path d="M900,200 C 900,392 300,404 92,372 L92,204" class="edge human" marker-end="url(#a4)"/>
-        <rect x="196" y="352" width="240" height="30" rx="8" fill="var(--surface)" stroke="var(--border)" stroke-width="1.5"/>
-        <text class="elbl" x="210" y="371" style="font-size:11.5px">Public pressure drives the next adoption.</text>
-      </svg>
-    </div>
-  </section>
-
-  <!-- ============================= INDEX ============================= -->
+  <!-- ================= PROPERTY INDEX ================= -->
   <section class="card">
-    <h2>The eleven properties, as drawn</h2>
-    <p class="idea">Every node above resolves to one of these. Hover any node in the graphics for its URL.</p>
+    <h2>Every tool, in one place</h2>
+    <p class="v-lead">The eleven public properties, plain descriptions. This is what the nodes above point to.</p>
     <div class="index">
-      <a href="https://disclose.io" target="_blank" rel="noopener">disclose.io</a><span class="d">the front door · /threats · /platforms</span>
-      <a href="https://github.com/disclose/dioterms" target="_blank" rel="noopener">dioterms</a><span class="d">CC0 Safe Harbor language · dioseal</span>
-      <a href="https://dnssecuritytxt.org" target="_blank" rel="noopener">dnssecuritytxt.org</a><span class="d">security contact at the DNS layer</span>
-      <a href="https://policymaker.disclose.io" target="_blank" rel="noopener">policymaker.disclose.io</a><span class="d">policy · security.txt · DNS TXT generator</span>
-      <a href="https://lookup.disclose.io" target="_blank" rel="noopener">lookup.disclose.io</a><span class="d">asset to contact · CLI · Caido · Burp · MCP</span>
-      <a href="https://vault.disclose.io" target="_blank" rel="noopener">vault.disclose.io</a><span class="d">cryptographic coordinated disclosure</span>
-      <a href="https://directory.disclose.io" target="_blank" rel="noopener">directory.disclose.io</a><span class="d">the open system of record · repo <code>disclose/diodb</code></span>
-      <a href="https://state.disclose.io" target="_blank" rel="noopener">state.disclose.io</a><span class="d">the scoreboard · /top-100 audits</span>
+      <a href="https://disclose.io" target="_blank" rel="noopener">disclose.io</a><span class="d">the front door to all of it</span>
+      <a href="https://lookup.disclose.io" target="_blank" rel="noopener">lookup.disclose.io</a><span class="d">who do I report a bug to?</span>
+      <a href="https://github.com/disclose/dioterms" target="_blank" rel="noopener">dioterms</a><span class="d">the free Safe Harbor policy language</span>
+      <a href="https://policymaker.disclose.io" target="_blank" rel="noopener">policymaker.disclose.io</a><span class="d">make a disclosure policy in minutes</span>
+      <a href="https://vault.disclose.io" target="_blank" rel="noopener">vault.disclose.io</a><span class="d">coordinate a disclosure on a deadline</span>
+      <a href="https://directory.disclose.io" target="_blank" rel="noopener">directory.disclose.io</a><span class="d">the open list of every program</span>
+      <a href="https://state.disclose.io" target="_blank" rel="noopener">state.disclose.io</a><span class="d">the safe-harbor scoreboard</span>
+      <a href="https://dnssecuritytxt.org" target="_blank" rel="noopener">dnssecuritytxt.org</a><span class="d">make your security contact easy to find</span>
       <a href="https://community.disclose.io" target="_blank" rel="noopener">community.disclose.io</a><span class="d">the open forum</span>
-      <a href="https://blog.disclose.io" target="_blank" rel="noopener">blog.disclose.io</a><span class="d">PolicyPulse · the weekly policy signal</span>
-      <a href="https://dates.disclose.io/upcoming-dates.ics" target="_blank" rel="noopener">dates.disclose.io</a><span class="d">subscribable ICS</span>
+      <a href="https://blog.disclose.io" target="_blank" rel="noopener">blog.disclose.io</a><span class="d">PolicyPulse, the weekly policy news</span>
+      <a href="https://dates.disclose.io/upcoming-dates.ics" target="_blank" rel="noopener">dates.disclose.io</a><span class="d">a shared calendar of key dates</span>
     </div>
   </section>
 
@@ -562,20 +265,14 @@
 
 <script>
   var root = document.documentElement, body = document.body;
-  function press(onBtn, offBtn) {
-    onBtn.setAttribute('aria-pressed', 'true');
-    offBtn.setAttribute('aria-pressed', 'false');
-  }
+  function press(on, off) { on.setAttribute('aria-pressed', 'true'); off.setAttribute('aria-pressed', 'false'); }
   var tl = document.getElementById('t-light'), td = document.getElementById('t-dark');
   var wc = document.getElementById('w-contained'), wb = document.getElementById('w-bleed');
   tl.addEventListener('click', function () { root.setAttribute('data-theme', 'light'); press(tl, td); });
   td.addEventListener('click', function () { root.setAttribute('data-theme', 'dark'); press(td, tl); });
   wc.addEventListener('click', function () { body.classList.remove('bleed'); press(wc, wb); });
   wb.addEventListener('click', function () { body.classList.add('bleed'); press(wb, wc); });
-
-  if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-    root.setAttribute('data-theme', 'dark'); press(td, tl);
-  }
+  if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) { root.setAttribute('data-theme', 'dark'); press(td, tl); }
 </script>
 </body>
 </html>
