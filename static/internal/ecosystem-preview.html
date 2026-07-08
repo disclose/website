@@ -555,33 +555,6 @@
     </div>
   </section>
 
-  <!-- ============================= NOTES ============================= -->
-  <section class="card">
-    <h2>Four things I found while building this</h2>
-    <ul class="notes">
-      <li><strong>The diagram currently on the site is stale, and it contradicts its own page.</strong>
-        <code>static/images/universe-diagram.svg</code> is embedded in <code>content/universe.md</code>. It names
-        <code>diodb</code> three times and <code>directory</code> zero times, while line 41 of that same page calls
-        diodb "legacy, superseded by directory.disclose.io as the system of record." It also predates state, vault,
-        dates, and the extension. Whatever you pick here should replace it.</li>
-
-      <li><strong>The flywheel in the funding deck does not close.</strong> Two edges break under audit.
-        Nothing ingests a newly published security.txt into the directory, so <code>policymaker to directory</code>
-        is a person doing it by hand. And <code>disclosure-audits/src/ingest.ts</code> reads an external ranked
-        company list, not the directory, then never writes the grades back. So "the dataset gets the world scored"
-        has the causality backwards: the audits score the world and discard the result, while most directory
-        entries sit with no Safe Harbor label. Worth fixing before a funder greps the repos.</li>
-
-      <li><strong>Every forward arrow is code. Every return arrow is a person.</strong> That is what the dashed
-        lines are. It is a sharper statement of the brake than "volunteer capacity," and it reframes the ask:
-        funding does not buy more forward arrows, it automates the return arrows.</li>
-
-      <li><strong>The one edge worth building the graphic around</strong> is lookup's failures repairing the
-        directory. It is the only relationship in the system where using the thing improves the thing, with
-        nobody deciding to help. It is also, already, the title of your [un]prompted talk.</li>
-    </ul>
-  </section>
-
   <footer>
     Internal preview. Unlisted and noindex. Lives at <code>/internal/ecosystem-preview.html</code> on the preview branch.
   </footer>
