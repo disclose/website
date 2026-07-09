@@ -37,16 +37,11 @@ const TERMS = [
 // Pillar 3: Practices — operational conduct guidance. External authors retain
 // rights; the file header carries attribution + license, which we surface in
 // frontmatter so layouts can render an appropriate badge.
-const PRACTICES = [
-  {
-    src: 'practices/good-faith-security-research.md',
-    slug: 'good-faith-security-research',
-    title: 'Accepted Practices for Good-Faith Security Research',
-    description: 'Operational conduct for good-faith security research, originally published by NextJenSecurity (2026). Aligns with the disclose.io framework.',
-    weight: 10,
-    license: 'See file header — author retains rights, reproduced with attribution',
-  },
-];
+// Empty 2026-07-08: the sole entry (NextJenSecurity's good-faith-research doc)
+// was taken down at the author's request pending a revised version. Re-add the
+// entry here (and the pillar's content/framework/practices/_index.md) once she
+// has one ready to republish.
+const PRACTICES = [];
 
 // Pillar 2: Maturity — diostatus levels. No variable replacement; keep first H1.
 const MATURITY = [
