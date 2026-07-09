@@ -263,17 +263,8 @@
   parent = "Terms"
   weight = 30
 
-# Pillar 2: Practices
-[[framework]]
-  name = "Practices"
-  url = "/framework/practices/"
-  weight = 20
-
-[[framework]]
-  name = "Good-Faith Security Research"
-  url = "/framework/practices/good-faith-security-research/"
-  parent = "Practices"
-  weight = 10
+# Pillar 2: Practices — empty 2026-07-08, sole doc taken down at author's
+# request pending revision; re-add here once republished.
 
 # Pillar 3: Maturity (diostatus)
 [[framework]]
