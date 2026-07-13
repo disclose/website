@@ -13,9 +13,13 @@ permissions:
   pages: write
   id-token: write
 
+# Deploys (push to main) serialize on a single "pages" group, because only one
+# deployment to GitHub Pages can be in flight at a time. PR validation builds
+# get their own per-ref group so they neither cancel each other nor contend
+# with a production deploy. Superseded PR builds are cancelled; deploys are not.
 concurrency:
-  group: "pages"
-  cancel-in-progress: false
+  group: ${{ github.event_name == 'pull_request' && format('pages-pr-{0}', github.ref) || 'pages' }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 defaults:
   run:
