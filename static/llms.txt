@@ -19,11 +19,10 @@ We maintain open-source databases, policy templates, tools, and resources to mak
 - [VDP with CVD terms](https://disclose.io/framework/terms/vdp-with-cvd/): VDP terms extended with coordinated vulnerability disclosure language.
 - [Bug Bounty Program (BBP) terms](https://disclose.io/framework/terms/bbp/): Terms specific to a paid bug bounty program.
 - [diostatus Maturity Model](https://disclose.io/framework/maturity/): Six-level ladder (Level 0 → Level 5) measuring program maturity.
-- [Best Practices](https://disclose.io/framework/practices/): Operational best practices for running a healthy program.
 
 ## Documentation
 
-- [What is disclose.io](https://disclose.io/docs/what-is-disclose/): The open, vendor-neutral infrastructure that powers vulnerability disclosure and security reporting.
+- [What is disclose.io](https://disclose.io/docs/what-is-disclose.io/): The open, vendor-neutral infrastructure that powers vulnerability disclosure and security reporting.
 - [Vision and Mission](https://disclose.io/docs/vision-and-mission/): Make vulnerability disclosure safe, simple, and standardized for everyone.
 - [Design Strategy](https://disclose.io/docs/design-strategy/): Design principles for making secure easy and insecure obvious.
 - [Key Objectives](https://disclose.io/docs/key-objectives/): The key objectives driving the disclose.io project.
@@ -31,8 +30,8 @@ We maintain open-source databases, policy templates, tools, and resources to mak
 - [For Organizations and Legal Teams](https://disclose.io/docs/for-organizations-and-legal-teams/): How disclose.io helps organizations and their legal teams.
 - [Project Directory](https://disclose.io/docs/project-directory/): All the projects under the disclose.io umbrella.
 - [Advocacy and Activism](https://disclose.io/docs/advocacy-and-activism/): Public policy work and open letters from disclose.io.
-- [Talks and Videos](https://disclose.io/docs/talks-and-videos/): Conference talks and presentations about disclose.io and vulnerability disclosure.
-- [Press Mentions](https://disclose.io/docs/press-articles/): Media coverage and press mentions.
+- [Talks and Videos](https://disclose.io/docs/conference-talks-and-videos/): Conference talks and presentations about disclose.io and vulnerability disclosure.
+- [Press Mentions](https://disclose.io/docs/press-mentions/): Media coverage and press mentions.
 
 ## Tools (separate properties)
 

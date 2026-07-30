@@ -247,13 +247,13 @@
 
 [[framework]]
   name = "Vulnerability Disclosure Policy"
-  url = "/framework/terms/core-vdp/"
+  url = "/framework/terms/vdp/"
   parent = "Terms"
   weight = 10
 
 [[framework]]
   name = "Bug Bounty Program Policy"
-  url = "/framework/terms/core-bbp/"
+  url = "/framework/terms/bbp/"
   parent = "Terms"
   weight = 20
 

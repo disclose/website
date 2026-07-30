@@ -62,24 +62,30 @@ function replaceVariables(content) {
   return out;
 }
 
-// Rewrites README-style `.md` links (which work on GitHub) into Hugo slug URLs
-// so they don't 404 in production. Hugo's Goldmark emits `href` literally, so
-// `[text](./file.md)` must become `[text](./file/)` to match the rendered URL.
-function rewriteLinks(content) {
-  // Fix stale "terms/core/vdp.md" reference from the dioterms source — the
-  // real Hugo slug after preprocess is terms/core-vdp/, and the text path is
-  // from an older layout.
+// Rewrites README-style relative links (which work on GitHub) into root-absolute
+// Hugo URLs so they don't 404 in production. Relative hrefs cannot survive as-is:
+// a generated leaf page renders at /framework/<pillar>/<slug>/, so `./x/` and
+// `../d/x/` both resolve one directory too deep in the browser. Instead, resolve
+// the target against the source file's directory in the dioterms repo, then emit
+// the /framework/ URL for that repo path.
+function rewriteLinks(content, srcDir = '') {
+  // Point the stale "terms/core/vdp.md" reference from the dioterms source at the
+  // real VDP template page (slug terms/vdp/ per the TERMS mapping above).
   let out = content.replace(
     /\[terms\/core\/vdp\.md\]\(\.\.\/terms\/\)/g,
-    '[terms/core-vdp.md](../terms/core-vdp/)'
+    '[terms/vdp.md](/framework/terms/vdp/)'
   );
 
-  // Strip .md extension from relative markdown link hrefs: `(./x.md)` → `(./x/)`,
-  // `(../d/x.md#anchor)` → `(../d/x/#anchor)`. External (http/https/mailto) and
-  // root-absolute (/...) hrefs are left alone because they match neither prefix.
+  // `(./x.md)`, `(../d/x.md#anchor)`, `(../d/)` → `(/framework/<resolved>/#anchor)`.
+  // External (http/https/mailto) and root-absolute (/...) hrefs are left alone
+  // because they match neither prefix. Targets that escape the repo are left alone.
   out = out.replace(
-    /(\]\()(\.{1,2}\/[^)\s]+?)\.md(#[^)\s]*)?(\))/g,
-    (_, open, path, anchor = '', close) => `${open}${path}/${anchor}${close}`
+    /(\]\()(\.{1,2}\/[^)\s]+?)(\.md)?(\/)?(#[^)\s]*)?(\))/g,
+    (match, open, rel, _mdExt, _slash, anchor = '', close) => {
+      const resolved = path.posix.normalize(path.posix.join(srcDir, rel));
+      if (resolved.startsWith('..')) return match;
+      return `${open}/framework/${resolved}/${anchor}${close}`;
+    }
   );
 
   return out;
@@ -161,7 +167,7 @@ function processFile({ src, out, title, description, weight, license, replaceVar
   let content = fs.readFileSync(srcPath, 'utf8');
   if (doStrip) content = stripFirstH1(content);
   if (doReplace) content = replaceVariables(content);
-  content = rewriteLinks(content);
+  content = rewriteLinks(content, path.posix.dirname(src));
   if (doDedash) content = dedashText(content);
   const body = frontMatter({ title, description, weight, license, extra }) + content.trimStart();
   const outPath = path.join(OUT, out);

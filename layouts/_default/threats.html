@@ -105,6 +105,15 @@
           {{ if and $applyLabels (lt $ti (len $labels)) }}{{ $label = index $labels $ti }}{{ end }}
           {{ $rows := sub (len (findRE `(?m)^\|` .md)) 2 }}
           {{ $rendered := .md | markdownify }}
+          {{/* README-relative artifact links live in the research-threats repo, not on this site —
+               rewrite them to GitHub. RE2 has no lookaheads: fix known-bad README paths, protect
+               absolute hrefs with a marker, prefix the remainder, restore. */}}
+          {{ $rendered = $rendered | replaceRE `href="(Coalfile-get-out-of-jail-free-letter\.jpg|Coalfire_Investigation_Report_0F05C8A1131D1\.pdf)"` `href="goodies/$1"` }}
+          {{ $rendered = $rendered | replaceRE `_#27\.pdf"` `_%2327.pdf"` }}
+          {{ $rendered = $rendered | replaceRE `href="www\.` `href="https://www.` }}
+          {{ $rendered = $rendered | replaceRE `href="(https?://|mailto:|tel:|ftp:|#|/)` `href="@@ABS@@$1` }}
+          {{ $rendered = $rendered | replaceRE `href="([^@"][^"]*)"` `href="https://github.com/disclose/research-threats/blob/master/$1"` }}
+          {{ $rendered = $rendered | replaceRE `href="@@ABS@@` `href="` }}
           {{ $rendered = $rendered | replaceRE `>https://www\.` `>` }}
           {{ $rendered = $rendered | replaceRE `>https://` `>` }}
           {{ $rendered = $rendered | replaceRE `>http://` `>` }}
@@ -126,6 +135,13 @@
           {{ $ti = add $ti 1 }}
         {{ else }}
           {{ $rendered := .md | markdownify }}
+          {{/* Same repo-relative link rewrite as the table branch above. */}}
+          {{ $rendered = $rendered | replaceRE `href="(Coalfile-get-out-of-jail-free-letter\.jpg|Coalfire_Investigation_Report_0F05C8A1131D1\.pdf)"` `href="goodies/$1"` }}
+          {{ $rendered = $rendered | replaceRE `_#27\.pdf"` `_%2327.pdf"` }}
+          {{ $rendered = $rendered | replaceRE `href="www\.` `href="https://www.` }}
+          {{ $rendered = $rendered | replaceRE `href="(https?://|mailto:|tel:|ftp:|#|/)` `href="@@ABS@@$1` }}
+          {{ $rendered = $rendered | replaceRE `href="([^@"][^"]*)"` `href="https://github.com/disclose/research-threats/blob/master/$1"` }}
+          {{ $rendered = $rendered | replaceRE `href="@@ABS@@` `href="` }}
           {{ $rendered = $rendered | replaceRE `>https://www\.` `>` }}
           {{ $rendered = $rendered | replaceRE `>https://` `>` }}
           {{ $rendered = $rendered | replaceRE `>http://` `>` }}
