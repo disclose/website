@@ -1,18 +1,19 @@
 <!DOCTYPE html>
 <html lang="{{ .Site.LanguageCode | default "en" }}">
 <head>
+  {{- $seoTitle := .Params.seo_title | default (cond .IsHome .Site.Title (printf "%s | %s" .Title .Site.Title)) }}
   {{- $seoDescription := .Params.seo_description | default .Description | default .Site.Params.description }}
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   {{ hugo.Generator }}
 
   {{/* SEO */}}
-  <title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} | {{ .Site.Title }}{{ end }}</title>
+  <title>{{ $seoTitle }}</title>
   <meta name="description" content="{{ $seoDescription }}">
   {{ with .Params.robots }}<meta name="robots" content="{{ . }}">{{ end }}
 
   {{/* Open Graph */}}
-  <meta property="og:title" content="{{ .Title }}">
+  <meta property="og:title" content="{{ $seoTitle }}">
   <meta property="og:description" content="{{ $seoDescription }}">
   <meta property="og:type" content="{{ if .IsPage }}article{{ else }}website{{ end }}">
   <meta property="og:url" content="{{ .Permalink }}">
@@ -22,7 +23,7 @@
   {{/* Twitter Card */}}
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:site" content="{{ .Site.Params.twitter }}">
-  <meta name="twitter:title" content="{{ .Title }}">
+  <meta name="twitter:title" content="{{ $seoTitle }}">
   <meta name="twitter:description" content="{{ $seoDescription }}">
   <meta name="twitter:image" content="{{ .Site.Params.og_image | absURL }}">
 
