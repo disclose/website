@@ -7,7 +7,7 @@ We maintain open-source databases, policy templates, tools, and resources to mak
 ## Open Databases
 
 - [Bug Bounty Platforms](https://disclose.io/platforms/): Community-curated directory of every known bug bounty, vulnerability disclosure, and crowdsourced security platform. Open-source at github.com/disclose/bug-bounty-platforms.
-- [VDP Programs](https://disclose.io/programs/): The largest open directory of vulnerability disclosure and bug bounty programs on the public internet. Each entry includes scope, policy URL, and safe-harbor language. Powers lookup.disclose.io.
+- [VDP Programs](https://directory.disclose.io/): The largest open directory of vulnerability disclosure and bug bounty programs on the public internet. Each entry includes scope, policy URL, and safe-harbor language. Powers lookup.disclose.io.
 - [Research Threats](https://disclose.io/threats/): Canonical public archive of legal threats made against security researchers engaged in good-faith vulnerability disclosure. Open-source at github.com/disclose/research-threats.
 - [State of Disclosure / Scoreboard](https://state.disclose.io): The evidence-backed safe-harbor scoreboard for the world's biggest companies (state.disclose.io/top-100).
 

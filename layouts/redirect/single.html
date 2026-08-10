@@ -1,0 +1,16 @@
+{{- $target := .Params.redirect_to -}}
+<!doctype html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Redirecting to the disclose.io Directory</title>
+    <meta name="robots" content="noindex, follow">
+    <link rel="canonical" href="{{ $target }}">
+    <meta http-equiv="refresh" content="0; url={{ $target }}">
+    <script>window.location.replace({{ $target | jsonify | safeJS }});</script>
+  </head>
+  <body>
+    <p>The VDP Programs directory has moved to <a href="{{ $target }}">directory.disclose.io</a>.</p>
+  </body>
+</html>
