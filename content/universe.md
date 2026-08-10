@@ -1,6 +1,8 @@
 ---
 title: "The disclose.io Universe"
 description: "The open standard for safe harbor vulnerability disclosure, and the ecosystem that makes it real."
+sitemap:
+  disable: true
 ---
 
 The disclose.io project is the open-source layer between raw standards (ISO 29147, CISA CVD) and commercial platforms, a vendor-neutral, practitioner-first playbook for coordinated vulnerability disclosure. It's the open infrastructure that powers vulnerability disclosure and security reporting, Internet-wide.

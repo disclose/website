@@ -1,5 +1,6 @@
 ---
 title: "Is this legal advice?"
+seo_description: "Understand the limits of disclose.io's policy resources and why organizations should consult their own legal counsel."
 weight: 60
 ---
 

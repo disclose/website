@@ -1,5 +1,6 @@
 ---
 title: "What is Safe Harbor?"
+seo_description: "Learn what vulnerability disclosure Safe Harbor is, why it protects good-faith security researchers, and how disclose.io helps organizations adopt it."
 weight: 20
 ---
 

@@ -1,5 +1,6 @@
 ---
 title: "Who is disclose.io for?"
+seo_description: "Learn how disclose.io helps security researchers, hackers, legal teams, and organizations coordinate vulnerability disclosure safely."
 weight: 10
 ---
 

@@ -1,5 +1,6 @@
 ---
 title: "How do I interact with or contribute to the disclose.io projects?"
+seo_description: "Ways to contribute to disclose.io: start a VDP, join the community, maintain the program directory, improve policy terms, or volunteer."
 weight: 30
 ---
 

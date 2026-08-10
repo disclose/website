@@ -1,17 +1,19 @@
 <!DOCTYPE html>
 <html lang="{{ .Site.LanguageCode | default "en" }}">
 <head>
+  {{- $seoDescription := .Params.seo_description | default .Description | default .Site.Params.description }}
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   {{ hugo.Generator }}
 
   {{/* SEO */}}
   <title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} | {{ .Site.Title }}{{ end }}</title>
-  <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ with .Site.Params.description }}{{ . }}{{ end }}{{ end }}">
+  <meta name="description" content="{{ $seoDescription }}">
+  {{ with .Params.robots }}<meta name="robots" content="{{ . }}">{{ end }}
 
   {{/* Open Graph */}}
   <meta property="og:title" content="{{ .Title }}">
-  <meta property="og:description" content="{{ with .Description }}{{ . }}{{ else }}{{ with .Site.Params.description }}{{ . }}{{ end }}{{ end }}">
+  <meta property="og:description" content="{{ $seoDescription }}">
   <meta property="og:type" content="{{ if .IsPage }}article{{ else }}website{{ end }}">
   <meta property="og:url" content="{{ .Permalink }}">
   <meta property="og:image" content="{{ .Site.Params.og_image | absURL }}">
@@ -21,7 +23,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:site" content="{{ .Site.Params.twitter }}">
   <meta name="twitter:title" content="{{ .Title }}">
-  <meta name="twitter:description" content="{{ with .Description }}{{ . }}{{ else }}{{ with .Site.Params.description }}{{ . }}{{ end }}{{ end }}">
+  <meta name="twitter:description" content="{{ $seoDescription }}">
   <meta name="twitter:image" content="{{ .Site.Params.og_image | absURL }}">
 
   {{/* Favicon */}}
@@ -119,7 +121,7 @@
     "@context": "https://schema.org",
     "@type": "WebPage",
     "name": {{ .Title | jsonify | safeJS }},
-    "description": {{ with .Description }}{{ . | jsonify | safeJS }}{{ else }}{{ with .Site.Params.description }}{{ . | jsonify | safeJS }}{{ end }}{{ end }},
+    "description": {{ $seoDescription | jsonify | safeJS }},
     "url": {{ .Permalink | jsonify | safeJS }},
     "isPartOf": {
       "@type": "WebSite",
