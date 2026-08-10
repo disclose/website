@@ -13,7 +13,7 @@
 - title: "I'm researching a program"
   description: "Browse the open directory of every known vulnerability disclosure and bug bounty program, with scope, policy URLs, and safe-harbor language."
   icon: "menu"
-  url: "/programs/"
+  url: "https://directory.disclose.io"
 
 - title: "I want to protect researchers"
   description: "Access model policies, legal frameworks, and safe harbor guidance. Help advance the legal protections security researchers need."
