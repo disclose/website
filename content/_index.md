@@ -1,10 +1,9 @@
 ---
 title: "disclose.io"
-seo_title: "Vulnerability Disclosure Tools & Safe Harbor | disclose.io"
 description: "The open, vendor-neutral infrastructure that powers vulnerability disclosure and security reporting. Safe, simple, and standardized for everyone."
 hero:
-  title: "Open infrastructure for vulnerability disclosure"
-  subtitle: "Practical tools, open data, and standardized safe harbor for security teams and researchers."
+  title: "disclose.io"
+  subtitle: "The infrastructure that powers vulnerability disclosure and security reporting. Safe, simple, and standardized for everyone."
   image: "uploads/tug-of-war.png"
   search: true
   buttons:
