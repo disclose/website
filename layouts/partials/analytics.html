@@ -91,17 +91,51 @@
     gtag('set', { traffic_type: 'internal', debug_mode: true });
   }
 
+  // ── Product outcomes (privacy-safe: never include submitted values) ───
+  if (h === 'directory.disclose.io' && /^\/o\/[^/]+\/?$/.test(location.pathname)) {
+    gtag('event', 'directory_record_view', { tool: 'directory' });
+  }
+
+  document.addEventListener('submit', function(e) {
+    var form = e.target;
+    if (h !== 'directory.disclose.io' || !form || form.id !== 'search-form') return;
+    gtag('event', 'directory_search', {
+      tool: 'directory',
+      has_filter: /(?:^|[?&])min_level=/.test(location.search)
+    });
+  }, true);
+
   // ── Outbound link classification ────────────────────────────────
   document.addEventListener('click', function(e) {
     var a = e.target && e.target.closest ? e.target.closest('a[href]') : null;
     if (!a) return;
     var href = a.getAttribute('href');
-    if (!href || !/^https?:\/\//i.test(href)) return;
+    if (!href) return;
+
+    if (/^mailto:/i.test(href)) {
+      gtag('event', 'reporting_channel_click', { channel_type: 'email' });
+      return;
+    }
+
+    var downloadMatch = href.match(/\.((?:csv|jsonl?|zip))(?:[?#]|$)/i);
+    if (a.hasAttribute('download') || downloadMatch) {
+      gtag('event', 'dataset_download', {
+        file_type: downloadMatch ? downloadMatch[1].toLowerCase() : 'other'
+      });
+    }
+
+    if (!/^https?:\/\//i.test(href)) return;
     var url;
     try { url = new URL(href); } catch (_) { return; }
 
     var host = url.hostname.toLowerCase();
     if (host === location.hostname.toLowerCase()) return;
+
+    // Cross-subdomain product starts are internal navigation, but meaningful
+    // outcomes in their own right. Do not attach the referring page's query.
+    if (host === 'policymaker.disclose.io') {
+      gtag('event', 'policymaker_start', { source: h });
+    }
     if (/(^|\.)disclose\.io$/.test(host)) return; // internal subdomain family
 
     var linkClass = 'other';
@@ -116,6 +150,12 @@
              host === 'infosec.exchange')                                            linkClass = 'social';
     else if (/(^|\.)(eff\.org|mvsp\.dev|owasp\.org)$/i.test(host))                   linkClass = 'ally';
     else if (/(^|\.)(chatgpt\.com|gemini\.google\.com|claude\.ai|perplexity\.ai)$/i.test(host)) linkClass = 'ai';
+
+    if (linkClass === 'platform' || /\breport(?:ing)?\b/i.test((a.textContent || '') + ' ' + (a.getAttribute('aria-label') || ''))) {
+      gtag('event', 'reporting_channel_click', {
+        channel_type: linkClass === 'platform' ? 'platform' : 'web_form'
+      });
+    }
 
     gtag('event', 'outbound', {
       link_class: linkClass,
