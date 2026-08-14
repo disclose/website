@@ -34,6 +34,8 @@
   url = "https://lookup.disclose.io"
   parent = "Tools"
   weight = 15
+  [main.params]
+    new_window = true
 
 [[main]]
   name = "Platforms"
@@ -52,6 +54,8 @@
   url = "https://community.disclose.io"
   parent = "Tools"
   weight = 40
+  [main.params]
+    new_window = true
 
 [[main]]
   name = "Blog"
