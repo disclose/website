@@ -1,5 +1,6 @@
 ---
 title: "disclose.io"
+seo_title: "disclose.io | Vulnerability Disclosure Standards & Tools"
 description: "The open, vendor-neutral infrastructure that powers vulnerability disclosure and security reporting. Safe, simple, and standardized for everyone."
 hero:
   title: "disclose.io"
