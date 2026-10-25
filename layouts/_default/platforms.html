@@ -44,6 +44,12 @@
 
     {{/* Table content from submodule */}}
     {{ $raw := readFile "external/bug-bounty-platforms/README.md" }}
+    {{/* Third-party markdown (PRs from anyone, merged by maintainers) must never carry raw HTML
+         into the page: goldmark runs with unsafe=true for first-party content, so strip tags
+         here, before rendering. Matches `<tag ...>` and `</tag>` only; markdown autolinks such
+         as `<https://example.com>` and `<file/path>` have no space after the name and survive.
+         The README contains no HTML today, so this is lossless (verified 2026-10-25). */}}
+    {{ $raw = $raw | replaceRE `</?[a-zA-Z][a-zA-Z0-9-]*(\s[^>]*)?>` "" }}
     {{ $table := "" }}
     {{ $marker := "<!-- platforms:start -->" }}
     {{ if in $raw $marker }}

@@ -38,6 +38,11 @@
 
     {{/* Content from submodule */}}
     {{ $raw := readFile "external/research-threats/README.md" }}
+    {{/* Third-party markdown must never carry raw HTML into the page (goldmark runs with
+         unsafe=true for first-party content). Strip `<tag ...>` and `</tag>` before rendering;
+         markdown autolinks such as `<https://example.com>` and `<goodies/file.pdf>` have no
+         space after the name and survive. Lossless for the README as of 2026-10-25. */}}
+    {{ $raw = $raw | replaceRE `</?[a-zA-Z][a-zA-Z0-9-]*(\s[^>]*)?>` "" }}
 
     {{/* Extract from after "### Confirmed Threats" heading onward (skip the heading itself) */}}
     {{ $content := "" }}
