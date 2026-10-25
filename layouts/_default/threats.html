@@ -38,12 +38,6 @@
 
     {{/* Content from submodule */}}
     {{ $raw := readFile "external/research-threats/README.md" }}
-    {{/* Third-party markdown must never carry raw HTML into the page (goldmark runs with
-         unsafe=true for first-party content). Strip `<tag ...>` and `</tag>` before rendering;
-         markdown autolinks such as `<https://example.com>` and `<goodies/file.pdf>` have no
-         space after the name and survive. Lossless for the README as of 2026-10-25. */}}
-    {{ $raw = $raw | replaceRE `</?[a-zA-Z][a-zA-Z0-9-]*(\s[^>]*)?>` "" }}
-
     {{/* Extract from after "### Confirmed Threats" heading onward (skip the heading itself) */}}
     {{ $content := "" }}
     {{ $lines := split $raw "\n" }}
@@ -63,6 +57,18 @@
 
     {{/* Strip trailing HTML link tag */}}
     {{ $content = $content | replaceRE `<link[^>]*>` "" }}
+    {{/* Third-party markdown must never carry raw HTML into the page (goldmark runs with
+         unsafe=true because first-party content needs inline HTML). Fail the build rather than
+         sanitise, probing only the slice that renders ($content; the README's badge banner above
+         "### Confirmed Threats" never reaches the page). Allowed: HTML comments, `<https://...>`
+         autolinks, and `<goodies/...>` references (a directory in that repo; no `=` allowed, so
+         they cannot carry an attribute). Anything else that starts like a tag aborts the build
+         so a human reviews the submodule change. Link and image URL schemes are allowlisted by
+         layouts/_default/_markup/render-*.html. */}}
+    {{ $probe := $content | replaceRE `<!--[\s\S]*?-->` "" | replaceRE `<https?://[^\s<>]+>` "" | replaceRE `<goodies/[^<>=]*>` "" }}
+    {{ with findRE `<[!?/a-zA-Z]` $probe }}
+      {{ errorf "threats.html: %d raw HTML tag start(s) in the rendered slice of external/research-threats/README.md; refusing to render third-party HTML. Review the submodule change." (len .) }}
+    {{ end }}
 
     {{/* Faithful section labels for each incident table, in document order.
          Extra tables (if the source grows) render as an unlabelled card. */}}
