@@ -1,6 +1,9 @@
 ---
 title: "Thanks"
 description: "We've received your message"
+robots: "noindex, follow"
+sitemap:
+  disable: true
 ---
 
 ### Thanks! We've received your message and will respond as soon as possible.

@@ -1,5 +1,6 @@
 ---
 title: "Is disclose.io a 501(c)(3) nonprofit?"
+seo_description: "Learn about disclose.io's origins, nonprofit status, and the standards, organizations, and experts that shaped the project."
 weight: 50
 ---
 

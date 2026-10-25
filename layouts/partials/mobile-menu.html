@@ -70,7 +70,8 @@
               <li>
                 <a href="{{ $href }}"
                    @click="mobileMenuOpen = false"
-                   class="block py-2 px-4 text-gray-600 hover:bg-shade-050 rounded-lg transition-colors text-sm">
+                   class="block py-2 px-4 text-gray-600 hover:bg-shade-050 rounded-lg transition-colors text-sm"
+                   {{ if eq .Params.new_window true }}target="_blank" rel="noopener noreferrer"{{ end }}>
                   {{ .Name }}
                 </a>
               </li>

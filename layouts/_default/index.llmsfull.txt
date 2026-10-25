@@ -1,6 +1,6 @@
 {{- $limit := 512000 -}}
 {{- $footer := "\n\n---\nOutput truncated at a page boundary because llms-full.txt is capped at 512000 bytes.\n" -}}
-{{- $shellSources := dict "/platforms/" "external/bug-bounty-platforms/README.md" "/threats/" "external/research-threats/README.md" "/programs/" "the Vultron directory widget embedded on /programs/" -}}
+{{- $shellSources := dict "/platforms/" "external/bug-bounty-platforms/README.md" "/threats/" "external/research-threats/README.md" -}}
 {{- $entries := slice -}}
 {{- $homeParts := slice (printf "# %s" .Title) (printf "URL: %s" .Permalink) -}}
 {{- with .Description -}}

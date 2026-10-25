@@ -1,6 +1,8 @@
 ---
 title: "The disclose.io Universe"
 description: "The open standard for safe harbor vulnerability disclosure, and the ecosystem that makes it real."
+sitemap:
+  disable: true
 ---
 
 The disclose.io project is the open-source layer between raw standards (ISO 29147, CISA CVD) and commercial platforms, a vendor-neutral, practitioner-first playbook for coordinated vulnerability disclosure. It's the open infrastructure that powers vulnerability disclosure and security reporting, Internet-wide.
@@ -16,7 +18,6 @@ Below is the full ecosystem. Every component answers a real question someone ask
 
 - [disclose.io](/): the framework, docs, and project home
 - [directory.disclose.io](https://directory.disclose.io?utm_source=universe&utm_medium=onepager&utm_campaign=directory): the open **system of record** for every known VDP and bug bounty program
-- [state.disclose.io](https://state.disclose.io?utm_source=universe&utm_medium=onepager&utm_campaign=state): maturity metrics + the evidence-backed [safe-harbor scoreboard](https://state.disclose.io/top-100/)
 - [disclose.io/programs](/programs): curated programs with safe harbor language
 - [disclose.io/platforms](/platforms): bug bounty platforms supporting safe harbor
 - [disclose.io/threats](/threats): the public archive of legal threats to security researchers
