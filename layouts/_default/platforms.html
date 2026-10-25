@@ -64,6 +64,17 @@
     {{ end }}
 
     {{/* Render markdown, then shorten display text (href untouched) */}}
+    {{/* Third-party markdown (PRs from anyone, merged by maintainers) must never carry raw HTML
+         into the page: goldmark runs with unsafe=true because first-party content needs inline
+         HTML. Rather than sanitise (regex sanitisers leak: `<img/src=x onerror=1>` has no space),
+         FAIL THE BUILD if anything that starts like a tag survives the allowlist inside the slice
+         that actually renders ($table; the README's badge banner above the table never reaches
+         the page). Allowed: HTML comments (the marker lines) and `<https://...>` autolinks.
+         Link and image URL schemes are allowlisted by layouts/_default/_markup/render-*.html. */}}
+    {{ $probe := $table | replaceRE `<!--[\s\S]*?-->` "" | replaceRE `<https?://[^\s<>]+>` "" }}
+    {{ with findRE `<[!?/a-zA-Z]` $probe }}
+      {{ errorf "platforms.html: %d raw HTML tag start(s) in the rendered slice of external/bug-bounty-platforms/README.md; refusing to render third-party HTML. Review the submodule change." (len .) }}
+    {{ end }}
     {{ $rendered := $table | markdownify }}
     {{ $rendered = $rendered | replaceRE `>https://www\.` `>` }}
     {{ $rendered = $rendered | replaceRE `>https://` `>` }}

@@ -1,0 +1,23 @@
+{{- /*
+  Link render hook: scheme allowlist for every markdown link on the site.
+  goldmark runs with unsafe=true (first-party content needs inline HTML), which also lets
+  `[x](javascript:...)` through. Third-party markdown (bug-bounty-platforms, research-threats
+  submodules) is rendered on /platforms/ and /threats/, so an allowlist here closes that door
+  for every page at once. .Destination is already percent/entity-decoded by goldmark, so
+  `java&#115;cript:` and friends arrive as `javascript:` and are rejected. Disallowed
+  destinations render as plain text, never as a link.
+*/ -}}
+{{- $u := .Destination -}}
+{{- $scheme := findRE `^[a-zA-Z][a-zA-Z0-9+.-]*:` $u 1 -}}
+{{- $ok := false -}}
+{{- if not $scheme -}}
+  {{- $ok = true -}}{{- /* relative path, root-relative, or fragment */ -}}
+{{- else -}}
+  {{- $s := lower (index $scheme 0) -}}
+  {{- if in (slice "http:" "https:" "mailto:") $s -}}{{- $ok = true -}}{{- end -}}
+{{- end -}}
+{{- if $ok -}}
+<a href="{{ $u | safeURL }}"{{ with .Title }} title="{{ . }}"{{ end }}>{{ .Text }}</a>
+{{- else -}}
+{{ .Text }}
+{{- end -}}
