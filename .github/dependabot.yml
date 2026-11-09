@@ -4,7 +4,7 @@ updates:
     directory: /
     schedule:
       interval: weekly
-    open-pull-requests-limit: 5
+    open-pull-requests-limit: 3
     groups:
       all-deps:
         patterns:
@@ -12,11 +12,18 @@ updates:
         update-types:
           - minor
           - patch
+      # Majors in one PR too. Twelve individual bumps sat open from July to November
+      # because each major arrived alone; one grouped PR per ecosystem is reviewable.
+      all-deps-major:
+        patterns:
+          - "*"
+        update-types:
+          - major
   - package-ecosystem: github-actions
     directory: /
     schedule:
       interval: weekly
-    open-pull-requests-limit: 5
+    open-pull-requests-limit: 3
     groups:
       all-deps:
         patterns:
@@ -24,3 +31,8 @@ updates:
         update-types:
           - minor
           - patch
+      all-deps-major:
+        patterns:
+          - "*"
+        update-types:
+          - major
