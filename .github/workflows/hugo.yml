@@ -74,6 +74,18 @@ jobs:
             --minify \
             --baseURL "https://disclose.io/"
 
+      - name: Check /security/ carries the DiscloseBot policy and the report form
+        # The policy text and asset list are fetched from DiscloseBot at build time and a failed
+        # fetch only warns, so a broken build would ship a page with no policy (red team 2026-11-26).
+        run: |
+          f=public/security/index.html
+          grep -Eq 'id="?dscls-policy' "$f" || { echo "::error::security page lost the policy container"; exit 1; }
+          grep -q 'Safe Harbor' "$f" || { echo "::error::security page lost the build-time policy text"; exit 1; }
+          grep -q 'data-disclosebot-form=' "$f" || { echo "::error::security page lost the report form"; exit 1; }
+          n=$(grep -Eo '<option value="?[0-9a-f-]{36}' "$f" | wc -l)
+          [ "$n" -ge 1 ] || { echo "::error::report form has no asset options"; exit 1; }
+          echo "security page ok: $n asset options"
+
       - name: Check the directory shell stays on the frozen main.css
         run: npm run check:shell
 
