@@ -90,6 +90,10 @@ disclose-io-hugo/
 
 The site deploys to GitHub Pages via GitHub Actions. Push to `main` to trigger deployment.
 
+## Security page
+
+[disclose.io/security](https://disclose.io/security/) embeds our policy from DiscloseBot and carries a native report form that files into DiscloseBot. How it works, and how to change it safely: [docs/SECURITY_PAGE.md](docs/SECURITY_PAGE.md).
+
 ## Design
 
 The site uses the policymaker.disclose.io design system:
