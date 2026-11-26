@@ -2,6 +2,8 @@
 module.exports = {
   content: [
     './layouts/**/*.html',
+    // Frozen directory-shell chrome is styled by the frozen static/css/main.css, not site.css.
+    '!./layouts/partials/legacy/**',
     './content/**/*.md',
     './content/**/*.html',
   ],
