@@ -1,0 +1,13 @@
+{{/* Site-wide header announcement ("badge and label" style, chosen 2026-11-25).
+     Configure in config/_default/params.toml [announcement]. Deep purple #4c1d95 with white text (10.95:1).
+     Not rendered on the directory shell, which stays on the frozen pre-restyle CSS. */}}
+{{ with .Site.Params.announcement }}
+{{ if and .enabled (ne $.Layout "directory-shell") }}
+<div class="on-dark bg-purple-dark text-white text-sm" role="region" aria-label="Announcement">
+  <div class="container-wide py-2.5 flex items-center justify-center gap-3">
+    <span class="shrink-0 rounded-full bg-white px-2 py-0.5 text-[11px] font-bold uppercase tracking-[0.12em] text-purple-dark">{{ .label | default "New" }}</span>
+    <a href="{{ .url }}" class="font-semibold text-white hover:underline whitespace-nowrap">{{ .title }} <span aria-hidden="true">&rarr;</span></a>
+  </div>
+</div>
+{{ end }}
+{{ end }}

@@ -1,11 +1,11 @@
 {{/* Videos section */}}
 {{ $videos := site.Data.videos }}
 {{ if $videos }}
-<section class="section bg-shade-050">
+<section class="section band-tint">
   <div class="container-wide">
     {{ with .Params.videos }}
     {{ with .title }}
-    <h2 class="text-3xl md:text-4xl font-display font-bold text-center text-purple mb-4">{{ . }}</h2>
+    <h2 class="text-3xl md:text-4xl font-display font-bold text-center text-gray-900 mb-4">{{ . }}</h2>
     {{ end }}
     {{ with .subtitle }}
     <p class="text-xl text-gray-600 text-center mb-12 max-w-2xl mx-auto">{{ . }}</p>
@@ -30,7 +30,7 @@
                 class="absolute inset-0 flex items-center justify-center bg-black/30 hover:bg-black/40 transition-colors group"
                 aria-label="Play video"
               >
-                <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
+                <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-[0_8px_24px_rgba(76,29,149,0.25)] group-hover:scale-110 transition-transform">
                   <svg class="w-6 h-6 text-purple ml-1" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M8 5v14l11-7z"/>
                   </svg>
