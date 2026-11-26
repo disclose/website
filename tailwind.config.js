@@ -57,6 +57,25 @@ module.exports = {
       typography: (theme) => ({
         DEFAULT: {
           css: {
+            // Point every prose variable at the slate-remapped gray scale. The plugin
+            // otherwise hard-codes Tailwind's original gray (#374151, #6b7280, ...).
+            '--tw-prose-body': theme('colors.gray.700'),
+            '--tw-prose-headings': theme('colors.gray.900'),
+            '--tw-prose-lead': theme('colors.gray.600'),
+            '--tw-prose-links': theme('colors.purple.DEFAULT'),
+            '--tw-prose-bold': theme('colors.gray.900'),
+            '--tw-prose-counters': theme('colors.gray.600'),
+            '--tw-prose-bullets': theme('colors.gray.400'),
+            '--tw-prose-hr': theme('colors.shade.200'),
+            '--tw-prose-quotes': theme('colors.gray.900'),
+            '--tw-prose-quote-borders': theme('colors.purple.DEFAULT'),
+            '--tw-prose-captions': theme('colors.gray.600'),
+            '--tw-prose-kbd': theme('colors.gray.900'),
+            '--tw-prose-code': theme('colors.purple.dark'),
+            '--tw-prose-pre-code': theme('colors.gray.200'),
+            '--tw-prose-pre-bg': theme('colors.gray.900'),
+            '--tw-prose-th-borders': theme('colors.shade.200'),
+            '--tw-prose-td-borders': theme('colors.gray.100'),
             color: theme('colors.gray.700'),
             a: {
               color: theme('colors.purple.DEFAULT'),
