@@ -209,6 +209,66 @@ Folks who have shipped meaningful commits across the [disclose.io GitHub org](ht
     <p class="text-sm text-gray-500">@gi-el</p>
   </a>
 
+  <a href="https://github.com/whiteroses" target="_blank" rel="noopener noreferrer" class="group flex flex-col items-center text-center hover:-translate-y-1 transition-transform">
+    <img src="https://github.com/whiteroses.png?size=160" alt="Ira" loading="lazy" class="w-24 h-24 rounded-full ring-2 ring-shade-200 group-hover:ring-purple transition" />
+    <h5 class="mt-3 font-semibold text-gray-900">Ira</h5>
+    <p class="text-sm text-gray-500">@whiteroses</p>
+  </a>
+
+  <a href="https://github.com/klepas" target="_blank" rel="noopener noreferrer" class="group flex flex-col items-center text-center hover:-translate-y-1 transition-transform">
+    <img src="https://github.com/klepas.png?size=160" alt="Simon Pascal Klein" loading="lazy" class="w-24 h-24 rounded-full ring-2 ring-shade-200 group-hover:ring-purple transition" />
+    <h5 class="mt-3 font-semibold text-gray-900">Simon Pascal Klein</h5>
+    <p class="text-sm text-gray-500">@klepas</p>
+  </a>
+
+  <a href="https://github.com/gamliel972" target="_blank" rel="noopener noreferrer" class="group flex flex-col items-center text-center hover:-translate-y-1 transition-transform">
+    <img src="https://github.com/gamliel972.png?size=160" alt="Gamliel Hernández" loading="lazy" class="w-24 h-24 rounded-full ring-2 ring-shade-200 group-hover:ring-purple transition" />
+    <h5 class="mt-3 font-semibold text-gray-900">Gamliel Hernández</h5>
+    <p class="text-sm text-gray-500">@gamliel972</p>
+  </a>
+
+  <a href="https://github.com/arn3tt" target="_blank" rel="noopener noreferrer" class="group flex flex-col items-center text-center hover:-translate-y-1 transition-transform">
+    <img src="https://github.com/arn3tt.png?size=160" alt="David Arnett" loading="lazy" class="w-24 h-24 rounded-full ring-2 ring-shade-200 group-hover:ring-purple transition" />
+    <h5 class="mt-3 font-semibold text-gray-900">David Arnett</h5>
+    <p class="text-sm text-gray-500">@arn3tt</p>
+  </a>
+
+  <a href="https://github.com/faykus" target="_blank" rel="noopener noreferrer" class="group flex flex-col items-center text-center hover:-translate-y-1 transition-transform">
+    <img src="https://github.com/faykus.png?size=160" alt="faykus" loading="lazy" class="w-24 h-24 rounded-full ring-2 ring-shade-200 group-hover:ring-purple transition" />
+    <h5 class="mt-3 font-semibold text-gray-900">faykus</h5>
+    <p class="text-sm text-gray-500">@faykus</p>
+  </a>
+
+  <a href="https://github.com/Steams" target="_blank" rel="noopener noreferrer" class="group flex flex-col items-center text-center hover:-translate-y-1 transition-transform">
+    <img src="https://github.com/Steams.png?size=160" alt="Radcliffe Robinson" loading="lazy" class="w-24 h-24 rounded-full ring-2 ring-shade-200 group-hover:ring-purple transition" />
+    <h5 class="mt-3 font-semibold text-gray-900">Radcliffe Robinson</h5>
+    <p class="text-sm text-gray-500">@Steams</p>
+  </a>
+
+  <a href="https://github.com/RootUp" target="_blank" rel="noopener noreferrer" class="group flex flex-col items-center text-center hover:-translate-y-1 transition-transform">
+    <img src="https://github.com/RootUp.png?size=160" alt="Dhiraj Mishra" loading="lazy" class="w-24 h-24 rounded-full ring-2 ring-shade-200 group-hover:ring-purple transition" />
+    <h5 class="mt-3 font-semibold text-gray-900">Dhiraj Mishra</h5>
+    <p class="text-sm text-gray-500">@RootUp</p>
+  </a>
+
+  <a href="https://github.com/knightpfhor" target="_blank" rel="noopener noreferrer" class="group flex flex-col items-center text-center hover:-translate-y-1 transition-transform">
+    <img src="https://github.com/knightpfhor.png?size=160" alt="Stephen Moir" loading="lazy" class="w-24 h-24 rounded-full ring-2 ring-shade-200 group-hover:ring-purple transition" />
+    <h5 class="mt-3 font-semibold text-gray-900">Stephen Moir</h5>
+    <p class="text-sm text-gray-500">@knightpfhor</p>
+  </a>
+
+  <a href="https://github.com/bad5ect0r" target="_blank" rel="noopener noreferrer" class="group flex flex-col items-center text-center hover:-translate-y-1 transition-transform">
+    <img src="https://github.com/bad5ect0r.png?size=160" alt="bad5ect0r" loading="lazy" class="w-24 h-24 rounded-full ring-2 ring-shade-200 group-hover:ring-purple transition" />
+    <h5 class="mt-3 font-semibold text-gray-900">bad5ect0r</h5>
+    <p class="text-sm text-gray-500">@bad5ect0r</p>
+  </a>
+
+  <a href="https://github.com/adityaax" target="_blank" rel="noopener noreferrer" class="group flex flex-col items-center text-center hover:-translate-y-1 transition-transform">
+    <img src="https://github.com/adityaax.png?size=160" alt="Aditya Saxena" loading="lazy" class="w-24 h-24 rounded-full ring-2 ring-shade-200 group-hover:ring-purple transition" />
+    <h5 class="mt-3 font-semibold text-gray-900">Aditya Saxena</h5>
+    <p class="text-sm text-gray-500">@adityaax</p>
+  </a>
+
 </div>
 
 ## How you can contribute
