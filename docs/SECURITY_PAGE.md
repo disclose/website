@@ -14,7 +14,8 @@ disclose.io's own vulnerability disclosure policy, followed by a form for report
 | Policy embed | `layouts/shortcodes/disclosebot.html` |
 | Report form | `layouts/shortcodes/disclosebot-report-form.html` |
 | Build-time fetch cache | `config/_default/hugo.toml`, `[caches.getresource] maxAge = 0` |
-| security.txt | `static/.well-known/security.txt`: Contacts in order are security@disclose.io, this page's form (`/security/#report`) and the hosted brief; Policy is this page; Expires 2027-06-30 |
+| security.txt | `static/.well-known/security.txt`: Contacts in order are security@disclose.io, this page's form (`/security/#report`) and the hosted brief; Policy is this page; Expires 2027-06-30. **This one file is served on every disclose.io property** (see "security.txt on every property" below). |
+| security.txt Worker | `workers/security-txt/` (Cloudflare Worker `security-txt` and its routes) |
 | DNS security TXT | `_security.disclose.io` and the apex carry the same contacts, policy and expiry as `security_contact=`, `security_policy=`, `security_expires=` records (Cloudflare DNS, not in this repo). Change both together with security.txt. |
 
 The policy itself is an instance of the dioterms [VDP with Coordinated Disclosure Window](/framework/terms/vdp-with-cvd/) template (`external/dioterms/terms/vdp-with-cvd/en-US.md`, organization disclose.io, channel security@disclose.io, 90-day window), plus a local note that disclose.io has no Hall of Fame and pays no compensation.
@@ -72,6 +73,30 @@ These are set in DiscloseBot, not here. Both the policy and the brief use:
 - Theme **host** and frame **none** (DiscloseBot's defaults): no border or background, text colour from the page.
 
 These settings also apply to the hosted DiscloseBot pages.
+
+## security.txt on every property
+
+`static/.well-known/security.txt` is the only copy. Every other disclose.io host serves it, so editing that file and deploying the site updates all of them (within the Worker's 5-minute cache).
+
+| Host type | Hosts | How it gets the file |
+|---|---|---|
+| Apex (the origin) | disclose.io | GitHub Pages serves the repo file at `/.well-known/security.txt`. The legacy `/security.txt` path is routed to the Worker. |
+| Proxied by Cloudflare | www, calendar, dates, dev, directory, go, history, links, lookup, platforms, policymaker, projects, state, threats, vault, zero (all `.disclose.io`), disclosecon.com, www.disclosecon.com | Worker `security-txt` (`workers/security-txt/worker.js`) fetches the apex file and returns it with the Canonical line set to the host it is answering. Routes are exact per host for `/.well-known/security.txt` and `/security.txt`, each also with a trailing `*`, because an exact route does not match a URL with a query string. |
+| Redirect hosts | calendar, links, projects | Their zone redirect rules (Rules, Redirect Rules) exclude the two security.txt paths, so the Worker answers there instead of the redirect. |
+| Behind Cloudflare Access | zero | An Access application "zero.disclose.io security.txt (public)" bypasses login for the two paths only. |
+| DNS-only, not proxied | blog (Ghost), community (Discourse) | They redirect to the apex file: Ghost redirects (302, set in Ghost admin, Settings, Labs, Redirects) and Discourse permalinks (Admin, Customize, Permalinks). Discourse permalinks do not match a URL with a query string. |
+| Not covered | m.disclose.io (Bitly short links) | Bitly answers for that host and serves its own `/security.txt`. It can only be covered by moving the short domain off Bitly. |
+
+To deploy or check the Worker and routes (idempotent; a route that points at another script is reported, never replaced):
+
+```
+bun workers/security-txt/deploy.ts           # dry run
+bun workers/security-txt/deploy.ts --apply   # upload the script, create missing routes
+```
+
+It needs `CLOUDFLARE_ACCOUNT_ID`, `CLOUDFLARE_API_EMAIL` and `CLOUDFLARE_API_KEY` in the environment. When a new disclose.io host goes live behind Cloudflare, add it to `HOSTS` in `deploy.ts` and run it with `--apply`. If it has a redirect rule or Access in front, exempt the two paths as above.
+
+Never route the Worker on `disclose.io/.well-known/security.txt`: that is its origin.
 
 ## Changing things
 
