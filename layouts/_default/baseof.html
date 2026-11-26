@@ -54,6 +54,11 @@
   <link rel="alternate" type="application/rss+xml" title="{{ $.Site.Title }}" href="{{ .Permalink }}">
   {{- end }}
 
+  {{- /* Markdown twin for AI agents (outputFormats.MARKDOWN); trimmed so pages without one stay byte-identical */ -}}
+  {{- with .OutputFormats.Get "markdown" }}
+  <link rel="alternate" type="text/markdown" href="{{ .Permalink }}">
+  {{- end }}
+
   {{/* Canonical */}}
   <link rel="canonical" href="{{ .Permalink }}">
 

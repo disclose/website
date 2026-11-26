@@ -29,9 +29,9 @@ pygmentsUseClasses = true
 
 # Output formats
 [outputs]
-  home = ["HTML", "RSS", "JSON", "LLMSFULL"]
-  section = ["HTML", "RSS"]
-  page = ["HTML"]
+  home = ["HTML", "RSS", "JSON", "LLMSFULL", "MARKDOWN"]
+  section = ["HTML", "RSS", "MARKDOWN"]
+  page = ["HTML", "MARKDOWN"]
 
 # Custom JSON output for search
 [outputFormats]
@@ -43,6 +43,12 @@ pygmentsUseClasses = true
     mediaType = "text/plain"
     baseName = "llms-full"
     isPlainText = true
+  # Markdown twin of every page at <page>/index.md, for AI agents (2026-11-25)
+  [outputFormats.MARKDOWN]
+    mediaType = "text/markdown"
+    baseName = "index"
+    isPlainText = true
+    rel = "alternate"
 
 # Minification
 [minify]
