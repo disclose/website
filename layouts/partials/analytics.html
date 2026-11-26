@@ -106,7 +106,9 @@
         api_host: host,
         defaults: '2025-05-24',
         person_profiles: 'identified_only',
-        session_recording: { maskAllInputs: true }
+        // Replay stays off on disclose.io even though the project enables it
+        // (decided 2026-11-26): pageviews, autocapture and heatmaps only.
+        disable_session_recording: true
       });
       if (internalFlag) window.posthog.register({ traffic_type: 'internal' });
     };
