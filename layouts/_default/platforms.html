@@ -39,7 +39,7 @@
         Is there a platform or detail missing? <a href="mailto:hello@disclose.io?subject=disclose.io%2Fplatforms%20update"
            class="text-purple hover:text-purple-dark underline">Let us know</a>.
       </p>
-      {{ with .Lastmod }}<p class="text-sm text-gray-400 mt-1">Last updated: {{ .Format "January 2, 2006" }}</p>{{ end }}
+      {{ with .Lastmod }}<p class="text-sm text-gray-500 mt-1">Last updated: {{ .Format "January 2, 2006" }}</p>{{ end }}
     </header>
 
     {{/* Table content from submodule */}}
@@ -102,7 +102,7 @@
     {{ range $sections }}
     <section id="{{ .id }}" class="card mb-6 scroll-mt-24">
       <div class="flex items-baseline justify-between gap-4 border-b border-shade-100 px-8 py-4">
-        <h2 class="!mt-0 text-lg md:text-xl font-display font-semibold text-purple">{{ .title }}</h2>
+        <h2 class="!mt-0 text-lg md:text-xl font-display font-semibold text-gray-900">{{ .title }}</h2>
         {{ if gt .rows 0 }}
         <span class="shrink-0 rounded-full bg-shade-050 px-2.5 py-1 text-xs font-medium text-gray-600">
           {{ .rows }} platform{{ if ne .rows 1 }}s{{ end }}
@@ -127,22 +127,22 @@
     table-layout: fixed;
   }
   .platforms-table thead th {
-    background: hsla(240, 8%, 97%, 1);      /* shade-050 */
-    color: #4b5563;                          /* gray-600 */
+    background: #f8fafc;                 /* state thead */
+    color: #475569;                          /* gray-600 */
     font-weight: 600;
     font-size: 0.6875rem;
-    letter-spacing: 0.03em;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
     text-align: left;
     padding: 0.625rem 0.75rem;
-    border-bottom: 1px solid hsla(229, 5%, 89%, 1);  /* shade-200 */
+    border-bottom: 1px solid #e5e7eb;  /* state line */
     white-space: nowrap;
   }
   .platforms-table tbody td {
     padding: 0.5rem 0.75rem;
-    border-bottom: 1px solid hsla(240, 5%, 93%, 1);  /* shade-100 */
+    border-bottom: 1px solid #f1f5f9;  /* state shade */
     vertical-align: top;
-    color: #374151;                          /* gray-700 */
+    color: #334155;                          /* gray-700 */
     max-width: 200px;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -152,11 +152,11 @@
     border-bottom: none;
   }
   .platforms-table tbody tr:hover {
-    background: hsla(240, 8%, 97%, 0.6);
+    background: #faf7ff;
   }
   .platforms-table td:first-child {
     font-weight: 600;
-    color: #111827;                          /* platform name emphasis */
+    color: #0f172a;                          /* platform name emphasis */
   }
   .platforms-table th:first-child,
   .platforms-table td:first-child {
@@ -184,7 +184,7 @@
     font-weight: 500;
   }
   .platforms-table a:hover {
-    color: #322a41;
+    color: #4c1d95;
     text-decoration: underline;
   }
 </style>

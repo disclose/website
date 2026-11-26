@@ -1,11 +1,11 @@
 {{/* Partners and friends section - matches the boxes.html aesthetic */}}
 {{ $partners := site.Data.partners }}
 {{ if $partners }}
-<section class="py-16 bg-gray-50" id="partners">
+<section class="py-16 band-alt" id="partners">
   <div class="container-narrow">
     {{ with .Params.partners }}
     {{ with .title }}
-    <h2 class="text-3xl md:text-4xl font-display font-bold text-center text-purple mb-4">{{ . }}</h2>
+    <h2 class="text-3xl md:text-4xl font-display font-bold text-center text-gray-900 mb-4">{{ . }}</h2>
     {{ end }}
     {{ with .subtitle }}
     <p class="text-xl text-gray-600 text-center mb-12 max-w-2xl mx-auto">{{ . }}</p>
@@ -16,7 +16,7 @@
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
       {{ range $i, $p := $partners }}
       {{ $isOrphan := and (eq $i (sub $count 1)) (eq (mod $count 2) 1) }}
-      <div class="rounded-lg overflow-hidden flex flex-col{{ if $isOrphan }} md:col-span-2 max-w-sm mx-auto w-full{{ end }}">
+      <div class="card p-6 flex flex-col{{ if $isOrphan }} md:col-span-2 max-w-sm mx-auto w-full{{ end }}">
         <a href="{{ $p.url }}" target="_blank" rel="noopener noreferrer"
            class="flex items-center justify-center h-40 p-6 group"
            aria-label="{{ $p.name }}"
@@ -25,7 +25,7 @@
                alt="{{ $p.name }} logo"
                class="max-h-full max-w-full object-contain group-hover:opacity-80 transition-opacity" />
         </a>
-        <div class="pt-8 text-gray-700 leading-relaxed space-y-4">
+        <div class="pt-6 text-gray-700 leading-relaxed space-y-4">
           {{ $p.description | safeHTML }}
         </div>
       </div>

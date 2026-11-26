@@ -33,7 +33,7 @@
            class="text-purple hover:text-purple-dark underline"
            target="_blank" rel="noopener noreferrer">Improve this page</a>!
       </p>
-      {{ with .Lastmod }}<p class="text-sm text-gray-400 mt-1">Last updated: {{ .Format "January 2, 2006" }}</p>{{ end }}
+      {{ with .Lastmod }}<p class="text-sm text-gray-500 mt-1">Last updated: {{ .Format "January 2, 2006" }}</p>{{ end }}
     </header>
 
     {{/* Content from submodule */}}
@@ -120,7 +120,7 @@
           <section class="card mb-6">
             {{ with $label }}
             <div class="flex items-baseline justify-between gap-4 border-b border-shade-100 px-8 py-4">
-              <h2 class="!mt-0 text-lg md:text-xl font-display font-semibold text-purple">{{ . }}</h2>
+              <h2 class="!mt-0 text-lg md:text-xl font-display font-semibold text-gray-900">{{ . }}</h2>
               {{ if gt $rows 0 }}
               <span class="shrink-0 rounded-full bg-shade-050 px-2.5 py-1 text-xs font-medium text-gray-600">
                 {{ $rows }} incident{{ if ne $rows 1 }}s{{ end }}
@@ -163,7 +163,7 @@
   .threats-prose:first-child { margin-top: 0; }
   .threats-prose p,
   .threats-prose ul {
-    color: #4b5563;                 /* gray-600 */
+    color: #475569;                 /* gray-600 */
     font-size: 0.9375rem;
     line-height: 1.7;
     margin: 0.5rem 0;
@@ -174,7 +174,7 @@
   }
   .threats-prose li { margin: 0.25rem 0; }
   .threats-prose a { color: #673ab6; font-weight: 500; }
-  .threats-prose a:hover { color: #322a41; text-decoration: underline; }
+  .threats-prose a:hover { color: #4c1d95; text-decoration: underline; }
 
   /* Table inside each card — mirrors the /platforms chrome; Status column wraps */
   .threats-table table {
@@ -184,26 +184,26 @@
     table-layout: auto;
   }
   .threats-table thead th {
-    background: hsla(240, 8%, 97%, 1);                 /* shade-050 */
-    color: #4b5563;                                    /* gray-600 */
+    background: #f8fafc;                            /* state thead */
+    color: #475569;                                    /* gray-600 */
     font-weight: 600;
     font-size: 0.6875rem;
-    letter-spacing: 0.03em;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
     text-align: left;
     padding: 0.625rem 0.75rem;
-    border-bottom: 1px solid hsla(229, 5%, 89%, 1);    /* shade-200 */
+    border-bottom: 1px solid #e5e7eb;    /* state line */
     white-space: nowrap;
   }
   .threats-table tbody td {
     padding: 0.5rem 0.75rem;
-    border-bottom: 1px solid hsla(240, 5%, 93%, 1);    /* shade-100 */
+    border-bottom: 1px solid #f1f5f9;    /* state shade */
     vertical-align: top;
-    color: #374151;                                    /* gray-700 */
+    color: #334155;                                    /* gray-700 */
     line-height: 1.6;
   }
   .threats-table tbody tr:last-child td { border-bottom: none; }
-  .threats-table tbody tr:hover { background: hsla(240, 8%, 97%, 0.6); }
+  .threats-table tbody tr:hover { background: #faf7ff; }
   .threats-table th:first-child,
   .threats-table td:first-child { padding-left: 2rem; }
   .threats-table th:last-child,
@@ -213,8 +213,8 @@
      Only the date VALUES are muted; the WHEN header stays gray-600 like its siblings. */
   .threats-table th:nth-child(1),
   .threats-table td:nth-child(1) { white-space: nowrap; width: 6.5rem; }
-  .threats-table td:nth-child(1) { color: #6b7280; }
-  .threats-table td:nth-child(2) { width: 9rem; font-weight: 600; color: #111827; }
+  .threats-table td:nth-child(1) { color: #64748b; }
+  .threats-table td:nth-child(2) { width: 9rem; font-weight: 600; color: #0f172a; }
   .threats-table th:nth-child(3),
   .threats-table td:nth-child(3) { width: 9rem; }
   .threats-table th:nth-child(4),
@@ -222,6 +222,6 @@
   .threats-table td:nth-child(5) { word-wrap: break-word; overflow-wrap: break-word; min-width: 18rem; }
 
   .threats-table a { color: #673ab6; font-weight: 500; }
-  .threats-table a:hover { color: #322a41; text-decoration: underline; }
+  .threats-table a:hover { color: #4c1d95; text-decoration: underline; }
 </style>
 {{ end }}

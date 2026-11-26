@@ -1,13 +1,13 @@
-<header class="bg-white sticky top-0 z-50">
-  <nav class="container-wide py-4">
+<header class="bg-white/95 backdrop-blur border-b border-shade-200 sticky top-0 z-50">
+  <nav class="container-wide py-3">
     <div class="flex items-center justify-between">
       {{/* Left side - Nav links only (matching production) */}}
-      <div class="hidden md:flex items-center space-x-6">
+      <div class="hidden md:inline-flex items-center gap-1 p-1 bg-white border border-shade-200 rounded-full">
         {{ range .Site.Menus.main }}
           {{ if .HasChildren }}
           <div class="relative" x-data="{ open: false }" @mouseenter="open = true" @mouseleave="open = false">
             <button @click="open = !open"
-                    class="text-gray-600 hover:text-purple text-sm font-medium transition-colors whitespace-nowrap">
+                    class="px-3.5 py-2 rounded-full text-[13px] font-medium text-gray-600 hover:bg-tint-100 hover:text-purple transition-colors duration-100 whitespace-nowrap">
               {{ .Name }} <svg style="display:inline;width:10px;height:10px;vertical-align:middle;opacity:0.4;margin-left:4px" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"/></svg>
             </button>
             <div x-show="open"
@@ -18,11 +18,11 @@
                  x-transition:leave-start="opacity-100 translate-y-0"
                  x-transition:leave-end="opacity-0 -translate-y-1"
                  class="absolute left-0 top-full pt-2" style="display: none;">
-              <div class="bg-white rounded-lg shadow-lg border border-gray-200 py-1 min-w-[10rem]">
+              <div class="bg-white rounded-xl shadow-[0_12px_28px_rgba(103,58,182,0.12)] border border-shade-200 p-1 min-w-[11rem]">
                 {{ range .Children }}
                 {{ $href := cond (and (eq .Params.use_directory_url true) (isset $.Site.Params "directory_url")) $.Site.Params.directory_url (.URL | absURL) }}
                 <a href="{{ $href }}"
-                   class="block px-4 py-2 text-sm text-gray-600 hover:bg-gray-50 hover:text-purple transition-colors"
+                   class="block px-3 py-2 rounded-lg text-sm text-gray-600 hover:bg-tint-100 hover:text-purple transition-colors duration-100"
                    {{ if eq .Params.new_window true }}target="_blank" rel="noopener noreferrer"{{ end }}>
                   {{ .Name }}
                 </a>
@@ -32,7 +32,7 @@
           </div>
           {{ else }}
           <a href="{{ .URL | absURL }}"
-             class="text-gray-600 hover:text-purple text-sm font-medium transition-colors{{ if $.IsMenuCurrent "main" . }} text-purple{{ end }}">
+             class="px-3.5 py-2 rounded-full text-[13px] font-medium hover:bg-tint-100 hover:text-purple transition-colors duration-100{{ if $.IsMenuCurrent "main" . }} bg-tint-100 text-purple{{ else }} text-gray-600{{ end }}">
             {{ .Name }}
           </a>
           {{ end }}
@@ -40,10 +40,10 @@
       </div>
 
       {{/* Right side - Search icon and button links */}}
-      <div class="hidden md:flex items-center space-x-4">
+      <div class="hidden md:flex items-center gap-2">
         {{/* Search icon */}}
         {{ if .Site.Params.enable_search }}
-        <button @click="searchOpen = !searchOpen" class="text-gray-500 hover:text-purple p-2" aria-label="Search">
+        <button @click="searchOpen = !searchOpen" class="text-gray-600 hover:text-purple hover:bg-tint-100 rounded-full p-2 transition-colors" aria-label="Search">
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
           </svg>
@@ -54,13 +54,13 @@
         {{ range .Site.Menus.main_buttons }}
         {{ if eq .Params.style "primary" }}
         <a href="{{ .URL | absURL }}"
-           class="bg-purple text-white px-4 py-2 rounded-full text-sm font-medium hover:bg-purple-dark transition-colors"
+           class="btn btn-primary px-4 py-2"
            {{ if strings.HasPrefix .URL "http" }}target="_blank" rel="noopener noreferrer"{{ end }}>
           {{ .Name }}
         </a>
         {{ else }}
         <a href="{{ .URL | absURL }}"
-           class="border border-gray-300 text-gray-600 px-4 py-2 rounded-full text-sm font-medium hover:border-purple hover:text-purple transition-colors"
+           class="btn btn-secondary px-4 py-2"
            {{ if strings.HasPrefix .URL "http" }}target="_blank" rel="noopener noreferrer"{{ end }}>
           {{ .Name }}
         </a>
