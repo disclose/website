@@ -1,24 +1,12 @@
-{{/* Site-wide header announcement. Configure in config/_default/params.toml [announcement].
-     Dismissal is remembered per announcement id in localStorage (best effort; it shows again if storage is blocked).
+{{/* Site-wide header announcement ("badge and label" style, chosen 2026-11-25).
+     Configure in config/_default/params.toml [announcement]. Deep purple #4c1d95 with white text (10.95:1).
      Not rendered on the directory shell, which stays on the frozen pre-restyle CSS. */}}
 {{ with .Site.Params.announcement }}
 {{ if and .enabled (ne $.Layout "directory-shell") }}
-<div class="on-dark bg-purple-dark text-white text-sm"
-     role="region" aria-label="Announcement"
-     x-data="{ hidden: (() => { try { return localStorage.getItem('dio-announce') === '{{ .id }}' } catch (e) { return false } })() }"
-     x-show="!hidden">
-  <div class="container-wide py-2.5 flex items-center gap-3">
+<div class="on-dark bg-purple-dark text-white text-sm" role="region" aria-label="Announcement">
+  <div class="container-wide py-2.5 flex items-center justify-center gap-3">
     <span class="shrink-0 rounded-full bg-white px-2 py-0.5 text-[11px] font-bold uppercase tracking-[0.12em] text-purple-dark">{{ .label | default "New" }}</span>
-    <p class="flex-1 min-w-0 text-white">
-      <a href="{{ .url }}" class="font-semibold text-white hover:underline">{{ .title }}</a>
-      <span class="hidden md:inline text-white"> {{ .text }}</span>
-      <a href="{{ .url }}" class="ml-1 whitespace-nowrap font-semibold text-white underline underline-offset-2 hover:no-underline">{{ .cta | default "Take a look" }} <span aria-hidden="true">&rarr;</span></a>
-    </p>
-    <button type="button" class="shrink-0 rounded-full p-1.5 text-white hover:bg-white/15 transition-colors"
-            aria-label="Dismiss announcement"
-            @click="hidden = true; try { localStorage.setItem('dio-announce', '{{ .id }}') } catch (e) {}">
-      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"/></svg>
-    </button>
+    <a href="{{ .url }}" class="font-semibold text-white hover:underline whitespace-nowrap">{{ .title }} <span aria-hidden="true">&rarr;</span></a>
   </div>
 </div>
 {{ end }}

@@ -4,8 +4,6 @@ module.exports = {
     './layouts/**/*.html',
     './content/**/*.md',
     './content/**/*.html',
-    // Temporary: internal review page for the announcement bar. Remove once a variant is chosen.
-    './static/internal/announcement-variants.html',
   ],
   theme: {
     extend: {
