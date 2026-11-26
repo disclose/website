@@ -5,10 +5,10 @@
   "scripts": {
     "dev": "npm run prebuild && npm-run-all --parallel dev:*",
     "dev:hugo": "hugo server --buildDrafts --buildFuture",
-    "dev:css": "npx tailwindcss -i ./assets/css/main.css -o ./static/css/main.css --watch",
+    "dev:css": "npx tailwindcss -i ./assets/css/main.css -o ./static/css/site.css --watch",
     "prebuild": "node scripts/preprocess-framework.js",
     "build": "npm-run-all prebuild build:css build:hugo build:search",
-    "build:css": "npx tailwindcss -i ./assets/css/main.css -o ./static/css/main.css --minify",
+    "build:css": "npx tailwindcss -i ./assets/css/main.css -o ./static/css/site.css --minify",
     "build:hugo": "hugo --minify",
     "build:search": "npx pagefind --site public",
     "preview": "hugo server --buildDrafts --buildFuture --port 1313",

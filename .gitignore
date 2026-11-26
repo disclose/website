@@ -11,7 +11,9 @@ yarn-debug.log*
 yarn-error.log*
 
 # Tailwind
-/static/css/main.css
+# main.css is a FROZEN copy of the pre-restyle CSS (2026-11-25) kept for directory.disclose.io.
+# The site's live stylesheet is built to site.css.
+/static/css/site.css
 
 # IDE
 .idea/
