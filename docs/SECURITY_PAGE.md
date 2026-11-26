@@ -81,9 +81,8 @@ These settings also apply to the hosted DiscloseBot pages.
 | Host type | Hosts | How it gets the file |
 |---|---|---|
 | Apex (the origin) | disclose.io | GitHub Pages serves the repo file at `/.well-known/security.txt`. The legacy `/security.txt` path is routed to the Worker. |
-| Proxied by Cloudflare | www, calendar, dates, dev, directory, go, history, links, lookup, platforms, policymaker, projects, state, threats, vault, zero (all `.disclose.io`), disclosecon.com, www.disclosecon.com | Worker `security-txt` (`workers/security-txt/worker.js`) fetches the apex file and returns it with the Canonical line set to the host it is answering. Routes are exact per host for `/.well-known/security.txt` and `/security.txt`, each also with a trailing `*`, because an exact route does not match a URL with a query string. |
+| Proxied by Cloudflare | www, calendar, dates, dev, directory, go, history, links, lookup, platforms, policymaker, projects, state, threats, vault (all `.disclose.io`), disclosecon.com, www.disclosecon.com | Worker `security-txt` (`workers/security-txt/worker.js`) fetches the apex file and returns it with the Canonical line set to the host it is answering. Routes are exact per host for `/.well-known/security.txt` and `/security.txt`, each also with a trailing `*`, because an exact route does not match a URL with a query string. |
 | Redirect hosts | calendar, links, projects | Their zone redirect rules (Rules, Redirect Rules) exclude the two security.txt paths, so the Worker answers there instead of the redirect. |
-| Behind Cloudflare Access | zero | An Access application "zero.disclose.io security.txt (public)" bypasses login for the two paths only. |
 | DNS-only, not proxied | blog (Ghost), community (Discourse) | They redirect to the apex file: Ghost redirects (302, set in Ghost admin, Settings, Labs, Redirects) and Discourse permalinks (Admin, Customize, Permalinks). Discourse permalinks do not match a URL with a query string. |
 | Out of scope | m.disclose.io (Bitly short links) | Bitly answers for that host and serves its own `/security.txt`. Removed from the policy and brief scope on 2026-11-26. |
 
