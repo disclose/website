@@ -26,7 +26,6 @@ const HOSTS: Record<string, string[]> = {
     "directory.disclose.io", "go.disclose.io", "history.disclose.io", "links.disclose.io",
     "lookup.disclose.io", "platforms.disclose.io", "policymaker.disclose.io",
     "projects.disclose.io", "state.disclose.io", "threats.disclose.io", "vault.disclose.io",
-    "zero.disclose.io",
   ],
   "disclosecon.com": ["disclosecon.com", "www.disclosecon.com"],
 };
