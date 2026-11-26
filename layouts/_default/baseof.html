@@ -31,7 +31,14 @@
   <link rel="icon" type="image/png" href="{{ "uploads/favicon.png" | relURL }}">
 
   {{/* Styles */}}
+  {{- /* directory.disclose.io loads this page's shell and stays on the frozen pre-restyle
+       main.css (Casey, 2026-11-25). Every other page uses site.css, cache-busted by hash. */ -}}
+  {{- if eq .Layout "directory-shell" }}
   <link rel="stylesheet" href="{{ "css/main.css" | relURL }}">
+  {{- else }}
+  {{- $v := "" }}{{ if fileExists "static/css/site.css" }}{{ $v = readFile "static/css/site.css" | md5 | truncate 10 "" }}{{ end }}
+  <link rel="stylesheet" href="{{ "css/site.css" | relURL }}{{ with $v }}?v={{ . }}{{ end }}">
+  {{- end }}
 
   {{/* Alpine.js */}}
   <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
