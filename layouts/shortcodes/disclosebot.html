@@ -1,0 +1,63 @@
+{{- /*
+  DiscloseBot widget embed.
+
+  Usage:
+    {{< disclosebot widget="brief" id="fa08cb" >}}    brief + submission form
+    {{< disclosebot widget="policy" id="fabeb9" >}}   policy text + scope
+
+  How it works (docs.disclosebot.io, Share & embed):
+  - widgets.disclosebot.io/{brief,policy}.js is a loader stub that sets up a
+    window.Brief / window.Policy queue and loads the widget bundle.
+  - The widget attaches a Shadow DOM to the container (#dscls-brief /
+    #dscls-policy) and renders the published document from
+    api.disclosebot.io/v1/p/{briefs,policies}/<id>.
+  - Light-DOM children of the container are hidden once the shadow root
+    attaches, so the content below is the no-JS / crawler / curl fallback.
+    It is fetched from the same public API at build time, so DiscloseBot
+    stays the single source of the text.
+*/ -}}
+{{- $widget := .Get "widget" -}}
+{{- $id := .Get "id" -}}
+{{- if not (in (slice "brief" "policy") $widget) -}}
+  {{- errorf "disclosebot shortcode: widget must be brief or policy, got %q (%s)" $widget .Position -}}
+{{- end -}}
+{{- if not (findRE "^[a-z0-9]{6}$" $id) -}}
+  {{- errorf "disclosebot shortcode: id must be a 6-character shortcode, got %q (%s)" $id .Position -}}
+{{- end -}}
+{{- $kind := cond (eq $widget "brief") "briefs" "policies" -}}
+{{- $global := cond (eq $widget "brief") "Brief" "Policy" -}}
+{{- $idKey := cond (eq $widget "brief") "briefId" "policyId" -}}
+{{- $hosted := printf "https://disclose.disclosebot.io/%s/%s" $widget $id -}}
+{{- $doc := dict -}}
+{{- with resources.GetRemote (printf "https://api.disclosebot.io/v1/p/%s/%s.json" $kind $id) -}}
+  {{- with .Err -}}
+    {{- warnf "disclosebot shortcode: build-time fetch failed for %s %s, fallback is links only: %s" $widget $id . -}}
+  {{- else -}}
+    {{- $doc = .Content | transform.Unmarshal -}}
+  {{- end -}}
+{{- end -}}
+{{- $attrs := dict -}}
+{{- with $doc.data }}{{ $attrs = .attributes }}{{ end -}}
+<div class="disclosebot-embed not-prose my-8" data-disclosebot-widget="{{ $widget }}">
+  <div id="dscls-{{ $widget }}">
+    <div class="prose prose-lg max-w-none">
+      {{- if eq $widget "policy" -}}
+        {{- with $attrs.policy_html -}}
+          {{- /* The page already has its h1; demote the policy title. */ -}}
+          {{ . | replaceRE "<(/?)h1>" "<${1}h2>" | safeHTML }}
+        {{- end }}
+        <p><a href="{{ $hosted }}">Read this policy on DiscloseBot</a>.</p>
+      {{- else -}}
+        {{- with $attrs.description_html }}{{ . | safeHTML }}{{ end }}
+        <p>Report a vulnerability through the <a href="{{ $hosted }}">disclose.io reporting form on DiscloseBot</a>, or email <a href="mailto:security@disclose.io">security@disclose.io</a>.</p>
+      {{- end }}
+    </div>
+  </div>
+</div>
+{{- /* Queue stub first, so init can be called before the async loader runs;
+       the loader keeps an existing window[name] and its queue. */ -}}
+<script>
+window[{{ $global }}] = window[{{ $global }}] || function () { (window[{{ $global }}].q = window[{{ $global }}].q || []).push(arguments); };
+window[{{ $global }}]('init', { {{ $idKey }}: {{ $id }}, container: {{ printf "dscls-%s" $widget }} });
+</script>
+<script async src="https://widgets.disclosebot.io/{{ $widget }}.js"></script>
