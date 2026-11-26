@@ -1,0 +1,110 @@
+{{- /*
+  Native report form for a DiscloseBot brief.
+
+  Usage: {{< disclosebot-report-form brief="fa08cb" policy-anchor="#policy" >}}
+
+  Why native and not a DiscloseBot widget (2026-11-25):
+  - The Brief widget repeats the policy (overview, scope table, rules, its own
+    Policy tab), which duplicates the Policy widget on the same page.
+  - The MiniBrief widget never sends policies_acknowledged, so the brief's
+    API answers 422 "must be accepted" and its reports never file.
+  This form posts to the same documented public endpoint every DiscloseBot
+  widget uses (POST api.disclosebot.io/v1/p/briefs/<id>/reports, JSON:API,
+  no auth, CORS *, rate limited 5/min and 30/hour per address), so reports
+  land in the same DiscloseBot inbox with the same fields.
+  The asset list is read from the published brief at build time.
+*/ -}}
+{{- $brief := .Get "brief" -}}
+{{- $policyAnchor := .Get "policy-anchor" | default "#policy" -}}
+{{- if not (findRE "^[a-z0-9]{6}$" $brief) -}}
+  {{- errorf "disclosebot-report-form: brief must be a 6-character shortcode, got %q (%s)" $brief .Position -}}
+{{- end -}}
+{{- $hosted := printf "https://disclose.disclosebot.io/brief/%s" $brief -}}
+{{- $assets := slice -}}
+{{- with resources.GetRemote (printf "https://api.disclosebot.io/v1/p/briefs/%s.json" $brief) -}}
+  {{- with .Err -}}
+    {{- warnf "disclosebot-report-form: build-time fetch failed for brief %s, no asset list: %s" $brief . -}}
+  {{- else -}}
+    {{- $doc := .Content | transform.Unmarshal -}}
+    {{- range $doc.included -}}
+      {{- if eq .type "asset" -}}{{- $assets = $assets | append (dict "id" .id "value" .attributes.value "kind" .attributes.kind) -}}{{- end -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+<div class="not-prose rounded-2xl border border-gray-200 bg-tint-50 p-6 md:p-8" data-disclosebot-form="{{ $brief }}">
+  <noscript>
+    <p class="text-gray-700">This form needs JavaScript. You can <a class="text-purple font-semibold underline" href="{{ $hosted }}">report on DiscloseBot</a> or email <a class="text-purple font-semibold underline" href="mailto:security@disclose.io">security@disclose.io</a>.</p>
+  </noscript>
+  <form class="space-y-5" novalidate data-endpoint="https://api.disclosebot.io/v1/p/briefs/{{ $brief }}/reports">
+    <div>
+      <label for="dbf-email" class="block text-sm font-semibold text-gray-900 mb-1">Your email <span class="text-purple">*</span></label>
+      <input id="dbf-email" name="reporter_email" type="email" required autocomplete="email" placeholder="researcher@example.com" class="w-full rounded-lg border-gray-300 bg-white focus:border-purple focus:ring-purple">
+    </div>
+    <div>
+      <label for="dbf-title" class="block text-sm font-semibold text-gray-900 mb-1">Report title <span class="text-purple">*</span></label>
+      <input id="dbf-title" name="title" type="text" required maxlength="200" placeholder="e.g. Stored XSS in the directory search" class="w-full rounded-lg border-gray-300 bg-white focus:border-purple focus:ring-purple">
+    </div>
+    {{- with $assets }}
+    <div>
+      <label for="dbf-asset" class="block text-sm font-semibold text-gray-900 mb-1">Affected asset <span class="font-normal text-gray-500">(optional)</span></label>
+      <select id="dbf-asset" name="asset" class="w-full rounded-lg border-gray-300 bg-white focus:border-purple focus:ring-purple">
+        <option value="">Not sure, or not listed</option>
+        {{- range sort . "value" }}
+        <option value="{{ .id }}">{{ .value }}</option>
+        {{- end }}
+      </select>
+    </div>
+    {{- end }}
+    <div>
+      <label for="dbf-description" class="block text-sm font-semibold text-gray-900 mb-1">Description <span class="text-purple">*</span></label>
+      <textarea id="dbf-description" name="description" required rows="8" placeholder="What you found, steps to reproduce, and the impact you believe it has." class="w-full rounded-lg border-gray-300 bg-white focus:border-purple focus:ring-purple"></textarea>
+    </div>
+    <label class="flex items-start gap-3 text-sm text-gray-700">
+      <input name="policies_acknowledged" type="checkbox" required class="mt-0.5 rounded border-gray-300 text-purple focus:ring-purple">
+      <span>I have read the <a class="text-purple font-semibold underline" href="{{ $policyAnchor }}">disclose.io Vulnerability Disclosure Policy</a> above.</span>
+    </label>
+    <p data-dbf-status class="hidden rounded-lg p-4 text-sm" role="status" aria-live="polite"></p>
+    <div class="flex flex-wrap items-center gap-4">
+      <button type="submit" class="btn btn-primary">Submit report</button>
+      <span class="text-sm text-gray-500">Or email <a class="text-purple underline" href="mailto:security@disclose.io">security@disclose.io</a>. Both reach the same inbox.</span>
+    </div>
+  </form>
+</div>
+<script>
+(function () {
+  var root = document.querySelector('[data-disclosebot-form="{{ $brief }}"]');
+  if (!root) return;
+  var form = root.querySelector('form');
+  var status = root.querySelector('[data-dbf-status]');
+  var button = form.querySelector('button[type=submit]');
+  function show(kind, text) {
+    status.className = 'rounded-lg p-4 text-sm ' + (kind === 'ok' ? 'bg-green-50 text-green-800' : 'bg-red-50 text-red-800');
+    status.textContent = text;
+  }
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var f = form.elements;
+    if (!f.reporter_email.value.trim() || !f.title.value.trim() || !f.description.value.trim()) { show('err', 'Please fill in your email, a title and a description.'); return; }
+    if (!f.policies_acknowledged.checked) { show('err', 'Please confirm you have read the policy.'); return; }
+    var attrs = { title: f.title.value.trim(), description: f.description.value.trim(), reporter_email: f.reporter_email.value.trim(), policies_acknowledged: true };
+    var body = { data: { type: 'report', attributes: attrs } };
+    if (f.asset && f.asset.value) body.data.relationships = { assets: { data: [{ type: 'asset', id: f.asset.value }] } };
+    button.disabled = true; button.textContent = 'Submitting...';
+    fetch(form.getAttribute('data-endpoint'), { method: 'POST', headers: { 'Content-Type': 'application/vnd.api+json', 'Accept': 'application/vnd.api+json' }, body: JSON.stringify(body) })
+      .then(function (r) { return r.json().catch(function () { return null; }).then(function (j) { return { status: r.status, json: j }; }); })
+      .then(function (res) {
+        if (res.status === 201) {
+          var code = res.json && res.json.data && res.json.data.attributes && res.json.data.attributes.shortcode;
+          form.reset();
+          show('ok', 'Thank you. Your report was received' + (code ? ' (reference ' + code + ')' : '') + '. We will reply to the email you gave.');
+          return;
+        }
+        var errs = (res.json && res.json.errors || []).map(function (x) { return x.detail || x.title; }).filter(Boolean);
+        if (res.status === 429) show('err', 'Too many submissions from your address. Please wait a minute and try again.');
+        else show('err', (errs.join(' ') || 'The report could not be sent (' + res.status + ').') + ' You can also email security@disclose.io.');
+      })
+      .catch(function () { show('err', 'The report could not be sent. Please email security@disclose.io instead.'); })
+      .then(function () { button.disabled = false; button.textContent = 'Submit report'; });
+  });
+})();
+</script>

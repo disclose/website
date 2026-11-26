@@ -66,3 +66,9 @@ pygmentsUseClasses = true
 [security]
   [security.funcs]
     getenv = ["^HUGO_", "^GOOGLE_ANALYTICS_ID$", "^DISQUS_SHORTNAME$"]
+
+# resources.GetRemote (DiscloseBot policy/brief for /security/): always fetch fresh at build.
+[caches]
+  [caches.getresource]
+    dir = ":cacheDir/:project"
+    maxAge = 0
