@@ -46,6 +46,11 @@
     outline: 2px solid #4c1d95;
     outline-offset: 2px;
   }
+
+  /* On ink and deep-violet surfaces #4c1d95 is ~1.6:1; use white (7.1:1 or more). */
+  .on-dark :focus-visible {
+    outline-color: #ffffff;
+  }
 }
 
 @layer components {
