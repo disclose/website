@@ -96,7 +96,7 @@
         if (res.status === 201) {
           var code = res.json && res.json.data && res.json.data.attributes && res.json.data.attributes.shortcode;
           form.reset();
-          show('ok', 'Thank you. Your report was received' + (code ? ' (reference ' + code + ')' : '') + '. We will reply to the email you gave.');
+          show('ok', 'Thank you. Your report was received' + (code ? ' (reference ' + code + ')' : '') + '. A person at disclose.io reviews every report and will follow up by email.' + (code ? ' If you have not heard back, email security@disclose.io and quote reference ' + code + '.' : ' If you have not heard back, email security@disclose.io.'));
           return;
         }
         var errs = (res.json && res.json.errors || []).map(function (x) { return x.detail || x.title; }).filter(Boolean);
