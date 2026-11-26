@@ -25,3 +25,14 @@ enable_search = true
 enable_comments = true
 enable_analytics = true
 
+
+# Site-wide header announcement (layouts/partials/announcement.html).
+# Change `id` whenever the message changes so visitors who dismissed the old one see the new one.
+[announcement]
+  enabled = true
+  id = "top-100-2026-11"
+  label = "New"
+  title = "The safe-harbor scoreboard is live."
+  text = "See how the Fortune 100, ASX 100, FTSE 100, Nasdaq-100 and US governments grade on the disclose.io maturity model."
+  cta = "See the Top 100"
+  url = "https://state.disclose.io/top-100/"

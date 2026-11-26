@@ -177,6 +177,7 @@
 
 <body class="min-h-screen flex flex-col" x-data="{ mobileMenuOpen: false, searchOpen: false }">
   {{/* Header */}}
+  {{ partial "announcement.html" . }}
   {{ partial "navbar.html" . }}
 
   {{/* Main content */}}
