@@ -9,6 +9,10 @@ og_image = "/uploads/og-image-1200x630.jpg"
 # Analytics & Comments
 google_analytics = "G-NJQTCTSYCM"
 disqus_shortname = "disclose-io"
+# PostHog project "Default project" (769471), shared with lookup.disclose.io.
+# The phc_ token is a public, write-only ingest key, safe in client HTML.
+posthog_project_token = "phc_rmyXAYbHuciDyeTpjmwuh6wqm4wmJkWtNrJBFpM2QuM8"
+posthog_host = "https://us.i.posthog.com"
 
 # Contact
 contact_email = "hello@disclose.io"

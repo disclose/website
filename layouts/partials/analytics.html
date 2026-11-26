@@ -91,6 +91,31 @@
     gtag('set', { traffic_type: 'internal', debug_mode: true });
   }
 
+  {{ with site.Params.posthog_project_token }}
+  // PostHog (same project as lookup.disclose.io). Runs behind the same dev
+  // guard as GA4. The cookie is scoped to .disclose.io by default, so a
+  // visitor moving between disclose.io and lookup.disclose.io stays one person.
+  (function () {
+    var host = {{ site.Params.posthog_host | default "https://us.i.posthog.com" }};
+    var ph = document.createElement('script');
+    ph.async = true;
+    ph.src = host.replace(/\/$/, '') + '/static/array.js';
+    ph.onload = function () {
+      if (!window.posthog || typeof window.posthog.init !== 'function') return;
+      window.posthog.init({{ . }}, {
+        api_host: host,
+        defaults: '2025-05-24',
+        person_profiles: 'identified_only',
+        // Replay stays off on disclose.io even though the project enables it
+        // (decided 2026-11-26): pageviews, autocapture and heatmaps only.
+        disable_session_recording: true
+      });
+      if (internalFlag) window.posthog.register({ traffic_type: 'internal' });
+    };
+    document.head.appendChild(ph);
+  })();
+  {{ end }}
+
   // ── Product outcomes (privacy-safe: never include submitted values) ───
   if (h === 'directory.disclose.io' && /^\/o\/[^/]+\/?$/.test(location.pathname)) {
     gtag('event', 'directory_record_view', { tool: 'directory' });
