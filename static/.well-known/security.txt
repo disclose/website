@@ -1,4 +1,5 @@
 Contact: mailto:security@disclose.io
+Contact: https://disclose.disclosebot.io/brief/fa08cb
 Contact: https://disclose.io/security/
 Expires: 2027-06-30T00:00:00.000Z
 Preferred-Languages: en

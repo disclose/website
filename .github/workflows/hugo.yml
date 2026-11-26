@@ -74,6 +74,9 @@ jobs:
             --minify \
             --baseURL "https://disclose.io/"
 
+      - name: Check the directory shell stays on the frozen main.css
+        run: npm run check:shell
+
       - name: Build search index
         run: npx pagefind --site public
 

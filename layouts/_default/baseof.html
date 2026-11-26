@@ -178,7 +178,9 @@
 <body class="min-h-screen flex flex-col" x-data="{ mobileMenuOpen: false, searchOpen: false }">
   {{/* Header */}}
   {{ partial "announcement.html" . }}
-  {{ partial "navbar.html" . }}
+  {{- /* The directory shell keeps the frozen pre-restyle chrome (layouts/partials/legacy/), matching its frozen main.css. */ -}}
+  {{- $chrome := cond (eq .Layout "directory-shell") "legacy/" "" }}
+  {{ partial (print $chrome "navbar.html") . }}
 
   {{/* Main content */}}
   <main class="flex-1">
@@ -186,10 +188,10 @@
   </main>
 
   {{/* Footer */}}
-  {{ partial "footer.html" . }}
+  {{ partial (print $chrome "footer.html") . }}
 
   {{/* Mobile menu */}}
-  {{ partial "mobile-menu.html" . }}
+  {{ partial (print $chrome "mobile-menu.html") . }}
 
   {{/* Google Analytics, loader, cross-domain linker, event tracking */}}
   {{ if eq hugo.Environment "production" }}
