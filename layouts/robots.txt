@@ -2,27 +2,18 @@
 User-agent: *
 Disallow: /
 {{- else -}}
+# disclose.io: people, search engines and AI agents are all welcome.
+# Content-Signal (https://contentsignals.org/): this site may be used for search, AI answers and AI training.
 User-agent: *
+Content-Signal: search=yes, ai-input=yes, ai-train=yes
 Allow: /
+
+# AI crawlers and agents, named so the welcome is explicit
+{{ range slice "GPTBot" "OAI-SearchBot" "ChatGPT-User" "ClaudeBot" "Claude-SearchBot" "Claude-User" "anthropic-ai" "PerplexityBot" "Perplexity-User" "Google-Extended" "Applebot-Extended" "Amazonbot" "Meta-ExternalAgent" "CCBot" "cohere-ai" "MistralAI-User" "DuckAssistBot" -}}
+User-agent: {{ . }}
+Allow: /
+
+{{ end -}}
 Sitemap: {{ .Site.BaseURL }}sitemap.xml
 Sitemap: https://directory.disclose.io/sitemap.xml
-
-# AI Crawlers - explicitly welcome
-User-agent: GPTBot
-Allow: /
-
-User-agent: Google-Extended
-Allow: /
-
-User-agent: PerplexityBot
-Allow: /
-
-User-agent: ClaudeBot
-Allow: /
-
-User-agent: anthropic-ai
-Allow: /
-
-User-agent: CCBot
-Allow: /
 {{- end }}
