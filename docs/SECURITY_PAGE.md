@@ -33,7 +33,7 @@ The shortcode also supports `widget="brief"`, which embeds DiscloseBot's full Br
 ### Things that will bite you
 
 - **Hugo 0.128 (the CI pin) refuses the API's `application/vnd.api+json` content type** ("failed to resolve media type"), and declaring it under `[mediaTypes]` does not help. Request the `.json` URL form (`.../fabeb9.json`), which the API serves, so Hugo resolves the type from the extension.
-- **The fallback text refreshes only on deploy.** The widget always shows the live policy; the build-time copy is as of the last build. After editing the policy in DiscloseBot, re-run the GitHub Pages workflow (`workflow_dispatch`) to refresh it.
+- **The fallback text refreshes only on deploy.** The widget always shows the live policy; the build-time copy is as of the last build. After editing the policy in DiscloseBot, run the GitHub Pages workflow by hand on `main` (Actions, Deploy Hugo site to Pages, Run workflow) to refresh it. Manual runs on `main` deploy; runs on any other ref only build.
 - **If the build-time fetch fails, the build still succeeds.** The shortcode logs a `WARN` and falls back to a link to the hosted policy. Check the build log for `disclosebot shortcode:` warnings.
 - **Console noise is expected:** DiscloseBot's widget preloads three of its own chunks (`/vite/assets/loader-*.js`) from the host origin and gets 404s. The real imports load from widgets.disclosebot.io, so the widget still renders.
 
@@ -85,7 +85,7 @@ These settings also apply to the hosted DiscloseBot pages.
 | Redirect hosts | calendar, links, projects | Their zone redirect rules (Rules, Redirect Rules) exclude the two security.txt paths, so the Worker answers there instead of the redirect. |
 | Behind Cloudflare Access | zero | An Access application "zero.disclose.io security.txt (public)" bypasses login for the two paths only. |
 | DNS-only, not proxied | blog (Ghost), community (Discourse) | They redirect to the apex file: Ghost redirects (302, set in Ghost admin, Settings, Labs, Redirects) and Discourse permalinks (Admin, Customize, Permalinks). Discourse permalinks do not match a URL with a query string. |
-| Not covered | m.disclose.io (Bitly short links) | Bitly answers for that host and serves its own `/security.txt`. It can only be covered by moving the short domain off Bitly. |
+| Out of scope | m.disclose.io (Bitly short links) | Bitly answers for that host and serves its own `/security.txt`. Removed from the policy and brief scope on 2026-11-26. |
 
 To deploy or check the Worker and routes (idempotent; a route that points at another script is reported, never replaced):
 
@@ -102,7 +102,7 @@ Never route the Worker on `disclose.io/.well-known/security.txt`: that is its or
 
 | To change | Do this |
 |---|---|
-| Policy wording, scope, commitments | Edit the policy in DiscloseBot. The widget updates at once; re-run the deploy workflow to refresh the build-time copy. Make no commitment the dioterms template does not make. |
+| Policy wording, scope, commitments | Edit the policy in DiscloseBot. The widget updates at once; run the deploy workflow on `main` to refresh the build-time copy and the form's asset list. Make no commitment the dioterms template does not make. |
 | Which assets reporters can pick | Edit the brief's in-scope assets in DiscloseBot, then redeploy. |
 | Page layout or copy around the policy | `content/security.md` |
 | Form fields or behaviour | `layouts/shortcodes/disclosebot-report-form.html`. Keep the request shape above; it is DiscloseBot's public API. |

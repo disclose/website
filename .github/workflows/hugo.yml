@@ -86,7 +86,9 @@ jobs:
           path: ./public
 
   deploy:
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    # Manual runs on main also deploy, so a DiscloseBot policy or asset change can be
+    # pulled into the build-time copy on /security/ without a commit.
+    if: (github.event_name == 'push' || github.event_name == 'workflow_dispatch') && github.ref == 'refs/heads/main'
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
